@@ -1,0 +1,463 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* GLOBAL CSS VARIABLES */
+:root {
+	--lighter-main-color: #fffff2;
+	--light-main-color: #feffda;
+	--black-color: #000000;
+	--dark-main-color: #00000069;
+	--dark-main-opacity-color: #0000002d;
+	--dark-second-color: #F3F1DB;
+	--dark-third-color: #7E7943;
+	--second-color: white;
+	--red-delete: rgb(182, 0, 0);
+	--main-blue-color: #0072dd;
+	--blue-bg-color: #eff7ff;
+	--true-boolean-text-color: #024E00;
+	--true-boolean-bg-color: #E1FFE0;
+	--false-boolean-text-color: #810000;
+	--false-boolean-bg-color: #FFE5E5;
+	--array-element-hover-bg-color: rgb(246, 255, 255);
+	--array-element-hover-bg-color: rgb(246, 255, 255);
+	--null-color: grey;
+	--null-bg-color: rgb(245, 245, 245);
+	
+	--minor-boder-radius: 5px;
+	--major-boder-radius: 15px;
+	--main-border-width: 1px;
+
+	--border-main: var(--main-border-width) solid rgb(172, 172, 172);
+	--border-second: var(--main-border-width) solid var(--dark-main-opacity-color);
+	--border-add-Property-button: 1px solid #93cbff;
+	--border-null: rgb(187, 187, 187) solid 1px;
+	--shadow-main: none;
+	--shadow-second: none;
+	--array-elements-gradient: none;
+	
+	/* --border-main: none;
+	--border-second: none;
+	--border-add-Property-button: none;
+	--border-null: none;
+	--shadow-main: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+	--shadow-second: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+	--array-elements-gradient: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.05); */
+	
+}
+
+.guifyMainContainer input:focus {
+	outline-color: var(--main-blue-color);
+}
+
+.guifyMainContainer * {
+	box-sizing: border-box;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.GuiHiddenElement {
+	display: none !important;
+}
+
+.GuiRotated {
+	transform:rotateX(180deg);
+	-webkit-transform:rotateX(180deg);
+	-moz-transform:rotateX(180deg);
+	-o-transform:rotateX(180deg);
+	-ms-transform:rotateX(180deg);
+}
+
+.guifyContainer {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+	padding: 15px;
+}
+
+.guifyProperty {
+	position: relative;
+}
+
+.guifyProperty:hover .guifyRemoveButtonForInputs {
+	fill: var(--red-delete);
+	transform: translateX(0px);
+}
+
+.guifyRemoveButtonForInputs {
+	/* position: absolute; */
+	cursor: pointer;
+	transition: 100ms;
+	fill: transparent;
+	right: 0px;
+	top: -5px;
+	transform: translateX(10px);
+}
+
+.guifyPropertyInput {
+	width: 100%;
+	padding: 5px 10px;
+	box-shadow: var(--shadow-main);
+	border: var(--border-main);
+	border-radius: var(--minor-boder-radius);
+	font-size: medium;
+}
+
+.guifyPropertyKey {
+	display: flex;
+	align-items: center;
+	font-size: large;
+	border: none;
+	background-color: transparent;
+	margin: 2.5px;
+	margin-left: 0;
+	margin-top: 0;
+	/* width: 100%; */
+}
+
+.guifyHeader .guifyPropertyKey {
+	font-size: larger;
+	border: none;
+	background-color: transparent;
+	font-weight: bold;
+	margin: 0;
+	width: 100%;
+}
+
+.guifyPropertyKey:focus {
+	outline: none;
+}
+
+.guifyPropertyKey span {
+	margin-right: 5px;
+}
+
+.guifyPropertyKey span:focus {
+	outline: none;
+}
+
+.guifyCheckBox {
+	display: flex;
+	width: fit-content;
+	border-radius: var(--minor-boder-radius);
+	overflow: hidden;
+	box-shadow: var(--shadow-main);
+	border: var(--border-main);
+	cursor: pointer;
+}
+
+.guifyTrue {
+	padding: 5px 10px;
+	border-right: var(--border-main);
+}
+
+.guifyFalse {
+	padding: 5px 10px;
+}
+
+.guifySelectTrue {
+	color: var(--true-boolean-text-color);
+	background-color: var(--true-boolean-bg-color);
+	font-weight: bold;
+}
+
+.guifySelectFalse {
+	color: var(--false-boolean-text-color);
+	background-color: var(--false-boolean-bg-color);
+	font-weight: bold;
+}
+
+.guifyObjectProperty {
+	position: relative;
+	/* border: var(--main-border-width) solid var(--dark-main-color); */
+	border-radius: var(--minor-boder-radius);
+	flex: 1;
+	grid-column: span 2;
+}
+
+.nullKeyArrayContainer ~ .guifyBody {
+	padding-top: none !important;
+}
+
+.guifyHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: var(--shadow-main);
+	border: var(--border-main);
+	padding: 12.5px 15px;
+	font-weight: bold;
+	font-size: large;
+	border-radius: var(--minor-boder-radius) var(--minor-boder-radius) 0 0;
+}
+
+
+.guifyRemoveButton {
+	transition: 100ms;
+	cursor: pointer;
+	fill: transparent;
+	transform: translateX(10px);
+}
+
+.guifyHeader:hover .guifyRemoveButton {
+	fill: var(--red-delete);
+	transform: translateX(0px);
+}
+
+.guifyHeaderLeftPart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.guifyBody {
+	position: relative;
+	z-index: 3;
+	box-shadow: var(--shadow-main);
+	border: var(--border-main);
+	border-top: none;
+	border-bottom: none;
+	/* overflow: hidden; */
+}
+
+.guifyArrayElement {
+	position: relative;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 15px;
+	border-bottom: var(--border-second);
+	cursor: pointer;
+	background-image: var(--array-elements-gradient);
+}
+
+/* .guifyArrayElement:hover {
+	background-color: var(--array-element-hover-bg-color);
+} */
+
+.guifyArrayElement:hover .guifyRemoveButtonForArrayElement {
+	fill: var(--red-delete);
+	transform: translateX(0px);
+}
+
+.guifyRemoveButtonForArrayElement {
+	transition: 100ms;
+	cursor: pointer;
+	fill: transparent;
+	transform: translateX(10px);
+}
+
+.guifyBody > .guifyArrayElement:first-child {
+	border-radius: 0;
+	border-top: none;
+}
+
+.guifyArrayElement .guifySvg {
+	cursor: pointer;
+}
+
+.guifyIndex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--dark-third-color);
+	background-color: var(--dark-second-color);
+	border-radius: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	font-size: small;
+	font-weight: bold;
+	width: 22.5px;
+	height: 22.5px;
+	padding: 5px;
+}
+
+.guifyValueBody {
+	border-bottom: var(--border-second);
+	border-radius: 0;
+}
+
+.guifyAddElementWidget {
+	display: grid;
+	gap: 10px;
+	padding: 10px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	position: absolute;
+	bottom: 60px;
+	left: 50%;
+	background-color: var(--second-color);
+	border: var(--border-main);
+	border-radius: 5px;
+	overflow: hidden;
+	/* width: 80%; */
+	transform: translateX(-50%);
+	box-sizing: initial;
+}
+
+.guifyAddElementWidget > div {
+	display: flex;
+	align-items: center;
+	padding: 10px 15px;
+	font-size: medium;
+	border: var(--border-main);
+	border-radius: var(--minor-boder-radius);
+	cursor: pointer;
+}
+
+.guifyAddElement:hover {
+	background-color: var(--lighter-main-color);
+}
+
+.guifyAddElement .guifySvg {
+	margin-right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.addPropertyButtonContainer {
+	position: relative;
+	z-index: 6;
+	box-shadow: var(--shadow-main);
+	grid-column: span 2;
+	padding: 15px;
+	padding-top: 0;
+	border: var(--border-main);
+	border-top: none;
+	border-radius: 0 0 var(--minor-boder-radius) var(--minor-boder-radius);
+}
+.addPropertyButton {
+	position: relative;
+}
+
+.addElementButtonContainer {
+	position: relative;
+	z-index: 6;
+	box-shadow: var(--shadow-main);
+	grid-column: span 2;
+	border-radius: 0 0 var(--minor-boder-radius) var(--minor-boder-radius);
+	border: var(--border-main);
+}
+
+.guifyAddPropertyInObject {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: var(--border-main);
+	color: var(--main-blue-color);
+	box-shadow: var(--shadow-main);
+	background-color: var(--blue-bg-color);
+	border-radius: var(--minor-boder-radius);
+	padding: 10px;
+	cursor: pointer;
+}
+
+.guifyAddPropertyInObject * {
+	fill: var(--main-blue-color);
+	pointer-events: none;
+}
+
+.guifyAddPropertyInArray {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--main-blue-color);
+	background-color: var(--blue-bg-color);
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 0 0 var(--minor-boder-radius) var(--minor-boder-radius);
+}
+
+.guifyAddPropertyInArray * {
+	fill: var(--main-blue-color);
+	pointer-events: none;
+}
+
+.guifyFirstElementStyle {
+	border-radius: var(--minor-boder-radius) var(--minor-boder-radius) 0 0;
+	border-top: var(--main-border-width) solid var(--dark-main-color);;
+}
+
+.guiEmptyContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	grid-column: span 2;
+	padding: 15px;
+}
+
+.guiEmptyContainer .title{
+	color: black;
+	font-size: large;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.guiEmptyContainer .description{
+	color: grey;
+	text-align: center;
+}
+
+/* ////////////// */
+/* shared classes */
+/* ////////////// */
+.hiddenElement {
+	display: none;
+}
+
+.guifyAddTopBorder {
+	border-top: var(--border-second) !important;
+}
+
+.guifyRemoveBotomBorder {
+	border-bottom: none !important;
+}
+
+.guifyRemoveTopBorder {
+	border-top: none !important;
+}
+
+.guifyRemoveBorder {
+	border: none !important;
+}
+
+.guifyRemovePadding {
+	padding: 0 !important;
+}
+
+.guifyRemoveTopPadding {
+	padding-top: 0 !important;
+}
+
+.guifyAddTopPadding {
+	padding-top: 15px !important;
+}
+
+.guifyRemoveSideBorder {
+	border-left: none;
+	border-right: none;
+}
+
+.guifyAddSideBorder {
+	border-left: var(--border-main);
+	border-right: var(--border-main);
+}
+
+.guifyremoveBorderRadius {
+	border-radius: 0 !important;
+}
+
+.guifyNull {
+	display: flex;
+}
+
+.guifyNull div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--null-bg-color);
+	border: var(--border-null);
+	color: var(--null-color);
+	padding: 5px 10px;
+	border-radius: 100px;
+	/* font-weight: bold; */
+}
