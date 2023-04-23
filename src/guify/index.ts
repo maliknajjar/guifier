@@ -1,3 +1,1 @@
-import { Guify } from "./guify";
-
-export { Guify }
+export { Guify } from "./guify"
