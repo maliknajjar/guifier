@@ -1,17 +1,15 @@
+import './style.css'
+
 import type { GuifyParameters } from './guify/types/guify'
 import { GuifyDataType } from './guify/enums/guify'
 import { Guify } from './guify/guify'
 
-import './style.css'
-
-import { example_data } from './data_examples'
+import { exampleData } from './dataExamples'
 
 const params: GuifyParameters = {
     elementId: 'app',
-    data: example_data,
-    dataType: GuifyDataType.JsObject
+    data: exampleData,
+    dataType: GuifyDataType.Json
 }
 
 const guify = new Guify(params)
-
-console.log(guify)

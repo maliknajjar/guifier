@@ -1,5 +1,8 @@
-export let example_data = {
-    "id": 123,
+export const exampleData = `{
+    "id": {
+        "_type": "number",
+        "_value": 123'
+    },
     "name": "John Doe",
     "email": "john.doe@example.com",
     "isMarried": false,
@@ -44,4 +47,4 @@ export let example_data = {
             ]
         }
     ]
-}
+}`

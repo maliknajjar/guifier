@@ -1,4 +1,9 @@
 /**
+ * Represents a javascript object with any structure
+ */
+export type AnyObject = Record<any, any>
+
+/**
  * Represents the object that gets passed to the instantiated Guify object
  *
  * @property {string} elementId is element's id.
@@ -7,6 +12,6 @@
  */
 export interface GuifyParameters {
     elementId: string
-    data: string | any
+    data: string
     dataType: GuifyDataType
 }
