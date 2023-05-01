@@ -1,3 +1,5 @@
+import type { AnyObject } from './types/guify'
+
 /**
  * A function that returns the type of any value passed to it<br>
  * These are the list of the supported types by this function:<br>
@@ -29,4 +31,24 @@ export function getType (value: any): string {
     } else {
         return type
     }
+}
+
+/**
+ * A function that tells you wether an object is empty or not<br>
+ *
+ * @param {any} obj is the object you want to check if its empty
+ * @returns {boolean} weather the object is empty or not
+ */
+export function isObjectEmpty (obj: AnyObject): boolean {
+    return Object.keys(obj).length === 0
+}
+
+/**
+ * A function that tells you wether an array is empty or not<br>
+ *
+ * @param {any} arr is the array you want to check if its empty
+ * @returns {boolean} weather the array is empty or not
+ */
+export function isArrayEmpty (arr: unknown[]): boolean {
+    return arr.length === 0
 }
