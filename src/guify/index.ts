@@ -1,1 +1,1 @@
-export { Guify } from './classes/Guify/guify'
+export { Guify } from './guify'

@@ -1,5 +1,6 @@
 import type * as z from 'zod'
 
+import { PrimitiveTypes } from './enums'
 import type { GuifyParameterSchema } from './schemas'
 
 /**
@@ -20,10 +21,12 @@ export type GuifyParameters = z.infer<typeof GuifyParameterSchema>
  * Represents the guify property contents
  */
 export interface GuifyProperty {
-    _type: string
+    _key: string
+    _valueType: PrimitiveTypes
     _value: any | GuifyProperty[]
 }
 export const defaultGuifyProperty: GuifyProperty = {
-    _type: 'nothing',
-    _value: 'nothing'
+    _key: 'null',
+    _valueType: PrimitiveTypes.String,
+    _value: 'null'
 }

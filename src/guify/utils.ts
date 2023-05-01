@@ -1,4 +1,5 @@
 import type { AnyObject } from './types'
+import { PrimitiveTypes } from './enums'
 
 /**
  * A function that returns the type of any value passed to it<br>
@@ -15,21 +16,21 @@ import type { AnyObject } from './types'
  * @param {any} value is the variable or property you want to get it's type
  * @returns {string} the type
  */
-export function getType (value: any): string {
+export function getType (value: any): PrimitiveTypes {
     const type = typeof value
 
-    if (type === 'object') {
+    if (type === PrimitiveTypes.Object) {
         if (Array.isArray(value)) {
-            return 'array'
+            return PrimitiveTypes.Array
         } else if (value === null) {
-            return 'null'
+            return PrimitiveTypes.Null
         } else {
-            return 'object'
+            return PrimitiveTypes.Object
         }
     } else if (type === 'number' && isNaN(value)) {
-        return 'NaN'
+        return PrimitiveTypes.NaN
     } else {
-        return type
+        return type as PrimitiveTypes
     }
 }
 

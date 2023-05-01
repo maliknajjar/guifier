@@ -2,7 +2,7 @@ import './style.css'
 
 import type { GuifyParameters } from './guify/types'
 import { GuifyDataType } from './guify/enums'
-import { Guify } from './guify/classes/Guify/guify'
+import { Guify } from './guify/guify'
 
 import { exampleData } from './dataExamples'
 

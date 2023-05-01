@@ -14,7 +14,7 @@ export class GuifyData {
         this.deserializeData(data, dataType)
 
         // adding meta data (private properties) to the properties that dont have them
-        this.data = GuifyData.addMetaDataRecursively(this.data)
+        this.data = GuifyData.addMetaDataRecursively(this.data, 'root')
 
         // calculating rules is the step of checking the global or local rules in a property and then refiling the rules
         // in all object's properties based on the rules specified by the user
@@ -63,23 +63,23 @@ export class GuifyData {
      * @param {AnyObject} field is the input you want to add meta data to it and to its properties
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addMetaDataRecursively (field: GuifyProperty): GuifyProperty {
+    private static addMetaDataRecursively (field: GuifyProperty, key: string): GuifyProperty {
         if (getType(field) === PrimitiveTypes.Object) {
             if (!('_value' in field)) {
-                field = GuifyData.addDefaultMetadataToPrimitives(field)
+                field = GuifyData.addDefaultMetadataToPrimitives(field, key)
             }
 
             for (const key in field._value) {
-                field._value[key] = GuifyData.addMetaDataRecursively(field._value[key])
+                field._value[key] = GuifyData.addMetaDataRecursively(field._value[key], key)
             }
         } else if (getType(field) === PrimitiveTypes.Array) {
-            field = GuifyData.addDefaultMetadataToPrimitives(field)
+            field = GuifyData.addDefaultMetadataToPrimitives(field, key)
 
             for (const key in field._value) {
-                field._value[key] = GuifyData.addMetaDataRecursively(field._value[key])
+                field._value[key] = GuifyData.addMetaDataRecursively(field._value[key], key)
             }
         } else {
-            field = GuifyData.addDefaultMetadataToPrimitives(field)
+            field = GuifyData.addDefaultMetadataToPrimitives(field, key)
         }
 
         return field
@@ -91,9 +91,10 @@ export class GuifyData {
      * @param {AnyObject} field is the primitive type that will be filled with default meta data
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addDefaultMetadataToPrimitives (field: GuifyProperty): GuifyProperty {
+    private static addDefaultMetadataToPrimitives (field: GuifyProperty, key: string): GuifyProperty {
         return {
-            _type: getType(field),
+            _key: key,
+            _valueType: getType(field),
             _value: field
         }
     }
@@ -102,4 +103,25 @@ export class GuifyData {
     // the purpose of this is to make looping through the object easy and
     // using a simpler syntax. its a nesseccasity if you want to loop
     // multiple times in different times
+    public * iter (property?: GuifyProperty): Generator<GuifyProperty> {
+        if (property == null) {
+            property = this.data
+        }
+
+        if (property._valueType === PrimitiveTypes.Object) {
+            yield property
+            const value = property._value
+            for (const key in value) {
+                yield * this.iter(value[key])
+            }
+        } else if (property._valueType === PrimitiveTypes.Array) {
+            yield property
+            const value = property._value
+            for (const key in value) {
+                yield * this.iter(value[key])
+            }
+        } else {
+            yield property
+        }
+    }
 }
