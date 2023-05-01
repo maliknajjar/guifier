@@ -1,8 +1,8 @@
 import './style.css'
 
-import type { GuifyParameters } from './guify/types/guify'
-import { GuifyDataType } from './guify/enums/guify'
-import { Guify } from './guify/guify'
+import type { GuifyParameters } from './guify/types'
+import { GuifyDataType } from './guify/enums'
+import { Guify } from './guify/classes/Guify/guify'
 
 import { exampleData } from './dataExamples'
 

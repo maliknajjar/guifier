@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-import { GuifyDataType } from '../enums/guify'
+import { GuifyDataType } from './enums'
 
 export const GuifyParameterSchema = z.object({
     elementId: z.string(),

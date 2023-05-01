@@ -1,19 +1,11 @@
 import type * as z from 'zod'
 
-import type { GuifyParameterSchema } from '../schemas/guify'
+import type { GuifyParameterSchema } from './schemas'
 
 /**
  * Represents a javascript object with any structure
  */
 export type AnyObject = Record<any, any>
-
-/**
- * Represents an error in Guify Context
- */
-export interface GuifyErrors {
-    code: string
-    message: string
-}
 
 /**
  * Represents the object that gets passed to the instantiated Guify object
@@ -23,3 +15,15 @@ export interface GuifyErrors {
  * @property {GuifyDataType} dataType is the type of the passed data.
  */
 export type GuifyParameters = z.infer<typeof GuifyParameterSchema>
+
+/**
+ * Represents the guify property contents
+ */
+export interface GuifyProperty {
+    _type: string
+    _value: any | GuifyProperty[]
+}
+export const defaultGuifyProperty: GuifyProperty = {
+    _type: 'nothing',
+    _value: 'nothing'
+}

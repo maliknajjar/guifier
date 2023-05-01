@@ -1,4 +1,4 @@
-import type { AnyObject } from './types/guify'
+import type { AnyObject } from './types'
 
 /**
  * A function that returns the type of any value passed to it<br>
