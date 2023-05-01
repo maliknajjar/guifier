@@ -93,16 +93,14 @@ export class GuifyData {
      */
     private static addDefaultMetadataToPrimitives (field: GuifyProperty, key: string): GuifyProperty {
         return {
+            // TODO: create a new key called _propertyPath that will have curent guify property object's path
             _key: key,
             _valueType: getType(field),
             _value: field
         }
     }
 
-    // TODO: create a generator function that loops through the data object
-    // the purpose of this is to make looping through the object easy and
-    // using a simpler syntax. its a nesseccasity if you want to loop
-    // multiple times in different times
+    // TODO: make the iter method return a tuple of the GuifyProperty object itself and its path from its _propertyPath property
     public * iter (property?: GuifyProperty): Generator<GuifyProperty> {
         if (property == null) {
             property = this.data
