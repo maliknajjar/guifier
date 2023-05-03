@@ -1,4 +1,4 @@
-import { GuifyData } from './classes/GuifyData/GuifyData'
+import { GuifyData } from './classes/GuifyData'
 import type { GuifyParameters } from './types'
 import { GuifyParameterSchema } from './schemas'
 
@@ -20,12 +20,6 @@ export class Guify {
 
         // parsing data phase
         this.data = new GuifyData(this.params.data, this.params.dataType)
-
-        // looping through the GuifyData
-        for (const obj of this.data.iter()) {
-            console.log('sssssssssssssssssssssssss')
-            console.log(obj)
-        }
 
         // drawing part
         // TODO

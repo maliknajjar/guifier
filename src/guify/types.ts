@@ -21,11 +21,13 @@ export type GuifyParameters = z.infer<typeof GuifyParameterSchema>
  * Represents the guify property contents
  */
 export interface GuifyProperty {
+    _path: string[]
     _key: string
     _valueType: PrimitiveTypes
     _value: any | GuifyProperty[]
 }
 export const defaultGuifyProperty: GuifyProperty = {
+    _path: [],
     _key: 'null',
     _valueType: PrimitiveTypes.String,
     _value: 'null'

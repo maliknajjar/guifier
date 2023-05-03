@@ -1,24 +1,29 @@
-import type { GuifyProperty } from '../../types'
-import { defaultGuifyProperty } from '../../types'
-import { GuifyDataType, PrimitiveTypes } from '../../enums'
-import { getType } from '../../utils'
+import type { GuifyProperty } from '../types'
+import { defaultGuifyProperty } from '../types'
+import { GuifyDataType, PrimitiveTypes } from '../enums'
+import { getType } from '../utils'
 
 /**
  * Represents the guify parsed data
  */
 export class GuifyData {
     private data: GuifyProperty = defaultGuifyProperty
+    readonly path: string[] = []
 
     constructor (data: string, dataType: GuifyDataType) {
         // converting the data types into a js object
         this.deserializeData(data, dataType)
 
         // adding meta data (private properties) to the properties that dont have them
-        this.data = GuifyData.addMetaDataRecursively(this.data, 'root')
+        this.data = this.addMetaDataRecursively(this.data, 'root')
 
-        // calculating rules is the step of checking the global or local rules in a property and then refiling the rules
+        // TODO: calculating rules is the step of checking the global or local rules in a property and then refiling the rules
         // in all object's properties based on the rules specified by the user
-        // TODO
+
+        // looping through the GuifyData
+        for (const obj of this.iter()) {
+            console.log(obj)
+        }
     }
 
     /**
@@ -63,24 +68,28 @@ export class GuifyData {
      * @param {AnyObject} field is the input you want to add meta data to it and to its properties
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addMetaDataRecursively (field: GuifyProperty, key: string): GuifyProperty {
+    private addMetaDataRecursively (field: GuifyProperty, key: string): GuifyProperty {
+        // to record the path
+        this.path.push(key)
+
         if (getType(field) === PrimitiveTypes.Object) {
-            if (!('_value' in field)) {
-                field = GuifyData.addDefaultMetadataToPrimitives(field, key)
-            }
+            field = GuifyData.addMetaDataToProperties(field, key, this.path)
 
             for (const key in field._value) {
-                field._value[key] = GuifyData.addMetaDataRecursively(field._value[key], key)
+                field._value[key] = this.addMetaDataRecursively(field._value[key], key)
             }
         } else if (getType(field) === PrimitiveTypes.Array) {
-            field = GuifyData.addDefaultMetadataToPrimitives(field, key)
+            field = GuifyData.addMetaDataToProperties(field, key, this.path)
 
             for (const key in field._value) {
-                field._value[key] = GuifyData.addMetaDataRecursively(field._value[key], key)
+                field._value[key] = this.addMetaDataRecursively(field._value[key], key)
             }
         } else {
-            field = GuifyData.addDefaultMetadataToPrimitives(field, key)
+            field = GuifyData.addMetaDataToProperties(field, key, this.path)
         }
+
+        // to record the path
+        this.path.pop()
 
         return field
     }
@@ -91,9 +100,16 @@ export class GuifyData {
      * @param {AnyObject} field is the primitive type that will be filled with default meta data
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addDefaultMetadataToPrimitives (field: GuifyProperty, key: string): GuifyProperty {
+    private static addMetaDataToProperties (field: GuifyProperty, key: string, path: string[]): GuifyProperty {
+        // TODO: check if the field already has private properties or not and fill the missing ones
+        // you can even make validation to check if the types of the private properties are right
+
+        // clone the array to prevent pointing to an empty array
+        path = Array.from(path)
+
         return {
             // TODO: create a new key called _propertyPath that will have curent guify property object's path
+            _path: path,
             _key: key,
             _valueType: getType(field),
             _value: field
