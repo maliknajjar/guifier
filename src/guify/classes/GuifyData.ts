@@ -11,7 +11,7 @@ export class GuifyData {
     readonly path: string[] = []
 
     constructor (data: string, dataType: GuifyDataType) {
-        // converting the data types into a js object
+        // converting data types string into a js object
         this.deserializeData(data, dataType)
 
         // adding meta data (private properties) to the properties that dont have them
@@ -21,7 +21,8 @@ export class GuifyData {
         // in all object's properties based on the rules specified by the user
 
         // looping through the GuifyData
-        for (const obj of this.iter()) {
+        for (const [obj, path] of this.iterateOverProperties()) {
+            console.log(path)
             console.log(obj)
         }
     }
@@ -108,7 +109,6 @@ export class GuifyData {
         path = Array.from(path)
 
         return {
-            // TODO: create a new key called _propertyPath that will have curent guify property object's path
             _path: path,
             _key: key,
             _valueType: getType(field),
@@ -116,26 +116,25 @@ export class GuifyData {
         }
     }
 
-    // TODO: make the iter method return a tuple of the GuifyProperty object itself and its path from its _propertyPath property
-    public * iter (property?: GuifyProperty): Generator<GuifyProperty> {
+    public * iterateOverProperties (property?: GuifyProperty): Generator<[GuifyProperty, string[]]> {
         if (property == null) {
             property = this.data
         }
 
         if (property._valueType === PrimitiveTypes.Object) {
-            yield property
+            yield [property, property._path]
             const value = property._value
             for (const key in value) {
-                yield * this.iter(value[key])
+                yield * this.iterateOverProperties(value[key])
             }
         } else if (property._valueType === PrimitiveTypes.Array) {
-            yield property
+            yield [property, property._path]
             const value = property._value
             for (const key in value) {
-                yield * this.iter(value[key])
+                yield * this.iterateOverProperties(value[key])
             }
         } else {
-            yield property
+            yield [property, property._path]
         }
     }
 }
