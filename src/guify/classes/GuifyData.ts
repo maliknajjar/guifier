@@ -62,6 +62,7 @@ export class GuifyData {
         }
     }
 
+    // TODO adjust the documentation of the function
     /**
      * This method adds meta data (private properties) to the data object and all its
      * nested properties if they dont have it and ignore the ones that have it
@@ -95,6 +96,7 @@ export class GuifyData {
         return field
     }
 
+    // TODO adjust the documentation of the function
     /**
      * This method fills default metadata for types that dont have metadata
      *
