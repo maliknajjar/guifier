@@ -118,6 +118,7 @@ export class GuifyData {
         }
     }
 
+    // TODO: add a documentation for this method
     public * iterateOverProperties (property?: GuifyProperty): Generator<[GuifyProperty, string[]]> {
         if (property == null) {
             property = this.data
