@@ -25,6 +25,7 @@ export class GuifyData {
             console.log(path)
             console.log(obj)
         }
+        // console.log(this.data)
     }
 
     /**
@@ -71,7 +72,7 @@ export class GuifyData {
      * @returns {AnyObject} the new object filled with meta data
      */
     private addMetaDataRecursively (field: GuifyProperty, key: string): GuifyProperty {
-        // to record the path
+        // to set the path
         this.path.push(key)
 
         if (getType(field) === PrimitiveTypes.Object) {
@@ -90,7 +91,7 @@ export class GuifyData {
             field = GuifyData.addMetaDataToProperties(field, key, this.path)
         }
 
-        // to record the path
+        // to set the path
         this.path.pop()
 
         return field
