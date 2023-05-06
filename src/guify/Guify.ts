@@ -28,6 +28,6 @@ export class Guify {
         // console.log('the raw data is: ')
         // console.log(this.params.data)
         console.log('the parsed data is: ')
-        console.log(this.data)
+        console.log(this.data.data)
     }
 }
