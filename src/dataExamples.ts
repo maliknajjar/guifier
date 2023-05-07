@@ -1,3 +1,5 @@
+// TODO: add the _rules meta data object to the exampleData
+
 export const exampleData = `{
     "id": {
         "_extra": "wowowo",

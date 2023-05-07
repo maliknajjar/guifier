@@ -20,10 +20,6 @@ export class GuifyData {
         // adding meta data (private properties) to the properties that dont have them
         this.data = this.addMetaDataRecursively(this.rawData, 'root')
 
-        // TODO: validate _rules metadata
-        // TODO: calculating rules is the step of checking the global or local rules in a property and then refiling the rules
-        // in all object's properties based on the rules specified by the user
-
         // looping through the GuifyData example
         for (const [obj, path] of this.iterateOverProperties()) {
             console.log(path)
