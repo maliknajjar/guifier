@@ -20,7 +20,7 @@ export class GuifyData {
         // adding meta data (private properties) to the properties that dont have them
         this.data = this.addMetaDataRecursively(this.rawData, 'root')
 
-        // TODO: normalizing _rules array in the property meta data
+        // normalizing _rules array in the property meta data
         this.normalizingRules()
 
         // looping through the GuifyData example and printing the properties
@@ -73,8 +73,9 @@ export class GuifyData {
      * This method adds meta data (private properties) to the data object and all its
      * nested properties if they dont have it and ignore the ones that have it
      *
-     * @param {AnyObject} field is the input you want to add meta data to it and to its properties
-     * @returns {AnyObject} the new object filled with meta data
+     * @param {GuifyProperty} field is the input you want to add meta data to it and to its properties
+     * @param {string} key the key of that property
+     * @returns {GuifyProperty} the new object containing required meta data (includes meta data added by the user)
      */
     private addMetaDataRecursively (field: GuifyProperty, key: string): GuifyProperty {
         // to set the path
@@ -131,7 +132,9 @@ export class GuifyData {
      * }
      * ```
      *
-     * @param {AnyObject} field is the primitive type that will be filled with default meta data
+     * @param {GuifyProperty} field is the primitive type that will be filled with default meta data
+     * @param {string} key is the key of the property
+     * @param {string[]} path is an array that represents the path of the property
      * @returns {AnyObject} the new object filled with meta data
      */
     private static addRequiredMetaDataToProperties (field: GuifyProperty, key: string, path: string[]): GuifyProperty {
