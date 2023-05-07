@@ -20,14 +20,17 @@ export class GuifyData {
         // adding meta data (private properties) to the properties that dont have them
         this.data = this.addMetaDataRecursively(this.rawData, 'root')
 
-        // TODO: normalizing _rules array in the property meta data 
+        // TODO: normalizing _rules array in the property meta data
+        this.normalizingRules()
 
-        // looping through the GuifyData example
+        // looping through the GuifyData example and printing the properties
         // for (const [obj, path] of this.iterateOverProperties()) {
         //     console.log(path)
         //     console.log(obj)
         // }
-        console.log(this.data)
+
+        // printing the whole object
+        // console.log(this.data)
     }
 
     /**
@@ -154,7 +157,19 @@ export class GuifyData {
         return returnedObject
     }
 
-    // TODO: add a documentation for this method
+    /**
+     * This method gives the ability to iterate over parsed data object easily
+     * with a simple for loop syntax
+     *
+     * @example
+     * ```ts
+     * const data = new GuifyData('{"name": "malik"}', 'json')
+     * for (const [obj, path] of data.iterateOverProperties()) {
+     *      console.log(path)
+     *      console.log(obj)
+     * }
+     * ```
+     */
     public * iterateOverProperties (property?: GuifyProperty): Generator<[GuifyProperty, string[]]> {
         if (property == null) {
             property = this.data
@@ -174,6 +189,16 @@ export class GuifyData {
             }
         } else {
             yield [property, property._path]
+        }
+    }
+
+    // TODO: add a documentation for this method
+    public normalizingRules (): void {
+        for (const [obj, path] of this.iterateOverProperties()) {
+            if ('_rules' in obj) {
+                console.log(path)
+                console.log(obj)
+            }
         }
     }
 }
