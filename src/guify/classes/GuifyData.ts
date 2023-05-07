@@ -20,12 +20,14 @@ export class GuifyData {
         // adding meta data (private properties) to the properties that dont have them
         this.data = this.addMetaDataRecursively(this.rawData, 'root')
 
+        // TODO: normalizing _rules array in the property meta data 
+
         // looping through the GuifyData example
-        for (const [obj, path] of this.iterateOverProperties()) {
-            console.log(path)
-            console.log(obj)
-        }
-        // console.log(this.data)
+        // for (const [obj, path] of this.iterateOverProperties()) {
+        //     console.log(path)
+        //     console.log(obj)
+        // }
+        console.log(this.data)
     }
 
     /**
