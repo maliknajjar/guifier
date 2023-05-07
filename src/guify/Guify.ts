@@ -21,7 +21,7 @@ export class Guify {
         // parsing data phase
         this.data = new GuifyData(this.params.data, this.params.dataType)
 
-        // drawing part
+        // drawing data phase
         // TODO
     }
 }
