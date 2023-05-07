@@ -53,3 +53,22 @@ export function isObjectEmpty (obj: AnyObject): boolean {
 export function isArrayEmpty (arr: unknown[]): boolean {
     return arr.length === 0
 }
+
+/**
+ * Merges two objects together, returning a new object that contains all properties from both
+ * objects, with properties from obj2 taking precedence over obj1 in case of conflicts. However,
+ * only properties from obj2 that do not already exist in obj1 will be included in the result.
+ *
+ * @param obj1 The first object to merge.
+ * @param obj2 The second object to merge.
+ *
+ * @returns A new object containing all properties from obj1 and obj2, with properties from obj2
+ * taking precedence over obj1 in case of conflicts, but only including properties from obj2 that
+ * do not already exist in obj1.
+ */
+export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject): any {
+    return {
+        ...obj1,
+        ...Object.fromEntries(Object.entries(obj2).filter(([key]) => !(key in obj1)))
+    }
+}

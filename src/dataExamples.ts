@@ -1,5 +1,8 @@
 export const exampleData = `{
-    "id": 123,
+    "id": {
+        "_extra": "wowowo",
+        "_value": 123
+    },
     "name": "John Doe",
     "email": "john.doe@example.com",
     "isMarried": false,
