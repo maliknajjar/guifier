@@ -12,9 +12,9 @@ export const exampleData = `{
     "isMarried": false,
     "address": {
         "_rules": [{
-                "rule": "MAX_PROPERTY_COUNT",
+                "rule": "PROPERTY_COUNT_LIMIT",
                 "params": {
-                    "count": 5
+                    "limit": 5
                 }
             },
             {

@@ -24,6 +24,7 @@ export interface GuifyProperty {
     _path: string[]
     _key: string
     _valueType: PrimitiveTypes
+    _rules?: string[] | AnyObject[]
     _value: any | GuifyProperty[]
 }
 export const defaultGuifyProperty: GuifyProperty = {

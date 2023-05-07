@@ -30,7 +30,8 @@ export class GuifyData {
         // }
 
         // printing the whole object
-        // console.log(this.data)
+        console.log('the data object')
+        console.log(this.data)
     }
 
     /**
@@ -192,12 +193,42 @@ export class GuifyData {
         }
     }
 
-    // TODO: add a documentation for this method
+    /**
+     * This method normalizes the _rule private parameter of a property
+     * @example
+     * Converts this:
+     * ```js
+     * {
+     *      _rules: ["READ_ONLY", "DELETE_DISABLED"]
+     * }
+     * ```
+     * To this:
+     * ```js
+     * {
+     *      _rules: [
+     *          {
+     *              rule: "READ_ONLY",
+     *              params: null
+     *          },
+     *          {
+     *              rule: "DELETE_DISABLED",
+     *              params: null
+     *          }
+     *      ]
+     * }
+     * ```
+     */
     public normalizingRules (): void {
-        for (const [obj, path] of this.iterateOverProperties()) {
-            if ('_rules' in obj) {
-                console.log(path)
-                console.log(obj)
+        for (const [obj] of this.iterateOverProperties()) {
+            if (obj._rules !== undefined) {
+                for (let index = 0; index < obj._rules.length; index++) {
+                    if (getType(obj._rules[index]) === PrimitiveTypes.String) {
+                        obj._rules[index] = {
+                            rule: obj._rules[index],
+                            param: null
+                        }
+                    }
+                }
             }
         }
     }
