@@ -13,6 +13,19 @@ export class GuifyData {
     public data: GuifyProperty = defaultGuifyProperty
     readonly path: string[] = []
 
+    // this object is used to assign default field type to a property
+    // if the field type wasnt specified by the user
+    public static valueTypesToFieldTypes = {
+        string: 'text',
+        number: 'number',
+        boolean: 'boolean',
+        object: 'object',
+        array: 'array',
+        null: 'null',
+        undefined: 'undefined',
+        NaN: 'notNumber'
+    }
+
     constructor (data: string, dataType: GuifyDataType) {
         // converting data types string into a js object
         this.rawData = GuifyData.deserializeData(data, dataType)
@@ -158,6 +171,9 @@ export class GuifyData {
             returnedObject._valueType = getType(field)
         }
 
+        // assigning the the field type based on the value type
+        returnedObject._fieldType = this.valueTypesToFieldTypes[returnedObject._valueType]
+
         return returnedObject
     }
 
@@ -221,7 +237,7 @@ export class GuifyData {
      * }
      * ```
      */
-    public normalizingRules (): void {
+    private normalizingRules (): void {
         for (const [obj] of this.iterateOverProperties()) {
             if (obj._rules !== undefined) {
                 for (let index = 0; index < obj._rules.length; index++) {

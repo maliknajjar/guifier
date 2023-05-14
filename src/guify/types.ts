@@ -26,10 +26,12 @@ export interface GuifyProperty {
     _valueType: PrimitiveTypes
     _rules?: string[] | AnyObject[]
     _value: any | GuifyProperty[]
+    _fieldType: string
 }
 export const defaultGuifyProperty: GuifyProperty = {
     _path: [],
     _key: 'null',
     _valueType: PrimitiveTypes.String,
-    _value: 'null'
+    _value: 'null',
+    _fieldType: 'null'
 }
