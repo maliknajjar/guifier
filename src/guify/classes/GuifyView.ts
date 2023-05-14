@@ -1,14 +1,22 @@
+import type { GuifyData } from './GuifyData'
+
 /**
- * Represents the html generated from the data
+ * Represents object that will handle generating html from the data
  */
 export class GuifyView {
-    // public rawData: any
+    public data: GuifyData
 
-    constructor () {
+    constructor (data: GuifyData) {
+        this.data = data
 
+        // drawing the data
+        this.drawDataRecursively()
     }
 
-    private static recursiveDraw (): any {
-
+    private drawDataRecursively (): any {
+        console.log('starting drawing data')
+        for (const [obj, path] of this.data.iterateOverProperties()) {
+            
+        }
     }
 }

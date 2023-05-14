@@ -1,4 +1,5 @@
 import { GuifyData } from './classes/GuifyData'
+import { GuifyView } from './classes/GuifyView'
 import type { GuifyParameters } from './types'
 import { GuifyParameterSchema } from './schemas'
 
@@ -10,6 +11,7 @@ import { GuifyParameterSchema } from './schemas'
 export class Guify {
     readonly params: GuifyParameters
     readonly data: GuifyData
+    readonly view: GuifyView
 
     constructor (params: GuifyParameters) {
         // setting properties
@@ -22,6 +24,6 @@ export class Guify {
         this.data = new GuifyData(this.params.data, this.params.dataType)
 
         // drawing data phase
-        // TODO
+        this.view = new GuifyView(this.data)
     }
 }
