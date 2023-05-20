@@ -1,7 +1,7 @@
 import type * as z from 'zod'
 
 import { PrimitiveTypes } from './enums'
-import type { GuifyParameterSchema } from './schemas'
+import type { ParameterSchema } from './schemas'
 
 /**
  * Represents a javascript object with any structure
@@ -15,20 +15,20 @@ export type AnyObject = Record<any, any>
  * @property {string} data is the data you want to guify.
  * @property {GuifyDataType} dataType is the type of the passed data.
  */
-export type GuifyParameters = z.infer<typeof GuifyParameterSchema>
+export type Parameters = z.infer<typeof ParameterSchema>
 
 /**
  * Represents the guify property contents
  */
-export interface GuifyProperty {
+export interface Property {
     _path: string[]
     _key: string
     _valueType: PrimitiveTypes
     _rules?: string[] | AnyObject[]
-    _value: any | GuifyProperty[]
+    _value: any | Property[]
     _fieldType: string
 }
-export const defaultGuifyProperty: GuifyProperty = {
+export const defaultProperty: Property = {
     _path: [],
     _key: 'null',
     _valueType: PrimitiveTypes.String,

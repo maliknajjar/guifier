@@ -1,7 +1,7 @@
 /**
 * Represents type of the data passed to the instantiated Guify object
 */
-export enum GuifyDataType {
+export enum DataType {
     Json = 'json',
     Yaml = 'yaml',
     Xml = 'xml',

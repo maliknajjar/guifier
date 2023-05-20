@@ -1,16 +1,16 @@
 import clone from 'clone'
 
-import type { GuifyProperty, AnyObject } from '../types'
-import { defaultGuifyProperty } from '../types'
-import { GuifyDataType, PrimitiveTypes } from '../enums'
+import type { Property, AnyObject } from '../types'
+import { defaultProperty } from '../types'
+import { DataType, PrimitiveTypes } from '../enums'
 import { getType, mergeObjectsOnlyNewProperties } from '../utils'
 
 /**
  * Represents the guify parsed data
  */
-export class GuifyData {
+export class Data {
     public rawData: any
-    public data: GuifyProperty = defaultGuifyProperty
+    public parsedData: Property = defaultProperty
     readonly path: string[] = []
 
     // this object is used to assign default field type to a property
@@ -26,55 +26,45 @@ export class GuifyData {
         NaN: 'notNumber'
     }
 
-    constructor (data: string, dataType: GuifyDataType) {
+    constructor (data: string, dataType: DataType) {
         // converting data types string into a js object
-        this.rawData = GuifyData.deserializeData(data, dataType)
+        this.rawData = Data.deserializeData(data, dataType)
 
         // adding meta data (private properties) to the properties that dont have them
-        this.data = this.addMetaDataRecursively(this.rawData, 'root')
+        this.parsedData = this.addMetaDataRecursively(this.rawData, 'root')
 
         // normalizing _rules array in the property meta data
         this.normalizingRules()
-
-        // looping through the GuifyData example and printing the properties
-        // for (const [obj, path] of this.iterateOverProperties()) {
-        //     console.log(path)
-        //     console.log(obj)
-        // }
-
-        // printing the whole object
-        console.log('the data object')
-        console.log(this.data)
     }
 
     /**
      * This method converts GuifyDataType string into a JS object
      *
      * @param {string} data is the data string
-     * @param {GuifyDataType} dataType is the data type
+     * @param {DataType} dataType is the data type
      * @returns {AnyObject} javascript object
      */
-    private static deserializeData (data: string, datatype: GuifyDataType): AnyObject {
+    private static deserializeData (data: string, datatype: DataType): AnyObject {
         switch (datatype) {
-            case GuifyDataType.Json:
+            case DataType.Json:
                 try {
                     return JSON.parse(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case GuifyDataType.Yaml:
+            case DataType.Yaml:
                 throw new Error('Unsupported datatype')
-            case GuifyDataType.Xml:
+            case DataType.Xml:
                 throw new Error('Unsupported datatype')
-            case GuifyDataType.Toml:
+            case DataType.Toml:
                 throw new Error('Unsupported datatype')
-            case GuifyDataType.Csv:
+            case DataType.Csv:
                 throw new Error('Unsupported datatype')
-            case GuifyDataType.Edn:
+            case DataType.Edn:
                 throw new Error('Unsupported datatype')
-            case GuifyDataType.Cbor:
+            case DataType.Cbor:
                 throw new Error('Unsupported datatype')
-            case GuifyDataType.Bson:
+            case DataType.Bson:
                 throw new Error('Unsupported datatype')
             default:
                 throw new Error('Invalid datatype')
@@ -86,11 +76,11 @@ export class GuifyData {
      * This method adds meta data (private properties) to the data object and all its
      * nested properties if they dont have it and ignore the ones that have it
      *
-     * @param {GuifyProperty} field is the input you want to add meta data to it and to its properties
+     * @param {Property} field is the input you want to add meta data to it and to its properties
      * @param {string} key the key of that property
-     * @returns {GuifyProperty} the new object containing required meta data (includes meta data added by the user)
+     * @returns {Property} the new object containing required meta data (includes meta data added by the user)
      */
-    private addMetaDataRecursively (field: GuifyProperty, key: string): GuifyProperty {
+    private addMetaDataRecursively (field: Property, key: string): Property {
         // to set the path
         this.path.push(key)
 
@@ -100,19 +90,19 @@ export class GuifyData {
         }
 
         if (fieldType === PrimitiveTypes.Object) {
-            field = GuifyData.addRequiredMetaDataToProperties(field, key, this.path)
+            field = Data.addRequiredMetaDataToProperties(field, key, this.path)
 
             for (const key in field._value) {
                 field._value[key] = this.addMetaDataRecursively(field._value[key], key)
             }
         } else if (fieldType === PrimitiveTypes.Array) {
-            field = GuifyData.addRequiredMetaDataToProperties(field, key, this.path)
+            field = Data.addRequiredMetaDataToProperties(field, key, this.path)
 
             for (const key in field._value) {
                 field._value[key] = this.addMetaDataRecursively(field._value[key], key)
             }
         } else {
-            field = GuifyData.addRequiredMetaDataToProperties(field, key, this.path)
+            field = Data.addRequiredMetaDataToProperties(field, key, this.path)
         }
 
         // to set the path
@@ -145,17 +135,17 @@ export class GuifyData {
      * }
      * ```
      *
-     * @param {GuifyProperty} field is the primitive type that will be filled with default meta data
+     * @param {Property} field is the primitive type that will be filled with default meta data
      * @param {string} key is the key of the property
      * @param {string[]} path is an array that represents the path of the property
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addRequiredMetaDataToProperties (field: GuifyProperty, key: string, path: string[]): GuifyProperty {
+    private static addRequiredMetaDataToProperties (field: Property, key: string, path: string[]): Property {
         // clone the array to prevent pointing to an empty array
         path = Array.from(path)
 
         // field with metadata object that will be returned
-        let returnedObject = clone(defaultGuifyProperty)
+        let returnedObject = clone(defaultProperty)
         returnedObject._path = path
         returnedObject._key = key
 
@@ -190,9 +180,9 @@ export class GuifyData {
      * }
      * ```
      */
-    public * iterateOverProperties (property?: GuifyProperty): Generator<[GuifyProperty, string[]]> {
+    public * iterateOverProperties (property?: Property): Generator<[Property, string[]]> {
         if (property == null) {
-            property = this.data
+            property = this.parsedData
         }
 
         if (property._valueType === PrimitiveTypes.Object) {
