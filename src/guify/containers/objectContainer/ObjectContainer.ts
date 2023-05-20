@@ -1,5 +1,7 @@
 import type { Property } from '../../types'
 
+import './style.css'
+
 /**
  * Represents peroperty of type object
  */
@@ -24,6 +26,7 @@ export class ObjectContainer {
     public draw (): HTMLElement {
         console.log('drawing the object now')
         const el = document.createElement('div')
+        el.classList.add('guifyObjectContainer')
         el.append('the object')
         return el
     }

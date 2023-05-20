@@ -25,5 +25,13 @@ export class Guify {
 
         // drawing data phase
         this.view = new View(this.data)
+
+        // inserting generated HTMLElement to element part
+        this.appendGeneratedElement()
+    }
+
+    private appendGeneratedElement (): void {
+        const el = document.getElementById(this.params.elementId)
+        el?.append(this.view.getGeneratedElement())
     }
 }

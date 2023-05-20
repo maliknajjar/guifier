@@ -21,10 +21,6 @@ export class View {
      */
     private drawData (): void {
         console.log('starting drawing data')
-        // for (const [property, path] of this.data.iterateOverProperties()) {
-        //     console.log(path.join('.'))
-        //     console.log(property)
-        // }
         if (this.data.parsedData._valueType === 'object') {
             // if the root is an object
             const objectContainer = new ObjectContainer(this.data.parsedData)
@@ -34,5 +30,12 @@ export class View {
             const arrayContainer = new ArrayContainer(this.data.parsedData)
             this.generatedElement = arrayContainer.draw()
         }
+    }
+
+    /**
+     * This method returns the generated HTMLElement
+     */
+    public getGeneratedElement (): HTMLElement {
+        return this.generatedElement
     }
 }

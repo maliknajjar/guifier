@@ -38,7 +38,7 @@ export class Data {
     }
 
     /**
-     * This method converts GuifyDataType string into a JS object
+     * This method converts DataType string into a JS object
      *
      * @param {string} data is the data string
      * @param {DataType} dataType is the data type
@@ -173,7 +173,7 @@ export class Data {
      *
      * @example
      * ```ts
-     * const data = new GuifyData('{"name": "malik"}', 'json')
+     * const data = new Data('{"name": "malik"}', 'json')
      * for (const [obj, path] of data.iterateOverProperties()) {
      *      console.log(path)
      *      console.log(obj)

@@ -13,7 +13,7 @@ export type AnyObject = Record<any, any>
  *
  * @property {string} elementId is element's id.
  * @property {string} data is the data you want to guify.
- * @property {GuifyDataType} dataType is the type of the passed data.
+ * @property {DataType} dataType is the type of the passed data.
  */
 export type Parameters = z.infer<typeof ParameterSchema>
 
