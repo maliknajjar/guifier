@@ -1,14 +1,17 @@
 import type { Property } from '../../types'
+import { Container } from '../Container'
 
 import './style.css'
 
 /**
  * Represents peroperty of type object
  */
-export class ObjectContainer {
+export class ObjectContainer extends Container {
     readonly property: Property
 
     constructor (property: Property) {
+        super(property)
+
         this.property = property
 
         // TODO: validate the value
@@ -24,10 +27,12 @@ export class ObjectContainer {
      * @returns {HTMLElement} html element object
      */
     public draw (): HTMLElement {
-        console.log('drawing the object now')
-        const el = document.createElement('div')
-        el.classList.add('guifyObjectContainer')
-        el.append('the object')
-        return el
+        const objectContainer = document.createElement('div')
+        objectContainer.classList.add('guifyObjectContainer')
+        if (this.containerInFirstLevel()) {
+            objectContainer.classList.add('guifyFullHeight')
+        }
+        objectContainer.append('the object')
+        return objectContainer
     }
 }

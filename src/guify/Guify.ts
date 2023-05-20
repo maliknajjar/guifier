@@ -3,6 +3,8 @@ import { View } from './classes/View'
 import type { Parameters } from './types'
 import { ParameterSchema } from './schemas'
 
+import './guifyStyle.css'
+
 /**
  * Guify class handles converting the passed data into an HTML/GUI representation
  *
@@ -20,6 +22,9 @@ export class Guify {
         // validating Guify params
         ParameterSchema.parse(this.params)
 
+        // checking if the main element exist
+        this.checkIfMainElementExist()
+
         // parsing data phase
         this.data = new Data(this.params.data, this.params.dataType)
 
@@ -33,5 +38,12 @@ export class Guify {
     private appendGeneratedElement (): void {
         const el = document.getElementById(this.params.elementId)
         el?.append(this.view.getGeneratedElement())
+    }
+
+    private checkIfMainElementExist (): void {
+        const mainElement = document.getElementById(this.params.elementId)
+        if (mainElement === null) {
+            throw new Error('Did not find the Main Element')
+        }
     }
 }
