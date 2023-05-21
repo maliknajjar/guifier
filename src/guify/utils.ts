@@ -1,5 +1,9 @@
-import type { AnyObject } from './types'
+import type { AnyObject, Property } from './types'
+import type { Field } from './fields/Field'
+
 import { PrimitiveTypes } from './enums'
+import { TextField } from './fields/TextField'
+import { BooleanField } from './fields/BooleanField'
 
 /**
  * A function that returns the type of any value passed to it<br>
@@ -70,5 +74,24 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
     return {
         ...obj1,
         ...Object.fromEntries(Object.entries(obj2).filter(([key]) => !(key in obj1)))
+    }
+}
+
+export function getFieldInstance (property: Property): Field {
+    switch (property._fieldType) {
+        case 'text':
+            return new TextField(property)
+        case 'number':
+            break
+        case 'boolean':
+            return new BooleanField(property)
+        case 'null':
+            break
+        case 'undefined':
+            break
+        case 'notNumber':
+            break
+        default:
+            break
     }
 }

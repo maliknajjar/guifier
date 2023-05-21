@@ -25,7 +25,7 @@ export interface Property {
     _key: string
     _valueType: PrimitiveTypes
     _rules?: string[] | AnyObject[]
-    _value: any | Property[]
+    _value: any
     _fieldType: string
 }
 export const defaultProperty: Property = {

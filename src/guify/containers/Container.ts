@@ -1,7 +1,7 @@
 import type { Property } from '../types'
 
 export abstract class Container {
-    readonly property: Property
+    protected property: Property
 
     constructor (property: Property) {
         this.property = property
@@ -9,6 +9,12 @@ export abstract class Container {
 
     public abstract draw (): void
 
+    /**
+     * this method checks if the current container is the
+     * first container and its not a nested container
+     *
+     * @returns {HTMLElement} html element object
+     */
     protected containerInFirstLevel (): boolean {
         return this.property._path.length === 1
     }
