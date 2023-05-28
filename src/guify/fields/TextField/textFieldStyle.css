@@ -1,0 +1,13 @@
+.guifyTextField {
+    width: 100%;
+    padding: 7.5px 15px;
+    border-radius: 7.5px;
+    border: var(--primary-border-width) solid var(--primary-stroke-color);
+    outline: 3px solid transparent;
+    transition: 100ms;
+}
+
+.guifyTextField:focus {
+    border: var(--primary-border-width) solid var(--primary-color);
+    outline: 3px solid var(--primary-lighter-color);
+}

@@ -71,7 +71,6 @@ export class Data {
         }
     }
 
-    // TODO adjust the documentation of the function
     /**
      * This method adds meta data (private properties) to the data object and all its
      * nested properties if they dont have it and ignore the ones that have it
@@ -111,7 +110,6 @@ export class Data {
         return field
     }
 
-    // TODO adjust the documentation of the function
     /**
      * This method fills metadata for properties that dont have metadata.
      * it fills those required metadata based on the property type
@@ -161,7 +159,7 @@ export class Data {
             returnedObject._valueType = getType(field)
         }
 
-        // assigning the the field type based on the value type
+        // assigning the field type based on the value type
         returnedObject._fieldType = this.valueTypesToFieldTypes[returnedObject._valueType]
 
         return returnedObject
@@ -234,7 +232,7 @@ export class Data {
                     if (getType(obj._rules[index]) === PrimitiveTypes.String) {
                         obj._rules[index] = {
                             rule: obj._rules[index],
-                            param: null
+                            params: undefined
                         }
                     }
                 }

@@ -11,8 +11,9 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: green;
+	background-color: rgb(255, 255, 255);
 	height: 100%;
+	margin: 0;
 }
 
 #app {

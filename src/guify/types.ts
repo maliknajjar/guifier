@@ -24,14 +24,17 @@ export interface Property {
     _path: string[]
     _key: string
     _valueType: PrimitiveTypes
-    _rules?: string[] | AnyObject[]
     _value: any
     _fieldType: string
+    _rules?: string[] | AnyObject[]
+    _params?: AnyObject[]
 }
 export const defaultProperty: Property = {
     _path: [],
     _key: 'null',
     _valueType: PrimitiveTypes.String,
     _value: 'null',
-    _fieldType: 'null'
+    _fieldType: 'null',
+    _rules: undefined,
+    _params: undefined
 }

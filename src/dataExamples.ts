@@ -68,5 +68,9 @@
 export const exampleData = `{
     "name": "John Doe",
     "email": "john.doe@example.com",
-    "isMarried": false
+    "isMarried": false,
+    "child": {
+        "name": "ahmed",
+        "email": "ahmed@gmail.com"
+    }
 }`

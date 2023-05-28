@@ -1,9 +1,9 @@
 import type { AnyObject, Property } from './types'
-import type { Field } from './fields/Field'
+import type { Field } from './fields/Field/Field'
 
 import { PrimitiveTypes } from './enums'
-import { TextField } from './fields/TextField'
-import { BooleanField } from './fields/BooleanField'
+import { TextField } from './fields/TextField/TextField'
+import { BooleanField } from './fields/BooleanField/BooleanField'
 
 /**
  * A function that returns the type of any value passed to it<br>
@@ -77,6 +77,12 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
     }
 }
 
+/**
+ * A function that gets an instance of the field based on the type
+ *
+ * @param {Property} property is the object you want to check if its empty
+ * @returns {Field} instance of the Field
+ */
 export function getFieldInstance (property: Property): Field {
     switch (property._fieldType) {
         case 'text':

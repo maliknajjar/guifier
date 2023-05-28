@@ -37,7 +37,7 @@ export class Guify {
 
     private appendGeneratedElement (): void {
         const el = document.getElementById(this.params.elementId)
-        el?.append(this.view.getGeneratedElement())
+        el?.append(this.view.getGeneratedHTML())
     }
 
     private checkIfMainElementExist (): void {
