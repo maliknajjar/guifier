@@ -38,7 +38,9 @@ export class BooleanField extends Field {
         const TrueElement = document.createElement('div')
         TrueElement.classList.add('guifyBooleanElement')
         TrueElement.classList.add('guifyBooleanTrueElement')
-        TrueElement.classList.add('guifyBooleanTrueElementSelect')
+        if (this.property._value === true) {
+            TrueElement.classList.add('guifyBooleanTrueElementSelect')
+        }
         TrueElement.innerHTML = 'True'
         booleanElement.append(TrueElement)
 
@@ -46,6 +48,9 @@ export class BooleanField extends Field {
         const FalseElement = document.createElement('div')
         FalseElement.classList.add('guifyBooleanElement')
         FalseElement.classList.add('guifyBooleanFalseElement')
+        if (this.property._value === false) {
+            FalseElement.classList.add('guifyBooleanFalseElementSelect')
+        }
         FalseElement.innerHTML = 'False'
         booleanElement.append(FalseElement)
 

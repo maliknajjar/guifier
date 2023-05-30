@@ -69,6 +69,7 @@ export const exampleData = `{
     "name": "John Doe",
     "email": "john.doe@example.com",
     "isMarried": false,
+    "wowowo": true,
     "child": {
         "name": "ahmed",
         "email": "ahmed@gmail.com"
