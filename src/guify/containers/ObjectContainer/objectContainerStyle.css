@@ -1,7 +1,7 @@
 .guifyObjectContainer {
     grid-column: span 2;
     background-color: var(--primary-bg-color);
-    border: var(--primary-border-width) solid var(--primary-stroke-color);
+    border: var(--primary-border);
     border-radius: var(--primary-border-radius);
 }
 
@@ -13,7 +13,8 @@
 }
 
 .guifyObjectContainerHeader {
+    font-size: larger;
     color: var(--primary-text-color);
     padding: var(--header-horizontal-padding) var(--primary-grid-gap);
-    border-bottom: var(--primary-border-width) solid var(--primary-stroke-color);
+    border-bottom: var(--primary-border);
 }

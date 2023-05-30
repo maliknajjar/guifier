@@ -5,12 +5,13 @@
     --primary-text-color: #888E9D;
     --primary-bg-color: #F5F7FB;
     --secondary-bg-color: #FFFFFF;
-    --primary-stroke-color: #CDD0DE;
     --primary-padding: 20px;
     --primary-grid-gap: 20px;
     --header-horizontal-padding: 15px;
-    --primary-border-width: 2px;
+    --primary-border-color: #CDD0DE;
+    --primary-border: 2px solid var(--primary-border-color);
     --primary-border-radius: 7.5px;
+    --primary-selected-border: 2px solid #1D5EFF;
 }
 
 /* global classes */

@@ -1,0 +1,41 @@
+.guifyBooleanField {
+    display: flex;
+    gap: 2px;
+    height: 40px;
+    font-size: small;
+    background-color: var(--primary-border-color);
+    border: var(--primary-border);
+    border-radius: var(--primary-border-radius);
+    width: fit-content;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.guifyBooleanElement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}   
+
+.guifyBooleanTrueElement {
+    background-color: transparent;
+    transition: 150ms;
+    background-color: white;
+}
+
+.guifyBooleanTrueElementSelect {
+    background-color: #BCFFC3;
+}
+
+.guifyBooleanFalseElement {
+    background-color: transparent;
+    transition: 150ms;
+    background-color: white;
+}
+
+.guifyBooleanFalseElementSelect {
+    background-color: #FFBCBC;
+}
