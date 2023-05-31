@@ -33,6 +33,14 @@ export class TextField extends Field {
         const inputElement = document.createElement('input')
         inputElement.type = 'text'
         inputElement.classList.add('guifyTextField')
+
+        // setting style based on color set wether primary or secondary
+        if (this.showSecondaryColors) {
+            inputElement.classList.add('guifyPrimaryBgColor')
+        } else {
+            inputElement.classList.add('guifySecondaryBgColor')
+        }
+
         FieldContainer.append(inputElement)
 
         return FieldContainer

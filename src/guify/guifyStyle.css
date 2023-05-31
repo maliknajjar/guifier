@@ -18,3 +18,11 @@
 .guifyFullHeight {
     height: 100%;
 }
+
+.guifyPrimaryBgColor {
+    background-color: var(--primary-bg-color);
+}
+
+.guifySecondaryBgColor {
+    background-color: var(--secondary-bg-color);
+}

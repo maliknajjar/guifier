@@ -1,11 +1,12 @@
 .guifyTextField {
     padding: 7.5px 15px;
-    border-radius: 7.5px;
+    border-radius: 10px;
     border: var(--primary-border);
     outline: 3px solid transparent;
     transition: 150ms;
     width: 100%;
     height: 40px;
+    font-size: medium;
 }
 
 .guifyTextField:focus {

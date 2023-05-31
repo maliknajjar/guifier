@@ -72,6 +72,11 @@ export const exampleData = `{
     "wowowo": true,
     "child": {
         "name": "ahmed",
-        "email": "ahmed@gmail.com"
+        "email": "ahmed@gmail.com",
+        "wowowo": true,
+        "dog": {
+            "name": "ahmed",
+            "email": "ahmed@gmail.com"
+        }
     }
 }`

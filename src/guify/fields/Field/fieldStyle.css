@@ -1,4 +1,5 @@
 .guifyLabelContainer {
     color: var(--primary-text-color);
-    margin: 5px 3px;
+    font-size: medium;
+    margin: 3px 3px;
 }

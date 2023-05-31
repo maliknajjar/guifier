@@ -40,6 +40,11 @@ export class ObjectContainer extends Container {
         // creating the container div
         const objectContainer = document.createElement('div')
         objectContainer.classList.add('guifyObjectContainer')
+        if (this.showSecondaryColors) {
+            objectContainer.classList.add('guifySecondaryBgColor')
+        } else {
+            objectContainer.classList.add('guifyPrimaryBgColor')
+        }
 
         // creating the header of the container
         objectContainer.append(this.drawHeader())
@@ -61,12 +66,15 @@ export class ObjectContainer extends Container {
             let propertyElement
             if (property._valueType === PrimitiveTypes.Object) {
                 const childObjectContainer = new ObjectContainer(property)
+                // make this child object use different set of colors that the current one
+                childObjectContainer.showSecondaryColors = !this.showSecondaryColors
                 propertyElement = childObjectContainer.draw()
             } else if (property._valueType === PrimitiveTypes.Array) {
                 const childArrayContainer = new ArrayContainer(property)
                 propertyElement = childArrayContainer.draw()
             } else {
                 const field = getFieldInstance(property)
+                field.showSecondaryColors = this.showSecondaryColors
                 propertyElement = field.draw()
             }
             propertyElement.classList.add('guifyFieldContainer')

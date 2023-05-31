@@ -1,6 +1,5 @@
 .guifyObjectContainer {
     grid-column: span 2;
-    background-color: var(--primary-bg-color);
     border: var(--primary-border);
     border-radius: var(--primary-border-radius);
 }
