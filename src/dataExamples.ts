@@ -68,15 +68,21 @@
 export const exampleData = `{
     "name": "John Doe",
     "email": "john.doe@example.com",
+    "age": 15,
     "isMarried": false,
     "wowowo": true,
+    "nothing": null,
+    "number of childrean": -50,
     "child": {
         "name": "ahmed",
+        "age": 35,
         "email": "ahmed@gmail.com",
         "wowowo": true,
+        "nothing": null,
         "dog": {
             "name": "ahmed",
-            "email": "ahmed@gmail.com"
+            "email": "ahmed@gmail.com",
+            "wowowo": true
         }
     }
 }`

@@ -33,6 +33,9 @@ export class TextField extends Field {
         const inputElement = document.createElement('input')
         inputElement.type = 'text'
         inputElement.classList.add('guifyTextField')
+        if (this.property._value !== '') {
+            inputElement.value = this.property._value
+        }
 
         // setting style based on color set wether primary or secondary
         if (this.showSecondaryColors) {
@@ -41,8 +44,21 @@ export class TextField extends Field {
             inputElement.classList.add('guifySecondaryBgColor')
         }
 
+        // adding the event handler
+        inputElement.addEventListener('input', (e) => {
+            this.inputEventHandler(e)
+        })
+
         FieldContainer.append(inputElement)
 
         return FieldContainer
+    }
+
+    /**
+     * This function handles the input event on the text field
+     */
+    private inputEventHandler (event: Event): void {
+        const element = event.target as HTMLInputElement
+        this.setValue(element.value)
     }
 }

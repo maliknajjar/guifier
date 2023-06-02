@@ -20,6 +20,7 @@
     "vite": "^4.3.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "clone": "^2.1.2",
     "zod": "^3.21.4"
   }

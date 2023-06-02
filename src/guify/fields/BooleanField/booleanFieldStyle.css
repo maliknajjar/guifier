@@ -8,8 +8,6 @@
     width: fit-content;
     color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    cursor: pointer;
-    font-weight: bold;
     font-size: medium;
 }
 
@@ -21,6 +19,7 @@
     border-radius: 10px;
     border: 2px solid transparent;
     transition: 150ms;
+    cursor: pointer;
 }   
 
 .guifyBooleanTrueElementSelect {

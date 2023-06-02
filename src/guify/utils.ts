@@ -3,7 +3,9 @@ import type { Field } from './fields/Field/Field'
 
 import { PrimitiveTypes } from './enums'
 import { TextField } from './fields/TextField/TextField'
+import { NumberField } from './fields/NumberField/NumberField'
 import { BooleanField } from './fields/BooleanField/BooleanField'
+import { NullField } from './fields/NullField/NullField'
 
 /**
  * A function that returns the type of any value passed to it<br>
@@ -88,16 +90,16 @@ export function getFieldInstance (property: Property): Field {
         case 'text':
             return new TextField(property)
         case 'number':
-            break
+            return new NumberField(property)
         case 'boolean':
             return new BooleanField(property)
         case 'null':
-            break
+            return new NullField(property)
         case 'undefined':
-            break
+            return new NullField(property)
         case 'notNumber':
-            break
+            return new NullField(property)
         default:
-            break
+            return new NullField(property)
     }
 }

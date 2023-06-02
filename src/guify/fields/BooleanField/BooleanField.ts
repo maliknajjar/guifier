@@ -47,7 +47,7 @@ export class BooleanField extends Field {
         FalseElement.innerHTML = 'False'
         booleanElement.append(FalseElement)
 
-        // setting the value of the boolean based on the data
+        // setting the value of the boolean in the html based on the data
         if (this.property._value === true) {
             TrueElement.classList.add('guifyBooleanTrueElementSelect')
         } else {

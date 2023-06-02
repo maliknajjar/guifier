@@ -1,4 +1,6 @@
 .guifyObjectContainer {
+    display: flex;
+    flex-direction: column;
     grid-column: span 2;
     border: var(--primary-border);
     border-radius: var(--primary-border-radius);
@@ -9,6 +11,7 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: var(--primary-grid-gap);
     padding: var(--primary-padding);
+    overflow-y: auto;
 }
 
 .guifyObjectContainerHeader {
