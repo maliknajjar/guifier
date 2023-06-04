@@ -33,16 +33,4 @@ export abstract class Field {
     protected setValue (newValue: any): void {
         this.property._value = newValue
     }
-
-    /**
-     * This function validates the _rules of the property object
-     */
-    protected drawFieldLabel (): HTMLElement {
-        const labelName = this.property._key
-        const labelContainer = document.createElement('div')
-        labelContainer.classList.add('guifyLabelContainer')
-        labelContainer.innerHTML = labelName
-
-        return labelContainer
-    }
 }

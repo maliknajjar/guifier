@@ -71,13 +71,32 @@ export class ObjectContainer extends Container {
                 propertyElement = childObjectContainer.draw()
             } else if (property._valueType === PrimitiveTypes.Array) {
                 const childArrayContainer = new ArrayContainer(property)
+                childArrayContainer.showSecondaryColors = !this.showSecondaryColors
                 propertyElement = childArrayContainer.draw()
             } else {
+                const guifyObjectFieldContainer = document.createElement('div')
+                guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
+
+                // append the key label to the property div in an object
+                const labelName = property._key
+                const labelContainer = document.createElement('div')
+                labelContainer.classList.add('guifyObjectLabelContainer')
+                labelContainer.innerHTML = labelName
+                guifyObjectFieldContainer.append(labelContainer)
+
                 const field = getFieldInstance(property)
                 field.showSecondaryColors = this.showSecondaryColors
-                propertyElement = field.draw()
+                const fieldElement = field.draw()
+
+                // wrap field element with a div container
+                const fieldInnerContainer = document.createElement('div')
+                fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
+                fieldInnerContainer.append(fieldElement)
+
+                guifyObjectFieldContainer.append(fieldInnerContainer)
+                propertyElement = guifyObjectFieldContainer
             }
-            propertyElement.classList.add('guifyFieldContainer')
+
             guifyObjectContainerbody.append(propertyElement)
         }
 

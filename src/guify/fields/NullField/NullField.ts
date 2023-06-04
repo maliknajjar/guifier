@@ -23,12 +23,6 @@ export class NullField extends Field {
      * @returns {HTMLElement} html element object
      */
     public draw (): HTMLElement {
-        // creating the container element
-        const FieldContainer = document.createElement('div')
-
-        // drawing the field label div
-        FieldContainer.append(this.drawFieldLabel())
-
         // drawing the null field
         const nullElement = document.createElement('div')
         nullElement.classList.add('guifyNullField')
@@ -42,9 +36,6 @@ export class NullField extends Field {
         nullElement.append(textElement)
         nullElement.append(iconElement)
 
-        // appending the null field to the container
-        FieldContainer.append(nullElement)
-
-        return FieldContainer
+        return nullElement
     }
 }

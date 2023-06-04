@@ -29,12 +29,6 @@ export class NumberField extends Field {
      * @returns {HTMLElement} html element object
      */
     public draw (): HTMLElement {
-        // creating the container element
-        const FieldContainer = document.createElement('div')
-
-        // drawing the field label div
-        FieldContainer.append(this.drawFieldLabel())
-
         // drawing the input container
         const inputContainerElement = document.createElement('div')
         inputContainerElement.classList.add('guifyNumberInputContainer')
@@ -103,9 +97,7 @@ export class NumberField extends Field {
             inputElement.classList.add('guifySecondaryBgColor')
         }
 
-        FieldContainer.append(inputContainerElement)
-
-        return FieldContainer
+        return inputContainerElement
     }
 
     /**
@@ -134,8 +126,6 @@ export class NumberField extends Field {
                 input.value = (parseInt(input.value) - 1).toString()
             }, 100)
         }
-        console.log('value to set is:')
-        console.log(parseInt(input.value))
         this.setValue(parseInt(input.value))
     }
 

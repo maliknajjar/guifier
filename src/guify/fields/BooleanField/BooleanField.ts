@@ -23,12 +23,6 @@ export class BooleanField extends Field {
      * @returns {HTMLElement} html element object
      */
     public draw (): HTMLElement {
-        // creating the container element
-        const FieldContainer = document.createElement('div')
-
-        // drawing the field label div
-        FieldContainer.append(this.drawFieldLabel())
-
         // drawing the boolean div
         const booleanElement = document.createElement('div')
         booleanElement.classList.add('guifyBooleanField')
@@ -64,10 +58,7 @@ export class BooleanField extends Field {
         // adding event handler for the boolean element
         booleanElement.addEventListener('click', (e) => { this.booleanEventHandler(e, TrueElement, FalseElement) })
 
-        // appending boolean content to the field container
-        FieldContainer.append(booleanElement)
-
-        return FieldContainer
+        return booleanElement
     }
 
     /**

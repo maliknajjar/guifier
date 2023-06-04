@@ -73,6 +73,11 @@ export const exampleData = `{
     "wowowo": true,
     "nothing": null,
     "number of childrean": -50,
+    "an array": [
+        "sas",
+        true,
+        "sasas"
+    ],
     "child": {
         "name": "ahmed",
         "age": 35,

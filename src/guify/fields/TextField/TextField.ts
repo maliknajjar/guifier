@@ -23,12 +23,6 @@ export class TextField extends Field {
      * @returns {HTMLElement} html element object
      */
     public draw (): HTMLElement {
-        // creating the container element
-        const FieldContainer = document.createElement('div')
-
-        // drawing the field label div
-        FieldContainer.append(this.drawFieldLabel())
-
         // drawing the input
         const inputElement = document.createElement('input')
         inputElement.type = 'text'
@@ -49,9 +43,7 @@ export class TextField extends Field {
             this.inputEventHandler(e)
         })
 
-        FieldContainer.append(inputElement)
-
-        return FieldContainer
+        return inputElement
     }
 
     /**

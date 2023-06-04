@@ -1,0 +1,67 @@
+.guifyArrayContainer {
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+    border: var(--primary-border);
+    border-radius: var(--primary-border-radius);
+}
+
+.guifyArrayContainerbody {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--primary-padding);
+    padding-left: 0;
+    overflow-y: auto;
+    gap: var(--primary-padding);
+    overflow: visible;
+}
+
+.guifyArrayContainerHeader {
+    font-size: larger;
+    color: var(--primary-text-color);
+    padding: var(--header-horizontal-padding) var(--primary-grid-gap);
+    border-bottom: var(--primary-border);
+}
+
+.guifyArrayFieldContainer {
+    display: flex;
+    align-items: center;
+}
+
+.guifyArrayfieldInnerContainer {
+    flex: 1;
+}
+
+.guifyArrayLabelContainer {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+}
+
+.guifyArrayIndexLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: var(--primary-border);
+    height: 35px;
+    width: 35px;
+    border-radius: 100%;
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+}
+
+.guifyArrayMainContainerbody {
+    display: flex;
+}
+
+.guifyArrayLevelElement {
+    width: 35px;
+    height: 100%;
+    background-color: transparent;
+    border-right: var(--primary-border);
+}
