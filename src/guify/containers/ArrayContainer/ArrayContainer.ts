@@ -57,6 +57,9 @@ export class ArrayContainer extends Container {
         const guifyArrayLevelElement = document.createElement('div')
         guifyArrayLevelElement.classList.add('guifyArrayLevelElement')
         guifyArrayMainContainerbody.append(guifyArrayLevelElement)
+        const guifyArrayLevelElement2 = document.createElement('div')
+        guifyArrayLevelElement2.classList.add('guifyArrayLevelElement')
+        guifyArrayMainContainerbody.append(guifyArrayLevelElement2)
 
         // creating the body of the container
         const guifyArrayContainerbody = document.createElement('div')

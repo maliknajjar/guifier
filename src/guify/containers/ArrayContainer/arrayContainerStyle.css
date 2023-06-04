@@ -40,16 +40,18 @@
     align-items: center;
     justify-content: center;
     transform: translateX(-50%);
+    padding-right: var(--primary-border-width);
 }
 
 .guifyArrayIndexLabel {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    border: var(--primary-border);
     height: 35px;
     width: 35px;
+    background-color: white;
+    border: var(--primary-border);
+    outline: 4px solid white;
     border-radius: 100%;
     color: var(--primary-text-color);
     background-color: var(--primary-bg-color);
