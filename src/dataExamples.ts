@@ -74,9 +74,9 @@ export const exampleData = `{
     "nothing": null,
     "number of childrean": -50,
     "an array": [
-        "sas",
+        "test text field",
         true,
-        "sasas"
+        454
     ],
     "child": {
         "name": "ahmed",
