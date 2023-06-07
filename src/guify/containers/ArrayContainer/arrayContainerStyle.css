@@ -10,10 +10,9 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: var(--primary-padding);
-    padding-left: 0;
+    /* padding: var(--primary-padding) 0; */
     overflow-y: auto;
-    gap: var(--primary-padding);
+    /* gap: var(--primary-padding); */
     overflow: visible;
 }
 
@@ -27,6 +26,18 @@
 .guifyArrayFieldContainer {
     display: flex;
     align-items: center;
+    height: 45px;
+    margin-right: var(--primary-padding);
+    margin-bottom: var(--secondary-padding);
+    margin-top: var(--secondary-padding);
+}
+
+.guifyArrayFieldContainer:first-of-type {
+    margin-top: var(--primary-padding);
+}
+
+.guifyArrayFieldContainer:last-of-type {
+    margin-bottom: var(--primary-padding);
 }
 
 .guifyArrayfieldInnerContainer {
@@ -59,11 +70,28 @@
 
 .guifyArrayMainContainerbody {
     display: flex;
+    overflow: hidden;
+}
+
+.guifyArrayLevelsContainer {
+    display: flex;
+    height: 100%;
+    transform: scaleY(2);
 }
 
 .guifyArrayLevelElement {
     width: 35px;
     height: 100%;
     background-color: transparent;
+    border-right: var(--primary-border-width) dashed var(--primary-border-color);
+}
+
+.guifyArrayLevelElement:last-of-type {
     border-right: var(--primary-border);
+}
+
+.guifyCollapsibleElementContent {
+    background-color: red;
+    position: relative;
+    z-index: 1;
 }

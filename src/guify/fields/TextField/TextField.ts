@@ -3,6 +3,8 @@ import './textFieldStyle.css'
 import { Field } from '../Field/Field'
 
 export class TextField extends Field {
+    public FieldLabelName: string = 'Text'
+
     /**
      * This function validates the _params of the property object
      */

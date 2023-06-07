@@ -3,6 +3,8 @@ import './nullFieldStyle.css'
 import { Field } from '../Field/Field'
 
 export class NullField extends Field {
+    public FieldLabelName: string = 'Null'
+
     /**
      * This function validates the _params of the property object
      */

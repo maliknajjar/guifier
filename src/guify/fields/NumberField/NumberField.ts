@@ -3,6 +3,8 @@ import './numberFieldStyle.css'
 import { Field } from '../Field/Field'
 
 export class NumberField extends Field {
+    public FieldLabelName: string = 'Number'
+
     /**
      * this property is an interval handler used to simulate
      * keeping pressing on the plus or minus buttons

@@ -1,9 +1,9 @@
 import './arrayContainerStyle.css'
 
 import type { Property } from '../../types'
-import { PrimitiveTypes } from '../../enums'
+import type { Field } from '../../fields/Field/Field'
 
-import { ObjectContainer } from '../ObjectContainer/ObjectContainer'
+import { PrimitiveTypes } from '../../enums'
 import { Container } from '../Container'
 import { getFieldInstance } from '../../utils'
 
@@ -11,6 +11,8 @@ import { getFieldInstance } from '../../utils'
  * Represents peroperty of type array
  */
 export class ArrayContainer extends Container {
+    public FieldLabelName: string = 'Array'
+
     constructor (property: Property) {
         super(property)
         this.validateParams()
@@ -53,14 +55,6 @@ export class ArrayContainer extends Container {
         const guifyArrayMainContainerbody = document.createElement('div')
         guifyArrayMainContainerbody.classList.add('guifyArrayMainContainerbody')
 
-        // creating an array level element
-        const guifyArrayLevelElement = document.createElement('div')
-        guifyArrayLevelElement.classList.add('guifyArrayLevelElement')
-        guifyArrayMainContainerbody.append(guifyArrayLevelElement)
-        const guifyArrayLevelElement2 = document.createElement('div')
-        guifyArrayLevelElement2.classList.add('guifyArrayLevelElement')
-        guifyArrayMainContainerbody.append(guifyArrayLevelElement2)
-
         // creating the body of the container
         const guifyArrayContainerbody = document.createElement('div')
         guifyArrayContainerbody.classList.add('guifyArrayContainerbody')
@@ -79,14 +73,18 @@ export class ArrayContainer extends Container {
             const property: Property = array[key]
             let propertyElement
             if (property._valueType === PrimitiveTypes.Object) {
-                const childObjectContainer = new ObjectContainer(property)
-                // make this child object use different set of colors that the current one
-                childObjectContainer.showSecondaryColors = !this.showSecondaryColors
-                propertyElement = childObjectContainer.draw()
+                // const childObjectContainer = new ObjectContainer(property)
+                // // make this child object use different set of colors that the current one
+                // childObjectContainer.showSecondaryColors = !this.showSecondaryColors
+                // propertyElement = childObjectContainer.draw()
+                console.log('sosaosaosoassaosoos')
+                console.log(property)
+                propertyElement = this.drawArrayElement(property, parseInt(property._key), array.length)
             } else if (property._valueType === PrimitiveTypes.Array) {
-                const childArrayContainer = new ArrayContainer(property)
-                childArrayContainer.showSecondaryColors = !this.showSecondaryColors
-                propertyElement = childArrayContainer.draw()
+                // const childArrayContainer = new ArrayContainer(property)
+                // childArrayContainer.showSecondaryColors = !this.showSecondaryColors
+                // propertyElement = childArrayContainer.draw()
+                propertyElement = this.drawArrayElement(property, parseInt(property._key), array.length)
             } else {
                 propertyElement = this.drawArrayElement(property, parseInt(property._key), array.length)
             }
@@ -116,9 +114,19 @@ export class ArrayContainer extends Container {
      *
      * @returns {HTMLElement} html element object
      */
-    private drawArrayElement (property: Property, index: number, length: number): HTMLElement {
+    private drawArrayElement (property: Property, index: number, length: number): HTMLElement | DocumentFragment {
         const guifyArrayFieldContainer = document.createElement('div')
         guifyArrayFieldContainer.classList.add('guifyArrayFieldContainer')
+
+        // creating the array elements
+        const arrayLevelsContainer = document.createElement('div')
+        arrayLevelsContainer.classList.add('guifyArrayLevelsContainer')
+        for (let index = 0; index < 1; index++) {
+            const guifyArrayLevelElement = document.createElement('div')
+            guifyArrayLevelElement.classList.add('guifyArrayLevelElement')
+            arrayLevelsContainer.append(guifyArrayLevelElement)
+        }
+        guifyArrayFieldContainer.append(arrayLevelsContainer)
 
         // append the key label to the property div in an Array
         const labelName = property._key
@@ -133,16 +141,53 @@ export class ArrayContainer extends Container {
 
         guifyArrayFieldContainer.append(labelContainer)
 
-        const field = getFieldInstance(property)
-        field.showSecondaryColors = this.showSecondaryColors
-        const fieldElement = field.draw()
-
-        // wrap field element with a div container
+        // container used to wrap field element with a div container
         const fieldInnerContainer = document.createElement('div')
         fieldInnerContainer.classList.add('guifyArrayfieldInnerContainer')
+
+        const field = getFieldInstance(property)
+        let fieldElement
+        if (field.isCollapsible) {
+            fieldElement = this.drawCollapsibleArrayElement(field)
+        } else {
+            field.showSecondaryColors = this.showSecondaryColors
+            fieldElement = field.draw()
+        }
+
         fieldInnerContainer.append(fieldElement)
 
         guifyArrayFieldContainer.append(fieldInnerContainer)
+
+        if (field.isCollapsible) {
+            const fragment = document.createDocumentFragment()
+            fragment.append(guifyArrayFieldContainer)
+            fragment.append(this.drawCollapsibleArrayElementContent(field))
+            return fragment
+        }
+
         return guifyArrayFieldContainer
+    }
+
+    /**
+     * This function is responsible for drawing an array element that is Collapsible
+     *
+     * @returns {HTMLElement} html element object
+     */
+    private drawCollapsibleArrayElement (field: Field): HTMLElement {
+        const collapsibleElement = document.createElement('div')
+        collapsibleElement.innerHTML = field.FieldLabelName
+        return collapsibleElement
+    }
+
+    /**
+     * This function is responsible for drawing the content of an array element that is Collapsible
+     *
+     * @returns {HTMLElement} html element object
+     */
+    private drawCollapsibleArrayElementContent (field: Field): HTMLElement {
+        const collapsibleElementContent = document.createElement('div')
+        collapsibleElementContent.classList.add('guifyCollapsibleElementContent')
+        collapsibleElementContent.innerHTML = 'this is the content of the ' + field.FieldLabelName
+        return collapsibleElementContent
     }
 }

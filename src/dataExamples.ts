@@ -76,6 +76,11 @@ export const exampleData = `{
     "an array": [
         "test text field",
         true,
+        {
+            "name": "malik",
+            "age": 40,
+            "is_married": false
+        },
         454
     ],
     "child": {

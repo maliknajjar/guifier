@@ -2,6 +2,10 @@ import type { AnyObject, Property } from './types'
 import type { Field } from './fields/Field/Field'
 
 import { PrimitiveTypes } from './enums'
+
+// fields
+import { ObjectContainer } from './containers/ObjectContainer/ObjectContainer'
+import { ArrayContainer } from './containers/ArrayContainer/ArrayContainer'
 import { TextField } from './fields/TextField/TextField'
 import { NumberField } from './fields/NumberField/NumberField'
 import { BooleanField } from './fields/BooleanField/BooleanField'
@@ -87,6 +91,10 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
  */
 export function getFieldInstance (property: Property): Field {
     switch (property._fieldType) {
+        case 'object':
+            return new ObjectContainer(property)
+        case 'array':
+            return new ArrayContainer(property)
         case 'text':
             return new TextField(property)
         case 'number':

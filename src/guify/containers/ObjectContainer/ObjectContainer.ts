@@ -11,6 +11,8 @@ import { getFieldInstance } from '../../utils'
  * Represents peroperty of type object
  */
 export class ObjectContainer extends Container {
+    public FieldLabelName: string = 'Object'
+
     constructor (property: Property) {
         super(property)
         this.validateParams()
