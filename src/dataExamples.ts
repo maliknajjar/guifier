@@ -81,7 +81,14 @@ export const exampleData = `{
             "age": 40,
             "is_married": false
         },
-        454
+        454,
+        [
+            454,
+            3233,
+            "sasa",
+            "asas",
+            45454
+        ]
     ],
     "child": {
         "name": "ahmed",

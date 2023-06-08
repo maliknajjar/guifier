@@ -12,6 +12,7 @@ import { getFieldInstance } from '../../utils'
  */
 export class ArrayContainer extends Container {
     public FieldLabelName: string = 'Array'
+    public numberOfLevels: number = 0
 
     constructor (property: Property) {
         super(property)
@@ -118,12 +119,18 @@ export class ArrayContainer extends Container {
         const guifyArrayFieldContainer = document.createElement('div')
         guifyArrayFieldContainer.classList.add('guifyArrayFieldContainer')
 
-        guifyArrayFieldContainer.append(this.drawArrayLevels(1))
+        guifyArrayFieldContainer.append(this.drawArrayLevels(this.numberOfLevels))
 
         // append the key label to the property div in an Array
         const labelName = property._key
         const labelContainer = document.createElement('div')
         labelContainer.classList.add('guifyArrayLabelContainer')
+        if (this.numberOfLevels > 0) {
+            labelContainer.classList.add('guifyArrayLabelContainerForUpperLevel')
+            const line = document.createElement('div')
+            line.classList.add('guifyArrayLabelLineForUpperLevel')
+            labelContainer.append(line)
+        }
 
         // adding label div and two divs for the lines
         const indexLabelElement = document.createElement('div')
@@ -202,7 +209,7 @@ export class ArrayContainer extends Container {
         }
 
         // creating the array levels
-        collapsibleElementContent.append(this.drawArrayLevels(1))
+        collapsibleElementContent.append(this.drawArrayLevels(this.numberOfLevels))
 
         // creating the inner container
         const collapsibleElementInnerContentContainer = document.createElement('div')
@@ -221,6 +228,9 @@ export class ArrayContainer extends Container {
     private drawArrayLevels (numberOfLevels: number): HTMLElement {
         const arrayLevelsContainer = document.createElement('div')
         arrayLevelsContainer.classList.add('guifyArrayLevelsContainer')
+        if (numberOfLevels === 0) {
+            numberOfLevels++
+        }
         for (let index = 0; index < numberOfLevels; index++) {
             const guifyArrayLevelElement = document.createElement('div')
             guifyArrayLevelElement.classList.add('guifyArrayLevelElement')

@@ -53,6 +53,7 @@
 }
 
 .guifyArrayLabelContainer {
+    position: relative;
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -62,7 +63,22 @@
     padding-right: var(--primary-border-width);
 }
 
+.guifyArrayLabelContainerForUpperLevel {
+    transform: none;
+    width: 70px;
+}
+
+.guifyArrayLabelLineForUpperLevel {
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-border-color);
+}
+
 .guifyArrayIndexLabel {
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,7 +100,7 @@
 .guifyArrayLevelsContainer {
     display: flex;
     height: 100%;
-    transform: scaleY(2);
+    transform: scaleY(2.2);
 }
 
 .guifyArrayLevelElement {
@@ -92,6 +108,13 @@
     height: 100%;
     background-color: transparent;
     border-right: var(--primary-border-width) dashed var(--primary-border-color);
+}
+
+.guifyArrayLevelElement:first-of-type {
+    width: 35px;
+    height: 100%;
+    background-color: transparent;
+    border-right: var(--primary-border-width) dashed #cdd0deb0;
 }
 
 .guifyArrayLevelElement:last-of-type {
