@@ -52,16 +52,41 @@ export class ObjectContainer extends Container {
         objectContainer.append(this.drawHeader())
 
         // creating the body of the container
-        const guifyObjectContainerbody = document.createElement('div')
-        guifyObjectContainerbody.classList.add('guifyObjectContainerbody')
-        objectContainer.append(guifyObjectContainerbody)
+        objectContainer.append(this.drawFields())
 
         // adding guifyFullHeight class to stretch height if it was in the first level
         if (this.containerInFirstLevel()) {
             objectContainer.classList.add('guifyFullHeight')
         }
 
-        // drawing the fields or containers that resides inside this container
+        return objectContainer
+    }
+
+    /**
+     * This function is responsible for drawing the header for the object
+     *
+     * @returns {HTMLElement} html element object
+     */
+    private drawHeader (): HTMLElement {
+        const objectName = this.property._key
+        const guifyObjectContainerHeader = document.createElement('div')
+        guifyObjectContainerHeader.classList.add('guifyObjectContainerHeader')
+        guifyObjectContainerHeader.innerHTML = objectName
+
+        return guifyObjectContainerHeader
+    }
+
+    /**
+     * This function is responsible for drawing the fields or containers that resides inside this container
+     *
+     * @returns {HTMLElement} html element object
+     */
+    private drawFields (): HTMLElement {
+        const guifyObjectContainerbody = document.createElement('div')
+        guifyObjectContainerbody.classList.add('guifyObjectContainerbody')
+        if (this.containerInFirstLevel()) {
+            guifyObjectContainerbody.style.overflowY = 'auto'
+        }
         const object = this.property._value
         for (const key in object) {
             const property = object[key]
@@ -102,20 +127,12 @@ export class ObjectContainer extends Container {
             guifyObjectContainerbody.append(propertyElement)
         }
 
-        return objectContainer
+        return guifyObjectContainerbody
     }
 
-    /**
-     * This function is responsible for drawing the header for the object
-     *
-     * @returns {HTMLElement} html element object
-     */
-    private drawHeader (): HTMLElement {
-        const objectName = this.property._key
-        const guifyObjectContainerHeader = document.createElement('div')
-        guifyObjectContainerHeader.classList.add('guifyObjectContainerHeader')
-        guifyObjectContainerHeader.innerHTML = objectName
-
-        return guifyObjectContainerHeader
+    public drawCollapsibleFieldContentForArray (): HTMLElement {
+        const el = this.drawFields()
+        el.style.padding = '0'
+        return el
     }
 }

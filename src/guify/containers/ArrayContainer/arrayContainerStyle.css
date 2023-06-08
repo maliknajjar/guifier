@@ -42,6 +42,14 @@
 
 .guifyArrayfieldInnerContainer {
     flex: 1;
+    height: 45px;
+}
+
+.guifyArrayCollapsibleElement {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .guifyArrayLabelContainer {
@@ -91,7 +99,16 @@
 }
 
 .guifyCollapsibleElementContent {
-    background-color: red;
+    display: flex;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+    border-top: var(--primary-border);
+    border-bottom: var(--primary-border);
+    margin-bottom: 10px;
+}
+
+.guifyCollapsibleElementInnerContentContainer {
+    padding: 20px;
+    padding-left: 30px;
 }

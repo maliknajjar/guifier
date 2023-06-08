@@ -43,4 +43,14 @@ export abstract class Field {
     protected setValue (newValue: any): void {
         this.property._value = newValue
     }
+
+    /**
+     * This function is responsible for drawing the collapsible fields in the array.
+     *  This function needs to be overridden by a child field class
+     */
+    public drawCollapsibleFieldContentForArray (): HTMLElement {
+        const el = document.createElement('div')
+        el.innerHTML = 'drawCollapsibleFieldContentForArray method is not defined in this field'
+        return el
+    }
 }

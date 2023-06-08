@@ -12,8 +12,8 @@ import { BooleanField } from './fields/BooleanField/BooleanField'
 import { NullField } from './fields/NullField/NullField'
 
 /**
- * A function that returns the type of any value passed to it<br>
- * These are the list of the supported types by this function:<br>
+ * A function that returns the type of any value passed to it
+ * These are the list of the supported types by this function:
  * - "string": for string values
  * - "number": for numeric values, including integers, decimals, and the special values Infinity and -Infinity
  * - "boolean": for boolean values (true or false)
@@ -45,7 +45,7 @@ export function getType (value: any): PrimitiveTypes {
 }
 
 /**
- * A function that tells you wether an object is empty or not<br>
+ * A function that tells you wether an object is empty or not
  *
  * @param {any} obj is the object you want to check if its empty
  * @returns {boolean} weather the object is empty or not
@@ -55,7 +55,7 @@ export function isObjectEmpty (obj: AnyObject): boolean {
 }
 
 /**
- * A function that tells you wether an array is empty or not<br>
+ * A function that tells you wether an array is empty or not
  *
  * @param {any} arr is the array you want to check if its empty
  * @returns {boolean} weather the array is empty or not

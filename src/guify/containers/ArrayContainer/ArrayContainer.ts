@@ -118,15 +118,7 @@ export class ArrayContainer extends Container {
         const guifyArrayFieldContainer = document.createElement('div')
         guifyArrayFieldContainer.classList.add('guifyArrayFieldContainer')
 
-        // creating the array elements
-        const arrayLevelsContainer = document.createElement('div')
-        arrayLevelsContainer.classList.add('guifyArrayLevelsContainer')
-        for (let index = 0; index < 1; index++) {
-            const guifyArrayLevelElement = document.createElement('div')
-            guifyArrayLevelElement.classList.add('guifyArrayLevelElement')
-            arrayLevelsContainer.append(guifyArrayLevelElement)
-        }
-        guifyArrayFieldContainer.append(arrayLevelsContainer)
+        guifyArrayFieldContainer.append(this.drawArrayLevels(1))
 
         // append the key label to the property div in an Array
         const labelName = property._key
@@ -175,7 +167,23 @@ export class ArrayContainer extends Container {
      */
     private drawCollapsibleArrayElement (field: Field): HTMLElement {
         const collapsibleElement = document.createElement('div')
-        collapsibleElement.innerHTML = field.FieldLabelName
+        collapsibleElement.classList.add('guifyArrayCollapsibleElement')
+
+        // drawing the field label name
+        const fieldLabelName = document.createElement('div')
+        fieldLabelName.classList.add('guifyFieldLabelName')
+        fieldLabelName.innerHTML = field.FieldLabelName
+        collapsibleElement.append(fieldLabelName)
+
+        // TODO: drawing the field collapse icon
+        const collapseIconElementContainer = document.createElement('div')
+        const collapseIconElement = document.createElement('i')
+        collapseIconElement.classList.add('guifyNullFieldIcon')
+        collapseIconElement.classList.add('fa-solid')
+        collapseIconElement.classList.add('fa-chevron-up')
+        collapseIconElementContainer.append(collapseIconElement)
+        collapsibleElement.append(collapseIconElementContainer)
+
         return collapsibleElement
     }
 
@@ -187,7 +195,38 @@ export class ArrayContainer extends Container {
     private drawCollapsibleArrayElementContent (field: Field): HTMLElement {
         const collapsibleElementContent = document.createElement('div')
         collapsibleElementContent.classList.add('guifyCollapsibleElementContent')
-        collapsibleElementContent.innerHTML = 'this is the content of the ' + field.FieldLabelName
+        if (this.showSecondaryColors) {
+            collapsibleElementContent.classList.add('guifyPrimaryBgColor')
+        } else {
+            collapsibleElementContent.classList.add('guifySecondaryBgColor')
+        }
+
+        // creating the array levels
+        collapsibleElementContent.append(this.drawArrayLevels(1))
+
+        // creating the inner container
+        const collapsibleElementInnerContentContainer = document.createElement('div')
+        collapsibleElementInnerContentContainer.classList.add('guifyCollapsibleElementInnerContentContainer')
+        collapsibleElementInnerContentContainer.append(field.drawCollapsibleFieldContentForArray())
+        collapsibleElementContent.append(collapsibleElementInnerContentContainer)
+
         return collapsibleElementContent
+    }
+
+    /**
+     * This function is responsible for drawing levels line for the array
+     *
+     * @returns {HTMLElement} html element object
+     */
+    private drawArrayLevels (numberOfLevels: number): HTMLElement {
+        const arrayLevelsContainer = document.createElement('div')
+        arrayLevelsContainer.classList.add('guifyArrayLevelsContainer')
+        for (let index = 0; index < numberOfLevels; index++) {
+            const guifyArrayLevelElement = document.createElement('div')
+            guifyArrayLevelElement.classList.add('guifyArrayLevelElement')
+            arrayLevelsContainer.append(guifyArrayLevelElement)
+        }
+
+        return arrayLevelsContainer
     }
 }
