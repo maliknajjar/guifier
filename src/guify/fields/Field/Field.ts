@@ -45,12 +45,13 @@ export abstract class Field {
     }
 
     /**
-     * This function is responsible for drawing the collapsible fields in the array.
-     *  This function needs to be overridden by a child field class
+     * This function is responsible for drawing the collapsible fields wihtout a container.
+     *  This function needs to be overridden by a child field class and it created to be used
+     * with arrays containers
      */
-    public drawCollapsibleFieldContentForArray (): HTMLElement {
-        const el = document.createElement('div')
-        el.innerHTML = 'drawCollapsibleFieldContentForArray method is not defined in this field'
+    public drawCollapsibleFieldContentWithoutContainer (): HTMLElement {
+        const el = document.createElement('p')
+        el.innerHTML = 'drawCollapsibleFieldContentWithoutContainer method is not defined in this field'
         return el
     }
 }

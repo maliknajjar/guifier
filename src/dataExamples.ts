@@ -87,8 +87,22 @@ export const exampleData = `{
             3233,
             "sasa",
             "asas",
-            45454
-        ]
+            [
+                45454,
+                45,
+                0,
+                {
+                    "name": "malik",
+                    "age": 44,
+                    "object": {
+                        "name": "malik",
+                        "age": 44
+                    }
+                }
+            ],
+            "asas"
+        ],
+        "asas"
     ],
     "child": {
         "name": "ahmed",

@@ -1,9 +1,7 @@
 import './objectContainerStyle.css'
 
 import type { Property } from '../../types'
-import { PrimitiveTypes } from '../../enums'
 
-import { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 import { Container } from '../Container'
 import { getFieldInstance } from '../../utils'
 
@@ -77,7 +75,7 @@ export class ObjectContainer extends Container {
     }
 
     /**
-     * This function is responsible for drawing the fields or containers that resides inside this container
+     * This function is responsible for drawing the fields or containers that resides inside this object container
      *
      * @returns {HTMLElement} html element object
      */
@@ -90,32 +88,25 @@ export class ObjectContainer extends Container {
         const object = this.property._value
         for (const key in object) {
             const property = object[key]
+            const field = getFieldInstance(property)
             let propertyElement
-            if (property._valueType === PrimitiveTypes.Object) {
-                const childObjectContainer = new ObjectContainer(property)
+            if (field.isCollapsible) {
                 // make this child object use different set of colors that the current one
-                childObjectContainer.showSecondaryColors = !this.showSecondaryColors
-                propertyElement = childObjectContainer.draw()
-            } else if (property._valueType === PrimitiveTypes.Array) {
-                const childArrayContainer = new ArrayContainer(property)
-                childArrayContainer.showSecondaryColors = !this.showSecondaryColors
-                propertyElement = childArrayContainer.draw()
+                field.showSecondaryColors = !this.showSecondaryColors
+                propertyElement = field.draw()
             } else {
                 const guifyObjectFieldContainer = document.createElement('div')
                 guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
 
-                // append the key label to the property div in an object
                 const labelName = property._key
                 const labelContainer = document.createElement('div')
                 labelContainer.classList.add('guifyObjectLabelContainer')
                 labelContainer.innerHTML = labelName
                 guifyObjectFieldContainer.append(labelContainer)
 
-                const field = getFieldInstance(property)
                 field.showSecondaryColors = this.showSecondaryColors
                 const fieldElement = field.draw()
 
-                // wrap field element with a div container
                 const fieldInnerContainer = document.createElement('div')
                 fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
                 fieldInnerContainer.append(fieldElement)
@@ -130,7 +121,7 @@ export class ObjectContainer extends Container {
         return guifyObjectContainerbody
     }
 
-    public drawCollapsibleFieldContentForArray (): HTMLElement {
+    public drawCollapsibleFieldContentWithoutContainer (): HTMLElement {
         const el = this.drawFields()
         el.style.padding = '0'
         return el
