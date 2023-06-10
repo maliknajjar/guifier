@@ -132,10 +132,8 @@ export class ArrayContainer extends Container {
         indexLabelElement.classList.add('guifyArrayIndexLabel')
         if (this.showSecondaryColors) {
             indexLabelElement.classList.add('guifyPrimaryBgColor')
-            indexLabelElement.style.outline = '4px solid white'
         } else {
             indexLabelElement.classList.add('guifySecondaryBgColor')
-            indexLabelElement.style.outline = '4px solid var(--primary-bg-color)'
         }
         indexLabelElement.innerHTML = labelName
         labelContainer.append(indexLabelElement)
@@ -209,7 +207,7 @@ export class ArrayContainer extends Container {
     private drawCollapsibleArrayElementContent (field: Field, lastElement = false): HTMLElement {
         const collapsibleElementContent = document.createElement('div')
         collapsibleElementContent.classList.add('guifyCollapsibleElementContent')
-        if (this.showSecondaryColors) {
+        if (!this.showSecondaryColors) {
             collapsibleElementContent.classList.add('guifyPrimaryBgColor')
         } else {
             collapsibleElementContent.classList.add('guifySecondaryBgColor')
@@ -221,9 +219,10 @@ export class ArrayContainer extends Container {
             collapsibleElementContent.style.borderRadius = '0 0 7.5px 7.5px'
         }
 
+        field.showSecondaryColors = this.showSecondaryColors
         if (field.FieldLabelName !== 'Array') {
             // creating the array levels
-            collapsibleElementContent.append(this.drawArrayLevels(this.numberOfLevels + 1))
+            collapsibleElementContent.append(this.drawArrayLevels(this.numberOfLevels))
             // creating the inner container
             const collapsibleElementInnerContentContainer = document.createElement('div')
             collapsibleElementInnerContentContainer.classList.add('guifyCollapsibleElementInnerContentContainer')
@@ -232,7 +231,6 @@ export class ArrayContainer extends Container {
         } else {
             const arrayField = (field as unknown as ArrayContainer)
             arrayField.numberOfLevels = this.numberOfLevels + 1
-            arrayField.showSecondaryColors = !this.showSecondaryColors
             collapsibleElementContent.append(arrayField.drawArrayContent())
         }
 

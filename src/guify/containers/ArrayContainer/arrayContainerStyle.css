@@ -27,23 +27,14 @@
 .guifyArrayFieldContainer {
     display: flex;
     align-items: center;
-    height: 45px;
-    margin-right: var(--primary-padding);
-    margin-bottom: var(--secondary-padding);
-    margin-top: var(--secondary-padding);
-}
-
-.guifyArrayFieldContainer:first-of-type {
-    margin-top: var(--primary-padding);
-}
-
-.guifyArrayFieldContainer:last-of-type {
-    margin-bottom: var(--primary-padding);
 }
 
 .guifyArrayfieldInnerContainer {
     flex: 1;
     height: 45px;
+    margin-right: var(--primary-padding);
+    margin-bottom: var(--secondary-padding);
+    margin-top: var(--secondary-padding);
 }
 
 .guifyArrayCollapsibleElement {
@@ -71,10 +62,10 @@
 
 .guifyArrayLabelLineForUpperLevel {
     position: absolute;
-    height: 2px;
     width: 50%;
     transform: translateX(-50%);
-    background-color: var(--primary-border-color);
+    border-bottom: var(--primary-border-width) dashed var(--primary-border-color);
+    margin-left: 6px;
 }
 
 .guifyArrayIndexLabel {
@@ -100,7 +91,6 @@
 .guifyArrayLevelsContainer {
     display: flex;
     height: 100%;
-    transform: scaleY(2.2);
 }
 
 .guifyArrayLevelElement {
@@ -114,11 +104,7 @@
     width: 35px;
     height: 100%;
     background-color: transparent;
-    border-right: var(--primary-border-width) dashed #cdd0deb0;
-}
-
-.guifyArrayLevelElement:last-of-type {
-    border-right: var(--primary-border);
+    border-right: var(--primary-border-width) dashed var(--primary-border-color);
 }
 
 .guifyCollapsibleElementContent {
@@ -126,12 +112,9 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
-    border-top: var(--primary-border);
-    border-bottom: var(--primary-border);
-    margin-bottom: 10px;
 }
 
 .guifyCollapsibleElementInnerContentContainer {
     padding: 20px;
-    padding-left: 30px;
+    padding-top: 0;
 }
