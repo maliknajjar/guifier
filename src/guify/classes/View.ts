@@ -1,6 +1,6 @@
 import type { Data } from './Data'
-import { ObjectContainer } from '../containers/ObjectContainer/ObjectContainer'
-import { ArrayContainer } from '../containers/ArrayContainer/ArrayContainer'
+
+import { getFieldInstance } from '../utils'
 
 /**
  * Represents object that will handle generating html from the data
@@ -21,15 +21,8 @@ export class View {
      */
     private drawData (): void {
         console.log('starting drawing data')
-        if (this.data.parsedData._valueType === 'object') {
-            // if the root is an object
-            const objectContainer = new ObjectContainer(this.data.parsedData)
-            this.generatedHTML = objectContainer.draw()
-        } else {
-            // if the root is an array
-            const arrayContainer = new ArrayContainer(this.data.parsedData)
-            this.generatedHTML = arrayContainer.draw()
-        }
+        const container = getFieldInstance(this.data.parsedData)
+        this.generatedHTML = container.draw()
     }
 
     /**

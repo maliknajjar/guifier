@@ -1,6 +1,6 @@
 import './booleanFieldStyle.css'
 
-import { Field } from '../Field/Field'
+import { Field } from '../../Field/Field'
 
 export class BooleanField extends Field {
     public FieldLabelName: string = 'Boolean'

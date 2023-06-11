@@ -1,10 +1,10 @@
 import './arrayContainerStyle.css'
 
-import type { Property } from '../../types'
-import type { Field } from '../../fields/Field/Field'
+import type { Property } from '../../../types'
+import type { Field } from '../../../fields/Field/Field'
 
-import { Container } from '../Container'
-import { getFieldInstance } from '../../utils'
+import { Container } from '../Container/Container'
+import { getFieldInstance } from '../../../utils'
 
 /**
  * Represents peroperty of type array
@@ -41,7 +41,7 @@ export class ArrayContainer extends Container {
     public draw (): HTMLElement {
         // creating the container div
         const arrayContainer = document.createElement('div')
-        arrayContainer.classList.add('guifyArrayContainer')
+        arrayContainer.classList.add('guifyContainer')
         if (this.showSecondaryColors) {
             arrayContainer.classList.add('guifySecondaryBgColor')
         } else {
@@ -59,25 +59,6 @@ export class ArrayContainer extends Container {
         arrayContainer.append(this.drawArrayContent())
 
         return arrayContainer
-    }
-
-    /**
-     * This function is responsible for drawing the header for the object
-     *
-     * @returns {HTMLElement} html element object
-     */
-    private drawHeader (): HTMLElement {
-        const arrayName = this.property._key
-        const guifyObjectContainerHeader = document.createElement('div')
-        guifyObjectContainerHeader.classList.add('guifyArrayContainerHeader')
-        if (this.showSecondaryColors) {
-            guifyObjectContainerHeader.classList.add('guifySecondaryBgColor')
-        } else {
-            guifyObjectContainerHeader.classList.add('guifyPrimaryBgColor')
-        }
-        guifyObjectContainerHeader.innerHTML = arrayName
-
-        return guifyObjectContainerHeader
     }
 
     /**
@@ -135,7 +116,7 @@ export class ArrayContainer extends Container {
         } else {
             indexLabelElement.classList.add('guifySecondaryBgColor')
         }
-        indexLabelElement.innerHTML = labelName
+        indexLabelElement.innerHTML = `${parseInt(labelName) + 1}`
         labelContainer.append(indexLabelElement)
 
         guifyArrayFieldContainer.append(labelContainer)
@@ -143,6 +124,11 @@ export class ArrayContainer extends Container {
         // container used to wrap field element with a div container
         const fieldInnerContainer = document.createElement('div')
         fieldInnerContainer.classList.add('guifyArrayfieldInnerContainer')
+        if (arrayElementIndex === 0) {
+            fieldInnerContainer.classList.add('guifyPrimaryMarginTop')
+        } else if (arrayElementIndex === this.property._value.length - 1) {
+            fieldInnerContainer.classList.add('guifyPrimaryMarginBottom')
+        }
 
         const field = getFieldInstance(property)
         let fieldElement
@@ -214,8 +200,6 @@ export class ArrayContainer extends Container {
         }
 
         if (lastElement) {
-            collapsibleElementContent.style.marginBottom = '0'
-            collapsibleElementContent.style.borderBottom = 'none'
             collapsibleElementContent.style.borderRadius = '0 0 7.5px 7.5px'
         }
 

@@ -1,0 +1,6 @@
+.guifyObjectContainerbody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--primary-grid-gap);
+    padding: var(--primary-padding);
+}

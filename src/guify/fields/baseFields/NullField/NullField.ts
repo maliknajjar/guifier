@@ -1,6 +1,6 @@
 import './nullFieldStyle.css'
 
-import { Field } from '../Field/Field'
+import { Field } from '../../Field/Field'
 
 export class NullField extends Field {
     public FieldLabelName: string = 'Null'

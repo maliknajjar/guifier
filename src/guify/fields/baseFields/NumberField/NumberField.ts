@@ -1,6 +1,6 @@
 import './numberFieldStyle.css'
 
-import { Field } from '../Field/Field'
+import { Field } from '../../Field/Field'
 
 export class NumberField extends Field {
     public FieldLabelName: string = 'Number'

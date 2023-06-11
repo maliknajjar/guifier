@@ -4,12 +4,12 @@ import type { Field } from './fields/Field/Field'
 import { PrimitiveTypes } from './enums'
 
 // fields
-import { ObjectContainer } from './containers/ObjectContainer/ObjectContainer'
-import { ArrayContainer } from './containers/ArrayContainer/ArrayContainer'
-import { TextField } from './fields/TextField/TextField'
-import { NumberField } from './fields/NumberField/NumberField'
-import { BooleanField } from './fields/BooleanField/BooleanField'
-import { NullField } from './fields/NullField/NullField'
+import { ObjectContainer } from './fields/containers/ObjectContainer/ObjectContainer'
+import { ArrayContainer } from './fields/containers/ArrayContainer/ArrayContainer'
+import { TextField } from './fields/baseFields/TextField/TextField'
+import { NumberField } from './fields/baseFields/NumberField/NumberField'
+import { BooleanField } from './fields/baseFields/BooleanField/BooleanField'
+import { NullField } from './fields/baseFields/NullField/NullField'
 
 /**
  * A function that returns the type of any value passed to it

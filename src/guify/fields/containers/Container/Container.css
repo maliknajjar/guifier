@@ -1,4 +1,4 @@
-.guifyObjectContainer {
+.guifyContainer {
     display: flex;
     flex-direction: column;
     grid-column: span 2;
@@ -6,14 +6,7 @@
     border-radius: var(--primary-border-radius);
 }
 
-.guifyObjectContainerbody {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: var(--primary-grid-gap);
-    padding: var(--primary-padding);
-}
-
-.guifyObjectContainerHeader {
+.guifyContainerHeader {
     font-size: larger;
     color: var(--primary-text-color);
     padding: var(--header-horizontal-padding) var(--primary-grid-gap);

@@ -73,6 +73,11 @@ export const exampleData = `{
     "wowowo": true,
     "nothing": null,
     "number of childrean": -50,
+    "simple array": [
+        121,
+        "sasasa",
+        true
+    ],
     "an array": [
         "test text field",
         true,
@@ -114,6 +119,25 @@ export const exampleData = `{
             "name": "ahmed",
             "email": "ahmed@gmail.com",
             "wowowo": true
-        }
+        },
+        "another array": [
+            454,
+            3233,
+            "sasa",
+            "asas",
+            [
+                45454,
+                45,
+                0,
+                {
+                    "name": "malik",
+                    "age": 44,
+                    "object": {
+                        "name": "malik",
+                        "age": 44
+                    }
+                }
+            ]
+        ]
     }
 }`

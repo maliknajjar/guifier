@@ -1,29 +1,8 @@
-.guifyArrayContainer {
-    display: flex;
-    flex-direction: column;
-    grid-column: span 2;
-    border: var(--primary-border);
-    border-radius: var(--primary-border-radius);
-}
-
 .guifyArrayContainerbody {
     display: flex;
     flex-direction: column;
     flex: 1;
-    overflow-y: auto;
-    overflow: hidden;
 }
-
-.guifyArrayContainerHeader {
-    position: relative;
-    z-index: 1;
-    font-size: larger;
-    color: var(--primary-text-color);
-    padding: var(--header-horizontal-padding) var(--primary-grid-gap);
-    border-bottom: var(--primary-border);
-    border-radius: 7.5px 7.5px 0 0;
-}
-
 .guifyArrayFieldContainer {
     display: flex;
     align-items: center;
@@ -85,7 +64,6 @@
 
 .guifyArrayMainContainerbody {
     display: flex;
-    overflow: hidden;
 }
 
 .guifyArrayLevelsContainer {

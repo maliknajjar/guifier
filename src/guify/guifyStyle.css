@@ -30,3 +30,11 @@
 .guifySecondaryBgColor {
     background-color: var(--secondary-bg-color);
 }
+
+.guifyPrimaryMarginTop {
+    margin-top: var(--primary-padding);
+}
+
+.guifyPrimaryMarginBottom {
+    margin-bottom: var(--primary-padding);
+}

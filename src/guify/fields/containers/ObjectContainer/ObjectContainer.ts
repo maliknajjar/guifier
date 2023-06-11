@@ -1,9 +1,9 @@
 import './objectContainerStyle.css'
 
-import type { Property } from '../../types'
+import type { Property } from '../../../types'
 
-import { Container } from '../Container'
-import { getFieldInstance } from '../../utils'
+import { Container } from '../Container/Container'
+import { getFieldInstance } from '../../../utils'
 
 /**
  * Represents peroperty of type object
@@ -39,7 +39,7 @@ export class ObjectContainer extends Container {
     public draw (): HTMLElement {
         // creating the container div
         const objectContainer = document.createElement('div')
-        objectContainer.classList.add('guifyObjectContainer')
+        objectContainer.classList.add('guifyContainer')
         if (this.showSecondaryColors) {
             objectContainer.classList.add('guifySecondaryBgColor')
         } else {
@@ -58,20 +58,6 @@ export class ObjectContainer extends Container {
         }
 
         return objectContainer
-    }
-
-    /**
-     * This function is responsible for drawing the header for the object
-     *
-     * @returns {HTMLElement} html element object
-     */
-    private drawHeader (): HTMLElement {
-        const objectName = this.property._key
-        const guifyObjectContainerHeader = document.createElement('div')
-        guifyObjectContainerHeader.classList.add('guifyObjectContainerHeader')
-        guifyObjectContainerHeader.innerHTML = objectName
-
-        return guifyObjectContainerHeader
     }
 
     /**
