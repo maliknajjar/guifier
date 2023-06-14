@@ -40,21 +40,7 @@ export class ArrayContainer extends Container {
      */
     public draw (): HTMLElement {
         // creating the container div
-        const arrayContainer = document.createElement('div')
-        arrayContainer.classList.add('guifyContainer')
-        if (this.showSecondaryColors) {
-            arrayContainer.classList.add('guifySecondaryBgColor')
-        } else {
-            arrayContainer.classList.add('guifyPrimaryBgColor')
-        }
-
-        // adding guifyFullHeight class to stretch height if it was in the first level
-        if (this.containerInFirstLevel()) {
-            arrayContainer.classList.add('guifyFullHeight')
-        }
-
-        // creating the header of the container
-        arrayContainer.append(this.drawHeader())
+        const arrayContainer = this.drawContainer()
 
         arrayContainer.append(this.drawArrayContent())
 
@@ -124,10 +110,13 @@ export class ArrayContainer extends Container {
         // container used to wrap field element with a div container
         const fieldInnerContainer = document.createElement('div')
         fieldInnerContainer.classList.add('guifyArrayfieldInnerContainer')
+
         if (arrayElementIndex === 0) {
             fieldInnerContainer.classList.add('guifyPrimaryMarginTop')
+            indexLabelElement.classList.add('guifySecondaryMarginTop')
         } else if (arrayElementIndex === this.property._value.length - 1) {
             fieldInnerContainer.classList.add('guifyPrimaryMarginBottom')
+            indexLabelElement.classList.add('guifySecondaryMarginBottom')
         }
 
         const field = getFieldInstance(property)
@@ -173,14 +162,11 @@ export class ArrayContainer extends Container {
         fieldLabelName.innerHTML = field.FieldLabelName
         collapsibleElement.append(fieldLabelName)
 
-        // TODO: drawing the field collapse icon
-        const collapseIconElementContainer = document.createElement('div')
-        const collapseIconElement = document.createElement('i')
-        collapseIconElement.classList.add('guifyNullFieldIcon')
-        collapseIconElement.classList.add('fa-solid')
-        collapseIconElement.classList.add('fa-chevron-up')
-        collapseIconElementContainer.append(collapseIconElement)
-        collapsibleElement.append(collapseIconElementContainer)
+        // drawing the field collapse icon
+        const guifyObjectContainerHeader = document.createElement('div')
+        guifyObjectContainerHeader.classList.add('guifyContainerHeaderButtons')
+        guifyObjectContainerHeader.append(this.drawCollapseIcon(true, true))
+        collapsibleElement.append(guifyObjectContainerHeader)
 
         return collapsibleElement
     }
@@ -217,6 +203,9 @@ export class ArrayContainer extends Container {
             arrayField.numberOfLevels = this.numberOfLevels + 1
             collapsibleElementContent.append(arrayField.drawArrayContent())
         }
+
+        // hide the collapsible elements
+        collapsibleElementContent.classList.add('guifyNoneDisplay')
 
         return collapsibleElementContent
     }

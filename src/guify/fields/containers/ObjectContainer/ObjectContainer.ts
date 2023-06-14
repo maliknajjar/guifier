@@ -38,16 +38,7 @@ export class ObjectContainer extends Container {
      */
     public draw (): HTMLElement {
         // creating the container div
-        const objectContainer = document.createElement('div')
-        objectContainer.classList.add('guifyContainer')
-        if (this.showSecondaryColors) {
-            objectContainer.classList.add('guifySecondaryBgColor')
-        } else {
-            objectContainer.classList.add('guifyPrimaryBgColor')
-        }
-
-        // creating the header of the container
-        objectContainer.append(this.drawHeader())
+        const objectContainer = this.drawContainer()
 
         // creating the body of the container
         objectContainer.append(this.drawFields())

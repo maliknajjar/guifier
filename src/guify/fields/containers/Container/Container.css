@@ -7,8 +7,19 @@
 }
 
 .guifyContainerHeader {
+    display: flex;
+    justify-content: space-between;
     font-size: larger;
     color: var(--primary-text-color);
     padding: var(--header-horizontal-padding) var(--primary-grid-gap);
-    border-bottom: var(--primary-border);
+}
+
+.guifyContainerHeaderButtons {
+    display: flex;
+    align-items: center;
+    font-size: larger;
+}
+
+.guifyContainerHeaderButtons > * {
+    cursor: pointer;
 }

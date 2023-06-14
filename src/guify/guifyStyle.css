@@ -38,3 +38,31 @@
 .guifyPrimaryMarginBottom {
     margin-bottom: var(--primary-padding);
 }
+
+.guifySecondaryMarginTop {
+    margin-top: var(--secondary-padding);
+}
+
+.guifySecondaryMarginBottom {
+    margin-bottom: var(--secondary-padding);
+}
+
+.guifyPrimaryTextColor {
+    color: var(--primary-text-color);
+}
+
+.guifyPrimaryTextMediumSize {
+    font-size: medium;
+}
+
+.guifyRotate {
+    transform: rotate(180deg);
+}
+
+.guifyPrimaryBottomBorder {
+    border-bottom: var(--primary-border);
+}
+
+.guifyNoneDisplay {
+    display: none;
+}

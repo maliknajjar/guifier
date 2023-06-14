@@ -28,14 +28,16 @@ export class NullField extends Field {
         // drawing the null field
         const nullElement = document.createElement('div')
         nullElement.classList.add('guifyNullField')
+
         const textElement = document.createElement('div')
         textElement.classList.add('guifyNullFieldText')
         textElement.innerHTML = 'Null'
+        nullElement.append(textElement)
+
         const iconElement = document.createElement('i')
         iconElement.classList.add('guifyNullFieldIcon')
         iconElement.classList.add('fa-solid')
         iconElement.classList.add('fa-ban')
-        nullElement.append(textElement)
         nullElement.append(iconElement)
 
         return nullElement
