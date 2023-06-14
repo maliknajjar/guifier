@@ -1,6 +1,7 @@
 import './numberFieldStyle.css'
 
 import { Field } from '../../Field/Field'
+import { drawOutlineIcon } from '../../../utils'
 
 export class NumberField extends Field {
     public FieldLabelName: string = 'Number'
@@ -48,9 +49,7 @@ export class NumberField extends Field {
         buttonsContainerElement.classList.add('guifyButtonsContainer')
 
         const minusButtonElement = document.createElement('div')
-        const minusIcon = document.createElement('i')
-        minusIcon.classList.add('fa-solid')
-        minusIcon.classList.add('fa-minus')
+        const minusIcon = drawOutlineIcon('remove')
         minusButtonElement.classList.add('guifyNumberButton')
         minusButtonElement.append(minusIcon)
         minusButtonElement.addEventListener('mousedown', () => {
@@ -61,9 +60,7 @@ export class NumberField extends Field {
         })
 
         const plusButtonElement = document.createElement('div')
-        const plusIcon = document.createElement('i')
-        plusIcon.classList.add('fa-solid')
-        plusIcon.classList.add('fa-plus')
+        const plusIcon = drawOutlineIcon('add')
         plusButtonElement.classList.add('guifyNumberButton')
         plusButtonElement.append(plusIcon)
         plusButtonElement.addEventListener('mousedown', () => {

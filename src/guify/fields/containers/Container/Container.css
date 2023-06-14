@@ -17,9 +17,11 @@
 .guifyContainerHeaderButtons {
     display: flex;
     align-items: center;
-    font-size: larger;
+    font-size: xx-large;
+    gap: 10px;
 }
 
 .guifyContainerHeaderButtons > * {
+    font-size: 25px;
     cursor: pointer;
 }

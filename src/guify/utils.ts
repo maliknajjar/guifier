@@ -1,3 +1,5 @@
+import 'material-icons/iconfont/outlined.css'
+
 import type { AnyObject, Property } from './types'
 import type { Field } from './fields/Field/Field'
 
@@ -110,4 +112,12 @@ export function getFieldInstance (property: Property): Field {
         default:
             return new NullField(property)
     }
+}
+
+export function drawOutlineIcon (iconName: string): HTMLElement {
+    const deleteIconElement = document.createElement('span')
+    deleteIconElement.classList.add('material-icons-outlined')
+    deleteIconElement.innerHTML = iconName
+
+    return deleteIconElement
 }

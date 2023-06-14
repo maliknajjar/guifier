@@ -1,6 +1,7 @@
 import './nullFieldStyle.css'
 
 import { Field } from '../../Field/Field'
+import { drawOutlineIcon } from '../../../utils'
 
 export class NullField extends Field {
     public FieldLabelName: string = 'Null'
@@ -34,10 +35,7 @@ export class NullField extends Field {
         textElement.innerHTML = 'Null'
         nullElement.append(textElement)
 
-        const iconElement = document.createElement('i')
-        iconElement.classList.add('guifyNullFieldIcon')
-        iconElement.classList.add('fa-solid')
-        iconElement.classList.add('fa-ban')
+        const iconElement = drawOutlineIcon('block')
         nullElement.append(iconElement)
 
         return nullElement

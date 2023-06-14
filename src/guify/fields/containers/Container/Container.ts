@@ -1,6 +1,7 @@
 import './Container.css'
 
 import { Field } from '../../../fields/Field/Field'
+import { drawOutlineIcon } from '../../../utils'
 
 export abstract class Container extends Field {
     /**
@@ -55,11 +56,12 @@ export abstract class Container extends Field {
         guifyContainerHeaderKeyName.innerHTML = objectName
         guifyContainerHeader.append(guifyContainerHeaderKeyName)
 
-        // creating the buttons part of the header
         if (!this.containerInFirstLevel()) {
             const guifyObjectContainerHeader = document.createElement('div')
             guifyObjectContainerHeader.classList.add('guifyContainerHeaderButtons')
-            guifyObjectContainerHeader.append(this.drawCollapseIcon())
+            // we add the buttons of the container here
+            guifyObjectContainerHeader.append(this.drawDeleteButton())
+            guifyObjectContainerHeader.append(this.drawCollapseButton())
             guifyContainerHeader.append(guifyObjectContainerHeader)
         }
 
@@ -67,17 +69,13 @@ export abstract class Container extends Field {
     }
 
     /**
-     * This function is responsible for drawing the collapse Icon for a container field
+     * This function is responsible for drawing the collapse button for the container field
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawCollapseIcon (rotate: boolean = false, forArray: boolean = false): HTMLElement {
+    protected drawCollapseButton (rotate: boolean = false, forArray: boolean = false): HTMLElement {
         // creating the collapse icon
-        const collapseIconElement = document.createElement('i')
-        collapseIconElement.classList.add('guifyPrimaryTextColor')
-        collapseIconElement.classList.add('guifyPrimaryTextMediumSize')
-        collapseIconElement.classList.add('fa-solid')
-        collapseIconElement.classList.add('fa-chevron-up')
+        const collapseIconElement = drawOutlineIcon('expand_less')
         if (rotate) {
             collapseIconElement.classList.add('guifyRotate')
         } else {
@@ -98,5 +96,23 @@ export abstract class Container extends Field {
         })
 
         return collapseIconElement
+    }
+
+    /**
+     * This function is responsible for drawing the delete button for the container field
+     *
+     * @returns {HTMLElement} html element object
+     */
+    protected drawDeleteButton (rotate: boolean = false, forArray: boolean = false): HTMLElement {
+        // creating the collapse icon <span class="material-icons-outlined">pie_chart</span>
+        const deleteIconElement = drawOutlineIcon('delete')
+
+        // adding the event listener
+        deleteIconElement.addEventListener('click', () => {
+            console.log('wowowowowooowo')
+            console.log(deleteIconElement)
+        })
+
+        return deleteIconElement
     }
 }

@@ -10,6 +10,7 @@ export const exampleData = `{
     "name": "John Doe",
     "email": "john.doe@example.com",
     "isMarried": false,
+    "childrean": null,
     "address": {
         "_rules": [{
                 "rule": "PROPERTY_COUNT_LIMIT",

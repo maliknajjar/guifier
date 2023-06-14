@@ -162,10 +162,10 @@ export class ArrayContainer extends Container {
         fieldLabelName.innerHTML = field.FieldLabelName
         collapsibleElement.append(fieldLabelName)
 
-        // drawing the field collapse icon
         const guifyObjectContainerHeader = document.createElement('div')
         guifyObjectContainerHeader.classList.add('guifyContainerHeaderButtons')
-        guifyObjectContainerHeader.append(this.drawCollapseIcon(true, true))
+        // we add the buttons of the container here
+        guifyObjectContainerHeader.append(this.drawCollapseButton(true, true))
         collapsibleElement.append(guifyObjectContainerHeader)
 
         return collapsibleElement
