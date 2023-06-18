@@ -1,6 +1,8 @@
 import clone from 'clone'
 
 import type { Property, AnyObject } from '../types'
+
+import { deleteProperty } from 'dot-prop'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -11,7 +13,7 @@ import { getType, mergeObjectsOnlyNewProperties } from '../utils'
 export class Data {
     public rawData: any
     public parsedData: Property = defaultProperty
-    readonly path: string[] = []
+    private readonly path: string[] = []
 
     // this object is used to assign default field type to a property
     // if the field type wasnt specified by the user
@@ -35,6 +37,13 @@ export class Data {
 
         // normalizing _rules array in the property meta data
         this.normalizingRules()
+    }
+
+    /**
+     * This method returns the parsed data object
+     */
+    public getParsedData (): any {
+        return this.parsedData
     }
 
     /**
@@ -238,5 +247,13 @@ export class Data {
                 }
             }
         }
+    }
+
+    /**
+     * This method removes a property
+     */
+    public removeProperty (propertyPath: string[]): void {
+        const pathString = propertyPath.join('._value.').substring(5)
+        deleteProperty(this.parsedData, pathString)
     }
 }

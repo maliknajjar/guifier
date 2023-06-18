@@ -2,6 +2,7 @@ import 'material-icons/iconfont/outlined.css'
 
 import type { AnyObject, Property } from './types'
 import type { Field } from './fields/Field/Field'
+import type { Data } from './classes/Data'
 
 import { PrimitiveTypes } from './enums'
 
@@ -12,6 +13,16 @@ import { TextField } from './fields/baseFields/TextField/TextField'
 import { NumberField } from './fields/baseFields/NumberField/NumberField'
 import { BooleanField } from './fields/baseFields/BooleanField/BooleanField'
 import { NullField } from './fields/baseFields/NullField/NullField'
+
+/**
+ * A function that tells you wether a number is odd or even
+ *
+ * @param {any} number is the number you want to know if its odd or even
+ * @returns {boolean} weather the number is odd or even
+ */
+export function isOdd (number: number): boolean {
+    return number % 2 !== 0
+}
 
 /**
  * A function that returns the type of any value passed to it
@@ -91,26 +102,26 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
  * @param {Property} property is the object you want to check if its empty
  * @returns {Field} instance of the Field
  */
-export function getFieldInstance (property: Property): Field {
+export function getFieldInstance (property: Property, data: Data): Field {
     switch (property._fieldType) {
         case 'object':
-            return new ObjectContainer(property)
+            return new ObjectContainer(property, data)
         case 'array':
-            return new ArrayContainer(property)
+            return new ArrayContainer(property, data)
         case 'text':
-            return new TextField(property)
+            return new TextField(property, data)
         case 'number':
-            return new NumberField(property)
+            return new NumberField(property, data)
         case 'boolean':
-            return new BooleanField(property)
+            return new BooleanField(property, data)
         case 'null':
-            return new NullField(property)
+            return new NullField(property, data)
         case 'undefined':
-            return new NullField(property)
+            return new NullField(property, data)
         case 'notNumber':
-            return new NullField(property)
+            return new NullField(property, data)
         default:
-            return new NullField(property)
+            return new NullField(property, data)
     }
 }
 

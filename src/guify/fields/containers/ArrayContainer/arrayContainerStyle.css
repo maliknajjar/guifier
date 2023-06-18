@@ -3,9 +3,12 @@
     flex-direction: column;
     flex: 1;
 }
+
 .guifyArrayFieldContainer {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    transition: 0.15s;
 }
 
 .guifyArrayfieldInnerContainer {

@@ -12,3 +12,7 @@ const params: Parameters = {
 }
 
 const guify = new Guify(params)
+
+// document.addEventListener('click', () => {
+//     console.log(guify.getData())
+// })

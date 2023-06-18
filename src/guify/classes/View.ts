@@ -21,7 +21,7 @@ export class View {
      */
     private drawData (): void {
         console.log('starting drawing data')
-        const container = getFieldInstance(this.data.parsedData)
+        const container = getFieldInstance(this.data.parsedData, this.data)
         this.generatedHTML = container.draw()
     }
 

@@ -1,8 +1,10 @@
 import './fieldStyle.css'
 
 import type { Property } from '../../types'
+import type { Data } from '../../classes/Data'
 
 export abstract class Field {
+    protected data: Data
     protected property: Property
     /**
      * every field has two colors theme to make them more visible when they are nested
@@ -16,8 +18,9 @@ export abstract class Field {
 
     public abstract FieldLabelName: string
 
-    constructor (property: Property) {
+    constructor (property: Property, data: Data) {
         this.property = property
+        this.data = data
     }
 
     /**

@@ -46,4 +46,13 @@ export class Guify {
             throw new Error('Did not find the Main Element')
         }
     }
+
+    /**
+     * This method gets the current state of the data from the GUI
+     * TODO: by default it should return the data wihtout the meta data
+     * TODO: you should create a parameter to enable you to return the data with the meta data too
+     */
+    public getData (): any {
+        return this.data.getParsedData()
+    }
 }

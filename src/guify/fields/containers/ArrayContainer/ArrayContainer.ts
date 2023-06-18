@@ -2,9 +2,10 @@ import './arrayContainerStyle.css'
 
 import type { Property } from '../../../types'
 import type { Field } from '../../../fields/Field/Field'
+import type { Data } from '../../../classes/Data'
 
 import { Container } from '../Container/Container'
-import { getFieldInstance } from '../../../utils'
+import { getFieldInstance, isOdd } from '../../../utils'
 
 /**
  * Represents peroperty of type array
@@ -13,8 +14,8 @@ export class ArrayContainer extends Container {
     public FieldLabelName: string = 'Array'
     public numberOfLevels: number = 0
 
-    constructor (property: Property) {
-        super(property)
+    constructor (property: Property, data: Data) {
+        super(property, data)
         this.validateParams()
         this.validateRules()
     }
@@ -80,6 +81,9 @@ export class ArrayContainer extends Container {
     private drawArrayElement (property: Property, arrayElementIndex: number): HTMLElement | DocumentFragment {
         const guifyArrayFieldContainer = document.createElement('div')
         guifyArrayFieldContainer.classList.add('guifyArrayFieldContainer')
+        if (isOdd(arrayElementIndex)) {
+            guifyArrayFieldContainer.classList.add('guifyOddBackground')
+        }
 
         guifyArrayFieldContainer.append(this.drawArrayLevels(this.numberOfLevels))
 
@@ -119,7 +123,7 @@ export class ArrayContainer extends Container {
             indexLabelElement.classList.add('guifySecondaryMarginBottom')
         }
 
-        const field = getFieldInstance(property)
+        const field = getFieldInstance(property, this.data)
         let fieldElement
         if (field.isCollapsible) {
             fieldElement = this.drawCollapsibleArrayElement(field)
@@ -165,6 +169,8 @@ export class ArrayContainer extends Container {
         const guifyObjectContainerHeader = document.createElement('div')
         guifyObjectContainerHeader.classList.add('guifyContainerHeaderButtons')
         // we add the buttons of the container here
+        guifyObjectContainerHeader.append(this.drawDeleteButton(true))
+        guifyObjectContainerHeader.append(this.drawAddButton(true))
         guifyObjectContainerHeader.append(this.drawCollapseButton(true, true))
         collapsibleElement.append(guifyObjectContainerHeader)
 

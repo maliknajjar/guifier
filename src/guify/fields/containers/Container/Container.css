@@ -12,6 +12,7 @@
     font-size: larger;
     color: var(--primary-text-color);
     padding: var(--header-horizontal-padding) var(--primary-grid-gap);
+    padding-right: 15px;
 }
 
 .guifyContainerHeaderButtons {
@@ -24,4 +25,17 @@
 .guifyContainerHeaderButtons > * {
     font-size: 25px;
     cursor: pointer;
+    opacity: 0.0;
+    transition: 0.2s ease;
+    transform: translateY(75%);
+}
+
+.guifyContainerCollapseButton {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.guifyContainerHeaderShow {
+    opacity: 1;
+    transform: translateY(0);
 }

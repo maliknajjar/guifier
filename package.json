@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "clone": "^2.1.2",
+    "dot-prop": "^8.0.0",
     "material-icons": "^1.13.8",
     "zod": "^3.21.4"
   }

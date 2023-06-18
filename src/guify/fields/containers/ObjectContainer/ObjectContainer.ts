@@ -1,6 +1,7 @@
 import './objectContainerStyle.css'
 
 import type { Property } from '../../../types'
+import type { Data } from '../../../classes/Data'
 
 import { Container } from '../Container/Container'
 import { getFieldInstance } from '../../../utils'
@@ -11,8 +12,8 @@ import { getFieldInstance } from '../../../utils'
 export class ObjectContainer extends Container {
     public FieldLabelName: string = 'Object'
 
-    constructor (property: Property) {
-        super(property)
+    constructor (property: Property, data: Data) {
+        super(property, data)
         this.validateParams()
         this.validateRules()
     }
@@ -65,7 +66,7 @@ export class ObjectContainer extends Container {
         const object = this.property._value
         for (const key in object) {
             const property = object[key]
-            const field = getFieldInstance(property)
+            const field = getFieldInstance(property, this.data)
             let propertyElement
             if (field.isCollapsible) {
                 // make this child object use different set of colors that the current one
