@@ -128,6 +128,9 @@ export class ArrayContainer extends Container {
 
         guifyArrayFieldContainer.append(fieldInnerContainer)
 
+        // adding the animation to the buttons for the guifyContainerHeaderButtons
+        this.showHeaderButtonsWhenHovering(guifyArrayFieldContainer, true)
+
         if (field.isCollapsible) {
             const fragment = document.createDocumentFragment()
             fragment.append(guifyArrayFieldContainer)

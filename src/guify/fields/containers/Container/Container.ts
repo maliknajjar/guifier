@@ -50,10 +50,15 @@ export abstract class Container extends Field {
     // TODO: Make the arrayContainer object use this function to add animation
     // TODO: and draw the delete and the add buttons on the array container too
     // TODO: remove button work for object container but doesnt work for array containers
-    private showHeaderButtonsWhenHovering (container: HTMLElement): void {
+    protected showHeaderButtonsWhenHovering (element: HTMLElement, forArray: boolean = false): void {
         let timeOut: number
-        container.addEventListener('mouseenter', () => {
-            const containerHeaderButtons = container.children[0].children[1]
+        element.addEventListener('mouseenter', () => {
+            let containerHeaderButtons
+            if (!forArray) {
+                containerHeaderButtons = element.children[0].children[1]
+            } else {
+                containerHeaderButtons = element.children[2].children[0].children[1]
+            }
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children).reverse()
                 const timeDifference = 100
@@ -69,8 +74,13 @@ export abstract class Container extends Field {
             }
         })
 
-        container.addEventListener('mouseleave', () => {
-            const containerHeaderButtons = container.children[0].children[1]
+        element.addEventListener('mouseleave', () => {
+            let containerHeaderButtons
+            if (!forArray) {
+                containerHeaderButtons = element.children[0].children[1]
+            } else {
+                containerHeaderButtons = element.children[2].children[0].children[1]
+            }
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children)
                 const timeDifference = 100

@@ -50,6 +50,36 @@ export const exampleData = `{
                     "name": "Gizmo",
                     "price": 7.99,
                     "quantity": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Gizmo",
+                    "price": 7.99,
+                    "quantity": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Gizmo",
+                    "price": 7.99,
+                    "quantity": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Gizmo",
+                    "price": 7.99,
+                    "quantity": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Gizmo",
+                    "price": 7.99,
+                    "quantity": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Gizmo",
+                    "price": 7.99,
+                    "quantity": 1
                 }
             ]
         },
