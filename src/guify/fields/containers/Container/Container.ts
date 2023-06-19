@@ -51,20 +51,20 @@ export abstract class Container extends Field {
     // TODO: and draw the delete and the add buttons on the array container too
     // TODO: remove button work for object container but doesnt work for array containers
     private showHeaderButtonsWhenHovering (container: HTMLElement): void {
+        let timeOut: number
         container.addEventListener('mouseenter', () => {
             const containerHeaderButtons = container.children[0].children[1]
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children).reverse()
                 const timeDifference = 100
-                let time = timeDifference
-                buttons.forEach(button => {
+                clearTimeout(timeOut)
+                buttons.forEach((button, index) => {
                     if (button.innerHTML === 'expand_less') {
                         return
                     }
-                    setTimeout(() => {
+                    timeOut = setTimeout(() => {
                         button.classList.add('guifyContainerHeaderShow')
-                    }, time)
-                    time += timeDifference
+                    }, timeDifference * index)
                 })
             }
         })
@@ -74,15 +74,14 @@ export abstract class Container extends Field {
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children)
                 const timeDifference = 100
-                let time = timeDifference
-                buttons.forEach(button => {
+                clearTimeout(timeOut)
+                buttons.forEach((button, index) => {
                     if (button.innerHTML === 'expand_less') {
                         return
                     }
-                    setTimeout(() => {
+                    timeOut = setTimeout(() => {
                         button.classList.remove('guifyContainerHeaderShow')
-                    }, time)
-                    time += timeDifference
+                    }, timeDifference * index)
                 })
             }
         })
