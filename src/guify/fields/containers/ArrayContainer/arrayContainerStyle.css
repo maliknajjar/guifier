@@ -9,6 +9,7 @@
     align-items: center;
     cursor: pointer;
     transition: 0.15s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
 }
 
 .guifyArrayfieldInnerContainer {
@@ -98,10 +99,11 @@
     position: relative;
     z-index: 1;
     overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
 }
 
 .guifyCollapsibleElementInnerContentContainer {
     padding: 20px;
     padding-left: 35px;
-    padding-top: 0;
+    /* padding-top: 0; */
 }

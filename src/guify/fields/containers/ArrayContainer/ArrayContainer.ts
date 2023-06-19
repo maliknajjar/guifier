@@ -115,14 +115,6 @@ export class ArrayContainer extends Container {
         const fieldInnerContainer = document.createElement('div')
         fieldInnerContainer.classList.add('guifyArrayfieldInnerContainer')
 
-        if (arrayElementIndex === 0) {
-            fieldInnerContainer.classList.add('guifyPrimaryMarginTop')
-            indexLabelElement.classList.add('guifySecondaryMarginTop')
-        } else if (arrayElementIndex === this.property._value.length - 1) {
-            fieldInnerContainer.classList.add('guifyPrimaryMarginBottom')
-            indexLabelElement.classList.add('guifySecondaryMarginBottom')
-        }
-
         const field = getFieldInstance(property, this.data)
         let fieldElement
         if (field.isCollapsible) {

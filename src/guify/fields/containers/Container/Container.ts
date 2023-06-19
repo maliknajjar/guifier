@@ -47,8 +47,9 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    // TODO: Make the arrayContainer object use this function add animation
-    // TODO: and draw the delete and the add button on the container too
+    // TODO: Make the arrayContainer object use this function to add animation
+    // TODO: and draw the delete and the add buttons on the array container too
+    // TODO: remove button work for object container but doesnt work for array containers
     private showHeaderButtonsWhenHovering (container: HTMLElement): void {
         container.addEventListener('mouseenter', () => {
             const containerHeaderButtons = container.children[0].children[1]
