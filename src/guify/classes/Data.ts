@@ -2,10 +2,14 @@ import clone from 'clone'
 
 import type { Property, AnyObject } from '../types'
 
-import { deleteProperty } from 'dot-prop'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getType, mergeObjectsOnlyNewProperties } from '../utils'
+import unset from 'lodash/unset'
+import compact from 'lodash/compact'
+import get from 'lodash/get'
+import set from 'lodash/set'
+import last from 'lodash/last'
 
 /**
  * Represents the guify parsed data
@@ -13,7 +17,7 @@ import { getType, mergeObjectsOnlyNewProperties } from '../utils'
 export class Data {
     public rawData: any
     public parsedData: Property = defaultProperty
-    private readonly path: string[] = []
+    private readonly path: Array<number | string> = []
 
     // this object is used to assign default field type to a property
     // if the field type wasnt specified by the user
@@ -88,9 +92,9 @@ export class Data {
      * @param {string} key the key of that property
      * @returns {Property} the new object containing required meta data (includes meta data added by the user)
      */
-    private addMetaDataRecursively (field: Property, key: string): Property {
+    private addMetaDataRecursively (field: Property, key: string, inArray: boolean = false): Property {
         // to set the path
-        this.path.push(key)
+        this.path.push(inArray ? parseInt(key) : key)
 
         let fieldType = getType(field)
         if (getType(field) === PrimitiveTypes.Object && '_value' in field) {
@@ -107,7 +111,7 @@ export class Data {
             field = Data.addRequiredMetaDataToProperties(field, key, this.path)
 
             for (const key in field._value) {
-                field._value[key] = this.addMetaDataRecursively(field._value[key], key)
+                field._value[key] = this.addMetaDataRecursively(field._value[key], key, true)
             }
         } else {
             field = Data.addRequiredMetaDataToProperties(field, key, this.path)
@@ -147,7 +151,7 @@ export class Data {
      * @param {string[]} path is an array that represents the path of the property
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addRequiredMetaDataToProperties (field: Property, key: string, path: string[]): Property {
+    private static addRequiredMetaDataToProperties (field: Property, key: string, path: Array<number | string>): Property {
         // clone the array to prevent pointing to an empty array
         path = Array.from(path)
 
@@ -187,7 +191,7 @@ export class Data {
      * }
      * ```
      */
-    public * iterateOverProperties (property?: Property): Generator<[Property, string[]]> {
+    public * iterateOverProperties (property?: Property): Generator<[Property, Array<number | string>]> {
         if (property == null) {
             property = this.parsedData
         }
@@ -250,10 +254,37 @@ export class Data {
     }
 
     /**
-     * This method removes a property
+     * This method removes an array element
      */
-    public removeProperty (propertyPath: string[]): void {
-        const pathString = propertyPath.join('._value.').substring(5)
-        deleteProperty(this.parsedData, pathString)
+    public removeProperty (propertyPath: Array<number | string>): void {
+        const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
+        unset(this.parsedData, propertyStringPath)
+        const lastElement = last(propertyPath)
+        if (getType(lastElement) === PrimitiveTypes.Number) {
+            propertyPath.pop()
+            const parentPath = Data.convertPathArrayToStringPathFormat(propertyPath)
+            const compactedArray = compact(get(this.parsedData, parentPath))
+            set(this.parsedData, parentPath, compactedArray)
+        }
+        console.log('OOOOOOOOOOOOOO')
+        console.log(this.parsedData)
+    }
+
+    /**
+     * This method converts this.path array into a js string path thats usable with lodash
+     */
+    private static convertPathArrayToStringPathFormat (propertyPath: Array<number | string>): string {
+        let returnedString: string = ''
+        for (let index = 0; index < propertyPath.length; index++) {
+            const element = propertyPath[index]
+            if (getType(element) === PrimitiveTypes.String) {
+                returnedString += index === 0 ? `${element}._value` : `.${element}._value`
+            } else if (getType(element) === PrimitiveTypes.Number) {
+                returnedString += `[${element}]`
+            }
+        }
+
+        // removing the first ".root" from the path
+        return returnedString.substring(5)
     }
 }

@@ -21,7 +21,7 @@ export type Parameters = z.infer<typeof ParameterSchema>
  * Represents the guify property contents
  */
 export interface Property {
-    _path: string[]
+    _path: Array<number | string>
     _key: string
     _valueType: PrimitiveTypes
     _value: any

@@ -43,13 +43,36 @@ export abstract class Container extends Field {
     }
 
     /**
+     * This function is responsible for drawing the header for a container field
+     *
+     * @returns {HTMLElement} html element object
+     */
+    protected drawHeader (): HTMLElement {
+        const guifyContainerHeader = document.createElement('div')
+        guifyContainerHeader.classList.add('guifyContainerHeader')
+        guifyContainerHeader.classList.add('guifyPrimaryBottomBorder')
+
+        // creating the key part of the header
+        const objectName = this.property._key
+        const guifyContainerHeaderKeyName = document.createElement('div')
+        guifyContainerHeaderKeyName.classList.add('guifyContainerHeaderKeyName')
+        guifyContainerHeaderKeyName.innerHTML = objectName
+        guifyContainerHeader.append(guifyContainerHeaderKeyName)
+
+        if (!this.containerInFirstLevel()) {
+            const guifyContainerHeaderButtons = document.createElement('div')
+            guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
+            guifyContainerHeader.append(guifyContainerHeaderButtons)
+        }
+
+        return guifyContainerHeader
+    }
+
+    /**
      * This function is responsible for adding the effect of showing buttons when hovering on the object
      *
      * @returns {HTMLElement} html element object
      */
-    // TODO: Make the arrayContainer object use this function to add animation
-    // TODO: and draw the delete and the add buttons on the array container too
-    // TODO: remove button work for object container but doesnt work for array containers
     protected showHeaderButtonsWhenHovering (element: HTMLElement, forArray: boolean = false): void {
         let timeOut: number
         element.addEventListener('mouseenter', () => {
@@ -98,36 +121,6 @@ export abstract class Container extends Field {
     }
 
     /**
-     * This function is responsible for drawing the header for a container field
-     *
-     * @returns {HTMLElement} html element object
-     */
-    protected drawHeader (): HTMLElement {
-        const guifyContainerHeader = document.createElement('div')
-        guifyContainerHeader.classList.add('guifyContainerHeader')
-        guifyContainerHeader.classList.add('guifyPrimaryBottomBorder')
-
-        // creating the key part of the header
-        const objectName = this.property._key
-        const guifyContainerHeaderKeyName = document.createElement('div')
-        guifyContainerHeaderKeyName.classList.add('guifyContainerHeaderKeyName')
-        guifyContainerHeaderKeyName.innerHTML = objectName
-        guifyContainerHeader.append(guifyContainerHeaderKeyName)
-
-        if (!this.containerInFirstLevel()) {
-            const guifyObjectContainerHeader = document.createElement('div')
-            guifyObjectContainerHeader.classList.add('guifyContainerHeaderButtons')
-            // we add the buttons of the container here
-            guifyObjectContainerHeader.append(this.drawDeleteButton())
-            guifyObjectContainerHeader.append(this.drawAddButton())
-            guifyObjectContainerHeader.append(this.drawCollapseButton())
-            guifyContainerHeader.append(guifyObjectContainerHeader)
-        }
-
-        return guifyContainerHeader
-    }
-
-    /**
      * This function is responsible for drawing the collapse button for the container field
      *
      * @returns {HTMLElement} html element object
@@ -163,13 +156,12 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawDeleteButton (forArray: boolean = false): HTMLElement {
+    protected drawDeleteButton (onClick: (e: MouseEvent) => void): HTMLElement {
         const deleteIconElement = drawOutlineIcon('delete')
 
         // adding the event listener
-        deleteIconElement.addEventListener('click', () => {
-            this.data.removeProperty(this.property._path)
-            deleteIconElement.parentElement?.parentElement?.parentElement?.remove()
+        deleteIconElement.addEventListener('click', (e) => {
+            onClick(e)
         })
 
         return deleteIconElement
@@ -180,14 +172,21 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawAddButton (forArray: boolean = false): HTMLElement {
+    protected drawAddButton (onClick: (e: MouseEvent) => void): HTMLElement {
         const iconElement = drawOutlineIcon('add')
 
         // adding the event listener
-        iconElement.addEventListener('click', () => {
-            // TODO
+        iconElement.addEventListener('click', (e) => {
+            onClick(e)
         })
 
         return iconElement
+    }
+
+    /**
+     * This function is responsible for deleting an object property
+     */
+    protected deleteProperty (propetyName): void {
+        
     }
 }

@@ -11,6 +11,7 @@ import { getFieldInstance } from '../../../utils'
  */
 export class ObjectContainer extends Container {
     public FieldLabelName: string = 'Object'
+    private objectBody: HTMLElement = document.createElement('div')
 
     constructor (property: Property, data: Data) {
         super(property, data)
@@ -41,8 +42,24 @@ export class ObjectContainer extends Container {
         // creating the container div
         const objectContainer = this.drawContainer()
 
+        this.objectBody = this.drawFields()
+
+        // we add the buttons of the container here
+        const guifyContainerHeaderButtons = objectContainer.querySelector('.guifyContainerHeaderButtons')
+        if (guifyContainerHeaderButtons !== null) {
+            guifyContainerHeaderButtons.append(this.drawDeleteButton(() => {
+                console.log('clicking on the delete button on an object container')
+                console.log(this.property._key)
+                // this.deleteProperty(this.property._key)
+            }))
+            guifyContainerHeaderButtons.append(this.drawAddButton(() => {
+                console.log('clicking on the add button on an object container')
+            }))
+            guifyContainerHeaderButtons.append(this.drawCollapseButton())
+        }
+
         // creating the body of the container
-        objectContainer.append(this.drawFields())
+        objectContainer.append(this.objectBody)
 
         // adding guifyFullHeight class to stretch height if it was in the first level
         if (this.containerInFirstLevel()) {

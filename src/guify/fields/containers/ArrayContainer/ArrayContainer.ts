@@ -6,6 +6,7 @@ import type { Data } from '../../../classes/Data'
 
 import { Container } from '../Container/Container'
 import { getFieldInstance, isOdd } from '../../../utils'
+import cloneDeep from 'lodash/cloneDeep'
 
 /**
  * Represents peroperty of type array
@@ -13,6 +14,7 @@ import { getFieldInstance, isOdd } from '../../../utils'
 export class ArrayContainer extends Container {
     public FieldLabelName: string = 'Array'
     public numberOfLevels: number = 0
+    private arrayBody: HTMLElement = document.createElement('div')
 
     constructor (property: Property, data: Data) {
         super(property, data)
@@ -43,7 +45,23 @@ export class ArrayContainer extends Container {
         // creating the container div
         const arrayContainer = this.drawContainer()
 
-        arrayContainer.append(this.drawArrayContent())
+        // we add the buttons of the container here
+        const guifyContainerHeaderButtons = arrayContainer.querySelector('.guifyContainerHeaderButtons')
+        if (guifyContainerHeaderButtons !== null) {
+            guifyContainerHeaderButtons.append(this.drawDeleteButton(() => {
+                console.log('clicking on the delete button on an array container')
+                console.log(this.property._key)
+                // this.deleteProperty(this.property._key)
+            }))
+            guifyContainerHeaderButtons.append(this.drawAddButton(() => {
+                console.log('clicking on the add button on an array container')
+            }))
+            guifyContainerHeaderButtons.append(this.drawCollapseButton())
+        }
+
+        this.arrayBody = this.drawArrayContent()
+
+        arrayContainer.append(this.arrayBody)
 
         return arrayContainer
     }
@@ -118,7 +136,7 @@ export class ArrayContainer extends Container {
         const field = getFieldInstance(property, this.data)
         let fieldElement
         if (field.isCollapsible) {
-            fieldElement = this.drawCollapsibleArrayElement(field)
+            fieldElement = this.drawCollapsibleArrayElement(field, arrayElementIndex)
         } else {
             field.showSecondaryColors = this.showSecondaryColors
             fieldElement = field.draw()
@@ -151,7 +169,7 @@ export class ArrayContainer extends Container {
      *
      * @returns {HTMLElement} html element object
      */
-    private drawCollapsibleArrayElement (field: Field): HTMLElement {
+    private drawCollapsibleArrayElement (field: Field, elementIndex: number): HTMLElement {
         const collapsibleElement = document.createElement('div')
         collapsibleElement.classList.add('guifyArrayCollapsibleElement')
 
@@ -161,13 +179,17 @@ export class ArrayContainer extends Container {
         fieldLabelName.innerHTML = field.FieldLabelName
         collapsibleElement.append(fieldLabelName)
 
-        const guifyObjectContainerHeader = document.createElement('div')
-        guifyObjectContainerHeader.classList.add('guifyContainerHeaderButtons')
+        const guifyContainerHeaderButtons = document.createElement('div')
+        guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
         // we add the buttons of the container here
-        guifyObjectContainerHeader.append(this.drawDeleteButton(true))
-        guifyObjectContainerHeader.append(this.drawAddButton(true))
-        guifyObjectContainerHeader.append(this.drawCollapseButton(true, true))
-        collapsibleElement.append(guifyObjectContainerHeader)
+        guifyContainerHeaderButtons.append(this.drawDeleteButton(() => {
+            this.deleteElement(elementIndex)
+        }))
+        guifyContainerHeaderButtons.append(this.drawAddButton(() => {
+            console.log('clicking on the add button from an array element')
+        }))
+        guifyContainerHeaderButtons.append(this.drawCollapseButton(true, true))
+        collapsibleElement.append(guifyContainerHeaderButtons)
 
         return collapsibleElement
     }
@@ -229,5 +251,53 @@ export class ArrayContainer extends Container {
         }
 
         return arrayLevelsContainer
+    }
+
+    /**
+     * This function is responsible for deleting an element in an array container
+     */
+    private deleteElement (elementIndex: number): void {
+        const guifyArrayFieldContainers = this.getArrayFieldContainers()
+        guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
+        guifyArrayFieldContainers[elementIndex].remove()
+
+        // remove the element from the data
+        const path = cloneDeep(this.property._path)
+
+        // adding the index element to the path
+        path.push(elementIndex)
+        this.data.removeProperty(path)
+
+        // redrawing the index label and the background color of the array elements in the html
+        this.redrawElementsInArrayContainer()
+    }
+
+    /**
+     * This function is responsible for redrawing Elements in an Array Container
+     */
+    private redrawElementsInArrayContainer (): void {
+        const guifyArrayFieldContainers = this.getArrayFieldContainers()
+        guifyArrayFieldContainers.forEach((element, index) => {
+            console.log(element)
+            element.children[1].children[0].innerHTML = `${index + 1}`
+            element.classList.remove('guifyOddBackground')
+            if (isOdd(index)) {
+                element.classList.add('guifyOddBackground')
+            }
+        })
+    }
+
+    /**
+     * This function is responsible for getting all the ArrayFieldContainers
+     */
+    private getArrayFieldContainers (): HTMLElement[] {
+        const guifyArrayFieldContainers = [] as HTMLElement[]
+        for (let index = 0; index < this.arrayBody.children.length; index++) {
+            if (this.arrayBody.children[index].classList.contains('guifyArrayFieldContainer')) {
+                guifyArrayFieldContainers.push(this.arrayBody.children[index] as HTMLElement)
+            }
+        }
+
+        return guifyArrayFieldContainers
     }
 }
