@@ -45,7 +45,10 @@ export const exampleData = `{
             5555,
             5555,
             5555,
-            5555
+            5555,
+            {
+                "name": "malik"
+            }
         ],
         {
             "id": 456,

@@ -182,11 +182,4 @@ export abstract class Container extends Field {
 
         return iconElement
     }
-
-    /**
-     * This function is responsible for deleting an object property
-     */
-    protected deleteProperty (propetyName): void {
-        
-    }
 }

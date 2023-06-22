@@ -59,9 +59,7 @@ export class ArrayContainer extends Container {
             guifyContainerHeaderButtons.append(this.drawCollapseButton())
         }
 
-        this.arrayBody = this.drawArrayContent()
-
-        arrayContainer.append(this.arrayBody)
+        arrayContainer.append(this.drawArrayContent())
 
         return arrayContainer
     }
@@ -87,6 +85,8 @@ export class ArrayContainer extends Container {
             const property: Property = array[key]
             guifyArrayContainerbody.append(this.drawArrayElement(property, parseInt(key)))
         }
+
+        this.arrayBody = guifyArrayContainerbody
 
         return guifyArrayContainerbody
     }
@@ -254,10 +254,13 @@ export class ArrayContainer extends Container {
     }
 
     /**
-     * This function is responsible for deleting an element in an array container
+     * This function is responsible for deleting an element in an array container in the ui
      */
     private deleteElement (elementIndex: number): void {
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
+        console.log(this.arrayBody)
+        console.log(elementIndex)
+        console.log(guifyArrayFieldContainers[elementIndex])
         guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         guifyArrayFieldContainers[elementIndex].remove()
 
@@ -269,17 +272,21 @@ export class ArrayContainer extends Container {
         this.data.removeProperty(path)
 
         // redrawing the index label and the background color of the array elements in the html
-        this.redrawElementsInArrayContainer()
+        this.resetElementsUiInArrayContainer()
     }
 
     /**
      * This function is responsible for redrawing Elements in an Array Container
      */
-    private redrawElementsInArrayContainer (): void {
+    private resetElementsUiInArrayContainer (): void {
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
         guifyArrayFieldContainers.forEach((element, index) => {
-            console.log(element)
-            element.children[1].children[0].innerHTML = `${index + 1}`
+            // resetting the index numbers of the elements in the array container
+            const indexLabel = element.querySelector('.guifyArrayIndexLabel')
+            if (indexLabel !== null) {
+                indexLabel.innerHTML = `${index + 1}`
+            }
+            // resetting the background colors for the elements in the array container
             element.classList.remove('guifyOddBackground')
             if (isOdd(index)) {
                 element.classList.add('guifyOddBackground')

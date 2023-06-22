@@ -42,15 +42,13 @@ export class ObjectContainer extends Container {
         // creating the container div
         const objectContainer = this.drawContainer()
 
-        this.objectBody = this.drawFields()
-
         // we add the buttons of the container here
         const guifyContainerHeaderButtons = objectContainer.querySelector('.guifyContainerHeaderButtons')
         if (guifyContainerHeaderButtons !== null) {
             guifyContainerHeaderButtons.append(this.drawDeleteButton(() => {
                 console.log('clicking on the delete button on an object container')
                 console.log(this.property._key)
-                // this.deleteProperty(this.property._key)
+                this.deleteProperty(this.property._key)
             }))
             guifyContainerHeaderButtons.append(this.drawAddButton(() => {
                 console.log('clicking on the add button on an object container')
@@ -59,7 +57,7 @@ export class ObjectContainer extends Container {
         }
 
         // creating the body of the container
-        objectContainer.append(this.objectBody)
+        objectContainer.append(this.drawFields())
 
         // adding guifyFullHeight class to stretch height if it was in the first level
         if (this.containerInFirstLevel()) {
@@ -113,12 +111,22 @@ export class ObjectContainer extends Container {
             guifyObjectContainerbody.append(propertyElement)
         }
 
+        this.objectBody = guifyObjectContainerbody
+
         return guifyObjectContainerbody
     }
 
+    // TODO: add docs
     public drawCollapsibleFieldContentWithoutContainer (): HTMLElement {
         const el = this.drawFields()
         el.style.padding = '0'
         return el
+    }
+
+    /**
+     * This function is responsible for deleting an object property in the ui
+     */
+    protected deleteProperty (propetyName): void {
+        
     }
 }
