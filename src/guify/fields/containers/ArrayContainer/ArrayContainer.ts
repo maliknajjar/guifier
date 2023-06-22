@@ -42,42 +42,13 @@ export class ArrayContainer extends Container {
      * @returns {HTMLElement} html element array
      */
     public draw (): HTMLElement {
-        // creating the container div
-        const arrayContainer = this.drawContainer()
-
-        // we add the buttons of the container here
-        const guifyContainerHeaderButtons = arrayContainer.querySelector('.guifyContainerHeaderButtons')
-        if (guifyContainerHeaderButtons !== null) {
-            guifyContainerHeaderButtons.append(this.drawDeleteButton(() => {
-                console.log('clicking on the delete button on an array container')
-                console.log(this.property._key)
-                // this.deleteProperty(this.property._key)
-            }))
-            guifyContainerHeaderButtons.append(this.drawAddButton(() => {
-                console.log('clicking on the add button on an array container')
-            }))
-            guifyContainerHeaderButtons.append(this.drawCollapseButton())
-        }
-
-        arrayContainer.append(this.drawArrayContent())
-
-        return arrayContainer
-    }
-
-    /**
-     * This function is responsible for drawing the content of an array
-     *
-     * @returns {HTMLElement} html element object
-     */
-    private drawArrayContent (): HTMLElement {
-        // creating a wrapping over the guifyArrayContainerbody
-        const guifyArrayMainContainerbody = document.createElement('div')
-        guifyArrayMainContainerbody.classList.add('guifyArrayMainContainerbody')
-
         // creating the body of the container
         const guifyArrayContainerbody = document.createElement('div')
         guifyArrayContainerbody.classList.add('guifyArrayContainerbody')
-        guifyArrayMainContainerbody.append(guifyArrayContainerbody)
+
+        if (this.containerInFirstLevel()) {
+            guifyArrayContainerbody.style.overflowY = 'auto'
+        }
 
         // drawing the fields or containers that resides inside this container
         const array = this.property._value
@@ -224,7 +195,7 @@ export class ArrayContainer extends Container {
         } else {
             const arrayField = (field as unknown as ArrayContainer)
             arrayField.numberOfLevels = this.numberOfLevels + 1
-            collapsibleElementContent.append(arrayField.drawArrayContent())
+            collapsibleElementContent.append(arrayField.draw())
         }
 
         // hide the collapsible elements
@@ -258,9 +229,6 @@ export class ArrayContainer extends Container {
      */
     private deleteElement (elementIndex: number): void {
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
-        console.log(this.arrayBody)
-        console.log(elementIndex)
-        console.log(guifyArrayFieldContainers[elementIndex])
         guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         guifyArrayFieldContainers[elementIndex].remove()
 

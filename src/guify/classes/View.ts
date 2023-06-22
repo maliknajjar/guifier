@@ -1,4 +1,5 @@
 import type { Data } from './Data'
+import type { Container } from '../fields/containers/Container/Container'
 
 import { getFieldInstance } from '../utils'
 
@@ -21,8 +22,10 @@ export class View {
      */
     private drawData (): void {
         console.log('starting drawing data')
-        const container = getFieldInstance(this.data.parsedData, this.data)
-        this.generatedHTML = container.draw()
+        const container = getFieldInstance(this.data.parsedData, this.data) as Container
+        const containerElement = container.drawContainer()
+        containerElement.append(container.draw())
+        this.generatedHTML = containerElement
     }
 
     /**

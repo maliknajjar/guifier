@@ -20,11 +20,11 @@ export abstract class Container extends Field {
     }
 
     /**
-     * This function is responsible for drawing the container for a container field
+     * This function is responsible for drawing the container in an object container
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawContainer (): HTMLElement {
+    public drawContainer (): HTMLElement {
         const container = document.createElement('div')
         container.classList.add('guifyContainer')
         if (this.showSecondaryColors) {
