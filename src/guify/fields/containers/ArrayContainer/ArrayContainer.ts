@@ -152,14 +152,20 @@ export class ArrayContainer extends Container {
 
         const guifyContainerHeaderButtons = document.createElement('div')
         guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
+
         // we add the buttons of the container here
-        guifyContainerHeaderButtons.append(this.drawDeleteButton(() => {
+        const deleteButton = this.drawDeleteButton()
+        deleteButton.onclick = () => {
             this.deleteElement(elementIndex)
-        }))
-        guifyContainerHeaderButtons.append(this.drawAddButton(() => {
-            console.log('clicking on the add button from an array element')
-        }))
+        }
+        guifyContainerHeaderButtons.append(deleteButton)
+        const addButton = this.drawAddButton()
+        addButton.onclick = () => {
+            console.log('this is the add button from the array')
+        }
+        guifyContainerHeaderButtons.append(addButton)
         guifyContainerHeaderButtons.append(this.drawCollapseButton(true, true))
+
         collapsibleElement.append(guifyContainerHeaderButtons)
 
         return collapsibleElement

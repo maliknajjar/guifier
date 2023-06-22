@@ -59,10 +59,14 @@ export abstract class Container extends Field {
         guifyContainerHeaderKeyName.innerHTML = objectName
         guifyContainerHeader.append(guifyContainerHeaderKeyName)
 
+        const guifyContainerHeaderButtons = document.createElement('div')
+        guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
+        guifyContainerHeader.append(guifyContainerHeaderButtons)
+
         if (!this.containerInFirstLevel()) {
-            const guifyContainerHeaderButtons = document.createElement('div')
-            guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
-            guifyContainerHeader.append(guifyContainerHeaderButtons)
+            guifyContainerHeaderButtons.append(this.drawDeleteButton())
+            guifyContainerHeaderButtons.append(this.drawAddButton())
+            guifyContainerHeaderButtons.append(this.drawCollapseButton())
         }
 
         return guifyContainerHeader
@@ -82,6 +86,7 @@ export abstract class Container extends Field {
             } else {
                 containerHeaderButtons = element.children[2].children[0].children[1]
             }
+            console.log(containerHeaderButtons)
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children).reverse()
                 const timeDifference = 100
@@ -156,13 +161,8 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawDeleteButton (onClick: (e: MouseEvent) => void): HTMLElement {
+    protected drawDeleteButton (): HTMLElement {
         const deleteIconElement = drawOutlineIcon('delete')
-
-        // adding the event listener
-        deleteIconElement.addEventListener('click', (e) => {
-            onClick(e)
-        })
 
         return deleteIconElement
     }
@@ -172,13 +172,8 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawAddButton (onClick: (e: MouseEvent) => void): HTMLElement {
+    protected drawAddButton (): HTMLElement {
         const iconElement = drawOutlineIcon('add')
-
-        // adding the event listener
-        iconElement.addEventListener('click', (e) => {
-            onClick(e)
-        })
 
         return iconElement
     }

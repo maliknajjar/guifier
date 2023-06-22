@@ -33,6 +33,10 @@ export class ObjectContainer extends Container {
 
     }
 
+    // TODO: create a method called drawContentWithContainer and change the places where it needs contents inside container
+    // like the collapse feild in the draw method below and the draw method in the view.ts file
+    // add event listener to the buttons in the header of the container
+
     /**
      * this function is responsible for drawing the HTMLElement object
      *
