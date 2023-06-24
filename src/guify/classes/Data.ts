@@ -255,19 +255,26 @@ export class Data {
     }
 
     /**
-     * This method removes an array element
+     * This method removes an array element. for example you pass it this property path `['root', 'orders', 4]`
+     * and it will remove it from the data object
      */
     public removeProperty (propertyPath: Array<number | string>): void {
         const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
+        console.log('removing this element')
+        console.log(propertyStringPath)
         unset(this.parsedData, propertyStringPath)
         const lastElement = last(propertyPath)
         if (getType(lastElement) === PrimitiveTypes.Number) {
+            console.log('you need to reset the array again now')
             propertyPath.pop()
+            console.log(propertyPath)
             const parentPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-            const compactedArray = compact(get(this.parsedData, parentPath))
-            set(this.parsedData, parentPath, compactedArray)
+            console.log('this is the PPPPPPAAAAAAAAAAAAAREnt PAAAAAAAAATH')
+            console.log(parentPath)
+            const resettedArray = Data.resetArrayIndexes(get(this.parsedData, parentPath + '._value'))
+            set(this.parsedData, parentPath, resettedArray)
         }
-        console.log('OOOOOOOOOOOOOO')
+        console.log('the data after the change')
         console.log(this.parsedData)
     }
 
@@ -279,7 +286,13 @@ export class Data {
         for (let index = 0; index < propertyPath.length; index++) {
             const element = propertyPath[index]
             if (getType(element) === PrimitiveTypes.String) {
-                returnedString += index === 0 ? `${element}._value` : `.${element}._value`
+                if (index === 0) {
+                    returnedString += `${element}._value`
+                } else if (index === propertyPath.length - 1) {
+                    returnedString += `.${element}`
+                } else {
+                    returnedString += `.${element}._value`
+                }
             } else if (getType(element) === PrimitiveTypes.Number) {
                 returnedString += `[${element}]`
             }
@@ -287,5 +300,15 @@ export class Data {
 
         // removing the first ".root" from the path
         return returnedString.substring(5)
+    }
+
+    /**
+     * This method resets the indexes of the array when there is an empty element in an array
+     */
+    private static resetArrayIndexes (array: any[]): any[] {
+        console.log('the arrraaaaaaaaaaaaaaaaaaaaaaay')
+        console.log(array)
+        const newArray = compact(array)
+        return newArray
     }
 }

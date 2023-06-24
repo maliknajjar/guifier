@@ -10,6 +10,11 @@ export abstract class Container extends Field {
     public isCollapsible = true
 
     /**
+     * this property tells if the current field is a big field like object, array or a rich text field
+     */
+    public contentBody: HTMLElement = document.createElement('div')
+
+    /**
      * this method checks if the current container is the
      * first container and its not a nested container
      *
@@ -71,6 +76,7 @@ export abstract class Container extends Field {
         guifyContainerHeaderKeyName.innerHTML = `${objectName}`
         guifyContainerHeader.append(guifyContainerHeaderKeyName)
 
+        // todo: add this part to a function
         const guifyContainerHeaderButtons = document.createElement('div')
         guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
         guifyContainerHeader.append(guifyContainerHeaderButtons)

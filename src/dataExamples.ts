@@ -56,7 +56,10 @@ export const exampleData = `{
             "street": "123 Main St",
             "city": "Anytown",
             "state": "CA",
-            "zip": "12345"
+            "zip": "12345",
+            "id": {
+                "name": "wowowowowow"
+            }
         }
     },
     "orders": [

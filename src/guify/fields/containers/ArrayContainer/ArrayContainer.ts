@@ -14,7 +14,7 @@ import cloneDeep from 'lodash/cloneDeep'
 export class ArrayContainer extends Container {
     public FieldLabelName: string = 'Array'
     public numberOfLevels: number = 0
-    private arrayBody: HTMLElement = document.createElement('div')
+    public contentBody: HTMLElement = document.createElement('div')
 
     constructor (property: Property, data: Data) {
         super(property, data)
@@ -57,7 +57,7 @@ export class ArrayContainer extends Container {
             guifyArrayContainerbody.append(this.drawArrayElement(property, parseInt(key)))
         }
 
-        this.arrayBody = guifyArrayContainerbody
+        this.contentBody = guifyArrayContainerbody
 
         return guifyArrayContainerbody
     }
@@ -70,6 +70,7 @@ export class ArrayContainer extends Container {
     private drawArrayElement (property: Property, arrayElementIndex: number): HTMLElement | DocumentFragment {
         const guifyArrayFieldContainer = document.createElement('div')
         guifyArrayFieldContainer.classList.add('guifyArrayFieldContainer')
+        guifyArrayFieldContainer.dataset.elementIndex = `${arrayElementIndex}`
         if (isOdd(arrayElementIndex)) {
             guifyArrayFieldContainer.classList.add('guifyOddBackground')
         }
@@ -155,10 +156,15 @@ export class ArrayContainer extends Container {
 
         // we add the buttons of the container here
         const deleteButton = this.drawDeleteButton()
-        deleteButton.onclick = () => {
-            this.deleteElement(elementIndex)
+        deleteButton.dataset.elementIndex = `${elementIndex}`
+        deleteButton.onclick = (e: MouseEvent) => {
+            const deleteButton = e.target as HTMLElement
+            const elementContainer = deleteButton.parentElement?.parentElement?.parentElement?.parentElement
+            const elementIndex = elementContainer?.dataset.elementIndex as string
+            this.deleteElement(parseInt(elementIndex))
         }
         guifyContainerHeaderButtons.append(deleteButton)
+
         const addButton = this.drawAddButton()
         addButton.onclick = () => {
             console.log('this is the add button from the array')
@@ -234,6 +240,7 @@ export class ArrayContainer extends Container {
      * This function is responsible for deleting an element in an array container in the ui
      */
     private deleteElement (elementIndex: number): void {
+        // removing the dom
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
         guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         guifyArrayFieldContainers[elementIndex].remove()
@@ -265,6 +272,8 @@ export class ArrayContainer extends Container {
             if (isOdd(index)) {
                 element.classList.add('guifyOddBackground')
             }
+            // resetting the index element in the dataset of the array element container
+            element.dataset.elementIndex = `${index}`
         })
     }
 
@@ -273,9 +282,9 @@ export class ArrayContainer extends Container {
      */
     private getArrayFieldContainers (): HTMLElement[] {
         const guifyArrayFieldContainers = [] as HTMLElement[]
-        for (let index = 0; index < this.arrayBody.children.length; index++) {
-            if (this.arrayBody.children[index].classList.contains('guifyArrayFieldContainer')) {
-                guifyArrayFieldContainers.push(this.arrayBody.children[index] as HTMLElement)
+        for (let index = 0; index < this.contentBody.children.length; index++) {
+            if (this.contentBody.children[index].classList.contains('guifyArrayFieldContainer')) {
+                guifyArrayFieldContainers.push(this.contentBody.children[index] as HTMLElement)
             }
         }
 

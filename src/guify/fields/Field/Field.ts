@@ -14,7 +14,7 @@ export abstract class Field {
      * This is the keyName of the current field. if the field is an object property
      * it will have a string key and if its an array key its going to have a number key
      */
-    protected keyName: string | number
+    public keyName: string | number
     /**
      * every field has two colors theme to make them more visible when they are nested
      * this property decides which color theme to use

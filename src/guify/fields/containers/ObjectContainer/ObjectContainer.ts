@@ -2,16 +2,18 @@ import './objectContainerStyle.css'
 
 import type { Property } from '../../../types'
 import type { Data } from '../../../classes/Data'
+import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 
 import { Container } from '../Container/Container'
 import { getFieldInstance } from '../../../utils'
+
+import cloneDeep from 'lodash/cloneDeep'
 
 /**
  * Represents peroperty of type object
  */
 export class ObjectContainer extends Container {
     public FieldLabelName: string = 'Object'
-    private objectBody: HTMLElement = document.createElement('div')
 
     constructor (property: Property, data: Data) {
         super(property, data)
@@ -52,9 +54,7 @@ export class ObjectContainer extends Container {
             if (field.isCollapsible) {
                 field.showSecondaryColors = !this.showSecondaryColors
                 const container = (field as Container).drawContentWithContainer(field)
-                if (field.FieldLabelName === 'Object') {
-                    ObjectContainer.addingEventListenerForObjectHeaderButtons(container, this, field as ObjectContainer)
-                }
+                ObjectContainer.addingEventListenerForHeaderButtons(container, this, field as ObjectContainer | ArrayContainer)
                 // TODO: add event listener for the header buttons from an object Container function here
                 propertyElement = container
             } else {
@@ -81,7 +81,7 @@ export class ObjectContainer extends Container {
             guifyObjectContainerbody.append(propertyElement)
         }
 
-        this.objectBody = guifyObjectContainerbody
+        this.contentBody = guifyObjectContainerbody
 
         return guifyObjectContainerbody
     }
@@ -96,7 +96,7 @@ export class ObjectContainer extends Container {
     /**
      * This function is responsible adding event listeners to the header buttons of an object container
      */
-    protected static addingEventListenerForObjectHeaderButtons (container: HTMLElement, parentObjectContainer: ObjectContainer, childObjectContainer: ObjectContainer): void {
+    protected static addingEventListenerForHeaderButtons (container: HTMLElement, parentObjectContainer: ObjectContainer, childContainer: ObjectContainer | ArrayContainer): void {
         const containerHeaderButtons = container.querySelector('.guifyContainerHeaderButtons')
         if (containerHeaderButtons !== null) {
             const buttons = Array.from(containerHeaderButtons.children)
@@ -106,10 +106,10 @@ export class ObjectContainer extends Container {
                         break
                     case 'delete':
                         button.addEventListener('click', () => {
-                            console.log('delete an object')
-                            console.log(childObjectContainer.keyName)
-                            console.log(parentObjectContainer.keyName)
-                            parentObjectContainer.deleteProperty(childObjectContainer.keyName)
+                            parentObjectContainer.deleteProperty(childContainer.keyName)
+                            const element = (childContainer as ObjectContainer).contentBody
+                            const container = element.closest('.guifyContainer')
+                            container?.remove()
                         })
                         break
                     default:
@@ -122,7 +122,10 @@ export class ObjectContainer extends Container {
     /**
      * This function is responsible for deleting an object property in the ui
      */
-    protected deleteProperty (propetyName): void {
-        console.log(propetyName)
+    protected deleteProperty (propetyName: string | number): void {
+        const path = cloneDeep(this.property._path)
+        path.push(propetyName)
+        const pathWithPropetyName = path
+        this.data.removeProperty(pathWithPropetyName)
     }
 }
