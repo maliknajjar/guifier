@@ -33,10 +33,6 @@ export class ObjectContainer extends Container {
 
     }
 
-    // TODO: create a method called drawContentWithContainer and change the places where it needs contents inside container
-    // like the collapse feild in the draw method below and the draw method in the view.ts file
-    // add event listener to the buttons in the header of the container
-
     /**
      * this function is responsible for drawing the HTMLElement object
      *
@@ -54,10 +50,12 @@ export class ObjectContainer extends Container {
             const field = getFieldInstance(property, this.data)
             let propertyElement
             if (field.isCollapsible) {
-                // make this child object use different set of colors that the current one
                 field.showSecondaryColors = !this.showSecondaryColors
-                const container = (field as Container).drawContainer()
-                container.append(field.draw())
+                const container = (field as Container).drawContentWithContainer(field)
+                if (field.FieldLabelName === 'Object') {
+                    ObjectContainer.addingEventListenerForObjectHeaderButtons(container, this, field as ObjectContainer)
+                }
+                // TODO: add event listener for the header buttons from an object Container function here
                 propertyElement = container
             } else {
                 const guifyObjectFieldContainer = document.createElement('div')
@@ -93,6 +91,32 @@ export class ObjectContainer extends Container {
         const el = this.draw()
         el.style.padding = '0'
         return el
+    }
+
+    /**
+     * This function is responsible adding event listeners to the header buttons of an object container
+     */
+    protected static addingEventListenerForObjectHeaderButtons (container: HTMLElement, parentObjectContainer: ObjectContainer, childObjectContainer: ObjectContainer): void {
+        const containerHeaderButtons = container.querySelector('.guifyContainerHeaderButtons')
+        if (containerHeaderButtons !== null) {
+            const buttons = Array.from(containerHeaderButtons.children)
+            buttons.forEach((button) => {
+                switch (button.innerHTML) {
+                    case 'expand_less':
+                        break
+                    case 'delete':
+                        button.addEventListener('click', () => {
+                            console.log('delete an object')
+                            console.log(childObjectContainer.keyName)
+                            console.log(parentObjectContainer.keyName)
+                            parentObjectContainer.deleteProperty(childObjectContainer.keyName)
+                        })
+                        break
+                    default:
+                        break
+                }
+            })
+        }
     }
 
     /**

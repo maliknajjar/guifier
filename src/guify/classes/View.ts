@@ -22,9 +22,9 @@ export class View {
      */
     private drawData (): void {
         console.log('starting drawing data')
-        const container = getFieldInstance(this.data.parsedData, this.data) as Container
-        const containerElement = container.drawContainer()
-        containerElement.append(container.draw())
+        const containerField = getFieldInstance(this.data.parsedData, this.data) as Container
+        const containerElement = containerField.drawContentWithContainer(containerField)
+        // TODO: add event listener for the header buttons from an object Container function here
         this.generatedHTML = containerElement
     }
 

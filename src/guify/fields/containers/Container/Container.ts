@@ -43,6 +43,18 @@ export abstract class Container extends Field {
     }
 
     /**
+     * This function will draw the container with its contents
+     *
+     * @returns {HTMLElement} html element object
+     */
+    public drawContentWithContainer (field: Field): HTMLElement {
+        const container = (field as Container).drawContainer()
+        container.append(field.draw())
+
+        return container
+    }
+
+    /**
      * This function is responsible for drawing the header for a container field
      *
      * @returns {HTMLElement} html element object
@@ -56,7 +68,7 @@ export abstract class Container extends Field {
         const objectName = this.property._key
         const guifyContainerHeaderKeyName = document.createElement('div')
         guifyContainerHeaderKeyName.classList.add('guifyContainerHeaderKeyName')
-        guifyContainerHeaderKeyName.innerHTML = objectName
+        guifyContainerHeaderKeyName.innerHTML = `${objectName}`
         guifyContainerHeader.append(guifyContainerHeaderKeyName)
 
         const guifyContainerHeaderButtons = document.createElement('div')
@@ -86,7 +98,6 @@ export abstract class Container extends Field {
             } else {
                 containerHeaderButtons = element.children[2].children[0].children[1]
             }
-            console.log(containerHeaderButtons)
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children).reverse()
                 const timeDifference = 100

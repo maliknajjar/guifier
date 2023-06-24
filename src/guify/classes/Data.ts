@@ -94,7 +94,8 @@ export class Data {
      */
     private addMetaDataRecursively (field: Property, key: string, inArray: boolean = false): Property {
         // to set the path
-        this.path.push(inArray ? parseInt(key) : key)
+        const updatedKey = inArray ? parseInt(key) : key
+        this.path.push(updatedKey)
 
         let fieldType = getType(field)
         if (getType(field) === PrimitiveTypes.Object && '_value' in field) {
@@ -102,19 +103,19 @@ export class Data {
         }
 
         if (fieldType === PrimitiveTypes.Object) {
-            field = Data.addRequiredMetaDataToProperties(field, key, this.path)
+            field = Data.addRequiredMetaDataToProperties(field, updatedKey, this.path)
 
             for (const key in field._value) {
                 field._value[key] = this.addMetaDataRecursively(field._value[key], key)
             }
         } else if (fieldType === PrimitiveTypes.Array) {
-            field = Data.addRequiredMetaDataToProperties(field, key, this.path)
+            field = Data.addRequiredMetaDataToProperties(field, updatedKey, this.path)
 
             for (const key in field._value) {
                 field._value[key] = this.addMetaDataRecursively(field._value[key], key, true)
             }
         } else {
-            field = Data.addRequiredMetaDataToProperties(field, key, this.path)
+            field = Data.addRequiredMetaDataToProperties(field, updatedKey, this.path)
         }
 
         // to set the path
@@ -151,7 +152,7 @@ export class Data {
      * @param {string[]} path is an array that represents the path of the property
      * @returns {AnyObject} the new object filled with meta data
      */
-    private static addRequiredMetaDataToProperties (field: Property, key: string, path: Array<number | string>): Property {
+    private static addRequiredMetaDataToProperties (field: Property, key: string | number, path: Array<number | string>): Property {
         // clone the array to prevent pointing to an empty array
         path = Array.from(path)
 

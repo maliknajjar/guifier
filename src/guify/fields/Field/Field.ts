@@ -5,7 +5,16 @@ import type { Data } from '../../classes/Data'
 
 export abstract class Field {
     protected data: Data
+    /**
+     * This is the property of the current field. a property is a part that
+     * represents the field in the data object that has all the data
+     */
     protected property: Property
+    /**
+     * This is the keyName of the current field. if the field is an object property
+     * it will have a string key and if its an array key its going to have a number key
+     */
+    protected keyName: string | number
     /**
      * every field has two colors theme to make them more visible when they are nested
      * this property decides which color theme to use
@@ -21,6 +30,7 @@ export abstract class Field {
     constructor (property: Property, data: Data) {
         this.property = property
         this.data = data
+        this.keyName = property._key
     }
 
     /**

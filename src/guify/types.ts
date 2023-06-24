@@ -22,7 +22,7 @@ export type Parameters = z.infer<typeof ParameterSchema>
  */
 export interface Property {
     _path: Array<number | string>
-    _key: string
+    _key: string | number
     _valueType: PrimitiveTypes
     _value: any
     _fieldType: string

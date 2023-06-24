@@ -95,7 +95,7 @@ export class ArrayContainer extends Container {
         } else {
             indexLabelElement.classList.add('guifySecondaryBgColor')
         }
-        indexLabelElement.innerHTML = `${parseInt(labelName) + 1}`
+        indexLabelElement.innerHTML = `${labelName as number + 1}`
         labelContainer.append(indexLabelElement)
 
         guifyArrayFieldContainer.append(labelContainer)
