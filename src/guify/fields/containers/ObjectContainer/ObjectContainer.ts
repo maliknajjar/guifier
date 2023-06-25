@@ -54,7 +54,8 @@ export class ObjectContainer extends Container {
             if (field.isCollapsible) {
                 field.showSecondaryColors = !this.showSecondaryColors
                 const container = (field as Container).drawContentWithContainer(field)
-                ObjectContainer.addingEventListenerForHeaderButtons(container, this, field as ObjectContainer | ArrayContainer)
+                const containerHeaderButtons = container.children[0].children[1] as HTMLElement
+                ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
                 // TODO: add event listener for the header buttons from an object Container function here
                 propertyElement = container
             } else {
@@ -96,19 +97,25 @@ export class ObjectContainer extends Container {
     /**
      * This function is responsible adding event listeners to the header buttons of an object container
      */
-    protected static addingEventListenerForHeaderButtons (container: HTMLElement, parentObjectContainer: ObjectContainer, childContainer: ObjectContainer | ArrayContainer): void {
-        const containerHeaderButtons = container.querySelector('.guifyContainerHeaderButtons')
+    protected static addingEventListenerForHeaderButtons (containerHeaderButtons: HTMLElement, parentObjectContainer: ObjectContainer, childContainer: ObjectContainer | ArrayContainer): void {
         if (containerHeaderButtons !== null) {
             const buttons = Array.from(containerHeaderButtons.children)
             buttons.forEach((button) => {
                 switch (button.innerHTML) {
                     case 'expand_less':
+                        button.addEventListener('click', () => {
+                            const bodyElement = button.parentElement?.parentElement?.nextElementSibling as HTMLDivElement
+                            const headerElement = button.parentElement?.parentElement as HTMLDivElement
+                            headerElement.classList.toggle('guifyPrimaryBottomBorder')
+                            button.classList.toggle('guifyRotate')
+                            bodyElement.classList.toggle('guifyNoneDisplay')
+                        })
                         break
                     case 'delete':
                         button.addEventListener('click', () => {
                             parentObjectContainer.deleteProperty(childContainer.keyName)
                             const element = (childContainer as ObjectContainer).contentBody
-                            const container = element.closest('.guifyContainer')
+                            const container = element.closest('.guifyObjectFieldContainer')
                             container?.remove()
                         })
                         break

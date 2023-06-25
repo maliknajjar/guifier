@@ -21,7 +21,6 @@ export class View {
      * This method returns the HTMLElement based on the data
      */
     private drawData (): void {
-        console.log('starting drawing data')
         const containerField = getFieldInstance(this.data.parsedData, this.data) as Container
         const containerElement = containerField.drawContentWithContainer(containerField)
         // TODO: add event listener for the header buttons from an object Container function here

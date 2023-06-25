@@ -2,6 +2,7 @@ import './arrayContainerStyle.css'
 
 import type { Property } from '../../../types'
 import type { Field } from '../../../fields/Field/Field'
+import type { ObjectContainer } from '../../../fields/containers/ObjectContainer/ObjectContainer'
 import type { Data } from '../../../classes/Data'
 
 import { Container } from '../Container/Container'
@@ -108,7 +109,7 @@ export class ArrayContainer extends Container {
         const field = getFieldInstance(property, this.data)
         let fieldElement
         if (field.isCollapsible) {
-            fieldElement = this.drawCollapsibleArrayElement(field, arrayElementIndex)
+            fieldElement = this.drawCollapsibleArrayElement(field as Container, arrayElementIndex)
         } else {
             field.showSecondaryColors = this.showSecondaryColors
             fieldElement = field.draw()
@@ -118,9 +119,6 @@ export class ArrayContainer extends Container {
 
         guifyArrayFieldContainer.append(fieldInnerContainer)
 
-        // adding the animation to the buttons for the guifyContainerHeaderButtons
-        this.showHeaderButtonsWhenHovering(guifyArrayFieldContainer, true)
-
         if (field.isCollapsible) {
             const fragment = document.createDocumentFragment()
             fragment.append(guifyArrayFieldContainer)
@@ -129,6 +127,10 @@ export class ArrayContainer extends Container {
             } else {
                 fragment.append(this.drawCollapsibleArrayElementContent(field))
             }
+
+            const containerHeaderButtons = guifyArrayFieldContainer.querySelector('.guifyContainerHeaderButtons') as HTMLElement
+            this.showHeaderButtonsWhenHovering(containerHeaderButtons, guifyArrayFieldContainer)
+            ArrayContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ArrayContainer | ObjectContainer)
 
             return fragment
         }
@@ -141,7 +143,7 @@ export class ArrayContainer extends Container {
      *
      * @returns {HTMLElement} html element object
      */
-    private drawCollapsibleArrayElement (field: Field, elementIndex: number): HTMLElement {
+    private drawCollapsibleArrayElement (field: Container, elementIndex: number): HTMLElement {
         const collapsibleElement = document.createElement('div')
         collapsibleElement.classList.add('guifyArrayCollapsibleElement')
 
@@ -151,26 +153,7 @@ export class ArrayContainer extends Container {
         fieldLabelName.innerHTML = field.FieldLabelName
         collapsibleElement.append(fieldLabelName)
 
-        const guifyContainerHeaderButtons = document.createElement('div')
-        guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
-
-        // we add the buttons of the container here
-        const deleteButton = this.drawDeleteButton()
-        deleteButton.dataset.elementIndex = `${elementIndex}`
-        deleteButton.onclick = (e: MouseEvent) => {
-            const deleteButton = e.target as HTMLElement
-            const elementContainer = deleteButton.parentElement?.parentElement?.parentElement?.parentElement
-            const elementIndex = elementContainer?.dataset.elementIndex as string
-            this.deleteElement(parseInt(elementIndex))
-        }
-        guifyContainerHeaderButtons.append(deleteButton)
-
-        const addButton = this.drawAddButton()
-        addButton.onclick = () => {
-            console.log('this is the add button from the array')
-        }
-        guifyContainerHeaderButtons.append(addButton)
-        guifyContainerHeaderButtons.append(this.drawCollapseButton(true, true))
+        const guifyContainerHeaderButtons = this.drawContainerHeaderButtons()
 
         collapsibleElement.append(guifyContainerHeaderButtons)
 
@@ -234,6 +217,42 @@ export class ArrayContainer extends Container {
         }
 
         return arrayLevelsContainer
+    }
+
+    /**
+     * This function is responsible adding event listeners to the header buttons of an object container
+     */
+    protected static addingEventListenerForHeaderButtons (containerHeaderButtons: HTMLElement, parentObjectContainer: ArrayContainer, childContainer: ObjectContainer | ArrayContainer): void {
+        if (containerHeaderButtons !== null) {
+            const buttons = Array.from(containerHeaderButtons.children) as HTMLElement[]
+            buttons.forEach((button) => {
+                switch (button.innerHTML) {
+                    case 'expand_less':
+                        button.addEventListener('click', () => {
+                            console.log('sasakslakslksa')
+                            const bodyElement = button.parentElement?.parentElement?.parentElement?.parentElement?.nextElementSibling as HTMLDivElement
+                            button.classList.toggle('guifyRotate')
+                            bodyElement.classList.toggle('guifyNoneDisplay')
+                        })
+                        break
+                    case 'delete':
+                        button.addEventListener('click', (e: MouseEvent) => {
+                            const deleteButton = e.target as HTMLElement
+                            const elementContainer = deleteButton.parentElement?.parentElement?.parentElement?.parentElement
+                            const elementIndex = elementContainer?.dataset.elementIndex as string
+                            parentObjectContainer.deleteElement(parseInt(elementIndex))
+                        })
+                        break
+                    case 'add':
+                        button.addEventListener('click', () => {
+                            console.log('add buttons from array man')
+                        })
+                        break
+                    default:
+                        break
+                }
+            })
+        }
     }
 
     /**

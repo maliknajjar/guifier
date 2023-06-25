@@ -32,6 +32,7 @@ export abstract class Container extends Field {
     public drawContainer (): HTMLElement {
         const container = document.createElement('div')
         container.classList.add('guifyContainer')
+        container.classList.add('guifyObjectFieldContainer')
         if (this.showSecondaryColors) {
             container.classList.add('guifySecondaryBgColor')
         } else {
@@ -42,7 +43,10 @@ export abstract class Container extends Field {
         container.append(this.drawHeader())
 
         // adding the effect of showing buttons when hovering on the object
-        this.showHeaderButtonsWhenHovering(container)
+        const containerHeaderButtons = container.querySelector('.guifyContainerHeaderButtons') as HTMLElement
+        if (containerHeaderButtons !== null) {
+            this.showHeaderButtonsWhenHovering(containerHeaderButtons, container)
+        }
 
         return container
     }
@@ -77,9 +81,21 @@ export abstract class Container extends Field {
         guifyContainerHeader.append(guifyContainerHeaderKeyName)
 
         // todo: add this part to a function
+        const guifyContainerHeaderButtons = this.drawContainerHeaderButtons()
+        guifyContainerHeader.append(guifyContainerHeaderButtons)
+
+        return guifyContainerHeader
+    }
+
+    /**
+     * This function is responsible for drawing the header part where we add buttons
+     *
+     * @returns {HTMLElement} html element object
+     */
+    protected drawContainerHeaderButtons (): HTMLElement {
+        // todo: add this part to a function
         const guifyContainerHeaderButtons = document.createElement('div')
         guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
-        guifyContainerHeader.append(guifyContainerHeaderButtons)
 
         if (!this.containerInFirstLevel()) {
             guifyContainerHeaderButtons.append(this.drawDeleteButton())
@@ -87,7 +103,7 @@ export abstract class Container extends Field {
             guifyContainerHeaderButtons.append(this.drawCollapseButton())
         }
 
-        return guifyContainerHeader
+        return guifyContainerHeaderButtons
     }
 
     /**
@@ -95,15 +111,9 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected showHeaderButtonsWhenHovering (element: HTMLElement, forArray: boolean = false): void {
+    protected showHeaderButtonsWhenHovering (containerHeaderButtons: HTMLElement, hoveredOnElement: HTMLElement): void {
         let timeOut: number
-        element.addEventListener('mouseenter', () => {
-            let containerHeaderButtons
-            if (!forArray) {
-                containerHeaderButtons = element.children[0].children[1]
-            } else {
-                containerHeaderButtons = element.children[2].children[0].children[1]
-            }
+        hoveredOnElement.addEventListener('mouseenter', () => {
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children).reverse()
                 const timeDifference = 100
@@ -119,13 +129,7 @@ export abstract class Container extends Field {
             }
         })
 
-        element.addEventListener('mouseleave', () => {
-            let containerHeaderButtons
-            if (!forArray) {
-                containerHeaderButtons = element.children[0].children[1]
-            } else {
-                containerHeaderButtons = element.children[2].children[0].children[1]
-            }
+        hoveredOnElement.addEventListener('mouseleave', () => {
             if (containerHeaderButtons !== undefined) {
                 const buttons = Array.from(containerHeaderButtons.children)
                 const timeDifference = 100
@@ -156,19 +160,6 @@ export abstract class Container extends Field {
         } else {
             collapseIconElement.classList.remove('guifyRotate')
         }
-        collapseIconElement.addEventListener('click', () => {
-            let bodyElement = document.createElement('div')
-            let headerElement = document.createElement('div')
-            if (forArray) {
-                bodyElement = collapseIconElement.parentElement?.parentElement?.parentElement?.parentElement?.nextElementSibling as HTMLDivElement
-            } else {
-                bodyElement = collapseIconElement.parentElement?.parentElement?.nextElementSibling as HTMLDivElement
-                headerElement = collapseIconElement.parentElement?.parentElement as HTMLDivElement
-                headerElement.classList.toggle('guifyPrimaryBottomBorder')
-            }
-            collapseIconElement.classList.toggle('guifyRotate')
-            bodyElement.classList.toggle('guifyNoneDisplay')
-        })
 
         return collapseIconElement
     }
