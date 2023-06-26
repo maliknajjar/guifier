@@ -109,11 +109,11 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    static showHeaderButtonsWhenHovering (containerHeaderButtons: HTMLElement, hoveredOnElement: HTMLElement): void {
+    static showHeaderButtonsWhenHovering (containerHeaderButtons: HTMLElement, hoveredOnElement: HTMLElement, rightToLeft = false): void {
         let timeOut: number
         hoveredOnElement.addEventListener('mouseenter', () => {
             if (containerHeaderButtons !== undefined) {
-                const buttons = Array.from(containerHeaderButtons.children).reverse() as HTMLElement[]
+                const buttons = rightToLeft ? Array.from(containerHeaderButtons.children) : Array.from(containerHeaderButtons.children).reverse() as HTMLElement[]
                 const timeDifference = 100
                 clearTimeout(timeOut)
                 buttons.forEach((button, index) => {
@@ -130,7 +130,7 @@ export abstract class Container extends Field {
 
         hoveredOnElement.addEventListener('mouseleave', () => {
             if (containerHeaderButtons !== undefined) {
-                const buttons = Array.from(containerHeaderButtons.children) as HTMLElement[]
+                const buttons = rightToLeft ? Array.from(containerHeaderButtons.children).reverse() : Array.from(containerHeaderButtons.children) as HTMLElement[]
                 const timeDifference = 100
                 clearTimeout(timeOut)
                 buttons.forEach((button, index) => {

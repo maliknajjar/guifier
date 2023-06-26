@@ -78,7 +78,7 @@ export class ObjectContainer extends Container {
 
                 // TODO: add the delete button or any other crud buttons
                 const fieldButtons = this.drawFieldButtons()
-                Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer)
+                Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
                 guifyObjectFieldContainer.append(fieldButtons)
 
                 // TODO: add the button that changes the the keyName of the field
