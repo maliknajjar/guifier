@@ -27,16 +27,11 @@
     font-size: 25px;
     cursor: pointer;
     opacity: 0.0;
-    transition: 0.2s ease;
     transform: translateY(75%);
+    transition: 0.2s ease;
 }
 
 .guifyContainerCollapseButton {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.guifyContainerHeaderShow {
     opacity: 1;
     transform: translateY(0);
 }

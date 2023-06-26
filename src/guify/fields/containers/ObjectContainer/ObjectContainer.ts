@@ -5,7 +5,7 @@ import type { Data } from '../../../classes/Data'
 import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 
 import { Container } from '../Container/Container'
-import { getFieldInstance } from '../../../utils'
+import { drawOutlineIcon, getFieldInstance } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 
@@ -74,8 +74,16 @@ export class ObjectContainer extends Container {
                 const fieldInnerContainer = document.createElement('div')
                 fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
                 fieldInnerContainer.append(fieldElement)
-
                 guifyObjectFieldContainer.append(fieldInnerContainer)
+
+                // TODO: add the delete button or any other crud buttons
+                const fieldButtons = this.drawFieldButtons()
+                Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer)
+                guifyObjectFieldContainer.append(fieldButtons)
+
+                // TODO: add the button that changes the the keyName of the field
+                // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
+
                 propertyElement = guifyObjectFieldContainer
             }
 
@@ -87,11 +95,34 @@ export class ObjectContainer extends Container {
         return guifyObjectContainerbody
     }
 
-    // TODO: add docs
+    /**
+     * This function is responsible for drawing the object without a container. used for objects in arrays
+     */
     public drawCollapsibleFieldContentWithoutContainer (): HTMLElement {
         const el = this.draw()
         el.style.padding = '0'
         return el
+    }
+
+    /**
+     * This function is responsible for drawing buttons that edits a field in an object container
+     */
+    public drawFieldButtons (): HTMLElement {
+        // creating the container
+        const fieldButtons = document.createElement('div')
+        fieldButtons.classList.add('fieldButtons')
+
+        // creating the buttons
+        const deleteButton = drawOutlineIcon('delete')
+        fieldButtons.append(deleteButton)
+
+        const addButton = drawOutlineIcon('add')
+        fieldButtons.append(addButton)
+
+        const minusButton = drawOutlineIcon('edit')
+        fieldButtons.append(minusButton)
+
+        return fieldButtons
     }
 
     /**
@@ -117,6 +148,11 @@ export class ObjectContainer extends Container {
                             const element = (childContainer as ObjectContainer).contentBody
                             const container = element.closest('.guifyObjectFieldContainer')
                             container?.remove()
+                        })
+                        break
+                    case 'add':
+                        button.addEventListener('click', () => {
+                            console.log('wowowow')
                         })
                         break
                     default:

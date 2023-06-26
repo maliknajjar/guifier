@@ -68,3 +68,8 @@
 .guifyOddBackground {
     background-color: rgb(73, 73, 73, 0.035);
 }
+
+.guifyShowElementWithAnimation {
+    opacity: 1;
+    transform: translateY(0);
+}

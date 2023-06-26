@@ -129,7 +129,7 @@ export class ArrayContainer extends Container {
             }
 
             const containerHeaderButtons = guifyArrayFieldContainer.querySelector('.guifyContainerHeaderButtons') as HTMLElement
-            this.showHeaderButtonsWhenHovering(containerHeaderButtons, guifyArrayFieldContainer)
+            Container.showHeaderButtonsWhenHovering(containerHeaderButtons, guifyArrayFieldContainer)
             ArrayContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ArrayContainer | ObjectContainer)
 
             return fragment
@@ -153,7 +153,7 @@ export class ArrayContainer extends Container {
         fieldLabelName.innerHTML = field.FieldLabelName
         collapsibleElement.append(fieldLabelName)
 
-        const guifyContainerHeaderButtons = this.drawContainerHeaderButtons()
+        const guifyContainerHeaderButtons = this.drawContainerHeaderButtons(true)
 
         collapsibleElement.append(guifyContainerHeaderButtons)
 

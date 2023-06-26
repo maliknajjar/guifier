@@ -4,3 +4,29 @@
     grid-gap: var(--primary-grid-gap);
     padding: var(--primary-padding);
 }
+
+.guifyObjectFieldContainer {
+    position: relative;
+}
+
+.fieldButtons {
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    gap: 10px;
+    bottom: -40px;
+    padding-top: 20px;
+    pointer-events: none;
+}
+
+.fieldButtons > * {
+    color: var(--primary-text-color);
+    background-color: white;
+    padding: 5px;
+    border-radius: 100%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    opacity: 0.0;
+    transform: translateY(75%);
+    transition: 0.2s ease;
+    cursor: pointer;
+}

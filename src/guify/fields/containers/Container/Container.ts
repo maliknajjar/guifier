@@ -45,7 +45,7 @@ export abstract class Container extends Field {
         // adding the effect of showing buttons when hovering on the object
         const containerHeaderButtons = container.querySelector('.guifyContainerHeaderButtons') as HTMLElement
         if (containerHeaderButtons !== null) {
-            this.showHeaderButtonsWhenHovering(containerHeaderButtons, container)
+            Container.showHeaderButtonsWhenHovering(containerHeaderButtons, container)
         }
 
         return container
@@ -92,16 +92,14 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawContainerHeaderButtons (): HTMLElement {
+    protected drawContainerHeaderButtons (collapseButtonDown: boolean = false): HTMLElement {
         // todo: add this part to a function
         const guifyContainerHeaderButtons = document.createElement('div')
         guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
 
-        if (!this.containerInFirstLevel()) {
-            guifyContainerHeaderButtons.append(this.drawDeleteButton())
-            guifyContainerHeaderButtons.append(this.drawAddButton())
-            guifyContainerHeaderButtons.append(this.drawCollapseButton())
-        }
+        if (!this.containerInFirstLevel()) guifyContainerHeaderButtons.append(this.drawDeleteButton())
+        guifyContainerHeaderButtons.append(this.drawAddButton())
+        if (!this.containerInFirstLevel()) guifyContainerHeaderButtons.append(this.drawCollapseButton(collapseButtonDown))
 
         return guifyContainerHeaderButtons
     }
@@ -111,11 +109,11 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected showHeaderButtonsWhenHovering (containerHeaderButtons: HTMLElement, hoveredOnElement: HTMLElement): void {
+    static showHeaderButtonsWhenHovering (containerHeaderButtons: HTMLElement, hoveredOnElement: HTMLElement): void {
         let timeOut: number
         hoveredOnElement.addEventListener('mouseenter', () => {
             if (containerHeaderButtons !== undefined) {
-                const buttons = Array.from(containerHeaderButtons.children).reverse()
+                const buttons = Array.from(containerHeaderButtons.children).reverse() as HTMLElement[]
                 const timeDifference = 100
                 clearTimeout(timeOut)
                 buttons.forEach((button, index) => {
@@ -123,7 +121,8 @@ export abstract class Container extends Field {
                         return
                     }
                     timeOut = setTimeout(() => {
-                        button.classList.add('guifyContainerHeaderShow')
+                        containerHeaderButtons.style.pointerEvents = 'all'
+                        button.classList.add('guifyShowElementWithAnimation')
                     }, timeDifference * index)
                 })
             }
@@ -131,7 +130,7 @@ export abstract class Container extends Field {
 
         hoveredOnElement.addEventListener('mouseleave', () => {
             if (containerHeaderButtons !== undefined) {
-                const buttons = Array.from(containerHeaderButtons.children)
+                const buttons = Array.from(containerHeaderButtons.children) as HTMLElement[]
                 const timeDifference = 100
                 clearTimeout(timeOut)
                 buttons.forEach((button, index) => {
@@ -139,7 +138,8 @@ export abstract class Container extends Field {
                         return
                     }
                     timeOut = setTimeout(() => {
-                        button.classList.remove('guifyContainerHeaderShow')
+                        containerHeaderButtons.style.pointerEvents = 'none'
+                        button.classList.remove('guifyShowElementWithAnimation')
                     }, timeDifference * index)
                 })
             }
@@ -151,7 +151,7 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawCollapseButton (forArray: boolean = false, rotate: boolean = false): HTMLElement {
+    protected drawCollapseButton (rotate: boolean = false): HTMLElement {
         // creating the collapse icon
         const collapseIconElement = drawOutlineIcon('expand_less')
         collapseIconElement.classList.add('guifyContainerCollapseButton')

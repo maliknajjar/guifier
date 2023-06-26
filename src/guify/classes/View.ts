@@ -24,6 +24,9 @@ export class View {
         const containerField = getFieldInstance(this.data.parsedData, this.data) as Container
         const containerElement = containerField.drawContentWithContainer(containerField)
         // TODO: add event listener for the header buttons from an object Container function here
+        // TODO: its better to create a specific static method for root object whether its an array or an object
+        // const containerHeaderButtons = containerElement.querySelector('.guifyContainerHeaderButtons')
+        // containerField.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
         this.generatedHTML = containerElement
     }
 
