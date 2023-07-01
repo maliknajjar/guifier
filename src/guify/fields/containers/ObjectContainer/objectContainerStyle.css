@@ -14,7 +14,7 @@
 }
 
 .guifyObjectLabelTextPart {
-    transition: 500ms;
+    transition: 300ms;
     transform-origin: left bottom;
     transform: translateY(0px);
 }

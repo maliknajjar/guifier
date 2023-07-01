@@ -177,7 +177,8 @@ export class ArrayContainer extends Container {
         fieldLabelName.innerHTML = field.FieldLabelName
         collapsibleElement.append(fieldLabelName)
 
-        const guifyContainerHeaderButtons = this.drawContainerHeaderButtons(true)
+        const guifyContainerHeaderButtons = field.drawContainerHeaderButtons(true)
+        console.log(guifyContainerHeaderButtons)
 
         collapsibleElement.append(guifyContainerHeaderButtons)
 

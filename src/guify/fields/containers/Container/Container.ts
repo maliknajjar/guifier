@@ -92,7 +92,7 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected drawContainerHeaderButtons (collapseButtonDown: boolean = false): HTMLElement {
+    public drawContainerHeaderButtons (collapseButtonDown: boolean = false): HTMLElement {
         // todo: add this part to a function
         const guifyContainerHeaderButtons = document.createElement('div')
         guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')

@@ -264,11 +264,19 @@ export class Data {
         const lastElement = last(propertyPath)
         if (getType(lastElement) === PrimitiveTypes.Number) {
             propertyPath.pop()
-            const parentPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-            const resettedArray = Data.resetArrayIndexes(get(this.parsedData, parentPath + '._value'))
-            console.log(parentPath + '._value')
+            const _valueString = propertyPath.length === 1 ? '' : '._value'
+            const parentPath = Data.convertPathArrayToStringPathFormat(propertyPath) + _valueString
+            const arrayToReset = get(this.parsedData, parentPath)
+            const resettedArray = Data.resetArrayIndexes(arrayToReset)
+            // reset all the propert._path property _key and _path to be accordance with their current index
+            console.log('waawawawawawwwawwawawaw')
             console.log(resettedArray)
-            set(this.parsedData, parentPath + '._value', resettedArray)
+            for (let index = 0; index < resettedArray.length; index++) {
+                resettedArray[index]._key = index
+                const pathLength = resettedArray[index]._path.length
+                resettedArray[index]._path[pathLength - 1] = index
+            }
+            set(this.parsedData, parentPath, resettedArray)
         }
     }
 
@@ -288,10 +296,16 @@ export class Data {
                     returnedString += `.${element}._value`
                 }
             } else if (getType(element) === PrimitiveTypes.Number) {
-                returnedString += `[${element}]`
+                if (index === propertyPath.length - 1) {
+                    returnedString += `[${element}]`
+                } else {
+                    returnedString += `[${element}]._value`
+                }
             }
         }
 
+        console.log('wpwpwpwppwwppwpwpwpwppwpw')
+        console.log(returnedString.substring(5))
         // removing the first ".root" from the path
         return returnedString.substring(5)
     }
@@ -300,8 +314,6 @@ export class Data {
      * This method resets the indexes of the array when there is an empty element in an array
      */
     private static resetArrayIndexes (array: any[]): any[] {
-        console.log('the arrraaaaaaaaaaaaaaaaaaaaaaay')
-        console.log(array)
         const newArray = compact(array)
         return newArray
     }
