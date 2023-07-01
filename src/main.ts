@@ -13,6 +13,8 @@ const params: Parameters = {
 
 const guify = new Guify(params)
 
+console.log(guify.getData())
+
 // document.addEventListener('click', () => {
 //     console.log(guify.getData())
 // })

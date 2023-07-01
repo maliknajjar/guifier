@@ -260,22 +260,16 @@ export class Data {
      */
     public removeProperty (propertyPath: Array<number | string>): void {
         const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-        console.log('removing this element')
-        console.log(propertyStringPath)
         unset(this.parsedData, propertyStringPath)
         const lastElement = last(propertyPath)
         if (getType(lastElement) === PrimitiveTypes.Number) {
-            console.log('you need to reset the array again now')
             propertyPath.pop()
-            console.log(propertyPath)
             const parentPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-            console.log('this is the PPPPPPAAAAAAAAAAAAAREnt PAAAAAAAAATH')
-            console.log(parentPath)
             const resettedArray = Data.resetArrayIndexes(get(this.parsedData, parentPath + '._value'))
-            set(this.parsedData, parentPath, resettedArray)
+            console.log(parentPath + '._value')
+            console.log(resettedArray)
+            set(this.parsedData, parentPath + '._value', resettedArray)
         }
-        console.log('the data after the change')
-        console.log(this.parsedData)
     }
 
     /**

@@ -3,6 +3,7 @@ import './objectContainerStyle.css'
 import type { Property } from '../../../types'
 import type { Data } from '../../../classes/Data'
 import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
+import type { Field } from '../../Field/Field'
 
 import { Container } from '../Container/Container'
 import { drawOutlineIcon, getFieldInstance } from '../../../utils'
@@ -62,10 +63,25 @@ export class ObjectContainer extends Container {
                 const guifyObjectFieldContainer = document.createElement('div')
                 guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
 
-                const labelName = property._key
                 const labelContainer = document.createElement('div')
                 labelContainer.classList.add('guifyObjectLabelContainer')
-                labelContainer.innerHTML = labelName
+
+                const textPart = document.createElement('div')
+                textPart.classList.add('guifyObjectLabelTextPart')
+                const labelName = property._key
+                textPart.innerHTML = labelName
+                labelContainer.append(textPart)
+
+                const buttonsPart = document.createElement('div')
+                buttonsPart.classList.add('guifyObjectLabelButtonsPart')
+                // TODO: add the delete button or any other crud buttons
+                const fieldButtons = this.drawFieldButtons(field, guifyObjectFieldContainer)
+                Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
+                buttonsPart.append(fieldButtons)
+                // TODO: add the button that changes the the keyName of the field
+                // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
+                labelContainer.append(buttonsPart)
+
                 guifyObjectFieldContainer.append(labelContainer)
 
                 field.showSecondaryColors = this.showSecondaryColors
@@ -75,14 +91,6 @@ export class ObjectContainer extends Container {
                 fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
                 fieldInnerContainer.append(fieldElement)
                 guifyObjectFieldContainer.append(fieldInnerContainer)
-
-                // TODO: add the delete button or any other crud buttons
-                const fieldButtons = this.drawFieldButtons()
-                Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
-                guifyObjectFieldContainer.append(fieldButtons)
-
-                // TODO: add the button that changes the the keyName of the field
-                // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
 
                 propertyElement = guifyObjectFieldContainer
             }
@@ -107,26 +115,27 @@ export class ObjectContainer extends Container {
     /**
      * This function is responsible for drawing buttons that edits a field in an object container
      */
-    public drawFieldButtons (): HTMLElement {
+    public drawFieldButtons (field: Field, fieldElement: HTMLElement): HTMLElement {
         // creating the container
         const fieldButtons = document.createElement('div')
         fieldButtons.classList.add('fieldButtons')
 
         // creating the buttons
-        const deleteButton = drawOutlineIcon('delete')
-        fieldButtons.append(deleteButton)
-
-        const addButton = drawOutlineIcon('add')
-        fieldButtons.append(addButton)
-
         const minusButton = drawOutlineIcon('edit')
         fieldButtons.append(minusButton)
+
+        const deleteButton = drawOutlineIcon('delete')
+        deleteButton.addEventListener('click', () => {
+            this.deleteProperty(field.keyName)
+            fieldElement.remove()
+        })
+        fieldButtons.append(deleteButton)
 
         return fieldButtons
     }
 
     /**
-     * This function is responsible adding event listeners to the header buttons of an object container
+     * This function is responsible of adding event listeners to the header buttons of an object container
      */
     protected static addingEventListenerForHeaderButtons (containerHeaderButtons: HTMLElement, parentObjectContainer: ObjectContainer, childContainer: ObjectContainer | ArrayContainer): void {
         if (containerHeaderButtons !== null) {

@@ -5,7 +5,25 @@
     padding: var(--primary-padding);
 }
 
+.guifyObjectLabelContainer {
+    display: flex;
+}
+
 .guifyObjectFieldContainer {
+    position: relative;
+}
+
+.guifyObjectLabelTextPart {
+    transition: 500ms;
+    transform-origin: left bottom;
+    transform: translateY(0px);
+}
+
+.guifyObjectFieldContainer:hover > .guifyObjectLabelContainer > .guifyObjectLabelTextPart {
+    transform: translateY(-6.5px);
+}
+
+.guifyObjectLabelButtonsPart {
     position: relative;
 }
 
@@ -13,20 +31,24 @@
     position: absolute;
     display: flex;
     z-index: 1;
-    gap: 10px;
-    bottom: -40px;
-    padding-top: 20px;
+    gap: 5px;
+    bottom: 0px;
+    left: 0;
+    padding-bottom: 3px;
+    padding-left: 10px;
     pointer-events: none;
 }
 
 .fieldButtons > * {
     color: var(--primary-text-color);
+    border: 1px solid rgba(0, 0, 0, 0.15);
     background-color: white;
     padding: 5px;
     border-radius: 100%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     opacity: 0.0;
-    transform: translateY(-75%);
+    transform: translateY(75%);
     transition: 0.2s ease;
     cursor: pointer;
+    font-size: large;
 }

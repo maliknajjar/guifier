@@ -110,9 +110,11 @@ export class ArrayContainer extends Container {
         let fieldElement
         if (field.isCollapsible) {
             fieldElement = this.drawCollapsibleArrayElement(field as Container, arrayElementIndex)
+            guifyArrayFieldContainer.classList.add('guifyContainerFieldType')
         } else {
             field.showSecondaryColors = this.showSecondaryColors
             fieldElement = field.draw()
+            guifyArrayFieldContainer.classList.add('guifyBaseFieldType')
         }
 
         fieldInnerContainer.append(fieldElement)
@@ -135,7 +137,29 @@ export class ArrayContainer extends Container {
             return fragment
         }
 
+        // TODO: add the delete button to the field element here
+        const deleteButton = this.drawArrayFieldDeleteButton()
+        guifyArrayFieldContainer.append(deleteButton)
+
         return guifyArrayFieldContainer
+    }
+
+    /**
+     * This function is responsible for drawing the button in the array field element
+     *
+     * @returns {HTMLElement} html element object
+     */
+    private drawArrayFieldDeleteButton (): HTMLElement {
+        const deleteButton = this.drawDeleteButton()
+        deleteButton.classList.add('guifyArrayFieldDeleteButton')
+
+        deleteButton.addEventListener('click', () => {
+            console.log('wowowowowow')
+            const elementIndex = parseInt(deleteButton.parentElement?.dataset.elementIndex as string)
+            this.deleteElement(elementIndex)
+        })
+
+        return deleteButton
     }
 
     /**
@@ -261,7 +285,9 @@ export class ArrayContainer extends Container {
     private deleteElement (elementIndex: number): void {
         // removing the dom
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
-        guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
+        if (guifyArrayFieldContainers[elementIndex].classList.contains('guifyContainerFieldType')) {
+            guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
+        }
         guifyArrayFieldContainers[elementIndex].remove()
 
         // remove the element from the data
