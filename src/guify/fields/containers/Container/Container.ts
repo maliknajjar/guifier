@@ -15,6 +15,13 @@ export abstract class Container extends Field {
     public contentBody: HTMLElement = document.createElement('div')
 
     /**
+     * This method is responsible for drawing the body when the container is empty
+     *
+     * @returns {HTMLElement} html element object
+     */
+    protected abstract drawEmptyContent (): HTMLElement
+
+    /**
      * this method checks if the current container is the
      * first container and its not a nested container
      *

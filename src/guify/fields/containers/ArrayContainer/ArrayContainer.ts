@@ -7,7 +7,9 @@ import type { Data } from '../../../classes/Data'
 
 import { Container } from '../Container/Container'
 import { getFieldInstance, isOdd } from '../../../utils'
+
 import cloneDeep from 'lodash/cloneDeep'
+import isEmpty from 'lodash/isEmpty'
 
 /**
  * Represents peroperty of type array
@@ -53,9 +55,15 @@ export class ArrayContainer extends Container {
 
         // drawing the fields or containers that resides inside this container
         const array = this.property._value
-        for (const key in array) {
-            const property: Property = array[key]
-            guifyArrayContainerbody.append(this.drawArrayElement(property, parseInt(key)))
+
+        // checking if the array is empty
+        if (!isEmpty(array)) {
+            for (const key in array) {
+                const property: Property = array[key]
+                guifyArrayContainerbody.append(this.drawArrayElement(property, parseInt(key)))
+            }
+        } else {
+            return this.drawEmptyContent()
         }
 
         this.contentBody = guifyArrayContainerbody
@@ -142,6 +150,34 @@ export class ArrayContainer extends Container {
         guifyArrayFieldContainer.append(deleteButton)
 
         return guifyArrayFieldContainer
+    }
+
+    /**
+     * This function is responsible for drawing the button in the array field element
+     *
+     * @returns {HTMLElement} html element object
+     */
+    protected drawEmptyContent (): HTMLElement {
+        const emptyContentContianer = document.createElement('div')
+        emptyContentContianer.classList.add('guifyEmptyContentContianer')
+
+        const mainMessage = document.createElement('h2')
+        mainMessage.classList.add('guifyEmptyTitle')
+        mainMessage.append('No Elements')
+        emptyContentContianer.append(mainMessage)
+
+        const paragraph = document.createElement('p')
+        paragraph.classList.add('guifyEmptyParagraph')
+        paragraph.append('You don’t have any Elements yet. Click the button below to get started.')
+        emptyContentContianer.append(paragraph)
+
+        const addELementButton = document.createElement('div')
+        addELementButton.classList.add('guifyEmptyButton')
+        addELementButton.append('Add Element')
+        addELementButton.append(this.drawAddButton())
+        emptyContentContianer.append(addELementButton)
+
+        return emptyContentContianer
     }
 
     /**

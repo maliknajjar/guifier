@@ -9,6 +9,7 @@ import { Container } from '../Container/Container'
 import { drawOutlineIcon, getFieldInstance } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
+import isEmpty from 'lodash/isEmpty'
 
 /**
  * Represents peroperty of type object
@@ -44,58 +45,65 @@ export class ObjectContainer extends Container {
     public draw (): HTMLElement {
         const guifyObjectContainerbody = document.createElement('div')
         guifyObjectContainerbody.classList.add('guifyObjectContainerbody')
+
         if (this.containerInFirstLevel()) {
             guifyObjectContainerbody.style.overflowY = 'auto'
         }
+
         const object = this.property._value
-        for (const key in object) {
-            const property = object[key]
-            const field = getFieldInstance(property, this.data)
-            let propertyElement
-            if (field.isCollapsible) {
-                field.showSecondaryColors = !this.showSecondaryColors
-                const container = (field as Container).drawContentWithContainer(field)
-                const containerHeaderButtons = container.children[0].children[1] as HTMLElement
-                ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
-                // TODO: add event listener for the header buttons from an object Container function here
-                propertyElement = container
-            } else {
-                const guifyObjectFieldContainer = document.createElement('div')
-                guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
 
-                const labelContainer = document.createElement('div')
-                labelContainer.classList.add('guifyObjectLabelContainer')
+        // checking if the array is empty
+        if (!isEmpty(object)) {
+            for (const key in object) {
+                const property = object[key]
+                const field = getFieldInstance(property, this.data)
+                let propertyElement
+                if (field.isCollapsible) {
+                    field.showSecondaryColors = !this.showSecondaryColors
+                    const container = (field as Container).drawContentWithContainer(field)
+                    const containerHeaderButtons = container.children[0].children[1] as HTMLElement
+                    ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
+                    propertyElement = container
+                } else {
+                    const guifyObjectFieldContainer = document.createElement('div')
+                    guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
 
-                const textPart = document.createElement('div')
-                textPart.classList.add('guifyObjectLabelTextPart')
-                const labelName = property._key
-                textPart.innerHTML = labelName
-                labelContainer.append(textPart)
+                    const labelContainer = document.createElement('div')
+                    labelContainer.classList.add('guifyObjectLabelContainer')
 
-                const buttonsPart = document.createElement('div')
-                buttonsPart.classList.add('guifyObjectLabelButtonsPart')
-                // TODO: add the delete button or any other crud buttons
-                const fieldButtons = this.drawFieldButtons(field, guifyObjectFieldContainer)
-                Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
-                buttonsPart.append(fieldButtons)
-                // TODO: add the button that changes the the keyName of the field
-                // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
-                labelContainer.append(buttonsPart)
+                    const textPart = document.createElement('div')
+                    textPart.classList.add('guifyObjectLabelTextPart')
+                    const labelName = property._key
+                    textPart.innerHTML = labelName
+                    labelContainer.append(textPart)
 
-                guifyObjectFieldContainer.append(labelContainer)
+                    const buttonsPart = document.createElement('div')
+                    buttonsPart.classList.add('guifyObjectLabelButtonsPart')
+                    // TODO: add the delete button or any other crud buttons
+                    const fieldButtons = this.drawFieldButtons(field, guifyObjectFieldContainer)
+                    Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
+                    buttonsPart.append(fieldButtons)
+                    // TODO: add the button that changes the the keyName of the field
+                    // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
+                    labelContainer.append(buttonsPart)
 
-                field.showSecondaryColors = this.showSecondaryColors
-                const fieldElement = field.draw()
+                    guifyObjectFieldContainer.append(labelContainer)
 
-                const fieldInnerContainer = document.createElement('div')
-                fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
-                fieldInnerContainer.append(fieldElement)
-                guifyObjectFieldContainer.append(fieldInnerContainer)
+                    field.showSecondaryColors = this.showSecondaryColors
+                    const fieldElement = field.draw()
 
-                propertyElement = guifyObjectFieldContainer
+                    const fieldInnerContainer = document.createElement('div')
+                    fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
+                    fieldInnerContainer.append(fieldElement)
+                    guifyObjectFieldContainer.append(fieldInnerContainer)
+
+                    propertyElement = guifyObjectFieldContainer
+                }
+
+                guifyObjectContainerbody.append(propertyElement)
             }
-
-            guifyObjectContainerbody.append(propertyElement)
+        } else {
+            return 'this object is empty'
         }
 
         this.contentBody = guifyObjectContainerbody

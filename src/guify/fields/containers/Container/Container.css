@@ -35,3 +35,7 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+.guifyContainerHeaderKeyName {
+    font-weight: bold;
+}

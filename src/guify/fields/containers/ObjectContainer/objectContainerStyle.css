@@ -17,10 +17,11 @@
     transition: 300ms;
     transform-origin: left bottom;
     transform: translateY(0px);
+    font-weight: bold;
 }
 
 .guifyObjectFieldContainer:hover > .guifyObjectLabelContainer > .guifyObjectLabelTextPart {
-    transform: translateY(-6.5px);
+    transform: translateY(-7px);
 }
 
 .guifyObjectLabelButtonsPart {
@@ -41,11 +42,11 @@
 
 .fieldButtons > * {
     color: var(--primary-text-color);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    background-color: white;
+    border: 1px solid var(--primary-border-color);
+    /* background-color: white; */
     padding: 5px;
     border-radius: 100%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
     opacity: 0.0;
     transform: translateY(75%);
     transition: 0.2s ease;

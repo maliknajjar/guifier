@@ -121,3 +121,40 @@
     width: 34px;
     opacity: 1;
 }
+
+.guifyEmptyContentContianer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px var(--primary-padding);
+}
+
+.guifyEmptyTitle {
+    margin: 0;
+    color: var(--primary-text-color);
+}
+
+.guifyEmptyParagraph {
+    text-align: center;
+    max-width: 375px;
+    margin-top: 7.5px;
+    margin-bottom: 15px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.guifyEmptyButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--primary-color);
+    padding: 10px 17.5px;
+    padding-left: 25px;
+    border-radius: var(--primary-border-radius);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.guifyEmptyButton:hover {
+    background-color: #1d5dffe7;
+}
