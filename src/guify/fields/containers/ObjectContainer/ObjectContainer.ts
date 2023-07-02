@@ -52,6 +52,8 @@ export class ObjectContainer extends Container {
 
         const object = this.property._value
 
+        this.containerLength = Object.keys(object).length
+
         // checking if the array is empty
         if (!isEmpty(object)) {
             for (const key in object) {
@@ -62,6 +64,9 @@ export class ObjectContainer extends Container {
                     field.showSecondaryColors = !this.showSecondaryColors
                     const container = (field as Container).drawContentWithContainer(field)
                     const containerHeaderButtons = container.children[0].children[1] as HTMLElement
+                    // TODO: add the event listener to the header buttons when to the "this" (the parent) instead of the child
+                    // if you give it to the child then the first object (parent) object wont have it .. if you give it to the "this" (parent)
+                    // all objects will have it
                     ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
                     propertyElement = container
                 } else {
@@ -103,7 +108,7 @@ export class ObjectContainer extends Container {
                 guifyObjectContainerbody.append(propertyElement)
             }
         } else {
-            return 'this object is empty'
+            guifyObjectContainerbody.append(this.drawEmptyContent())
         }
 
         this.contentBody = guifyObjectContainerbody
@@ -187,5 +192,12 @@ export class ObjectContainer extends Container {
         path.push(propetyName)
         const pathWithPropetyName = path
         this.data.removeProperty(pathWithPropetyName)
+
+        // reducing the counter
+        this.containerLength--
+        console.log(this.containerLength)
+        if (this.containerLength === 0) {
+            this.contentBody.append(this.drawEmptyContent())
+        }
     }
 }

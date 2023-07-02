@@ -12,6 +12,11 @@ export abstract class Container extends Field {
     /**
      * this property tells if the current field is a big field like object, array or a rich text field
      */
+    public containerLength: number = 0
+
+    /**
+     * this property tells if the current field is a big field like object, array or a rich text field
+     */
     public contentBody: HTMLElement = document.createElement('div')
 
     /**
@@ -19,7 +24,31 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    protected abstract drawEmptyContent (): HTMLElement
+    protected drawEmptyContent (forArrayContainer: boolean = false): HTMLElement {
+        const pluralText = forArrayContainer ? 'Elements' : 'Properties'
+        const singularText = forArrayContainer ? 'Element' : 'Property'
+
+        const emptyContentContianer = document.createElement('div')
+        emptyContentContianer.classList.add('guifyEmptyContentContianer')
+
+        const mainMessage = document.createElement('h2')
+        mainMessage.classList.add('guifyEmptyTitle')
+        mainMessage.append(`No ${pluralText}`)
+        emptyContentContianer.append(mainMessage)
+
+        const paragraph = document.createElement('p')
+        paragraph.classList.add('guifyEmptyParagraph')
+        paragraph.append(`You don’t have any ${pluralText} yet. Click the button below to get started.`)
+        emptyContentContianer.append(paragraph)
+
+        const addELementButton = document.createElement('div')
+        addELementButton.classList.add('guifyEmptyButton')
+        addELementButton.append(`Add ${singularText}`)
+        addELementButton.append(this.drawAddButton())
+        emptyContentContianer.append(addELementButton)
+
+        return emptyContentContianer
+    }
 
     /**
      * this method checks if the current container is the

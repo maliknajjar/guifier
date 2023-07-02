@@ -54,7 +54,8 @@ export class ArrayContainer extends Container {
         }
 
         // drawing the fields or containers that resides inside this container
-        const array = this.property._value
+        const array: [any] = this.property._value
+        this.containerLength = array.length
 
         // checking if the array is empty
         if (!isEmpty(array)) {
@@ -63,7 +64,7 @@ export class ArrayContainer extends Container {
                 guifyArrayContainerbody.append(this.drawArrayElement(property, parseInt(key)))
             }
         } else {
-            return this.drawEmptyContent()
+            guifyArrayContainerbody.append(this.drawEmptyContent(true))
         }
 
         this.contentBody = guifyArrayContainerbody
@@ -150,34 +151,6 @@ export class ArrayContainer extends Container {
         guifyArrayFieldContainer.append(deleteButton)
 
         return guifyArrayFieldContainer
-    }
-
-    /**
-     * This function is responsible for drawing the button in the array field element
-     *
-     * @returns {HTMLElement} html element object
-     */
-    protected drawEmptyContent (): HTMLElement {
-        const emptyContentContianer = document.createElement('div')
-        emptyContentContianer.classList.add('guifyEmptyContentContianer')
-
-        const mainMessage = document.createElement('h2')
-        mainMessage.classList.add('guifyEmptyTitle')
-        mainMessage.append('No Elements')
-        emptyContentContianer.append(mainMessage)
-
-        const paragraph = document.createElement('p')
-        paragraph.classList.add('guifyEmptyParagraph')
-        paragraph.append('You don’t have any Elements yet. Click the button below to get started.')
-        emptyContentContianer.append(paragraph)
-
-        const addELementButton = document.createElement('div')
-        addELementButton.classList.add('guifyEmptyButton')
-        addELementButton.append('Add Element')
-        addELementButton.append(this.drawAddButton())
-        emptyContentContianer.append(addELementButton)
-
-        return emptyContentContianer
     }
 
     /**
@@ -336,6 +309,13 @@ export class ArrayContainer extends Container {
 
         // redrawing the index label and the background color of the array elements in the html
         this.resetElementsUiInArrayContainer()
+
+        // reducing the counter
+        this.containerLength--
+        console.log(this.containerLength)
+        if (this.containerLength === 0) {
+            this.contentBody.append(this.drawEmptyContent())
+        }
     }
 
     /**

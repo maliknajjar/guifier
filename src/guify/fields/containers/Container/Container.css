@@ -39,3 +39,53 @@
 .guifyContainerHeaderKeyName {
     font-weight: bold;
 }
+
+/* empty content for empty containers css rules */
+.guifyEmptyContentContianer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px var(--primary-padding);
+    grid-column: span 2;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.guifyArrayContainerbody .guifyEmptyContentContianer {
+    padding: var(--primary-padding) var(--primary-padding);
+}
+
+.guifyEmptyTitle {
+    margin: 0;
+    color: var(--primary-text-color);
+    font-size: large;
+}
+
+.guifyEmptyParagraph {
+    text-align: center;
+    max-width: 375px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: medium;
+}
+
+.guifyEmptyButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    padding-left: 19px;
+    border-radius: var(--primary-border-radius);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: small;
+    margin-top: 15px;
+    box-shadow: #1d5dffa2 0px 0px 40px 0px;
+}
+
+.guifyEmptyButton:hover {
+    background-color: #1d5dffe7;
+}
