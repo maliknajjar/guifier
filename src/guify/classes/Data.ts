@@ -28,8 +28,8 @@ export class Data {
         object: 'object',
         array: 'array',
         null: 'null',
-        undefined: 'undefined',
-        NaN: 'notNumber'
+        undefined: 'null',
+        NaN: 'null'
     }
 
     constructor (data: string, dataType: DataType) {
@@ -269,8 +269,6 @@ export class Data {
             const arrayToReset = get(this.parsedData, parentPath)
             const resettedArray = Data.resetArrayIndexes(arrayToReset)
             // reset all the propert._path property _key and _path to be accordance with their current index
-            console.log('waawawawawawwwawwawawaw')
-            console.log(resettedArray)
             for (let index = 0; index < resettedArray.length; index++) {
                 resettedArray[index]._key = index
                 const pathLength = resettedArray[index]._path.length
@@ -304,8 +302,6 @@ export class Data {
             }
         }
 
-        console.log('wpwpwpwppwwppwpwpwpwppwpw')
-        console.log(returnedString.substring(5))
         // removing the first ".root" from the path
         return returnedString.substring(5)
     }

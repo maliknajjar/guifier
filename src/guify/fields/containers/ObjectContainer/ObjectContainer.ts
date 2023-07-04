@@ -10,6 +10,7 @@ import { drawOutlineIcon, getFieldInstance } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
+import { PrimitiveTypes } from '../../../enums'
 
 /**
  * Represents peroperty of type object
@@ -58,53 +59,7 @@ export class ObjectContainer extends Container {
         if (!isEmpty(object)) {
             for (const key in object) {
                 const property = object[key]
-                const field = getFieldInstance(property, this.data)
-                let propertyElement
-                if (field.isCollapsible) {
-                    field.showSecondaryColors = !this.showSecondaryColors
-                    const container = (field as Container).drawContentWithContainer(field)
-                    const containerHeaderButtons = container.children[0].children[1] as HTMLElement
-                    // TODO: add the event listener to the header buttons when to the "this" (the parent) instead of the child
-                    // if you give it to the child then the first object (parent) object wont have it .. if you give it to the "this" (parent)
-                    // all objects will have it
-                    ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
-                    propertyElement = container
-                } else {
-                    const guifyObjectFieldContainer = document.createElement('div')
-                    guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
-
-                    const labelContainer = document.createElement('div')
-                    labelContainer.classList.add('guifyObjectLabelContainer')
-
-                    const textPart = document.createElement('div')
-                    textPart.classList.add('guifyObjectLabelTextPart')
-                    const labelName = property._key
-                    textPart.innerHTML = labelName
-                    labelContainer.append(textPart)
-
-                    const buttonsPart = document.createElement('div')
-                    buttonsPart.classList.add('guifyObjectLabelButtonsPart')
-                    // TODO: add the delete button or any other crud buttons
-                    const fieldButtons = this.drawFieldButtons(field, guifyObjectFieldContainer)
-                    Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
-                    buttonsPart.append(fieldButtons)
-                    // TODO: add the button that changes the the keyName of the field
-                    // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
-                    labelContainer.append(buttonsPart)
-
-                    guifyObjectFieldContainer.append(labelContainer)
-
-                    field.showSecondaryColors = this.showSecondaryColors
-                    const fieldElement = field.draw()
-
-                    const fieldInnerContainer = document.createElement('div')
-                    fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
-                    fieldInnerContainer.append(fieldElement)
-                    guifyObjectFieldContainer.append(fieldInnerContainer)
-
-                    propertyElement = guifyObjectFieldContainer
-                }
-
+                const propertyElement = this.drawProperty(property)
                 guifyObjectContainerbody.append(propertyElement)
             }
         } else {
@@ -114,6 +69,59 @@ export class ObjectContainer extends Container {
         this.contentBody = guifyObjectContainerbody
 
         return guifyObjectContainerbody
+    }
+
+    /**
+     * This function is responsible for drawing a property of the object
+     */
+    protected drawProperty (property: Property): HTMLElement {
+        console.log('FFFFFFFFFFFFFFFFFF')
+        console.log(property)
+        const field = getFieldInstance(property, this.data)
+        let propertyElement
+        if (field.isCollapsible) {
+            field.showSecondaryColors = !this.showSecondaryColors
+            const container = (field as Container).drawContentWithContainer(field)
+            const containerHeaderButtons = container.children[0].children[1] as HTMLElement
+            ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
+            propertyElement = container
+        } else {
+            const guifyObjectFieldContainer = document.createElement('div')
+            guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
+
+            const labelContainer = document.createElement('div')
+            labelContainer.classList.add('guifyObjectLabelContainer')
+
+            const textPart = document.createElement('div')
+            textPart.classList.add('guifyObjectLabelTextPart')
+            const labelName = property._key
+            textPart.innerHTML = labelName.toString()
+            labelContainer.append(textPart)
+
+            const buttonsPart = document.createElement('div')
+            buttonsPart.classList.add('guifyObjectLabelButtonsPart')
+            // TODO: add the delete button or any other crud buttons
+            const fieldButtons = this.drawFieldButtons(field, guifyObjectFieldContainer)
+            Container.showHeaderButtonsWhenHovering(fieldButtons, guifyObjectFieldContainer, true)
+            buttonsPart.append(fieldButtons)
+            // TODO: add the button that changes the the keyName of the field
+            // const changeFieldKeyNameButton = this.drawChangeFieldKeyNameButton()
+            labelContainer.append(buttonsPart)
+
+            guifyObjectFieldContainer.append(labelContainer)
+
+            field.showSecondaryColors = this.showSecondaryColors
+            const fieldElement = field.draw()
+
+            const fieldInnerContainer = document.createElement('div')
+            fieldInnerContainer.classList.add('guifyObjectfieldInnerContainer')
+            fieldInnerContainer.append(fieldElement)
+            guifyObjectFieldContainer.append(fieldInnerContainer)
+
+            propertyElement = guifyObjectFieldContainer
+        }
+
+        return propertyElement
     }
 
     /**
@@ -173,8 +181,33 @@ export class ObjectContainer extends Container {
                         })
                         break
                     case 'add':
+                        console.log(button)
                         button.addEventListener('click', () => {
-                            console.log('wowowow')
+                            if (childContainer.FieldLabelName === 'Object') {
+                                const container = (childContainer as ObjectContainer)
+                                const propertyExample: Property = {
+                                    _path: [...container.property._path, container.containerLength],
+                                    _key: container.containerLength,
+                                    _valueType: PrimitiveTypes.String,
+                                    _value: [],
+                                    _fieldType: 'array',
+                                    _rules: undefined,
+                                    _params: undefined
+                                }
+                                container.addProperty(propertyExample)
+                            } else if (childContainer.FieldLabelName === 'Array') {
+                                const container = (childContainer as ArrayContainer)
+                                const propertyExample: Property = {
+                                    _path: [...container.property._path, container.containerLength],
+                                    _key: container.containerLength,
+                                    _valueType: PrimitiveTypes.String,
+                                    _value: 'nothing man',
+                                    _fieldType: 'text',
+                                    _rules: undefined,
+                                    _params: undefined
+                                }
+                                container.addElement(propertyExample)
+                            }
                         })
                         break
                     default:
@@ -195,9 +228,21 @@ export class ObjectContainer extends Container {
 
         // reducing the counter
         this.containerLength--
-        console.log(this.containerLength)
         if (this.containerLength === 0) {
             this.contentBody.append(this.drawEmptyContent())
         }
+    }
+
+    /**
+     * This function is responsible for adding a property in an object container
+     */
+    protected addProperty (property: Property): void {
+        console.log('we will add a property in this object')
+        console.log(property)
+        if (this.containerLength === 0) {
+            this.contentBody.innerHTML = ''
+        }
+        this.contentBody.append(this.drawProperty(property))
+        this.containerLength++
     }
 }

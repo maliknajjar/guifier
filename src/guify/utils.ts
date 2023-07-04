@@ -125,10 +125,35 @@ export function getFieldInstance (property: Property, data: Data): Field {
     }
 }
 
+/**
+ * A function that draws any google font outline Icon by icon name
+ *
+ * @param {string} iconName is the the name of the icon you want to draw
+ * @returns {Field} instance of the Field
+ */
 export function drawOutlineIcon (iconName: string): HTMLElement {
     const deleteIconElement = document.createElement('span')
     deleteIconElement.classList.add('material-icons-outlined')
     deleteIconElement.innerHTML = iconName
 
     return deleteIconElement
+}
+
+/**
+ * This function will get you the PrimitiveTypes based on the string stringType
+ *
+ * @param {string} stringType is the stringType that will get the PrimitiveTypes based on
+ * @returns {PrimitiveTypes} the primitive type according to the stringType
+ */
+export function getPrimitiveEnumByStringType (stringType: string): PrimitiveTypes {
+    const stringTypeToPrimitiveEnum: Record<string, PrimitiveTypes> = {
+        array: PrimitiveTypes.Array,
+        object: PrimitiveTypes.Object,
+        boolean: PrimitiveTypes.Boolean,
+        null: PrimitiveTypes.Null,
+        number: PrimitiveTypes.Number,
+        string: PrimitiveTypes.String
+    }
+
+    return stringTypeToPrimitiveEnum[stringType]
 }

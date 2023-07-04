@@ -38,7 +38,7 @@ export abstract class Container extends Field {
 
         const paragraph = document.createElement('p')
         paragraph.classList.add('guifyEmptyParagraph')
-        paragraph.append(`You don’t have any ${pluralText} yet. Click the button below to get started.`)
+        paragraph.append(`You don’t have any ${pluralText} yet. Click the button below to add one.`)
         emptyContentContianer.append(paragraph)
 
         const addELementButton = document.createElement('div')

@@ -10,6 +10,7 @@ import { getFieldInstance, isOdd } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
+import { PrimitiveTypes } from '../../../enums'
 
 /**
  * Represents peroperty of type array
@@ -55,13 +56,13 @@ export class ArrayContainer extends Container {
 
         // drawing the fields or containers that resides inside this container
         const array: [any] = this.property._value
-        this.containerLength = array.length
 
         // checking if the array is empty
         if (!isEmpty(array)) {
             for (const key in array) {
                 const property: Property = array[key]
-                guifyArrayContainerbody.append(this.drawArrayElement(property, parseInt(key)))
+                guifyArrayContainerbody.append(this.drawElement(property))
+                this.containerLength++
             }
         } else {
             guifyArrayContainerbody.append(this.drawEmptyContent(true))
@@ -77,11 +78,11 @@ export class ArrayContainer extends Container {
      *
      * @returns {HTMLElement} html element object
      */
-    private drawArrayElement (property: Property, arrayElementIndex: number): HTMLElement | DocumentFragment {
+    private drawElement (property: Property): HTMLElement | DocumentFragment {
         const guifyArrayFieldContainer = document.createElement('div')
         guifyArrayFieldContainer.classList.add('guifyArrayFieldContainer')
-        guifyArrayFieldContainer.dataset.elementIndex = `${arrayElementIndex}`
-        if (isOdd(arrayElementIndex)) {
+        guifyArrayFieldContainer.dataset.elementIndex = `${this.containerLength}`
+        if (isOdd(this.containerLength)) {
             guifyArrayFieldContainer.classList.add('guifyOddBackground')
         }
 
@@ -118,7 +119,7 @@ export class ArrayContainer extends Container {
         const field = getFieldInstance(property, this.data)
         let fieldElement
         if (field.isCollapsible) {
-            fieldElement = this.drawCollapsibleArrayElement(field as Container, arrayElementIndex)
+            fieldElement = this.drawCollapsibleArrayElement(field as Container, this.containerLength)
             guifyArrayFieldContainer.classList.add('guifyContainerFieldType')
         } else {
             field.showSecondaryColors = this.showSecondaryColors
@@ -133,7 +134,7 @@ export class ArrayContainer extends Container {
         if (field.isCollapsible) {
             const fragment = document.createDocumentFragment()
             fragment.append(guifyArrayFieldContainer)
-            if (arrayElementIndex === this.property._value.length - 1) {
+            if (this.containerLength === this.property._value.length - 1) {
                 fragment.append(this.drawCollapsibleArrayElementContent(field, true))
             } else {
                 fragment.append(this.drawCollapsibleArrayElementContent(field))
@@ -163,7 +164,6 @@ export class ArrayContainer extends Container {
         deleteButton.classList.add('guifyArrayFieldDeleteButton')
 
         deleteButton.addEventListener('click', () => {
-            console.log('wowowowowow')
             const elementIndex = parseInt(deleteButton.parentElement?.dataset.elementIndex as string)
             this.deleteElement(elementIndex)
         })
@@ -187,7 +187,6 @@ export class ArrayContainer extends Container {
         collapsibleElement.append(fieldLabelName)
 
         const guifyContainerHeaderButtons = field.drawContainerHeaderButtons(true)
-        console.log(guifyContainerHeaderButtons)
 
         collapsibleElement.append(guifyContainerHeaderButtons)
 
@@ -263,7 +262,6 @@ export class ArrayContainer extends Container {
                 switch (button.innerHTML) {
                     case 'expand_less':
                         button.addEventListener('click', () => {
-                            console.log('sasakslakslksa')
                             const bodyElement = button.parentElement?.parentElement?.parentElement?.parentElement?.nextElementSibling as HTMLDivElement
                             button.classList.toggle('guifyRotate')
                             bodyElement.classList.toggle('guifyNoneDisplay')
@@ -279,7 +277,21 @@ export class ArrayContainer extends Container {
                         break
                     case 'add':
                         button.addEventListener('click', () => {
-                            console.log('add buttons from array man')
+                            // console.log('add buttons from array man')
+                            const propertyExample: Property = {
+                                _path: [...childContainer.property._path, childContainer.containerLength],
+                                _key: childContainer.containerLength,
+                                _valueType: PrimitiveTypes.String,
+                                _value: 'nothing man',
+                                _fieldType: 'text',
+                                _rules: undefined,
+                                _params: undefined
+                            }
+                            if (childContainer.FieldLabelName === 'Object') {
+                                childContainer.addProperty(propertyExample)
+                            } else if (childContainer.FieldLabelName === 'Array') {
+                                childContainer.addElement(propertyExample)
+                            }
                         })
                         break
                     default:
@@ -293,8 +305,10 @@ export class ArrayContainer extends Container {
      * This function is responsible for deleting an element in an array container in the ui
      */
     private deleteElement (elementIndex: number): void {
+        console.log(elementIndex)
         // removing the dom
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
+        console.log(guifyArrayFieldContainers)
         if (guifyArrayFieldContainers[elementIndex].classList.contains('guifyContainerFieldType')) {
             guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         }
@@ -312,10 +326,22 @@ export class ArrayContainer extends Container {
 
         // reducing the counter
         this.containerLength--
-        console.log(this.containerLength)
         if (this.containerLength === 0) {
             this.contentBody.append(this.drawEmptyContent())
         }
+    }
+
+    /**
+     * This function is responsible for adding a property in an object container
+     */
+    public addElement (property: Property): void {
+        console.log('we will add a property in this object')
+        console.log(property)
+        if (this.containerLength === 0) {
+            this.contentBody.innerHTML = ''
+        }
+        this.contentBody.append(this.drawElement(property))
+        this.containerLength++
     }
 
     /**
