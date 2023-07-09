@@ -1,6 +1,6 @@
 import 'material-icons/iconfont/outlined.css'
 
-import type { AnyObject, Property } from './types'
+import type { AnyObject, Property, FieldsMetaData, Parameters } from './types'
 import type { Field } from './fields/Field/Field'
 import type { Data } from './classes/Data'
 
@@ -97,32 +97,55 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
 }
 
 /**
+ * This object will have all fields and their important data
+ */
+export const fieldsMetaData: FieldsMetaData = {
+    text: {
+        labelName: TextField.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+            return new TextField(property, data, params)
+        }
+    },
+    number: {
+        labelName: NumberField.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+            return new NumberField(property, data, params)
+        }
+    },
+    boolean: {
+        labelName: BooleanField.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+            return new BooleanField(property, data, params)
+        }
+    },
+    null: {
+        labelName: NullField.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+            return new NullField(property, data, params)
+        }
+    },
+    object: {
+        labelName: ObjectContainer.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: Parameters): Field => {
+            return new ObjectContainer(property, data, params)
+        }
+    },
+    array: {
+        labelName: ArrayContainer.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+            return new ArrayContainer(property, data, params)
+        }
+    }
+}
+
+/**
  * A function that gets an instance of the field based on the type
  *
  * @param {Property} property is the object you want to check if its empty
  * @returns {Field} instance of the Field
  */
-export function getFieldInstance (property: Property, data: Data): Field {
-    switch (property._fieldType) {
-        case 'object':
-            return new ObjectContainer(property, data)
-        case 'array':
-            return new ArrayContainer(property, data)
-        case 'text':
-            return new TextField(property, data)
-        case 'number':
-            return new NumberField(property, data)
-        case 'boolean':
-            return new BooleanField(property, data)
-        case 'null':
-            return new NullField(property, data)
-        case 'undefined':
-            return new NullField(property, data)
-        case 'notNumber':
-            return new NullField(property, data)
-        default:
-            return new NullField(property, data)
-    }
+export function getFieldInstance (property: Property, data: Data, params: Parameters): Field {
+    return fieldsMetaData[property._fieldType].getInstantiatedObject(property, data, params)
 }
 
 /**

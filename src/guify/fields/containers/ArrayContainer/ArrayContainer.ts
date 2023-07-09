@@ -1,6 +1,6 @@
 import './arrayContainerStyle.css'
 
-import type { Property } from '../../../types'
+import type { Parameters, Property } from '../../../types'
 import type { Field } from '../../../fields/Field/Field'
 import type { ObjectContainer } from '../../../fields/containers/ObjectContainer/ObjectContainer'
 import type { Data } from '../../../classes/Data'
@@ -16,12 +16,12 @@ import { PrimitiveTypes } from '../../../enums'
  * Represents peroperty of type array
  */
 export class ArrayContainer extends Container {
-    public FieldLabelName: string = 'Array'
+    public static FieldLabelName: string = 'Array'
     public numberOfLevels: number = 0
     public contentBody: HTMLElement = document.createElement('div')
 
-    constructor (property: Property, data: Data) {
-        super(property, data)
+    constructor (property: Property, data: Data, params: Parameters) {
+        super(property, data, params)
         this.validateParams()
         this.validateRules()
     }
@@ -38,6 +38,13 @@ export class ArrayContainer extends Container {
      */
     protected validateRules (): void {
 
+    }
+
+    /**
+     * This function validates the _rules of the property object
+     */
+    public getFieldLabelName (): string {
+        return ArrayContainer.FieldLabelName
     }
 
     /**
@@ -116,7 +123,7 @@ export class ArrayContainer extends Container {
         const fieldInnerContainer = document.createElement('div')
         fieldInnerContainer.classList.add('guifyArrayfieldInnerContainer')
 
-        const field = getFieldInstance(property, this.data)
+        const field = getFieldInstance(property, this.data, this.params)
         let fieldElement
         if (field.isCollapsible) {
             fieldElement = this.drawCollapsibleArrayElement(field as Container, this.containerLength)
@@ -183,7 +190,7 @@ export class ArrayContainer extends Container {
         // drawing the field label name
         const fieldLabelName = document.createElement('div')
         fieldLabelName.classList.add('guifyFieldLabelName')
-        fieldLabelName.innerHTML = field.FieldLabelName
+        fieldLabelName.innerHTML = field.getFieldLabelName()
         collapsibleElement.append(fieldLabelName)
 
         const guifyContainerHeaderButtons = field.drawContainerHeaderButtons(true)
@@ -212,7 +219,7 @@ export class ArrayContainer extends Container {
         }
 
         field.showSecondaryColors = this.showSecondaryColors
-        if (field.FieldLabelName !== 'Array') {
+        if (field.getFieldLabelName() !== 'Array') {
             // creating the array levels
             collapsibleElementContent.append(this.drawArrayLevels(this.numberOfLevels))
             // creating the inner container
@@ -277,7 +284,6 @@ export class ArrayContainer extends Container {
                         break
                     case 'add':
                         button.addEventListener('click', () => {
-                            // console.log('add buttons from array man')
                             const propertyExample: Property = {
                                 _path: [...childContainer.property._path, childContainer.containerLength],
                                 _key: childContainer.containerLength,
@@ -287,10 +293,10 @@ export class ArrayContainer extends Container {
                                 _rules: undefined,
                                 _params: undefined
                             }
-                            if (childContainer.FieldLabelName === 'Object') {
-                                childContainer.addProperty(propertyExample)
-                            } else if (childContainer.FieldLabelName === 'Array') {
-                                childContainer.addElement(propertyExample)
+                            if (childContainer.getFieldLabelName() === 'Object') {
+                                (childContainer as ObjectContainer).addProperty(propertyExample)
+                            } else if (childContainer.getFieldLabelName() === 'Array') {
+                                (childContainer as ArrayContainer).addElement(propertyExample)
                             }
                         })
                         break
@@ -305,10 +311,8 @@ export class ArrayContainer extends Container {
      * This function is responsible for deleting an element in an array container in the ui
      */
     private deleteElement (elementIndex: number): void {
-        console.log(elementIndex)
         // removing the dom
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
-        console.log(guifyArrayFieldContainers)
         if (guifyArrayFieldContainers[elementIndex].classList.contains('guifyContainerFieldType')) {
             guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         }
@@ -335,8 +339,6 @@ export class ArrayContainer extends Container {
      * This function is responsible for adding a property in an object container
      */
     public addElement (property: Property): void {
-        console.log('we will add a property in this object')
-        console.log(property)
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''
         }

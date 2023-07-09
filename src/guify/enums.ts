@@ -2,6 +2,7 @@
 * Represents type of the data passed to the instantiated Guify object
 */
 export enum DataType {
+    Js = 'js',
     Json = 'json',
     Yaml = 'yaml',
     Xml = 'xml',

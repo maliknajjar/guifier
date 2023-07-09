@@ -4,7 +4,7 @@ import { Field } from '../../Field/Field'
 import { drawOutlineIcon } from '../../../utils'
 
 export class NullField extends Field {
-    public FieldLabelName: string = 'Null'
+    public static FieldLabelName: string = 'Null'
 
     /**
      * This function validates the _params of the property object
@@ -18,6 +18,13 @@ export class NullField extends Field {
      */
     protected validateRules (): void {
 
+    }
+
+    /**
+     * This function validates the _rules of the property object
+     */
+    public getFieldLabelName (): string {
+        return NullField.FieldLabelName
     }
 
     /**

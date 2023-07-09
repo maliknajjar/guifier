@@ -1,0 +1,75 @@
+.guifyDialogBackgroundContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.guifyDialogContainer {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    width: 70%;
+    background-color: white;
+    border: var(--primary-border);
+    border-radius: var(--primary-border-radius);
+}
+
+.guifyDialogContainerTitle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    border-bottom: var(--primary-border);
+    padding: 15px;
+    gap: 5px;
+}
+
+.guifyDialogBackIcon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    height: 100%;
+    left: 0;
+    color: grey;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.guifyDialogBackIcon:hover {
+    color: black;
+}
+
+.guifyDialogContainerBody {
+    padding: 25px;
+    overflow: auto;
+}
+
+.guifyGridFieldContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    flex: 1;
+    gap: 25px;
+}
+
+.guifyDialogContainerBodyElement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--primary-border-radius);
+    border: 2px solid #cdd0de80;
+    cursor: pointer;
+    transition: 150ms;
+    aspect-ratio: 1.5;
+}
+
+.guifyDialogContainerBodyElement:hover {
+    border: 2px solid #CDD0DE;
+}

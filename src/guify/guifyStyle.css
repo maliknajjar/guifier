@@ -62,7 +62,7 @@
 }
 
 .guifyNoneDisplay {
-    display: none;
+    display: none !important;
 }
 
 .guifyOddBackground {
@@ -72,4 +72,8 @@
 .guifyShowElementWithAnimation {
     opacity: 1;
     transform: translateY(0);
+}
+
+.guifyRemovePadding {
+    padding: 0 !important;
 }

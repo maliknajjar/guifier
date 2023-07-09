@@ -3,7 +3,7 @@ import './booleanFieldStyle.css'
 import { Field } from '../../Field/Field'
 
 export class BooleanField extends Field {
-    public FieldLabelName: string = 'Boolean'
+    public static FieldLabelName: string = 'Boolean'
 
     /**
      * This function validates the _params of the property object
@@ -17,6 +17,13 @@ export class BooleanField extends Field {
      */
     protected validateRules (): void {
 
+    }
+
+    /**
+     * This function validates the _rules of the property object
+     */
+    public getFieldLabelName (): string {
+        return BooleanField.FieldLabelName
     }
 
     /**

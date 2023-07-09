@@ -92,9 +92,9 @@ export abstract class Container extends Field {
      *
      * @returns {HTMLElement} html element object
      */
-    public drawContentWithContainer (field: Field): HTMLElement {
-        const container = (field as Container).drawContainer()
-        container.append(field.draw())
+    public drawContentWithContainer (): HTMLElement {
+        const container = this.drawContainer()
+        container.append(this.draw())
 
         return container
     }

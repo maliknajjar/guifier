@@ -1,5 +1,0 @@
-class Dialogue {
-    constructor(parameters) {
-        
-    }
-}

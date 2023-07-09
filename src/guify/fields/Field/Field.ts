@@ -1,6 +1,6 @@
 import './fieldStyle.css'
 
-import type { Property } from '../../types'
+import type { Parameters, Property } from '../../types'
 import type { Data } from '../../classes/Data'
 
 export abstract class Field {
@@ -9,7 +9,11 @@ export abstract class Field {
      * This is the property of the current field. a property is a part that
      * represents the field in the data object that has all the data
      */
-    protected property: Property
+    public property: Property
+    /**
+     * This is the params of the guify object. here you can find all the configurations of the user
+     */
+    protected params: Parameters
     /**
      * This is the keyName of the current field. if the field is an object property
      * it will have a string key and if its an array key its going to have a number key
@@ -25,9 +29,10 @@ export abstract class Field {
      */
     public isCollapsible = false
 
-    public abstract FieldLabelName: string
+    public abstract getFieldLabelName (): string
 
-    constructor (property: Property, data: Data) {
+    constructor (property: Property, data: Data, params: Parameters) {
+        this.params = params
         this.property = property
         this.data = data
         this.keyName = property._key

@@ -1,6 +1,6 @@
 import clone from 'clone'
 
-import type { Property, AnyObject } from '../types'
+import type { Property, AnyObject, Parameters } from '../types'
 
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
@@ -17,6 +17,7 @@ import last from 'lodash/last'
 export class Data {
     public rawData: any
     public parsedData: Property = defaultProperty
+    public params: Parameters
     private readonly path: Array<number | string> = []
 
     // this object is used to assign default field type to a property
@@ -32,7 +33,10 @@ export class Data {
         NaN: 'null'
     }
 
-    constructor (data: string, dataType: DataType) {
+    constructor (data: string, dataType: DataType, params: Parameters) {
+        // add guify params
+        this.params = params
+
         // converting data types string into a js object
         this.rawData = Data.deserializeData(data, dataType)
 
@@ -44,10 +48,20 @@ export class Data {
     }
 
     /**
-     * This method returns the parsed data object
+     * This method returns the data
      */
-    public getParsedData (): any {
-        return this.parsedData
+    public getData (): any {
+        const exportedData: any = {}
+        for (const [obj, path] of this.iterateOverProperties()) {
+            // skipping the root element
+            if (path.length === 1) {
+                continue
+            }
+            const objectPath = Data.convertPathArrayToStringPathFormat(path, false)
+            set(exportedData, objectPath, obj._value)
+        }
+
+        return exportedData
     }
 
     /**
@@ -57,8 +71,10 @@ export class Data {
      * @param {DataType} dataType is the data type
      * @returns {AnyObject} javascript object
      */
-    private static deserializeData (data: string, datatype: DataType): AnyObject {
+    private static deserializeData (data: any, datatype: DataType): AnyObject {
         switch (datatype) {
+            case DataType.Js:
+                return data
             case DataType.Json:
                 try {
                     return JSON.parse(data)
@@ -279,25 +295,26 @@ export class Data {
     }
 
     /**
-     * This method converts this.path array into a js string path thats usable with lodash
+     * This method converts this._path array into a js string path thats usable with lodash
+     * @param {boolean} forParsedData is boolean that will make the function generate a path for data that has meta data in it
      */
-    private static convertPathArrayToStringPathFormat (propertyPath: Array<number | string>): string {
+    private static convertPathArrayToStringPathFormat (propertyPath: Array<number | string>, forParsedData = true): string {
         let returnedString: string = ''
         for (let index = 0; index < propertyPath.length; index++) {
             const element = propertyPath[index]
             if (getType(element) === PrimitiveTypes.String) {
                 if (index === 0) {
-                    returnedString += `${element}._value`
+                    returnedString += `${element}${forParsedData ? '._value' : ''}`
                 } else if (index === propertyPath.length - 1) {
                     returnedString += `.${element}`
                 } else {
-                    returnedString += `.${element}._value`
+                    returnedString += `.${element}${forParsedData ? '._value' : ''}`
                 }
             } else if (getType(element) === PrimitiveTypes.Number) {
                 if (index === propertyPath.length - 1) {
                     returnedString += `[${element}]`
                 } else {
-                    returnedString += `[${element}]._value`
+                    returnedString += `[${element}]${forParsedData ? '._value' : ''}`
                 }
             }
         }

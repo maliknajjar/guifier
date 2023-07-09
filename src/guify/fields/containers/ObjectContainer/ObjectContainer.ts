@@ -1,6 +1,6 @@
 import './objectContainerStyle.css'
 
-import type { Property } from '../../../types'
+import type { Parameters, Property } from '../../../types'
 import type { Data } from '../../../classes/Data'
 import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 import type { Field } from '../../Field/Field'
@@ -16,10 +16,10 @@ import { PrimitiveTypes } from '../../../enums'
  * Represents peroperty of type object
  */
 export class ObjectContainer extends Container {
-    public FieldLabelName: string = 'Object'
+    public static FieldLabelName: string = 'Object'
 
-    constructor (property: Property, data: Data) {
-        super(property, data)
+    constructor (property: Property, data: Data, params: Parameters) {
+        super(property, data, params)
         this.validateParams()
         this.validateRules()
     }
@@ -36,6 +36,13 @@ export class ObjectContainer extends Container {
      */
     protected validateRules (): void {
 
+    }
+
+    /**
+     * This function validates the _rules of the property object
+     */
+    public getFieldLabelName (): string {
+        return ObjectContainer.FieldLabelName
     }
 
     /**
@@ -75,13 +82,11 @@ export class ObjectContainer extends Container {
      * This function is responsible for drawing a property of the object
      */
     protected drawProperty (property: Property): HTMLElement {
-        console.log('FFFFFFFFFFFFFFFFFF')
-        console.log(property)
-        const field = getFieldInstance(property, this.data)
+        const field = getFieldInstance(property, this.data, this.params)
         let propertyElement
         if (field.isCollapsible) {
             field.showSecondaryColors = !this.showSecondaryColors
-            const container = (field as Container).drawContentWithContainer(field)
+            const container = (field as Container).drawContentWithContainer()
             const containerHeaderButtons = container.children[0].children[1] as HTMLElement
             ObjectContainer.addingEventListenerForHeaderButtons(containerHeaderButtons, this, field as ObjectContainer | ArrayContainer)
             propertyElement = container
@@ -181,9 +186,8 @@ export class ObjectContainer extends Container {
                         })
                         break
                     case 'add':
-                        console.log(button)
                         button.addEventListener('click', () => {
-                            if (childContainer.FieldLabelName === 'Object') {
+                            if (childContainer.getFieldLabelName() === 'Object') {
                                 const container = (childContainer as ObjectContainer)
                                 const propertyExample: Property = {
                                     _path: [...container.property._path, container.containerLength],
@@ -195,7 +199,7 @@ export class ObjectContainer extends Container {
                                     _params: undefined
                                 }
                                 container.addProperty(propertyExample)
-                            } else if (childContainer.FieldLabelName === 'Array') {
+                            } else if (childContainer.getFieldLabelName() === 'Array') {
                                 const container = (childContainer as ArrayContainer)
                                 const propertyExample: Property = {
                                     _path: [...container.property._path, container.containerLength],
@@ -236,9 +240,7 @@ export class ObjectContainer extends Container {
     /**
      * This function is responsible for adding a property in an object container
      */
-    protected addProperty (property: Property): void {
-        console.log('we will add a property in this object')
-        console.log(property)
+    public addProperty (property: Property): void {
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''
         }

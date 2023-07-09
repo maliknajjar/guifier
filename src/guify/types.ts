@@ -2,6 +2,8 @@ import type * as z from 'zod'
 
 import { PrimitiveTypes } from './enums'
 import type { ParameterSchema } from './schemas'
+import type { Data } from './classes/Data'
+import type { Field } from './fields/Field/Field'
 
 /**
  * Represents a javascript object with any structure
@@ -16,6 +18,7 @@ export type AnyObject = Record<any, any>
  * @property {DataType} dataType is the type of the passed data.
  */
 export type Parameters = z.infer<typeof ParameterSchema>
+// TODO: create default Parameters object. will be used to complete the missing properties
 
 /**
  * Represents the guify property contents
@@ -37,4 +40,13 @@ export const defaultProperty: Property = {
     _fieldType: 'null',
     _rules: undefined,
     _params: undefined
+}
+
+/**
+ * Represents the FieldsMetaData object
+ */
+export type FieldsMetaData = Record<string, FieldMetaData>
+export interface FieldMetaData {
+    labelName: string
+    getInstantiatedObject: (property: Property, data: Data, params: Parameters) => Field
 }

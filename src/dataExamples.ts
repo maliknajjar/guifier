@@ -1,3 +1,23 @@
+export const exampleData = `{
+  "string": "Hello, world!",
+  "number": 42,
+  "boolean": true,
+  "array": [1, 2, 3],
+  "object": {
+    "nestedString": "I am nested!",
+    "nestedNumber": 3.14,
+    "nestedBoolean": false,
+    "nestedArray": ["apple", "banana", "orange"],
+    "nestedObject": {
+      "deeplyNestedString": "I am deeply nested!",
+      "deeplyNestedNumber": 2.71828,
+      "deeplyNestedBoolean": true,
+      "deeplyNestedArray": [true, false, true],
+      "deeplyNestedObject": {}
+    }
+  }
+}`
+
 // export const exampleData = `[
 //     5555,
 //     5555,
@@ -25,115 +45,115 @@
 //     ]
 // ]`
 
-export const exampleData = `{
-    "emptyObject": {},
-    "emptyArray": [],
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "isMarried": false,
-    "childrean": null,
-    "address": {
-        "_rules": [{
-                "rule": "PROPERTY_COUNT_LIMIT",
-                "params": {
-                    "limit": 5
-                }
-            },
-            {
-                "rule": "ALLOWED_PROPERTY_TYPES",
-                "params": {
-                    "types": ["string", "number"]
-                }
-            }
-        ],
-        "_value": {
-            "street": "123 Main St",
-            "city": "Anytown",
-            "state": "CA",
-            "zip": "12345",
-            "id": {
-                "name": "wowowowowow"
-            }
-        }
-    },
-    "orders": [
-        5555,
-        "test strin",
-        true,
-        [],
-        [
-            5555,
-            5555,
-            5555,
-            5555,
-            5555,
-            5555,
-            5555,
-            5555,
-            5555,
-            {
-                "name": "malik"
-            }
-        ],
-        {
-            "id": 456,
-            "order_date": "2022-02-15T14:30:00.000Z",
-            "items": [{
-                    "id": 1,
-                    "name": "Widget",
-                    "price": 10.99,
-                    "quantity": 2
-                },
-                {
-                    "id": 2,
-                    "name": "Gizmo",
-                    "price": 7.99,
-                    "quantity": 1
-                },
-                {
-                    "id": 2,
-                    "name": "Gizmo",
-                    "price": 7.99,
-                    "quantity": 1
-                },
-                {
-                    "id": 2,
-                    "name": "Gizmo",
-                    "price": 7.99,
-                    "quantity": 1
-                },
-                {
-                    "id": 2,
-                    "name": "Gizmo",
-                    "price": 7.99,
-                    "quantity": 1
-                },
-                {
-                    "id": 2,
-                    "name": "Gizmo",
-                    "price": 7.99,
-                    "quantity": 1
-                },
-                {
-                    "id": 2,
-                    "name": "Gizmo",
-                    "price": 7.99,
-                    "quantity": 1
-                }
-            ]
-        },
-        {
-            "id": 789,
-            "order_date": "2022-02-18T10:15:00.000Z",
-            "items": [{
-                "id": 3,
-                "name": "Thingamajig",
-                "price": 19.99,
-                "quantity": 3
-            }]
-        }
-    ]
-}`
+// export const exampleData = `{
+//     "emptyObject": {},
+//     "emptyArray": [],
+//     "name": "John Doe",
+//     "email": "john.doe@example.com",
+//     "isMarried": false,
+//     "childrean": null,
+//     "address": {
+//         "_rules": [{
+//                 "rule": "PROPERTY_COUNT_LIMIT",
+//                 "params": {
+//                     "limit": 5
+//                 }
+//             },
+//             {
+//                 "rule": "ALLOWED_PROPERTY_TYPES",
+//                 "params": {
+//                     "types": ["string", "number"]
+//                 }
+//             }
+//         ],
+//         "_value": {
+//             "street": "123 Main St",
+//             "city": "Anytown",
+//             "state": "CA",
+//             "zip": "12345",
+//             "id": {
+//                 "name": "wowowowowow"
+//             }
+//         }
+//     },
+//     "orders": [
+//         5555,
+//         "test strin",
+//         true,
+//         [],
+//         [
+//             5555,
+//             5555,
+//             5555,
+//             5555,
+//             5555,
+//             5555,
+//             5555,
+//             5555,
+//             5555,
+//             {
+//                 "name": "malik"
+//             }
+//         ],
+//         {
+//             "id": 456,
+//             "order_date": "2022-02-15T14:30:00.000Z",
+//             "items": [{
+//                     "id": 1,
+//                     "name": "Widget",
+//                     "price": 10.99,
+//                     "quantity": 2
+//                 },
+//                 {
+//                     "id": 2,
+//                     "name": "Gizmo",
+//                     "price": 7.99,
+//                     "quantity": 1
+//                 },
+//                 {
+//                     "id": 2,
+//                     "name": "Gizmo",
+//                     "price": 7.99,
+//                     "quantity": 1
+//                 },
+//                 {
+//                     "id": 2,
+//                     "name": "Gizmo",
+//                     "price": 7.99,
+//                     "quantity": 1
+//                 },
+//                 {
+//                     "id": 2,
+//                     "name": "Gizmo",
+//                     "price": 7.99,
+//                     "quantity": 1
+//                 },
+//                 {
+//                     "id": 2,
+//                     "name": "Gizmo",
+//                     "price": 7.99,
+//                     "quantity": 1
+//                 },
+//                 {
+//                     "id": 2,
+//                     "name": "Gizmo",
+//                     "price": 7.99,
+//                     "quantity": 1
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 789,
+//             "order_date": "2022-02-18T10:15:00.000Z",
+//             "items": [{
+//                 "id": 3,
+//                 "name": "Thingamajig",
+//                 "price": 19.99,
+//                 "quantity": 3
+//             }]
+//         }
+//     ]
+// }`
 
 // export const exampleData = `{
 //     "id": {
