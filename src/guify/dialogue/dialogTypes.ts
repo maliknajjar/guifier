@@ -1,3 +1,4 @@
-export interface dialogParameters {
+export interface DialogParameters {
     elementId: string
+    dialogTitle: string
 }

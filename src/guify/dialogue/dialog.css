@@ -13,6 +13,7 @@
 .guifyDialogContainer {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 60%;
     width: 70%;
     background-color: white;
@@ -31,45 +32,42 @@
     gap: 5px;
 }
 
-.guifyDialogBackIcon {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    padding-left: 15px;
-    height: 100%;
-    left: 0;
-    color: grey;
-    cursor: pointer;
-    transition: 150ms;
-}
-
-.guifyDialogBackIcon:hover {
-    color: black;
-}
-
 .guifyDialogContainerBody {
-    padding: 25px;
     overflow: auto;
-}
-
-.guifyGridFieldContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
     flex: 1;
-    gap: 25px;
 }
 
-.guifyDialogContainerBodyElement {
+.guifyDialogFooter {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: var(--primary-border-radius);
-    border: 2px solid #cdd0de80;
-    cursor: pointer;
-    transition: 150ms;
-    aspect-ratio: 1.5;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.guifyDialogContainerBodyElement:hover {
-    border: 2px solid #CDD0DE;
+.guifyDialogButton {
+    padding: 12.5px 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.guifyDialogCancelButton {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+}
+
+.guifyDialogCancelButton:hover {
+    background-color: #eeeff3;
+}
+
+.guifyDialogConfirmButton {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.guifyDialogConfirmButton:hover {
+    background-color: #366fff;
 }

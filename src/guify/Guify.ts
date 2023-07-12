@@ -21,7 +21,7 @@ export class Guify {
         this.params = params
 
         // validating Guify params
-        ParameterSchema.parse(this.params)
+        this.params = ParameterSchema.parse(this.params)
 
         // checking if the main element exist
         this.checkIfMainElementExist()

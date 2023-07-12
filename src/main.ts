@@ -6,28 +6,15 @@ import { exampleData } from './dataExamples'
 
 import './style.css'
 
-const params: Parameters = {
-    elementId: 'app',
-    data: exampleData,
-    dataType: DataType.Json
+async function init (): Promise<void> {
+    const params: Parameters = {
+        elementId: 'app',
+        data: exampleData,
+        dataType: DataType.Json
+    }
+
+    const guify = new Guify(params)
+    guify.drawGeneratedHtmlElement()
 }
 
-const guify = new Guify(params)
-guify.drawGeneratedHtmlElement()
-
-console.log(guify.getData())
-
-const dialogParams = {
-    elementId: params.elementId
-}
-const dialogueData = {
-    'Field Name': 'name',
-    'Field Value': 'value',
-    'Field Type': 'text'
-}
-const dialog = new Dialog(dialogParams)
-dialog.setDialogData(dialogueData)
-
-// document.addEventListener('click', () => {
-//     console.log(guify.getData())
-// })
+init()
