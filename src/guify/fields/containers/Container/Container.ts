@@ -10,6 +10,11 @@ export abstract class Container extends Field {
     public isCollapsible = true
 
     /**
+     * this property sets the space an object will take in a grid
+     */
+    public gridSpace = 2
+
+    /**
      * this property tells if the current field is a big field like object, array or a rich text field
      */
     public containerLength: number = 0
@@ -69,6 +74,7 @@ export abstract class Container extends Field {
         const container = document.createElement('div')
         container.classList.add('guifyContainer')
         container.classList.add('guifyObjectFieldContainer')
+        container.style.gridColumn = `span ${this.gridSpace}`
         if (this.showSecondaryColors) {
             container.classList.add('guifySecondaryBgColor')
         } else {

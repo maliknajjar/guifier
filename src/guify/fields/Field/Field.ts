@@ -5,25 +5,36 @@ import type { Data } from '../../classes/Data'
 
 export abstract class Field {
     protected data: Data
+
     /**
      * This is the property of the current field. a property is a part that
      * represents the field in the data object that has all the data
      */
     public property: Property
+
     /**
      * This is the params of the guify object. here you can find all the configurations of the user
      */
     protected params: Parameters
+
     /**
      * This is the keyName of the current field. if the field is an object property
      * it will have a string key and if its an array key its going to have a number key
      */
     public keyName: string | number
+
     /**
      * every field has two colors theme to make them more visible when they are nested
      * this property decides which color theme to use
      */
     public showSecondaryColors: boolean = false
+
+    /**
+     * this property sets the space an object will take in a grid
+     * set this variable to 2 in order to make the field take all the space of the grid
+     */
+    public gridSpace = 1
+
     /**
      * this property tells if the current field is a big field (if it requires more than 45px height) like object, array or a rich text field
      */
