@@ -2,6 +2,9 @@ import './fieldStyle.css'
 
 import type { Parameters, Property } from '../../types'
 import type { Data } from '../../classes/Data'
+import type { FieldLocalParamInternal } from './types'
+
+import { fieldLocalParameterSchema } from './types'
 
 export abstract class Field {
     protected data: Data
@@ -30,10 +33,9 @@ export abstract class Field {
     public showSecondaryColors: boolean = false
 
     /**
-     * this property sets the space an object will take in a grid
-     * set this variable to 2 in order to make the field take all the space of the grid
+     * The localParam property is the this.property._params
      */
-    public gridSpace = 1
+    public localParam: FieldLocalParamInternal
 
     /**
      * this property tells if the current field is a big field (if it requires more than 45px height) like object, array or a rich text field
@@ -47,6 +49,12 @@ export abstract class Field {
         this.property = property
         this.data = data
         this.keyName = property._key
+
+        // setting the _param property
+        if (this.property._params === undefined) {
+            this.property._params = {}
+        }
+        this.localParam = fieldLocalParameterSchema.parse(this.property._params)
     }
 
     /**

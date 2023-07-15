@@ -1,5 +1,10 @@
 export const exampleData = `{
-  "string": "Hello, world!",
+  "string": {
+    "_params": {
+      "fullWidth": true
+    },
+    "_value": "Hello, world!"
+  },
   "number": 42,
   "boolean": true,
   "array": [1, 2, 3],

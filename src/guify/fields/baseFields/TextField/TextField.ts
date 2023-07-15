@@ -1,9 +1,17 @@
 import './textFieldStyle.css'
 
+import type { TextFieldLocalParamInternal } from './types'
+
 import { Field } from '../../Field/Field'
+import { textFieldLocalParamSchema } from './types'
 
 export class TextField extends Field {
     public static FieldLabelName: string = 'Text'
+
+    /**
+     * The localParam property is the this.property._params of this field
+     */
+    public localParam: TextFieldLocalParamInternal = textFieldLocalParamSchema.parse(this.property._params)
 
     /**
      * This function validates the _params of the property object

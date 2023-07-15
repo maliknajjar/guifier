@@ -94,7 +94,11 @@ export class ObjectContainer extends Container {
         } else {
             const guifyObjectFieldContainer = document.createElement('div')
             guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
-            guifyObjectFieldContainer.style.gridColumn = `span ${field.gridSpace}`
+            if (field.localParam.fullWidth) {
+                guifyObjectFieldContainer.style.gridColumn = 'span 2'
+            } else {
+                guifyObjectFieldContainer.style.gridColumn = 'span 1'
+            }
 
             const labelContainer = document.createElement('div')
             labelContainer.classList.add('guifyObjectLabelContainer')
