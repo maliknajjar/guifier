@@ -94,10 +94,17 @@ export class ObjectContainer extends Container {
         } else {
             const guifyObjectFieldContainer = document.createElement('div')
             guifyObjectFieldContainer.classList.add('guifyObjectFieldContainer')
+
+            // draw the field in full width if the user specified that in the _params
             if (field.localParam.fullWidth) {
                 guifyObjectFieldContainer.style.gridColumn = 'span 2'
             } else {
                 guifyObjectFieldContainer.style.gridColumn = 'span 1'
+            }
+
+            // draw the field in full width if the user specified that
+            if (this.params.expandFieldsToFullWidth) {
+                guifyObjectFieldContainer.style.gridColumn = 'span 2'
             }
 
             const labelContainer = document.createElement('div')

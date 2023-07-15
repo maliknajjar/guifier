@@ -9,7 +9,8 @@ async function init (): Promise<void> {
     const params: Parameters = {
         elementId: 'app',
         data: exampleData,
-        dataType: DataType.Json
+        dataType: DataType.Json,
+        expandFieldsToFullWidth: true
     }
 
     const guify = new Guify(params)

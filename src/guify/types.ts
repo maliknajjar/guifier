@@ -14,12 +14,14 @@ export const ParameterSchema = z.object({
     data: z.any(),
     dataType: z.nativeEnum(DataType),
     withoutContainer: z.boolean().optional().default(false),
-    flipBackgroundColors: z.boolean().optional().default(false)
+    flipBackgroundColors: z.boolean().optional().default(false),
+    expandFieldsToFullWidth: z.boolean().optional().default(false)
 })
 /**
  * Represents the object that gets passed to the instantiated Guify object
  */
 export type Parameters = z.input<typeof ParameterSchema>
+export type ParametersInternal = z.infer<typeof ParameterSchema>
 
 /**
  * Represents the guify property contents

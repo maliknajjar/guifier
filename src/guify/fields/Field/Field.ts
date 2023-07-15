@@ -1,6 +1,6 @@
 import './fieldStyle.css'
 
-import type { Parameters, Property } from '../../types'
+import type { ParametersInternal, Property } from '../../types'
 import type { Data } from '../../classes/Data'
 import type { FieldLocalParamInternal } from './types'
 
@@ -18,7 +18,7 @@ export abstract class Field {
     /**
      * This is the params of the guify object. here you can find all the configurations of the user
      */
-    protected params: Parameters
+    protected params: ParametersInternal
 
     /**
      * This is the keyName of the current field. if the field is an object property
@@ -44,7 +44,7 @@ export abstract class Field {
 
     public abstract getFieldLabelName (): string
 
-    constructor (property: Property, data: Data, params: Parameters) {
+    constructor (property: Property, data: Data, params: ParametersInternal) {
         this.params = params
         this.property = property
         this.data = data
