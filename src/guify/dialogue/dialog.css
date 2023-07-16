@@ -42,7 +42,7 @@
     justify-content: space-evenly;
     gap: 20px;
     padding: 15px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: var(--primary-border);
 }
 
 .guifyDialogButton {
