@@ -5,7 +5,9 @@
 }
 
 .guifyCard {
+    box-sizing: content-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: var(--primary-border);
@@ -19,6 +21,10 @@
 
 .guifyCard:hover {
     border-color: grey;
+}
+
+.cardIconElement .material-icons-outlined {
+    font-size: 40px !important;
 }
 
 .guifySelectedCard {

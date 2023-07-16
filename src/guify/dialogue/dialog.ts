@@ -187,7 +187,8 @@ export class Dialog {
             dataType: DataType.Js,
             withoutContainer: true,
             flipBackgroundColors: true,
-            expandFieldsToFullWidth: true
+            expandFieldsToFullWidth: true,
+            readOnlyMode: true
         }
         this.guify = new Guify(params)
         const generatedHtmlFromData = this.guify.getGeneratedHtmlElement()

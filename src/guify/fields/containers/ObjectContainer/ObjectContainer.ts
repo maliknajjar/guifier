@@ -25,6 +25,11 @@ export class ObjectContainer extends Container {
     public static fieldLabelName: string = 'Object'
 
     /**
+     * this is the icon thats shown for users
+     */
+    public static fieldIcon: string = 'data_object'
+
+    /**
      * This function validates the _params of the property object
      */
     protected validateParams (): void {
@@ -158,6 +163,9 @@ export class ObjectContainer extends Container {
         // creating the container
         const fieldButtons = document.createElement('div')
         fieldButtons.classList.add('fieldButtons')
+        if (this.params.readOnlyMode) {
+            fieldButtons.style.display = 'none'
+        }
 
         // creating the buttons
         const minusButton = drawOutlineIcon('edit')

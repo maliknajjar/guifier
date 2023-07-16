@@ -11,6 +11,11 @@ export class BooleanField extends Field {
     public static fieldLabelName: string = 'Boolean'
 
     /**
+     * this is the icon thats shown for users
+     */
+    public static fieldIcon: string = 'check_box'
+
+    /**
      * This function validates the _params of the property object
      */
     protected validateParams (): void {

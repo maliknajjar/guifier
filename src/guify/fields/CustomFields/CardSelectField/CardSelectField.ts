@@ -3,6 +3,7 @@ import './style.css'
 import { localParamSchema, type LocalParamInternal, type CardSchemaInternal } from './types'
 
 import { Field } from '../../Field/Field'
+import { drawOutlineIcon } from '../../../utils'
 
 export class CardSelectField extends Field {
     /**
@@ -61,11 +62,22 @@ export class CardSelectField extends Field {
             const card = this.localParam.cards[index]
             const cardElement = document.createElement('div')
             cardElement.classList.add('guifyCard')
-            cardElement.innerHTML = card.text
             cardElement.addEventListener('click', () => {
                 this.cardClickHandler(cardElement, mainElement, card)
             })
             mainElement.append(cardElement)
+
+            // drawing the icon of the card
+            const cardIconElement = document.createElement('div')
+            cardIconElement.classList.add('cardIconElement')
+            cardIconElement.append(drawOutlineIcon(card.icon))
+            cardElement.append(cardIconElement)
+
+            // drawing the text of the card
+            const cardTextElement = document.createElement('div')
+            cardTextElement.classList.add('cardTextElement')
+            cardTextElement.innerHTML = card.text
+            cardElement.append(cardTextElement)
 
             // selecting the first card by default
             if (index === 0) {

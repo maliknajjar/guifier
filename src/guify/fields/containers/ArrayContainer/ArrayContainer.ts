@@ -24,6 +24,12 @@ export class ArrayContainer extends Container {
     public static fieldName: string = 'array'
 
     public static fieldLabelName: string = 'Array'
+
+    /**
+     * this is the icon thats shown for users
+     */
+    public static fieldIcon: string = 'data_array'
+
     public numberOfLevels: number = 0
     public contentBody: HTMLElement = document.createElement('div')
 
@@ -169,6 +175,9 @@ export class ArrayContainer extends Container {
      */
     private drawArrayFieldDeleteButton (): HTMLElement {
         const deleteButton = this.drawDeleteButton()
+        if (this.params.readOnlyMode) {
+            deleteButton.style.display = 'none'
+        }
         deleteButton.classList.add('guifyArrayFieldDeleteButton')
 
         deleteButton.addEventListener('click', () => {

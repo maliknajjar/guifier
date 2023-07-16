@@ -12,6 +12,11 @@ export class NumberField extends Field {
     public static fieldLabelName: string = 'Number'
 
     /**
+     * this is the icon thats shown for users
+     */
+    public static fieldIcon: string = 'numbers'
+
+    /**
      * this property is an interval handler used to simulate
      * keeping pressing on the plus or minus buttons
      */

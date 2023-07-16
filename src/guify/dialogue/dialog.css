@@ -54,7 +54,7 @@
 }
 
 .guifyDialogCancelButton {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: var(--primary-border);
     background-color: var(--primary-bg-color);
     color: var(--primary-text-color);
 }

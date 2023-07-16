@@ -11,7 +11,15 @@ export class TextField extends Field {
      */
     public static fieldName: string = 'text'
 
+    /**
+     * this is shown name to the user
+     */
     public static fieldLabelName: string = 'Text'
+
+    /**
+     * this is the icon thats shown for users
+     */
+    public static fieldIcon: string = 'title'
 
     /**
      * The localParam property is the this.property._params of this field

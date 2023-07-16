@@ -149,8 +149,10 @@ export abstract class Container extends Field {
         const guifyContainerHeaderButtons = document.createElement('div')
         guifyContainerHeaderButtons.classList.add('guifyContainerHeaderButtons')
 
-        if (!this.containerInFirstLevel()) guifyContainerHeaderButtons.append(this.drawDeleteButton())
-        guifyContainerHeaderButtons.append(this.drawAddButton())
+        if (!this.params.readOnlyMode) {
+            if (!this.containerInFirstLevel()) guifyContainerHeaderButtons.append(this.drawDeleteButton())
+            guifyContainerHeaderButtons.append(this.drawAddButton())
+        }
         if (!this.containerInFirstLevel()) guifyContainerHeaderButtons.append(this.drawCollapseButton(collapseButtonDown))
 
         return guifyContainerHeaderButtons
