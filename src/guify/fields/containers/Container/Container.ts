@@ -1,5 +1,8 @@
 import './Container.css'
 
+import type { ObjectContainer } from '../ObjectContainer/ObjectContainer'
+import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
+
 import { Field } from '../../../fields/Field/Field'
 import { drawOutlineIcon } from '../../../utils'
 
@@ -46,21 +49,40 @@ export abstract class Container extends Field {
         const emptyContentContianer = document.createElement('div')
         emptyContentContianer.classList.add('guifyEmptyContentContianer')
 
+        // drawing wrapper on the content of the emptyContentContianer
+        const emptyContentContianerWrapper = document.createElement('div')
+        emptyContentContianerWrapper.classList.add('emptyContentContianerWrapper')
+        emptyContentContianer.append(emptyContentContianerWrapper)
+
+
         const mainMessage = document.createElement('h2')
         mainMessage.classList.add('guifyEmptyTitle')
         mainMessage.append(`No ${pluralText}`)
-        emptyContentContianer.append(mainMessage)
+        emptyContentContianerWrapper.append(mainMessage)
 
         const paragraph = document.createElement('p')
         paragraph.classList.add('guifyEmptyParagraph')
         paragraph.append(`You don’t have any ${pluralText} yet. Click the button below to add one.`)
-        emptyContentContianer.append(paragraph)
+        emptyContentContianerWrapper.append(paragraph)
 
         const addELementButton = document.createElement('div')
         addELementButton.classList.add('guifyEmptyButton')
         addELementButton.append(`Add ${singularText}`)
         addELementButton.append(this.drawAddButton())
-        emptyContentContianer.append(addELementButton)
+        addELementButton.addEventListener('click', (): void => {
+            Promise.resolve().then(async () => {
+                if (!forArrayContainer) {
+                    const container = (this as unknown as ObjectContainer)
+                    await container.letUserAddProperty()
+                } else {
+                    const container = (this as unknown as ArrayContainer)
+                    await container.letUserAddElement()
+                }
+            }).catch((error) => {
+                console.error(error)
+            })
+        })
+        emptyContentContianerWrapper.append(addELementButton)
 
         return emptyContentContianer
     }

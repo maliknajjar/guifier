@@ -80,6 +80,8 @@ export class ArrayContainer extends Container {
             }
         } else {
             guifyArrayContainerbody.append(this.drawEmptyContent(true))
+            const guifyEmptyContentContianer = guifyArrayContainerbody.querySelector('.guifyEmptyContentContianer')
+            guifyEmptyContentContianer?.prepend(this.drawArrayLevels(this.numberOfLevels - 1))
         }
 
         this.contentBody = guifyArrayContainerbody
@@ -294,18 +296,15 @@ export class ArrayContainer extends Container {
                         break
                     case 'add':
                         button.addEventListener('click', () => {
-                            const propertyExample: Property = {
-                                _path: [...childContainer.property._path, childContainer.containerLength],
-                                _key: childContainer.containerLength,
-                                _valueType: PrimitiveTypes.String,
-                                _value: 'nothing man',
-                                _fieldType: 'text'
-                            }
-                            if (childContainer.getFieldLabelName() === 'Object') {
-                                (childContainer as ObjectContainer).addProperty(propertyExample)
-                            } else if (childContainer.getFieldLabelName() === 'Array') {
-                                (childContainer as ArrayContainer).addElement(propertyExample)
-                            }
+                            Promise.resolve().then(async () => {
+                                if (childContainer.getFieldLabelName() === 'Object') {
+                                    await (childContainer as ObjectContainer).letUserAddProperty()
+                                } else if (childContainer.getFieldLabelName() === 'Array') {
+                                    await (childContainer as ArrayContainer).letUserAddElement()
+                                }
+                            }).catch((error) => {
+                                console.error(error)
+                            })
                         })
                         break
                     default:
@@ -346,7 +345,7 @@ export class ArrayContainer extends Container {
     /**
      * This function lets the user add an element by showing a prompt to him
      */
-    public async letUserAddAnElement (container: ArrayContainer): Promise<void> {
+    public async letUserAddElement (): Promise<void> {
         const cards: CardSchemaInternal[] = []
         for (const key in fieldsMetaData) {
             const element = fieldsMetaData[key]
@@ -368,7 +367,7 @@ export class ArrayContainer extends Container {
             }
         }
         const dialogParams = {
-            elementId: container.params.elementId,
+            elementId: this.params.elementId,
             dialogTitle: 'New Field'
         }
         const data = await Dialog.get(dialogData, dialogParams)
@@ -377,15 +376,15 @@ export class ArrayContainer extends Container {
         // adding the element
         if (data !== null) {
             const propertyExample: Property = {
-                _path: [...container.property._path, container.containerLength],
-                _key: container.containerLength,
+                _path: [...this.property._path, this.containerLength],
+                _key: this.containerLength,
                 _valueType: PrimitiveTypes.String,
                 _value: '',
                 _fieldType: data['Field Type'],
                 _rules: undefined,
                 _params: undefined
             }
-            container.addElement(propertyExample)
+            this.addElement(propertyExample)
         }
     }
 

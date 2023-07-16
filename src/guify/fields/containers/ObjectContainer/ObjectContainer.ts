@@ -4,9 +4,10 @@ import type { Parameters, Property } from '../../../types'
 import type { Data } from '../../../classes/Data'
 import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 import type { Field } from '../../Field/Field'
+import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
-import { drawOutlineIcon, getFieldInstance } from '../../../utils'
+import { drawOutlineIcon, fieldsMetaData, getFieldInstance } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
@@ -211,19 +212,10 @@ export class ObjectContainer extends Container {
                             Promise.resolve().then(async () => {
                                 if (childContainer.getFieldLabelName() === 'Object') {
                                     const container = (childContainer as ObjectContainer)
-                                    const propertyExample: Property = {
-                                        _path: [...container.property._path, container.containerLength],
-                                        _key: container.containerLength,
-                                        _valueType: PrimitiveTypes.String,
-                                        _value: [],
-                                        _fieldType: 'array',
-                                        _rules: undefined,
-                                        _params: undefined
-                                    }
-                                    container.addProperty(propertyExample)
+                                    await container.letUserAddProperty()
                                 } else if (childContainer.getFieldLabelName() === 'Array') {
                                     const container = (childContainer as ArrayContainer)
-                                    await container.letUserAddAnElement(container)
+                                    await container.letUserAddElement()
                                 }
                             }).catch((error) => {
                                 console.error(error)
@@ -262,5 +254,52 @@ export class ObjectContainer extends Container {
         }
         this.contentBody.append(this.drawProperty(property))
         this.containerLength++
+    }
+
+    /**
+     * This function lets the user add a property to an object container by showing a prompt to him
+     */
+    public async letUserAddProperty (): Promise<void> {
+        const cards: CardSchemaInternal[] = []
+        for (const key in fieldsMetaData) {
+            const element = fieldsMetaData[key]
+            if (element.staticObject.isBaseField) {
+                cards.push({
+                    icon: element.staticObject.fieldIcon,
+                    text: element.staticObject.fieldLabelName,
+                    value: element.staticObject.fieldName
+                })
+            }
+        }
+        const dialogData = {
+            'Field Name': '',
+            'Field Type': {
+                _fieldType: 'cardSelect',
+                _params: {
+                    cards
+                },
+                _value: 'wowowo'
+            }
+        }
+        const dialogParams = {
+            elementId: this.params.elementId,
+            dialogTitle: 'New Field'
+        }
+        const data = await Dialog.get(dialogData, dialogParams)
+        console.log(data)
+
+        // adding the element
+        if (data !== null) {
+            const propertyExample: Property = {
+                _path: [...this.property._path, data['Field Name']],
+                _key: data['Field Name'],
+                _valueType: PrimitiveTypes.String,
+                _value: '',
+                _fieldType: data['Field Type'],
+                _rules: undefined,
+                _params: undefined
+            }
+            this.addProperty(propertyExample)
+        }
     }
 }

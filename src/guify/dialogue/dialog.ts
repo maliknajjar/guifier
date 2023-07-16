@@ -74,6 +74,8 @@ export class Dialog {
         this.showDialog()
         return await new Promise((resolve) => {
             this.confirmButton.addEventListener('click', () => {
+                // TODO: prevent hiding and returning the data if the user didnt
+                // fill all the data in the dialog
                 resolve(this.guify.getData())
                 this.hideDialog()
             })

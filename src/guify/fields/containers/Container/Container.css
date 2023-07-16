@@ -47,16 +47,20 @@
 /* empty content for empty containers css rules */
 .guifyEmptyContentContianer {
     display: flex;
+    flex-direction: row;
+    grid-column: span 2;
+}
+
+.emptyContentContianerWrapper {
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0px var(--primary-padding);
     grid-column: span 2;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
 
-.guifyArrayContainerbody .guifyEmptyContentContianer {
-    padding: var(--primary-padding) var(--primary-padding);
+.guifyArrayContainerbody .emptyContentContianerWrapper {
+    padding: var(--primary-padding-double);
 }
 
 .guifyEmptyTitle {

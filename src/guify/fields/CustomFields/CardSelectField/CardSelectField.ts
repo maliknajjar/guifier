@@ -78,11 +78,6 @@ export class CardSelectField extends Field {
             cardTextElement.classList.add('cardTextElement')
             cardTextElement.innerHTML = card.text
             cardElement.append(cardTextElement)
-
-            // selecting the first card by default
-            if (index === 0) {
-                this.selectCard(cardElement, mainElement, card)
-            }
         }
 
         return mainElement

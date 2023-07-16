@@ -8,6 +8,7 @@
     bottom: 0;
     width: 100%;
     height: 100%;
+    z-index: 1000;
 }
 
 .guifyDialogContainer {
@@ -46,6 +47,9 @@
 }
 
 .guifyDialogButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 12.5px 35px;
     border-radius: 10px;
     cursor: pointer;
