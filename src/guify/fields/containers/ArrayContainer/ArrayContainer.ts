@@ -11,6 +11,7 @@ import { getFieldInstance, isOdd } from '../../../utils'
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
 import { PrimitiveTypes } from '../../../enums'
+import { Dialog } from '../../../dialogue/dialog'
 
 /**
  * Represents peroperty of type array
@@ -289,9 +290,7 @@ export class ArrayContainer extends Container {
                                 _key: childContainer.containerLength,
                                 _valueType: PrimitiveTypes.String,
                                 _value: 'nothing man',
-                                _fieldType: 'text',
-                                _rules: undefined,
-                                _params: undefined
+                                _fieldType: 'text'
                             }
                             if (childContainer.getFieldLabelName() === 'Object') {
                                 (childContainer as ObjectContainer).addProperty(propertyExample)
@@ -332,6 +331,35 @@ export class ArrayContainer extends Container {
         this.containerLength--
         if (this.containerLength === 0) {
             this.contentBody.append(this.drawEmptyContent())
+        }
+    }
+
+    /**
+     * This function lets the user add an element by showing a prompt to him
+     */
+    public async letUserAddAnElement (container: ArrayContainer): Promise<void> {
+        const dialogData = {
+            'Field Type': {
+                _fieldType: 'cardSelect',
+                _value: 'wowowo'
+            }
+        }
+        const dialogParams = {
+            elementId: container.params.elementId,
+            dialogTitle: 'New Field'
+        }
+        const data = await Dialog.get(dialogData, dialogParams)
+        if (data !== null) {
+            const propertyExample: Property = {
+                _path: [...container.property._path, container.containerLength],
+                _key: container.containerLength,
+                _valueType: PrimitiveTypes.String,
+                _value: '',
+                _fieldType: data['Field Type'],
+                _rules: undefined,
+                _params: undefined
+            }
+            container.addElement(propertyExample)
         }
     }
 

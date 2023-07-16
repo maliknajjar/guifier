@@ -216,36 +216,11 @@ export class ObjectContainer extends Container {
                                     container.addProperty(propertyExample)
                                 } else if (childContainer.getFieldLabelName() === 'Array') {
                                     const container = (childContainer as ArrayContainer)
-
-                                    // getting the data from the user
-                                    // TODO: create a new field type contains cards a user can select
-                                    // TODO: add two dialogs to simulate two pages and add the ability to change buttons names
-                                    // TODO: create a static method here that returns the data for the creation insteaf of adding everything here
-                                    const dialogData = {
-                                        'Field Value': '',
-                                        'Field Type': 'text'
-                                    }
-                                    const dialogParams = {
-                                        elementId: parentObjectContainer.params.elementId,
-                                        dialogTitle: 'new field Man'
-                                    }
-                                    const data = await Dialog.get(dialogData, dialogParams)
-
-                                    const propertyExample: Property = {
-                                        _path: [...container.property._path, container.containerLength],
-                                        _key: container.containerLength,
-                                        _valueType: PrimitiveTypes.String,
-                                        _value: data['Field Value'],
-                                        _fieldType: data['Field Type'],
-                                        _rules: undefined,
-                                        _params: undefined
-                                    }
-                                    container.addElement(propertyExample)
+                                    await container.letUserAddAnElement(container)
                                 }
                             }).catch((error) => {
                                 console.error(error)
                             })
-                            // return Promise.resolve();
                         })
                         break
                     default:

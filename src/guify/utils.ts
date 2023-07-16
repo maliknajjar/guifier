@@ -1,6 +1,6 @@
 import 'material-icons/iconfont/outlined.css'
 
-import type { AnyObject, Property, FieldsMetaData, Parameters } from './types'
+import type { AnyObject, Property, FieldsMetaData, ParametersInternal } from './types'
 import type { Field } from './fields/Field/Field'
 import type { Data } from './classes/Data'
 
@@ -13,6 +13,7 @@ import { TextField } from './fields/baseFields/TextField/TextField'
 import { NumberField } from './fields/baseFields/NumberField/NumberField'
 import { BooleanField } from './fields/baseFields/BooleanField/BooleanField'
 import { NullField } from './fields/baseFields/NullField/NullField'
+import { CardSelectField } from './fields/CustomFields/CardSelectField/CardSelectField'
 
 /**
  * A function that tells you wether a number is odd or even
@@ -102,38 +103,44 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
 export const fieldsMetaData: FieldsMetaData = {
     text: {
         labelName: TextField.FieldLabelName,
-        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new TextField(property, data, params)
         }
     },
     number: {
         labelName: NumberField.FieldLabelName,
-        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new NumberField(property, data, params)
         }
     },
     boolean: {
         labelName: BooleanField.FieldLabelName,
-        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new BooleanField(property, data, params)
         }
     },
     null: {
         labelName: NullField.FieldLabelName,
-        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new NullField(property, data, params)
         }
     },
     object: {
         labelName: ObjectContainer.FieldLabelName,
-        getInstantiatedObject: (property: Property, data: Data, params: Parameters): Field => {
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal): Field => {
             return new ObjectContainer(property, data, params)
         }
     },
     array: {
         labelName: ArrayContainer.FieldLabelName,
-        getInstantiatedObject: (property: Property, data: Data, params: Parameters) => {
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new ArrayContainer(property, data, params)
+        }
+    },
+    cardSelect: {
+        labelName: CardSelectField.FieldLabelName,
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
+            return new CardSelectField(property, data, params)
         }
     }
 }
@@ -144,8 +151,11 @@ export const fieldsMetaData: FieldsMetaData = {
  * @param {Property} property is the object you want to check if its empty
  * @returns {Field} instance of the Field
  */
-export function getFieldInstance (property: Property, data: Data, params: Parameters): Field {
-    return fieldsMetaData[property._fieldType].getInstantiatedObject(property, data, params)
+export function getFieldInstance (property: Property, data: Data, params: ParametersInternal): Field {
+    if (property._fieldType !== undefined) {
+        return fieldsMetaData[property._fieldType].getInstantiatedObject(property, data, params)
+    }
+    throw new Error('property._fieldType is undefined')
 }
 
 /**

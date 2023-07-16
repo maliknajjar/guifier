@@ -31,16 +31,16 @@ export interface Property {
     _key: string | number
     _valueType: PrimitiveTypes
     _value: any
-    _fieldType: string
+    _fieldType?: string
     _rules?: string[] | AnyObject[]
-    _params?: AnyObject
+    _params?: any
 }
 export const defaultProperty: Property = {
     _path: [],
-    _key: 'null',
+    _key: '',
     _valueType: PrimitiveTypes.String,
-    _value: 'null',
-    _fieldType: 'null'
+    _value: '',
+    _fieldType: undefined
 }
 
 /**
@@ -49,5 +49,5 @@ export const defaultProperty: Property = {
 export type FieldsMetaData = Record<string, FieldMetaData>
 export interface FieldMetaData {
     labelName: string
-    getInstantiatedObject: (property: Property, data: Data, params: Parameters) => Field
+    getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => Field
 }

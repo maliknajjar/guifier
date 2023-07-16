@@ -1,5 +1,6 @@
 .guifyNumberInputContainer {
     position: relative;
+    flex: 1;
 }
 
 .guifyNumberField {

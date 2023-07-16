@@ -72,7 +72,7 @@ export class Dialog {
         this.guifyGeneratedContent = this.drawGuifyGeneratedContent(data)
         this.dialogContainerBody.append(this.guifyGeneratedContent)
         this.showDialog()
-        return await new Promise((resolve, reject) => {
+        return await new Promise((resolve) => {
             this.confirmButton.addEventListener('click', () => {
                 resolve(this.guify.getData())
                 this.hideDialog()
@@ -186,7 +186,8 @@ export class Dialog {
             data,
             dataType: DataType.Js,
             withoutContainer: true,
-            flipBackgroundColors: true
+            flipBackgroundColors: true,
+            expandFieldsToFullWidth: true
         }
         this.guify = new Guify(params)
         const generatedHtmlFromData = this.guify.getGeneratedHtmlElement()
@@ -209,8 +210,7 @@ export class Dialog {
      * This function will show a dialog and return its data
      *
      * @param {any} data is the data you want the user to set in the dialog
-     * @param {string} title is the title of the dialag
-     * @param {string} elementId is the element where you want to show the dialog
+     * @param {DialogParameters} params is the parameter of the dialog
      * @returns the data of click on confirm or returns null if clicked on cancel
      */
     public static async get (data: any, params: DialogParameters): Promise<any | null> {

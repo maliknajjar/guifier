@@ -131,7 +131,10 @@ export class Data {
                 field._value[key] = this.addMetaDataRecursively(field._value[key], key, true)
             }
         } else {
+            console.log('FFFFFFFFFFFFFFFFFFFFF')
+            console.log(field)
             field = Data.addRequiredMetaDataToProperties(field, updatedKey, this.path)
+            console.log(field)
         }
 
         // to set the path
@@ -190,7 +193,11 @@ export class Data {
         }
 
         // assigning the field type based on the value type
-        returnedObject._fieldType = this.valueTypesToFieldTypes[returnedObject._valueType]
+        if (field._fieldType === undefined) {
+            returnedObject._fieldType = this.valueTypesToFieldTypes[returnedObject._valueType]
+        } else {
+            returnedObject._fieldType = field._fieldType
+        }
 
         return returnedObject
     }

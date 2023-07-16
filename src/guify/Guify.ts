@@ -1,6 +1,6 @@
 import { Data } from './classes/Data'
 import { View } from './classes/View'
-import { ParameterSchema } from './schemas'
+import { ParameterSchema } from './types'
 
 import type { Parameters } from './types'
 
