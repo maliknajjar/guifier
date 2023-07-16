@@ -6,6 +6,11 @@ import { Field } from '../../Field/Field'
 import { textFieldLocalParamSchema } from './types'
 
 export class TextField extends Field {
+    /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'text'
+
     public static fieldLabelName: string = 'Text'
 
     /**

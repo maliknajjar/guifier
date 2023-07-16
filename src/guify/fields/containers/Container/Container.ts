@@ -5,6 +5,16 @@ import { drawOutlineIcon } from '../../../utils'
 
 export abstract class Container extends Field {
     /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'container'
+
+    /**
+     * this is the label name thats shown for users
+     */
+    public static fieldLabelName: string = 'Container'
+
+    /**
      * this property tells if the current field is a big field like object, array or a rich text field
      */
     public isCollapsible = true

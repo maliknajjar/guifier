@@ -17,6 +17,11 @@ import { Dialog } from '../../../dialogue/dialog'
  * Represents peroperty of type object
  */
 export class ObjectContainer extends Container {
+    /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'object'
+
     public static fieldLabelName: string = 'Object'
 
     /**

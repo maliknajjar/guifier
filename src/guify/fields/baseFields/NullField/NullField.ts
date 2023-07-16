@@ -4,6 +4,11 @@ import { Field } from '../../Field/Field'
 import { drawOutlineIcon } from '../../../utils'
 
 export class NullField extends Field {
+    /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'null'
+
     public static fieldLabelName: string = 'Null'
 
     /**

@@ -10,6 +10,18 @@
     align-items: center;
     border: var(--primary-border);
     border-radius: var(--primary-border-radius);
-    padding: 10px;
+    padding: 15px;
     height: 75px;
+    cursor: pointer;
+    transition: 150ms;
+    outline: 3px solid transparent;
+}
+
+.guifyCard:hover {
+    border-color: grey;
+}
+
+.guifySelectedCard {
+    border-color: var(--primary-color) !important;
+    outline: 3px solid var(--primary-lighter-color);
 }

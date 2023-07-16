@@ -8,6 +8,11 @@ import { fieldLocalParameterSchema } from './types'
 
 export abstract class Field {
     /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'field'
+
+    /**
      * this is the label name thats shown for users
      */
     public static fieldLabelName: string = 'Field'

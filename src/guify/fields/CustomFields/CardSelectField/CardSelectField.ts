@@ -1,10 +1,15 @@
 import './style.css'
 
-import { localParamSchema, type LocalParamInternal } from './types'
+import { localParamSchema, type LocalParamInternal, type CardSchemaInternal } from './types'
 
 import { Field } from '../../Field/Field'
 
 export class CardSelectField extends Field {
+    /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'cardSelect'
+
     /**
      * this is the label name thats shown for users
      */
@@ -48,8 +53,8 @@ export class CardSelectField extends Field {
      */
     public draw (): HTMLElement {
         // drawing the card's container
-        const mainELement = document.createElement('div')
-        mainELement.classList.add('guifyCardsContainer')
+        const mainElement = document.createElement('div')
+        mainElement.classList.add('guifyCardsContainer')
 
         // drawing cards
         for (let index = 0; index < this.localParam.cards.length; index++) {
@@ -57,9 +62,42 @@ export class CardSelectField extends Field {
             const cardElement = document.createElement('div')
             cardElement.classList.add('guifyCard')
             cardElement.innerHTML = card.text
-            mainELement.append(cardElement)
+            cardElement.addEventListener('click', () => {
+                this.cardClickHandler(cardElement, mainElement, card)
+            })
+            mainElement.append(cardElement)
+
+            // selecting the first card by default
+            if (index === 0) {
+                this.selectCard(cardElement, mainElement, card)
+            }
         }
 
-        return mainELement
+        return mainElement
+    }
+
+    /**
+     * this function is responsible for handling the click on the cards
+     */
+    private cardClickHandler (cardElement: HTMLElement, mainElement: HTMLElement, card: CardSchemaInternal): void {
+        this.selectCard(cardElement, mainElement, card)
+    }
+
+    /**
+     * this function is responsible for selecting one of the cards
+     */
+    private selectCard (cardElement: HTMLElement, mainElement: HTMLElement, card: CardSchemaInternal): void {
+        // remove the selected border color from all cards
+        const cards = mainElement.querySelectorAll('.guifyCard')
+        for (let index = 0; index < cards.length; index++) {
+            const card = cards[index]
+            card.classList.remove('guifySelectedCard')
+        }
+
+        // add the selected border color to the clicked card
+        cardElement.classList.add('guifySelectedCard')
+
+        // set the value
+        this.setValue(card.value)
     }
 }

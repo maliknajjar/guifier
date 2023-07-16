@@ -4,6 +4,7 @@ import type { Parameters, Property } from '../../../types'
 import type { Field } from '../../../fields/Field/Field'
 import type { ObjectContainer } from '../../../fields/containers/ObjectContainer/ObjectContainer'
 import type { Data } from '../../../classes/Data'
+import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
 import { fieldsMetaData, getFieldInstance, isOdd } from '../../../utils'
@@ -17,6 +18,11 @@ import { Dialog } from '../../../dialogue/dialog'
  * Represents peroperty of type array
  */
 export class ArrayContainer extends Container {
+    /**
+     * this is name of the field internaly
+     */
+    public static fieldName: string = 'array'
+
     public static fieldLabelName: string = 'Array'
     public numberOfLevels: number = 0
     public contentBody: HTMLElement = document.createElement('div')
@@ -332,13 +338,14 @@ export class ArrayContainer extends Container {
      * This function lets the user add an element by showing a prompt to him
      */
     public async letUserAddAnElement (container: ArrayContainer): Promise<void> {
-        const cards = []
+        const cards: CardSchemaInternal[] = []
         for (const key in fieldsMetaData) {
             const element = fieldsMetaData[key]
             if (element.staticObject.isBaseField) {
                 cards.push({
                     icon: element.staticObject.fieldIcon,
-                    text: element.staticObject.fieldLabelName
+                    text: element.staticObject.fieldLabelName,
+                    value: element.staticObject.fieldName
                 })
             }
         }
@@ -356,6 +363,7 @@ export class ArrayContainer extends Container {
             dialogTitle: 'New Field'
         }
         const data = await Dialog.get(dialogData, dialogParams)
+        console.log(data)
 
         // adding the element
         if (data !== null) {
