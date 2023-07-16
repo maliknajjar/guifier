@@ -6,7 +6,7 @@ import { Field } from '../../Field/Field'
 import { textFieldLocalParamSchema } from './types'
 
 export class TextField extends Field {
-    public static FieldLabelName: string = 'Text'
+    public static fieldLabelName: string = 'Text'
 
     /**
      * The localParam property is the this.property._params of this field
@@ -31,7 +31,7 @@ export class TextField extends Field {
      * This function validates the _rules of the property object
      */
     public getFieldLabelName (): string {
-        return TextField.FieldLabelName
+        return TextField.fieldLabelName
     }
 
     /**

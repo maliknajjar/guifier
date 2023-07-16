@@ -4,7 +4,7 @@ import { Field } from '../../Field/Field'
 import { drawOutlineIcon } from '../../../utils'
 
 export class NumberField extends Field {
-    public static FieldLabelName: string = 'Number'
+    public static fieldLabelName: string = 'Number'
 
     /**
      * this property is an interval handler used to simulate
@@ -30,7 +30,7 @@ export class NumberField extends Field {
      * This function validates the _rules of the property object
      */
     public getFieldLabelName (): string {
-        return NumberField.FieldLabelName
+        return NumberField.fieldLabelName
     }
 
     /**

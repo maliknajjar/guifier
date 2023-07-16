@@ -17,13 +17,7 @@ import { Dialog } from '../../../dialogue/dialog'
  * Represents peroperty of type object
  */
 export class ObjectContainer extends Container {
-    public static FieldLabelName: string = 'Object'
-
-    constructor (property: Property, data: Data, params: Parameters) {
-        super(property, data, params)
-        this.validateParams()
-        this.validateRules()
-    }
+    public static fieldLabelName: string = 'Object'
 
     /**
      * This function validates the _params of the property object
@@ -43,7 +37,7 @@ export class ObjectContainer extends Container {
      * This function validates the _rules of the property object
      */
     public getFieldLabelName (): string {
-        return ObjectContainer.FieldLabelName
+        return ObjectContainer.fieldLabelName
     }
 
     /**

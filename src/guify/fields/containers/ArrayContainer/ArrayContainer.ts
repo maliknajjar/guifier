@@ -6,7 +6,7 @@ import type { ObjectContainer } from '../../../fields/containers/ObjectContainer
 import type { Data } from '../../../classes/Data'
 
 import { Container } from '../Container/Container'
-import { getFieldInstance, isOdd } from '../../../utils'
+import { fieldsMetaData, getFieldInstance, isOdd } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
@@ -17,15 +17,9 @@ import { Dialog } from '../../../dialogue/dialog'
  * Represents peroperty of type array
  */
 export class ArrayContainer extends Container {
-    public static FieldLabelName: string = 'Array'
+    public static fieldLabelName: string = 'Array'
     public numberOfLevels: number = 0
     public contentBody: HTMLElement = document.createElement('div')
-
-    constructor (property: Property, data: Data, params: Parameters) {
-        super(property, data, params)
-        this.validateParams()
-        this.validateRules()
-    }
 
     /**
      * This function validates the _params of the property array
@@ -45,7 +39,7 @@ export class ArrayContainer extends Container {
      * This function validates the _rules of the property object
      */
     public getFieldLabelName (): string {
-        return ArrayContainer.FieldLabelName
+        return ArrayContainer.fieldLabelName
     }
 
     /**
@@ -338,9 +332,22 @@ export class ArrayContainer extends Container {
      * This function lets the user add an element by showing a prompt to him
      */
     public async letUserAddAnElement (container: ArrayContainer): Promise<void> {
+        const cards = []
+        for (const key in fieldsMetaData) {
+            const element = fieldsMetaData[key]
+            if (element.staticObject.isBaseField) {
+                cards.push({
+                    icon: element.staticObject.fieldIcon,
+                    text: element.staticObject.fieldLabelName
+                })
+            }
+        }
         const dialogData = {
             'Field Type': {
                 _fieldType: 'cardSelect',
+                _params: {
+                    cards
+                },
                 _value: 'wowowo'
             }
         }
@@ -349,6 +356,8 @@ export class ArrayContainer extends Container {
             dialogTitle: 'New Field'
         }
         const data = await Dialog.get(dialogData, dialogParams)
+
+        // adding the element
         if (data !== null) {
             const propertyExample: Property = {
                 _path: [...container.property._path, container.containerLength],

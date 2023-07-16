@@ -48,6 +48,6 @@ export const defaultProperty: Property = {
  */
 export type FieldsMetaData = Record<string, FieldMetaData>
 export interface FieldMetaData {
-    labelName: string
+    staticObject: typeof Field
     getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => Field
 }

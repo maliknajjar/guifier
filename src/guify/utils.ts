@@ -102,43 +102,43 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
  */
 export const fieldsMetaData: FieldsMetaData = {
     text: {
-        labelName: TextField.FieldLabelName,
+        staticObject: TextField,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new TextField(property, data, params)
         }
     },
     number: {
-        labelName: NumberField.FieldLabelName,
+        staticObject: NumberField,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new NumberField(property, data, params)
         }
     },
     boolean: {
-        labelName: BooleanField.FieldLabelName,
+        staticObject: BooleanField,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new BooleanField(property, data, params)
         }
     },
     null: {
-        labelName: NullField.FieldLabelName,
+        staticObject: NullField,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new NullField(property, data, params)
         }
     },
     object: {
-        labelName: ObjectContainer.FieldLabelName,
+        staticObject: ObjectContainer,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal): Field => {
             return new ObjectContainer(property, data, params)
         }
     },
     array: {
-        labelName: ArrayContainer.FieldLabelName,
+        staticObject: ArrayContainer,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new ArrayContainer(property, data, params)
         }
     },
     cardSelect: {
-        labelName: CardSelectField.FieldLabelName,
+        staticObject: CardSelectField,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new CardSelectField(property, data, params)
         }

@@ -1,0 +1,15 @@
+.guifyCardsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.guifyCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: var(--primary-border);
+    border-radius: var(--primary-border-radius);
+    padding: 10px;
+    height: 75px;
+}

@@ -7,6 +7,24 @@ import type { FieldLocalParamInternal } from './types'
 import { fieldLocalParameterSchema } from './types'
 
 export abstract class Field {
+    /**
+     * this is the label name thats shown for users
+     */
+    public static fieldLabelName: string = 'Field'
+
+    /**
+     * this is the icon thats shown for users
+     */
+    public static fieldIcon: string = ''
+
+    /**
+     * this the flag that determens if the field is Base or a CustomField
+     */
+    public static isBaseField = true
+
+    /**
+     * this is a refrance of the Data object
+     */
     protected data: Data
 
     /**
