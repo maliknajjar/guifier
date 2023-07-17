@@ -170,7 +170,17 @@ export class ObjectContainer extends Container {
 
         // creating the buttons
         const minusButton = drawOutlineIcon('edit')
-        fieldButtons.append(minusButton)
+        minusButton.addEventListener('click', () => {
+            Promise.resolve().then(async () => {
+                await this.letUserEditProperty(field.keyName)
+            }).catch((error) => {
+                console.error(error)
+            })
+        })
+        // TODO: hide the edit button for now.
+        // but in the future this will be responsible editing the
+        // field name, parameters and the rules of the field
+        // fieldButtons.append(minusButton)
 
         const deleteButton = drawOutlineIcon('delete')
         deleteButton.addEventListener('click', () => {
@@ -284,6 +294,35 @@ export class ObjectContainer extends Container {
         const dialogParams = {
             elementId: this.params.elementId,
             dialogTitle: 'New Field'
+        }
+        const data = await Dialog.get(dialogData, dialogParams)
+        console.log(data)
+
+        // adding the element
+        if (data !== null) {
+            const propertyExample: Property = {
+                _path: [...this.property._path, data['Field Name']],
+                _key: data['Field Name'],
+                _valueType: PrimitiveTypes.String,
+                _value: '',
+                _fieldType: data['Field Type'],
+                _rules: undefined,
+                _params: undefined
+            }
+            this.addProperty(propertyExample)
+        }
+    }
+
+    /**
+     * This function lets the user edits an property
+     */
+    public async letUserEditProperty (fieldName: string): Promise<void> {
+        const dialogData = {
+            'Field Name': fieldName
+        }
+        const dialogParams = {
+            elementId: this.params.elementId,
+            dialogTitle: 'Edit Field'
         }
         const data = await Dialog.get(dialogData, dialogParams)
         console.log(data)

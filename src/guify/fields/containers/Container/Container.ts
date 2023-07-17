@@ -54,7 +54,6 @@ export abstract class Container extends Field {
         emptyContentContianerWrapper.classList.add('emptyContentContianerWrapper')
         emptyContentContianer.append(emptyContentContianerWrapper)
 
-
         const mainMessage = document.createElement('h2')
         mainMessage.classList.add('guifyEmptyTitle')
         mainMessage.append(`No ${pluralText}`)
@@ -190,7 +189,7 @@ export abstract class Container extends Field {
         hoveredOnElement.addEventListener('mouseenter', () => {
             if (containerHeaderButtons !== undefined) {
                 const buttons = rightToLeft ? Array.from(containerHeaderButtons.children) : Array.from(containerHeaderButtons.children).reverse() as HTMLElement[]
-                const timeDifference = 100
+                const timeDifference = 50
                 clearTimeout(timeOut)
                 buttons.forEach((button, index) => {
                     if (button.innerHTML === 'expand_less') {
