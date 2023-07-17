@@ -6,6 +6,7 @@ import type { DialogParameters } from './dialogTypes'
 import { drawOutlineIcon, fieldsMetaData } from '../utils'
 import { DataType } from '../enums'
 import { Guify } from '../Guify'
+import { isEmpty } from 'lodash'
 
 export class Dialog {
     /**
@@ -74,9 +75,16 @@ export class Dialog {
         this.showDialog()
         return await new Promise((resolve) => {
             this.confirmButton.addEventListener('click', () => {
-                // TODO: prevent hiding and returning the data if the user didnt
-                // fill all the data in the dialog
-                resolve(this.guify.getData())
+                const data = this.guify?.getData()
+                for (const key in data) {
+                    const value = data[key]
+                    if (isEmpty(value)) {
+                        console.log(key + ' is empty')
+                        alert('Please ensure that all required fields have been completed.')
+                        return
+                    }
+                }
+                resolve(data)
                 this.hideDialog()
             })
             this.cancelButton.addEventListener('click', () => {

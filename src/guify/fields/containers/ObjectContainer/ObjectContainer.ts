@@ -278,7 +278,7 @@ export class ObjectContainer extends Container {
                 _params: {
                     cards
                 },
-                _value: 'wowowo'
+                _value: ''
             }
         }
         const dialogParams = {

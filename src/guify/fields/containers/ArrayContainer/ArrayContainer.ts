@@ -363,7 +363,7 @@ export class ArrayContainer extends Container {
                 _params: {
                     cards
                 },
-                _value: 'wowowo'
+                _value: ''
             }
         }
         const dialogParams = {
@@ -371,7 +371,6 @@ export class ArrayContainer extends Container {
             dialogTitle: 'New Field'
         }
         const data = await Dialog.get(dialogData, dialogParams)
-        console.log(data)
 
         // adding the element
         if (data !== null) {
