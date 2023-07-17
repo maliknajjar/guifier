@@ -295,7 +295,7 @@ export class ObjectContainer extends Container {
             elementId: this.params.elementId,
             dialogTitle: 'New Field'
         }
-        const data = await Dialog.get(dialogData, dialogParams)
+        const data = await Dialog.get(dialogData, dialogParams) // TODO: the problem of the container not wanting to show anything is from here
         console.log(data)
 
         // adding the element

@@ -1,6 +1,8 @@
 import type { Data } from './Data'
-import type { Parameters } from '../types'
+import type { ParametersInternal } from '../types'
 import type { Container } from '../fields/containers/Container/Container'
+import type { ObjectContainer } from '../fields/containers/ObjectContainer/ObjectContainer'
+import type { ArrayContainer } from '../fields/containers/ArrayContainer/ArrayContainer'
 
 import { getFieldInstance } from '../utils'
 
@@ -9,10 +11,10 @@ import { getFieldInstance } from '../utils'
  */
 export class View {
     public data: Data
-    readonly params: Parameters
+    readonly params: ParametersInternal
     private generatedHTML: HTMLElement = document.createElement('null')
 
-    constructor (data: Data, params: Parameters) {
+    constructor (data: Data, params: ParametersInternal) {
         // add guify params
         this.params = params
 
@@ -43,6 +45,21 @@ export class View {
             containerElement = containerField.drawContentWithContainer()
         }
         guifyMainWrapper.append(containerElement)
+
+        const addButton = guifyMainWrapper.querySelector('.guifyContainerHeaderButtons')?.children[0] as HTMLElement
+        addButton.addEventListener('click', () => {
+            Promise.resolve().then(async () => {
+                if (containerField.getFieldLabelName() === 'Object') {
+                    const container = (containerField as ObjectContainer)
+                    await container.letUserAddProperty()
+                } else if (containerField.getFieldLabelName() === 'Array') {
+                    const container = (containerField as ArrayContainer)
+                    await container.letUserAddElement()
+                }
+            }).catch((error) => {
+                console.error(error)
+            })
+        })
 
         // TODO: add event listener for the header buttons from an object Container function here
         // TODO: its better to create a specific static method for root object whether its an array or an object
