@@ -1,6 +1,6 @@
 import './dialog.css'
 
-import type { Parameters } from '../types'
+import type { ParametersInternal } from '../types'
 import type { DialogParameters } from './dialogTypes'
 
 import { drawOutlineIcon } from '../utils'
@@ -70,7 +70,7 @@ export class Dialog {
      */
     public async get (data: any): Promise<any | null> {
         this.data = data
-        this.guifyGeneratedContent = this.drawGuifyGeneratedContent(data)
+        this.guifyGeneratedContent = this.drawGuifyGeneratedContent(this.data)
         this.dialogContainerBody.append(this.guifyGeneratedContent)
         this.showDialog()
         return await new Promise((resolve) => {
@@ -208,7 +208,7 @@ export class Dialog {
      * This function is responsible for drawing a grid element
      */
     private drawGuifyGeneratedContent (data: any): HTMLElement {
-        const params: Parameters = {
+        const params: ParametersInternal = {
             elementId: this.params.elementId,
             data,
             dataType: DataType.Js,

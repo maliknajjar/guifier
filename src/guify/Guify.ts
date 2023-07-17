@@ -2,7 +2,7 @@ import { Data } from './classes/Data'
 import { View } from './classes/View'
 import { ParameterSchema } from './types'
 
-import type { Parameters } from './types'
+import type { Parameters, ParametersInternal } from './types'
 
 import './guifyStyle.css'
 
@@ -12,16 +12,13 @@ import './guifyStyle.css'
  * @param {Parameters} params is the object that has all parameters for the Guify class.
  */
 export class Guify {
-    readonly params: Parameters
+    readonly params: ParametersInternal
     readonly data: Data
     readonly view: View
 
     constructor (params: Parameters) {
-        // setting properties
-        this.params = params
-
         // validating Guify params
-        this.params = ParameterSchema.parse(this.params)
+        this.params = ParameterSchema.parse(params)
 
         // checking if the main element exist
         this.checkIfMainElementExist()
@@ -30,7 +27,7 @@ export class Guify {
         this.data = new Data(this.params.data, this.params.dataType, params)
 
         // drawing data phase
-        this.view = new View(this.data, params)
+        this.view = new View(this.data, this.params)
     }
 
     /**

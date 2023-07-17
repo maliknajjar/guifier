@@ -1,7 +1,6 @@
 import './objectContainerStyle.css'
 
-import type { Parameters, Property } from '../../../types'
-import type { Data } from '../../../classes/Data'
+import type { Property } from '../../../types'
 import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 import type { Field } from '../../Field/Field'
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'

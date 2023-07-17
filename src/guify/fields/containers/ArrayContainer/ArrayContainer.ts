@@ -1,9 +1,8 @@
 import './arrayContainerStyle.css'
 
-import type { Parameters, Property } from '../../../types'
+import type { Property } from '../../../types'
 import type { Field } from '../../../fields/Field/Field'
 import type { ObjectContainer } from '../../../fields/containers/ObjectContainer/ObjectContainer'
-import type { Data } from '../../../classes/Data'
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
@@ -135,7 +134,7 @@ export class ArrayContainer extends Container {
         const field = getFieldInstance(property, this.data, this.params)
         let fieldElement
         if (field.isCollapsible) {
-            fieldElement = this.drawCollapsibleArrayElement(field as Container, this.containerLength)
+            fieldElement = this.drawCollapsibleArrayElement(field as Container)
             guifyArrayFieldContainer.classList.add('guifyContainerFieldType')
         } else {
             field.showSecondaryColors = this.showSecondaryColors
@@ -195,7 +194,7 @@ export class ArrayContainer extends Container {
      *
      * @returns {HTMLElement} html element object
      */
-    private drawCollapsibleArrayElement (field: Container, elementIndex: number): HTMLElement {
+    private drawCollapsibleArrayElement (field: Container): HTMLElement {
         const collapsibleElement = document.createElement('div')
         collapsibleElement.classList.add('guifyArrayCollapsibleElement')
 
