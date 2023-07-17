@@ -195,7 +195,7 @@ export class ObjectContainer extends Container {
     /**
      * This function is responsible of adding event listeners to the header buttons of an object container
      */
-    protected static addingEventListenerForHeaderButtons (containerHeaderButtons: HTMLElement, parentObjectContainer: ObjectContainer, childContainer: ObjectContainer | ArrayContainer): void {
+    public static addingEventListenerForHeaderButtons (containerHeaderButtons: HTMLElement, parentObjectContainer: ObjectContainer, childContainer: ObjectContainer | ArrayContainer): void {
         if (containerHeaderButtons !== null) {
             const buttons = Array.from(containerHeaderButtons.children)
             buttons.forEach((button) => {
