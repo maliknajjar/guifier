@@ -3,7 +3,7 @@ import './dialog.css'
 import type { Parameters } from '../types'
 import type { DialogParameters } from './dialogTypes'
 
-import { drawOutlineIcon, fieldsMetaData } from '../utils'
+import { drawOutlineIcon } from '../utils'
 import { DataType } from '../enums'
 import { Guify } from '../Guify'
 import { isEmpty } from 'lodash'
@@ -53,7 +53,7 @@ export class Dialog {
      */
     private confirmButton: HTMLElement = document.createElement('div')
 
-    constructor (dialogParameters: dialogParameters) {
+    constructor (dialogParameters: DialogParameters) {
         this.params = dialogParameters
 
         // adding the dialog to the main element
@@ -86,10 +86,16 @@ export class Dialog {
                 }
                 resolve(data)
                 this.hideDialog()
+                setTimeout(() => {
+                    this.removeDialog()
+                }, 150)
             })
             this.cancelButton.addEventListener('click', () => {
                 resolve(null)
                 this.hideDialog()
+                setTimeout(() => {
+                    this.removeDialog()
+                }, 150)
             })
         })
     }
@@ -122,6 +128,7 @@ export class Dialog {
             const element = e.target as HTMLElement
             if (element.classList.contains('guifyDialogBackgroundContainer')) {
                 this.hideDialog()
+                this.removeDialog()
             }
         })
 
@@ -132,15 +139,25 @@ export class Dialog {
      * This function is responsible for showing the dialog
      */
     private showDialog (): void {
-        this.dialogElement.classList.remove('guifyNoneDisplay')
+        console.log('wwowowoow')
+        setTimeout(() => {
+            this.dialogElement.classList.remove('guifyOpacityZero')
+        }, 0)
     }
 
     /**
      * This function is responsible for hiding the dialog
      */
     private hideDialog (): void {
-        this.dialogElement.classList.add('guifyNoneDisplay')
+        this.dialogElement.classList.add('guifyOpacityZero')
         this.clearGuifyGeneratedContent()
+    }
+
+    /**
+     * This function is responsible for removing the dialog
+     */
+    private removeDialog (): void {
+        this.dialogContainerBody.parentElement?.parentElement?.remove()
     }
 
     /**

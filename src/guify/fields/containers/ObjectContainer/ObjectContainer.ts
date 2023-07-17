@@ -168,18 +168,18 @@ export class ObjectContainer extends Container {
             fieldButtons.style.display = 'none'
         }
 
-        // creating the buttons
-        const minusButton = drawOutlineIcon('edit')
-        minusButton.addEventListener('click', () => {
-            Promise.resolve().then(async () => {
-                await this.letUserEditProperty(field.keyName)
-            }).catch((error) => {
-                console.error(error)
-            })
-        })
         // TODO: hide the edit button for now.
         // but in the future this will be responsible editing the
         // field name, parameters and the rules of the field
+
+        // const editButton = drawOutlineIcon('edit')
+        // editButton.addEventListener('click', () => {
+        //     Promise.resolve().then(async () => {
+        //         await this.letUserEditProperty(field.keyName)
+        //     }).catch((error) => {
+        //         console.error(error)
+        //     })
+        // })
         // fieldButtons.append(minusButton)
 
         const deleteButton = drawOutlineIcon('delete')

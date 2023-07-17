@@ -25,9 +25,14 @@
 
 .cardIconElement .material-icons-outlined {
     font-size: 40px !important;
+    color: rgba(0, 0, 0, 0.75);
 }
 
 .guifySelectedCard {
     border-color: var(--primary-color) !important;
     outline: 3px solid var(--primary-lighter-color);
+}
+
+.cardTextElement {
+    margin-top: 10px;
 }
