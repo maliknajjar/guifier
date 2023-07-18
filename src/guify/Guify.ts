@@ -16,6 +16,7 @@ export class Guify {
     readonly params: ParametersInternal
     private data: Data
     private view: View
+    private element: HTMLElement | null = null
 
     constructor (params: Parameters) {
         // validating Guify params
@@ -40,7 +41,7 @@ export class Guify {
     public drawGeneratedHtmlElement (): void {
         const el = document.getElementById(this.params.elementId)
         if (el !== null) {
-            el.innerHTML = ''
+            this.element = el
             el.append(this.view.getGeneratedHTML())
         }
     }
@@ -84,6 +85,9 @@ export class Guify {
         this.view = new View(this.data, this.params)
 
         // pasting the drawn data to the element with the elementId
-        this.drawGeneratedHtmlElement()
+        if (this.element !== null) {
+            this.element.innerHTML = ''
+            this.drawGeneratedHtmlElement()
+        }
     }
 }
