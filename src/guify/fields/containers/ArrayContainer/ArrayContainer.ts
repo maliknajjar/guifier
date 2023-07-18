@@ -183,7 +183,7 @@ export class ArrayContainer extends Container {
 
         deleteButton.addEventListener('click', () => {
             const elementIndex = parseInt(deleteButton.parentElement?.dataset.elementIndex as string)
-            this.deleteElement(elementIndex)
+            this.removeElement(elementIndex)
         })
 
         return deleteButton
@@ -290,7 +290,7 @@ export class ArrayContainer extends Container {
                             const deleteButton = e.target as HTMLElement
                             const elementContainer = deleteButton.parentElement?.parentElement?.parentElement?.parentElement
                             const elementIndex = elementContainer?.dataset.elementIndex as string
-                            parentObjectContainer.deleteElement(parseInt(elementIndex))
+                            parentObjectContainer.removeElement(parseInt(elementIndex))
                         })
                         break
                     case 'add':
@@ -316,29 +316,38 @@ export class ArrayContainer extends Container {
     /**
      * This function is responsible for deleting an element in an array container in the ui
      */
-    private deleteElement (elementIndex: number): void {
+    private removeElement (elementIndex: number): void {
+        console.log('removing the element')
         // removing the dom
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
         if (guifyArrayFieldContainers[elementIndex].classList.contains('guifyContainerFieldType')) {
             guifyArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         }
-        guifyArrayFieldContainers[elementIndex].remove()
+        const animationMilliSeconds = 150
+        const height = guifyArrayFieldContainers[elementIndex].offsetHeight
+        guifyArrayFieldContainers[elementIndex].style.height = `${height}px`
+        guifyArrayFieldContainers[elementIndex].style.transition = `${animationMilliSeconds}ms`
+        setTimeout(() => {
+            guifyArrayFieldContainers[elementIndex].classList.add('guifyHeightZero')
+        }, 0)
+        setTimeout(() => {
+            guifyArrayFieldContainers[elementIndex].remove()
+            // remove the element from the data
+            const path = cloneDeep(this.property._path)
 
-        // remove the element from the data
-        const path = cloneDeep(this.property._path)
+            // adding the index element to the path
+            path.push(elementIndex)
+            this.data.removeProperty(path)
 
-        // adding the index element to the path
-        path.push(elementIndex)
-        this.data.removeProperty(path)
+            // redrawing the index label and the background color of the array elements in the html
+            this.resetElementsUiInArrayContainer()
 
-        // redrawing the index label and the background color of the array elements in the html
-        this.resetElementsUiInArrayContainer()
-
-        // reducing the counter
-        this.containerLength--
-        if (this.containerLength === 0) {
-            this.contentBody.append(this.drawEmptyContent())
-        }
+            // reducing the counter
+            this.containerLength--
+            if (this.containerLength === 0) {
+                this.contentBody.append(this.drawEmptyContent())
+            }
+        }, animationMilliSeconds)
     }
 
     /**

@@ -22,6 +22,10 @@
     height: 100%;
 }
 
+.guifyHeightZero {
+    height: 0 !important;
+}
+
 .guifyPrimaryBgColor {
     background-color: var(--primary-bg-color);
 }
