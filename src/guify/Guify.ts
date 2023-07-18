@@ -3,9 +3,9 @@ import { View } from './classes/View'
 import { ParameterSchema } from './types'
 
 import type { Parameters, ParametersInternal } from './types'
+import type { DataType } from './enums'
 
 import './guifyStyle.css'
-import { DataType } from './enums'
 
 /**
  * Guify class handles converting the passed data into an HTML/GUI representation
