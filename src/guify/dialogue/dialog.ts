@@ -128,7 +128,9 @@ export class Dialog {
             const element = e.target as HTMLElement
             if (element.classList.contains('guifyDialogBackgroundContainer')) {
                 this.hideDialog()
-                this.removeDialog()
+                setTimeout(() => {
+                    this.removeDialog()
+                }, 150)
             }
         })
 

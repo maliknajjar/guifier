@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    overflow-x: hidden;
 }
 
 .guifyArrayFieldContainer {
     display: flex;
     align-items: center;
-    cursor: pointer;
     transition: 0.15s;
     border-bottom: 1px solid rgba(0, 0, 0, 0.075);
     padding-right: var(--primary-padding);
@@ -71,8 +71,9 @@
     background-color: white;
     border: var(--primary-border);
     border-radius: 100%;
-    color: var(--primary-text-color);
+    color: grey;
     background-color: var(--primary-bg-color);
+    font-weight: bold;
 }
 
 .guifyArrayMainContainerbody {
@@ -118,6 +119,7 @@
     padding-left: 0px;
     transition: 300ms;
     opacity: 0;
+    cursor: pointer;
 }
 
 .guifyArrayFieldContainer:hover .guifyArrayFieldDeleteButton {
