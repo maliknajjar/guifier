@@ -5,6 +5,7 @@ import { ParameterSchema } from './types'
 import type { Parameters, ParametersInternal } from './types'
 
 import './guifyStyle.css'
+import { DataType } from './enums'
 
 /**
  * Guify class handles converting the passed data into an HTML/GUI representation
@@ -13,8 +14,8 @@ import './guifyStyle.css'
  */
 export class Guify {
     readonly params: ParametersInternal
-    readonly data: Data
-    readonly view: View
+    private data: Data
+    private view: View
 
     constructor (params: Parameters) {
         // validating Guify params
@@ -24,10 +25,13 @@ export class Guify {
         this.checkIfMainElementExist()
 
         // parsing data phase
-        this.data = new Data(this.params.data, this.params.dataType, params)
+        this.data = new Data(this.params.data, this.params.dataType, this.params)
 
-        // drawing data phase
+        // drawing internally data phase
         this.view = new View(this.data, this.params)
+
+        // pasting the drawn data to the element with the elementId
+        this.drawGeneratedHtmlElement()
     }
 
     /**
@@ -35,7 +39,10 @@ export class Guify {
      */
     public drawGeneratedHtmlElement (): void {
         const el = document.getElementById(this.params.elementId)
-        el?.append(this.view.getGeneratedHTML())
+        if (el !== null) {
+            el.innerHTML = ''
+            el.append(this.view.getGeneratedHTML())
+        }
     }
 
     /**
@@ -57,10 +64,26 @@ export class Guify {
 
     /**
      * This method gets the current state of the data from the GUI
-     * TODO: by default it should return the data wihtout the meta data
-     * TODO: you should create a parameter to enable you to return the data with the meta data too
      */
     public getData (): any {
         return this.data.getData()
+    }
+
+    /**
+     * This method sets the data. you can use it to change the data shown in the Guify element
+     */
+    public setData (data: any, dataType: DataType): void {
+        // updating the params
+        this.params.data = data
+        this.params.dataType = dataType
+
+        // parsing data phase
+        this.data = new Data(data, dataType, this.params)
+
+        // drawing data phase
+        this.view = new View(this.data, this.params)
+
+        // pasting the drawn data to the element with the elementId
+        this.drawGeneratedHtmlElement()
     }
 }

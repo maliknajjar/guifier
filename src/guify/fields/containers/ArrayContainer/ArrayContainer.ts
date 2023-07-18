@@ -402,7 +402,8 @@ export class ArrayContainer extends Container {
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''
         }
-        this.contentBody.append(this.drawElement(property))
+        const element = this.drawElement(property)
+        this.contentBody.append(element)
         this.containerLength++
     }
 

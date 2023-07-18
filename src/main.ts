@@ -13,7 +13,11 @@ async function init (): Promise<void> {
     }
 
     const guify = new Guify(params)
-    guify.drawGeneratedHtmlElement()
+
+    document.addEventListener('click', () => {
+        console.log('wowowoow')
+        guify.setData([121, 6565, 112], DataType.Js)
+    })
 }
 
 void init()
