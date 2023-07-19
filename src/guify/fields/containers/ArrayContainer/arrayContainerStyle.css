@@ -11,7 +11,7 @@
     transition: 0.15s;
     border-bottom: 1px solid rgba(0, 0, 0, 0.075);
     padding-right: var(--primary-padding);
-    overflow: hidden;
+    opacity: 1;
 }
 
 .guifyArrayfieldInnerContainer {

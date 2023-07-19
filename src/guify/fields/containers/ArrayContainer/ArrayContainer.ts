@@ -329,6 +329,7 @@ export class ArrayContainer extends Container {
         guifyArrayFieldContainers[elementIndex].style.transition = `${animationMilliSeconds}ms`
         setTimeout(() => {
             guifyArrayFieldContainers[elementIndex].classList.add('guifyHeightZero')
+            guifyArrayFieldContainers[elementIndex].classList.add('guifyOpacityZero')
         }, 0)
         setTimeout(() => {
             guifyArrayFieldContainers[elementIndex].remove()
