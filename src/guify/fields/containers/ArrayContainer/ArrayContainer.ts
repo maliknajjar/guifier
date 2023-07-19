@@ -345,7 +345,7 @@ export class ArrayContainer extends Container {
             // reducing the counter
             this.containerLength--
             if (this.containerLength === 0) {
-                this.contentBody.append(this.drawEmptyContent())
+                this.contentBody.append(this.drawEmptyContent(true))
             }
         }, animationMilliSeconds)
 

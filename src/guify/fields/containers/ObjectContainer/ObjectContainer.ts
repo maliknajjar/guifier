@@ -75,7 +75,7 @@ export class ObjectContainer extends Container {
                 guifyObjectContainerbody.append(propertyElement)
             }
         } else {
-            guifyObjectContainerbody.append(this.drawEmptyContent())
+            guifyObjectContainerbody.append(this.drawEmptyContent(false))
         }
 
         this.contentBody = guifyObjectContainerbody
@@ -250,7 +250,7 @@ export class ObjectContainer extends Container {
         // reducing the counter
         this.containerLength--
         if (this.containerLength === 0) {
-            this.contentBody.append(this.drawEmptyContent())
+            this.contentBody.append(this.drawEmptyContent(false))
         }
 
         if (this.params.onChange !== undefined) {
