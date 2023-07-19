@@ -70,7 +70,7 @@ export abstract class Container extends Field {
         addELementButton.append(this.drawAddButton())
         addELementButton.addEventListener('click', (): void => {
             Promise.resolve().then(async () => {
-                if (!forArrayContainer) {
+                if (forArrayContainer) {
                     const container = (this as unknown as ObjectContainer)
                     await container.letUserAddProperty()
                 } else {

@@ -16,7 +16,8 @@ export const ParameterSchema = z.object({
     withoutContainer: z.boolean().optional().default(false),
     flipBackgroundColors: z.boolean().optional().default(false),
     expandFieldsToFullWidth: z.boolean().optional().default(false),
-    readOnlyMode: z.boolean().optional().default(false)
+    readOnlyMode: z.boolean().optional().default(false),
+    onChange: z.function().optional()
 })
 /**
  * Represents the object that gets passed to the instantiated Guify object

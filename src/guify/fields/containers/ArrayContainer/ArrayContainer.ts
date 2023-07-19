@@ -317,7 +317,6 @@ export class ArrayContainer extends Container {
      * This function is responsible for deleting an element in an array container in the ui
      */
     private removeElement (elementIndex: number): void {
-        console.log('removing the element')
         // removing the dom
         const guifyArrayFieldContainers = this.getArrayFieldContainers()
         if (guifyArrayFieldContainers[elementIndex].classList.contains('guifyContainerFieldType')) {
@@ -349,6 +348,10 @@ export class ArrayContainer extends Container {
                 this.contentBody.append(this.drawEmptyContent())
             }
         }, animationMilliSeconds)
+
+        if (this.params.onChange !== undefined) {
+            this.params.onChange()
+        }
     }
 
     /**
@@ -406,6 +409,10 @@ export class ArrayContainer extends Container {
         const element = this.drawElement(property)
         this.contentBody.append(element)
         this.containerLength++
+
+        if (this.params.onChange !== undefined) {
+            this.params.onChange()
+        }
     }
 
     /**

@@ -252,6 +252,10 @@ export class ObjectContainer extends Container {
         if (this.containerLength === 0) {
             this.contentBody.append(this.drawEmptyContent())
         }
+
+        if (this.params.onChange !== undefined) {
+            this.params.onChange()
+        }
     }
 
     /**
@@ -263,6 +267,10 @@ export class ObjectContainer extends Container {
         }
         this.contentBody.append(this.drawProperty(property))
         this.containerLength++
+
+        if (this.params.onChange !== undefined) {
+            this.params.onChange()
+        }
     }
 
     /**
@@ -295,36 +303,6 @@ export class ObjectContainer extends Container {
             dialogTitle: 'New Field'
         }
         const data = await Dialog.get(dialogData, dialogParams) // TODO: the problem of the container not wanting to show anything is from here
-        console.log(data)
-
-        // adding the element
-        if (data !== null) {
-            const propertyExample: Property = {
-                _path: [...this.property._path, data['Field Name']],
-                _key: data['Field Name'],
-                _valueType: PrimitiveTypes.String,
-                _value: '',
-                _fieldType: data['Field Type'],
-                _rules: undefined,
-                _params: undefined
-            }
-            this.addProperty(propertyExample)
-        }
-    }
-
-    /**
-     * This function lets the user edits an property
-     */
-    public async letUserEditProperty (fieldName: string): Promise<void> {
-        const dialogData = {
-            'Field Name': fieldName
-        }
-        const dialogParams = {
-            elementId: this.params.elementId,
-            dialogTitle: 'Edit Field'
-        }
-        const data = await Dialog.get(dialogData, dialogParams)
-        console.log(data)
 
         // adding the element
         if (data !== null) {

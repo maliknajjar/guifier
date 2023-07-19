@@ -102,6 +102,9 @@ export abstract class Field {
      */
     protected setValue (newValue: any): void {
         this.property._value = newValue
+        if (this.params.onChange !== undefined) {
+            this.params.onChange()
+        }
     }
 
     /**

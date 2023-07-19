@@ -141,7 +141,6 @@ export class Dialog {
      * This function is responsible for showing the dialog
      */
     private showDialog (): void {
-        console.log('wwowowoow')
         setTimeout(() => {
             this.dialogElement.classList.remove('guifyOpacityZero')
         }, 0)
