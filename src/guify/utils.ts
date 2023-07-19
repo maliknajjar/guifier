@@ -205,8 +205,9 @@ export function drawError (elementId: string, error: any): void {
     errorContainer.append(errorContainerHeader)
 
     // drawing the content
-    const errorContainerContent = document.createElement('div')
+    const errorContainerContent = document.createElement('pre')
     errorContainerContent.classList.add('guifyErrorContainerContent')
+    errorContainerContent.style.whiteSpace = 'pre-wrap'
     errorContainerContent.innerHTML = error
     errorContainer.append(errorContainerContent)
 
