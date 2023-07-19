@@ -190,3 +190,26 @@ export function getPrimitiveEnumByStringType (stringType: string): PrimitiveType
 
     return stringTypeToPrimitiveEnum[stringType]
 }
+
+/**
+ * This function will draw an error on the element that has the this.params.elementId
+ */
+export function drawError (elementId: string, error: any): void {
+    const errorContainer = document.createElement('div')
+    errorContainer.classList.add('guifyErrorContainer')
+
+    // drawing the header
+    const errorContainerHeader = document.createElement('div')
+    errorContainerHeader.classList.add('guifyErrorContainerError')
+    errorContainerHeader.innerHTML = 'Error Messages'
+    errorContainer.append(errorContainerHeader)
+
+    // drawing the content
+    const errorContainerContent = document.createElement('div')
+    errorContainerContent.classList.add('guifyErrorContainerContent')
+    errorContainerContent.innerHTML = error
+    errorContainer.append(errorContainerContent)
+
+    const element = document.getElementById(elementId)
+    element?.append(errorContainer)
+}

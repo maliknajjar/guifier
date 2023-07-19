@@ -5,6 +5,7 @@ import type { Property, AnyObject, Parameters } from '../types'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getType, mergeObjectsOnlyNewProperties } from '../utils'
+import * as yaml from 'js-yaml'
 import unset from 'lodash/unset'
 import compact from 'lodash/compact'
 import get from 'lodash/get'
@@ -50,7 +51,7 @@ export class Data {
     /**
      * This method returns the data
      */
-    public getData (): any {
+    public getData (dataType: DataType): any {
         const exportedData: any = {}
         for (const [obj, path] of this.iterateOverProperties()) {
             // skipping the root element
@@ -61,17 +62,17 @@ export class Data {
             set(exportedData, objectPath, obj._value)
         }
 
-        return exportedData
+        return Data.serializeData(exportedData, dataType)
     }
 
     /**
      * This method converts DataType string into a JS object
      *
-     * @param {string} data is the data string
+     * @param {string | any} data is the data string
      * @param {DataType} dataType is the data type
      * @returns {AnyObject} javascript object
      */
-    private static deserializeData (data: any, datatype: DataType): AnyObject {
+    private static deserializeData (data: string | any, datatype: DataType): any {
         switch (datatype) {
             case DataType.Js:
                 return data
@@ -82,7 +83,49 @@ export class Data {
                     throw new Error(error)
                 }
             case DataType.Yaml:
+                try {
+                    return yaml.load(data) as any
+                } catch (error: any) {
+                    throw new Error(error)
+                }
+            case DataType.Xml:
                 throw new Error('Unsupported datatype')
+            case DataType.Toml:
+                throw new Error('Unsupported datatype')
+            case DataType.Csv:
+                throw new Error('Unsupported datatype')
+            case DataType.Edn:
+                throw new Error('Unsupported datatype')
+            case DataType.Cbor:
+                throw new Error('Unsupported datatype')
+            case DataType.Bson:
+                throw new Error('Unsupported datatype')
+            default:
+                throw new Error('Invalid datatype')
+        }
+    }
+
+    /**
+     * This method converts JS object into a DataType string
+     *
+     * @param {string} data is the data JS object
+     * @param {DataType} dataType is the data type
+     * @returns {AnyObject} is data string
+     */
+    private static serializeData (data: any, datatype: DataType): string {
+        switch (datatype) {
+            case DataType.Json:
+                try {
+                    return JSON.stringify(data)
+                } catch (error: any) {
+                    throw new Error(error)
+                }
+            case DataType.Yaml:
+                try {
+                    return yaml.dump(data)
+                } catch (error: any) {
+                    throw new Error(error)
+                }
             case DataType.Xml:
                 throw new Error('Unsupported datatype')
             case DataType.Toml:

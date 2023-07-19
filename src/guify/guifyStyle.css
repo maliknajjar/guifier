@@ -87,3 +87,24 @@
 .guifyRemovePadding {
     padding: 0 !important;
 }
+
+/* error container styles */
+.guifyErrorContainer {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: var(--primary-border-radius);
+    border: 2px solid rgba(255, 0, 0, 0.25);
+    height: 100%;
+}
+
+.guifyErrorContainerError {
+    border-bottom: 2px solid rgba(255, 0, 0, 0.25);
+    padding: var(--primary-padding);
+    font-weight: bold;
+    color: rgb(128, 0, 0);
+}
+
+.guifyErrorContainerContent {
+    padding: var(--primary-padding);
+    font-weight: bold;
+    color: rgb(182, 0, 0);
+}
