@@ -17,6 +17,7 @@ async function init (): Promise<void> {
 
     const guify = new Guify(params)
 
+    // FIXME: an error happens when using the guify.getData twice
     document.addEventListener('click', () => {
         console.log('wowoowowowowowowowoowo')
         console.log(guify.getData(DataType.Yaml))

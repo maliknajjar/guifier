@@ -1,6 +1,6 @@
 import clone from 'clone'
 
-import type { Property, AnyObject, Parameters } from '../types'
+import type { Property, Parameters } from '../types'
 
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
@@ -59,7 +59,7 @@ export class Data {
                 continue
             }
             const objectPath = Data.convertPathArrayToStringPathFormat(path, false)
-            set(exportedData, objectPath, obj._value)
+            set(exportedData, objectPath, clone(obj._value))
         }
 
         return Data.serializeData(exportedData, dataType)
