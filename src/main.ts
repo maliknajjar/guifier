@@ -9,7 +9,7 @@ async function init (): Promise<void> {
     const params: Parameters = {
         elementId: 'app',
         data: exampleData,
-        dataType: DataType.Xml,
+        dataType: DataType.Toml,
         onChange: () => {
             console.log('data has changed')
         }
@@ -19,7 +19,7 @@ async function init (): Promise<void> {
 
     document.addEventListener('click', () => {
         console.log('wowoowowowowowowowoowo')
-        console.log(guify.getData(DataType.Xml))
+        console.log(guify.getData(DataType.Toml))
     })
 }
 

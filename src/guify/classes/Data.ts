@@ -3,6 +3,8 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
+import * as toml from 'toml'
+import { stringify as tomlStringify } from 'toml-patch'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -96,7 +98,11 @@ export class Data {
                     throw new Error(error)
                 }
             case DataType.Toml:
-                throw new Error('Unsupported datatype')
+                try {
+                    return toml.parse(data)
+                } catch (error: any) {
+                    throw new Error(error)
+                }
             case DataType.Csv:
                 throw new Error('Unsupported datatype')
             case DataType.Edn:
@@ -117,8 +123,10 @@ export class Data {
      * @param {DataType} dataType is the data type
      * @returns {AnyObject} is data string
      */
-    private static serializeData (data: any, datatype: DataType): string {
+    private static serializeData (data: any, datatype: DataType): string | any {
         switch (datatype) {
+            case DataType.Js:
+                return data
             case DataType.Json:
                 try {
                     return JSON.stringify(data)
@@ -138,7 +146,11 @@ export class Data {
                     throw new Error(error)
                 }
             case DataType.Toml:
-                throw new Error('Unsupported datatype')
+                try {
+                    return tomlStringify(data)
+                } catch (error: any) {
+                    throw new Error(error)
+                }
             case DataType.Csv:
                 throw new Error('Unsupported datatype')
             case DataType.Edn:
