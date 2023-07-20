@@ -201,7 +201,7 @@ export function drawError (elementId: string, error: any): void {
     // drawing the header
     const errorContainerHeader = document.createElement('div')
     errorContainerHeader.classList.add('guifyErrorContainerError')
-    errorContainerHeader.innerHTML = 'Error Messages'
+    errorContainerHeader.innerHTML = 'Error Occured'
     errorContainer.append(errorContainerHeader)
 
     // drawing the content

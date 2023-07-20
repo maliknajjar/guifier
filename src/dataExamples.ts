@@ -57,5 +57,5 @@ export const exampleData = `
   address:
     street: 123 Main St
     city: Anytown
-    country: USA
+    country USA
 `
