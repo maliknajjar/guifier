@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "clone": "^2.1.2",
+    "fast-xml-parser": "^4.2.6",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "material-icons": "^1.13.8",

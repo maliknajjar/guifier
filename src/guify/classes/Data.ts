@@ -2,6 +2,7 @@ import clone from 'clone'
 
 import type { Property, Parameters } from '../types'
 
+import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -89,7 +90,11 @@ export class Data {
                     throw new Error(error)
                 }
             case DataType.Xml:
-                throw new Error('Unsupported datatype')
+                try {
+                    return (new XMLParser()).parse(data)
+                } catch (error: any) {
+                    throw new Error(error)
+                }
             case DataType.Toml:
                 throw new Error('Unsupported datatype')
             case DataType.Csv:
@@ -127,7 +132,11 @@ export class Data {
                     throw new Error(error)
                 }
             case DataType.Xml:
-                throw new Error('Unsupported datatype')
+                try {
+                    return (new XMLBuilder()).build(data)
+                } catch (error: any) {
+                    throw new Error(error)
+                }
             case DataType.Toml:
                 throw new Error('Unsupported datatype')
             case DataType.Csv:

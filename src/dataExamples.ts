@@ -23,6 +23,36 @@
 //   }
 // }`
 
+export const exampleData = `
+    <string>
+        <_params>
+            <fullWidth>true</fullWidth>
+        </_params>
+        <_value>Hello, world!</_value>
+    </string>
+    <number>42</number>
+    <boolean>true</boolean>
+    <array>1</array>
+    <array>2</array>
+    <array>3</array>
+    <object>
+        <nestedString>I am nested!</nestedString>
+        <nestedNumber>3.14</nestedNumber>
+        <nestedBoolean>false</nestedBoolean>
+        <nestedArray>apple</nestedArray>
+        <nestedArray>banana</nestedArray>
+        <nestedArray>orange</nestedArray>
+        <nestedObject>
+            <deeplyNestedString>I am deeply nested!</deeplyNestedString>
+            <deeplyNestedNumber>2.71828</deeplyNestedNumber>
+            <deeplyNestedBoolean>true</deeplyNestedBoolean>
+            <deeplyNestedArray>true</deeplyNestedArray>
+            <deeplyNestedArray>false</deeplyNestedArray>
+            <deeplyNestedArray>true</deeplyNestedArray>
+        </nestedObject>
+    </object>
+`
+
 // export const exampleData = `[
 //     5555,
 //     5555,
@@ -50,12 +80,12 @@
 //     ]
 // ]`
 
-export const exampleData = `
-  name: John Doe
-  age: 30
-  email: john.doe@example.com
-  address:
-    street: 123 Main St
-    city: Anytown
-    country USA
-`
+// export const exampleData = `
+//   name: John Doe
+//   age: 30
+//   email: john.doe@example.com
+//   address:
+//     street: 123 Main St
+//     city: Anytown
+//     country: USA
+// `
