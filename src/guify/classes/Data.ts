@@ -103,14 +103,6 @@ export class Data {
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Csv:
-                throw new Error('Unsupported datatype')
-            case DataType.Edn:
-                throw new Error('Unsupported datatype')
-            case DataType.Cbor:
-                throw new Error('Unsupported datatype')
-            case DataType.Bson:
-                throw new Error('Unsupported datatype')
             default:
                 throw new Error('Invalid datatype')
         }
@@ -151,14 +143,6 @@ export class Data {
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Csv:
-                throw new Error('Unsupported datatype')
-            case DataType.Edn:
-                throw new Error('Unsupported datatype')
-            case DataType.Cbor:
-                throw new Error('Unsupported datatype')
-            case DataType.Bson:
-                throw new Error('Unsupported datatype')
             default:
                 throw new Error('Invalid datatype')
         }

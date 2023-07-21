@@ -6,11 +6,7 @@ export enum DataType {
     Json = 'json',
     Yaml = 'yaml',
     Xml = 'xml',
-    Toml = 'toml',
-    Csv = 'csv',
-    Edn = 'edn',
-    Cbor = 'cbor',
-    Bson = 'bson',
+    Toml = 'toml'
 }
 
 /**
