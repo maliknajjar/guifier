@@ -5,7 +5,7 @@
 }
 
 .guifierCard {
-    box-sizing: content-box;
+    box-sizing: content-box !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
