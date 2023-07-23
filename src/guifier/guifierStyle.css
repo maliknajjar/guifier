@@ -1,0 +1,120 @@
+/* global variables */
+:root {
+    --primary-color: #1D5EFF;
+    --primary-lighter-color: #B7C7F2;
+    --primary-text-color: #575757;
+    --primary-bg-color: #F5F7FB;
+    --secondary-bg-color: #FFFFFF;
+    --primary-padding-double: 40px;
+    --primary-padding: 20px;
+    --secondary-padding: 10px;
+    --primary-grid-gap: 20px;
+    --header-horizontal-padding: 15px;
+    --primary-border-color: #CDD0DE;
+    --primary-border-width: 2px;
+    --primary-border: var(--primary-border-width) solid var(--primary-border-color);
+    --primary-border-radius: 7.5px;
+    --primary-selected-border: 2px solid #1D5EFF;
+}
+
+.guifierMainWrapper * {
+	box-sizing: border-box;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+/* to keep google font icons */
+.material-icons-outlined {
+    font-family: Material Icons Outlined;
+}
+
+/* global classes */
+.guifierFullHeight {
+    height: 100%;
+}
+
+.guifierHeightZero {
+    height: 0 !important;
+}
+
+.guifierPrimaryBgColor {
+    background-color: var(--primary-bg-color);
+}
+
+.guifierSecondaryBgColor {
+    background-color: var(--secondary-bg-color);
+}
+
+.guifierPrimaryMarginTop {
+    margin-top: var(--primary-padding);
+}
+
+.guifierPrimaryMarginBottom {
+    margin-bottom: var(--primary-padding);
+}
+
+.guifierSecondaryMarginTop {
+    margin-top: var(--secondary-padding);
+}
+
+.guifierSecondaryMarginBottom {
+    margin-bottom: var(--secondary-padding);
+}
+
+.guifierPrimaryTextColor {
+    color: var(--primary-text-color);
+}
+
+.guifierPrimaryTextMediumSize {
+    font-size: medium;
+}
+
+.guifierRotate {
+    transform: rotate(180deg);
+}
+
+.guifierPrimaryBottomBorder {
+    border-bottom: var(--primary-border);
+}
+
+.guifierNoneDisplay {
+    display: none !important;
+}
+
+.guifierOddBackground {
+    background-color: rgb(73, 73, 73, 0.035);
+}
+
+.guifierOpacityZero {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.guifierShowElementWithAnimation {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.guifierRemovePadding {
+    padding: 0 !important;
+}
+
+/* error container styles */
+.guifierErrorContainer {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: var(--primary-border-radius);
+    border: 2px solid rgba(255, 0, 0, 0.25);
+    height: 100%;
+}
+
+.guifierErrorContainerError {
+    border-bottom: 2px solid rgba(255, 0, 0, 0.25);
+    padding: var(--primary-padding);
+    font-weight: bold;
+    color: rgb(128, 0, 0);
+}
+
+.guifierErrorContainerContent {
+    padding: var(--primary-padding);
+    font-weight: bold;
+    color: rgb(182, 0, 0);
+}

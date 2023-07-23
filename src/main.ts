@@ -1,8 +1,8 @@
 import './style.css'
 
-import type { Parameters } from './guify/types'
-import { DataType } from './guify/enums'
-import { Guify } from './guify/Guify'
+import type { Parameters } from './guifier/types'
+import { DataType } from './guifier/enums'
+import Guifier from './guifier/Guifier'
 import { exampleData } from './dataExamples'
 
 async function init (): Promise<void> {
@@ -15,11 +15,11 @@ async function init (): Promise<void> {
         }
     }
 
-    const guify = new Guify(params)
+    const guifier = new Guifier(params)
 
     document.addEventListener('click', () => {
         console.log('wowoowowowowowowowoowo')
-        console.log(guify.getData(DataType.Toml))
+        console.log(guifier.getData(DataType.Toml))
     })
 }
 

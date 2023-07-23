@@ -1,0 +1,55 @@
+.guifierObjectContainerbody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: var(--primary-grid-gap);
+    padding: var(--primary-padding);
+}
+
+.guifierObjectLabelContainer {
+    display: flex;
+}
+
+.guifierObjectFieldContainer {
+    position: relative;
+}
+
+.guifierObjectLabelTextPart {
+    transition: 300ms;
+    transform-origin: left bottom;
+    transform: translateY(0px);
+    font-weight: bold;
+}
+
+.guifierObjectFieldContainer:hover > .guifierObjectLabelContainer > .guifierObjectLabelTextPart {
+    transform: translateY(-7px);
+}
+
+.guifierObjectLabelButtonsPart {
+    position: relative;
+}
+
+.fieldButtons {
+    position: absolute;
+    display: flex;
+    z-index: 1;
+    gap: 5px;
+    bottom: 0px;
+    left: 0;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    pointer-events: none;
+}
+
+.fieldButtons > * {
+    color: var(--primary-text-color);
+    border: 1px solid var(--primary-border-color);
+    /* background-color: white; */
+    padding: 5px;
+    border-radius: 100%;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+    opacity: 0.0;
+    transform: translateY(75%);
+    transition: 0.2s ease;
+    cursor: pointer;
+    font-size: large;
+}

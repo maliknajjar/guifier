@@ -1,0 +1,12 @@
+.guifierNullField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888E9D;
+    border-radius: 10px;
+    border: var(--primary-border);
+    height: 45px;
+    width: fit-content;
+    padding: 20px;
+    gap: 7.5px;
+}

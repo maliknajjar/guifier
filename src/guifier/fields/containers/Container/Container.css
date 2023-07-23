@@ -1,0 +1,100 @@
+.guifierMainWrapper {
+    position: relative;
+    height: 100%;
+}
+
+.guifierContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: var(--primary-border);
+    border-radius: var(--primary-border-radius);
+}
+
+.guifierContainerHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: larger;
+    color: var(--primary-text-color);
+    padding: var(--header-horizontal-padding) var(--primary-grid-gap);
+    padding-right: 15px;
+}
+
+.guifierContainerHeaderButtons {
+    display: flex;
+    align-items: center;
+    font-size: xx-large;
+    gap: 10px;
+}
+
+.guifierContainerHeaderButtons > * {
+    font-size: 25px;
+    cursor: pointer;
+    opacity: 0.0;
+    transform: translateY(75%);
+    transition: 0.2s ease;
+}
+
+.guifierContainerCollapseButton {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.guifierContainerHeaderKeyName {
+    font-weight: bold;
+}
+
+/* empty content for empty containers css rules */
+.guifierEmptyContentContianer {
+    display: flex;
+    flex-direction: row;
+    grid-column: span 2;
+}
+
+.emptyContentContianerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 0px var(--primary-padding);
+    grid-column: span 2;
+}
+
+.guifierArrayContainerbody .emptyContentContianerWrapper {
+    padding: var(--primary-padding-double);
+}
+
+.guifierEmptyTitle {
+    margin: 0;
+    color: var(--primary-text-color);
+    font-size: large;
+}
+
+.guifierEmptyParagraph {
+    text-align: center;
+    max-width: 375px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: medium;
+}
+
+.guifierEmptyButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    padding-left: 19px;
+    border-radius: var(--primary-border-radius);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: small;
+    margin-top: 15px;
+    box-shadow: #1d5dff5e 0px 0px 40px 0px;
+}
+
+.guifierEmptyButton:hover {
+    background-color: #1d5dffec;
+}

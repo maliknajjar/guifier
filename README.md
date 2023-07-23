@@ -1,3 +1,3 @@
-# guify
+# guifier
 
-Guify all kinds of data formats
+Guifier all kinds of data formats

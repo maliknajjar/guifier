@@ -1,1 +1,0 @@
-export { Guify } from './Guify'
