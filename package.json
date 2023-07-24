@@ -27,9 +27,9 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "material-icons": "^1.13.8",
-    "muuri": "^0.9.5",
     "toml": "^3.0.0",
     "toml-patch": "^0.2.3",
+    "vite-plugin-css-injected-by-js": "^3.2.1",
     "zod": "^3.21.4"
   }
 }
