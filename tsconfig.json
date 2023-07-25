@@ -17,7 +17,7 @@
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "types",
-    "outDir": "ts_dist",
+    "outDir": "js_dist",
   },
   "include": ["src"]
 }
