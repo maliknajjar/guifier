@@ -9,11 +9,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "noEmit": true,
+    "noEmit": false, // TODO: make it false but check if you can just generate the .d.ts files or move the emited object to another directory
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "types",
+    "outDir": "ts_dist",
   },
   "include": ["src"]
 }

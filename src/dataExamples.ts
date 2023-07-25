@@ -1,27 +1,27 @@
-// export const exampleData = `{
-//   "string": {
-//     "_params": {
-//       "fullWidth": true
-//     },
-//     "_value": "Hello, world!"
-//   },
-//   "number": 42,
-//   "boolean": true,
-//   "array": [1, 2, 3],
-//   "object": {
-//     "nestedString": "I am nested!",
-//     "nestedNumber": 3.14,
-//     "nestedBoolean": false,
-//     "nestedArray": ["apple", "banana", "orange"],
-//     "nestedObject": {
-//       "deeplyNestedString": "I am deeply nested!",
-//       "deeplyNestedNumber": 2.71828,
-//       "deeplyNestedBoolean": true,
-//       "deeplyNestedArray": [true, false, true],
-//       "deeplyNestedObject": {}
-//     }
-//   }
-// }`
+export const exampleData = `{
+  "string": {
+    "_params": {
+      "fullWidth": true
+    },
+    "_value": "Hello, world!"
+  },
+  "number": 42,
+  "boolean": true,
+  "array": [1, 2, 3],
+  "object": {
+    "nestedString": "I am nested!",
+    "nestedNumber": 3.14,
+    "nestedBoolean": false,
+    "nestedArray": ["apple", "banana", "orange"],
+    "nestedObject": {
+      "deeplyNestedString": "I am deeply nested!",
+      "deeplyNestedNumber": 2.71828,
+      "deeplyNestedBoolean": true,
+      "deeplyNestedArray": [true, false, true],
+      "deeplyNestedObject": {}
+    }
+  }
+}`
 
 // export const exampleData = `
 //     <string>
@@ -53,37 +53,37 @@
 //     </object>
 // `
 
-export const exampleData = `
-    title = "TOML Configuration Example"
+// export const exampleData = `
+//     title = "TOML Configuration Example"
 
-    [server]
-    hostname = "example.com"
-    port = 8080
-    enabled = true
+//     [server]
+//     hostname = "example.com"
+//     port = 8080
+//     enabled = true
 
-    [database]
-    host = "db.example.com"
-    port = 5432
-    username = "admin"
-    password = "secret"
+//     [database]
+//     host = "db.example.com"
+//     port = 5432
+//     username = "admin"
+//     password = "secret"
 
-    [[users]]
-    name = "Alice"
-    age = 28
-    email = "alice@example.com"
-    roles = ["admin", "editor"]
+//     [[users]]
+//     name = "Alice"
+//     age = 28
+//     email = "alice@example.com"
+//     roles = ["admin", "editor"]
 
-    [[users]]
-    name = "Bob"
-    age = 32
-    email = "bob@example.com"
-    roles = ["editor"]
+//     [[users]]
+//     name = "Bob"
+//     age = 32
+//     email = "bob@example.com"
+//     roles = ["editor"]
 
-    [settings]
-    theme = "dark"
-    language = "en"
-    timeout = 300
-`
+//     [settings]
+//     theme = "dark"
+//     language = "en"
+//     timeout = 300
+// `
 
 // export const exampleData = `
 //   name: John Doe

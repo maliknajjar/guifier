@@ -7,7 +7,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/guifier/index.ts'),
       name: 'Guifier',
-      fileName: 'guifier',
+      fileName: 'Guifier',
     },
     rollupOptions: {
       plugins: [
