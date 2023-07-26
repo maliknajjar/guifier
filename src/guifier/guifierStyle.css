@@ -22,6 +22,11 @@
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
+.guifierErrorContainer * {
+	box-sizing: border-box;
+	font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
 /* to keep google font icons */
 .material-icons-outlined {
     font-family: Material Icons Outlined;
