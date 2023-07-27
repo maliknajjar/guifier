@@ -17,9 +17,12 @@ async function init (): Promise<void> {
 
     const guifier = new Guifier(params)
 
-    document.addEventListener('click', () => {
-        console.log('wowoowowowowowowowoowo')
-        console.log(guifier.getData(DataType.Json))
+    document.addEventListener('keydown', (e) => {
+        // press on s key on the keyboard to show the big Data object
+        if (e.keyCode === 83) {
+            console.log('XXXXXXXXXXXXXXXXXXXXX')
+            console.log(guifier.getData(DataType.Json))
+        }
     })
 }
 

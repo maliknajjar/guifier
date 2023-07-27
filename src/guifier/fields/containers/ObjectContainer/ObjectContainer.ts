@@ -6,7 +6,7 @@ import type { Field } from '../../Field/Field'
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
-import { drawOutlineIcon, fieldsMetaData, getFieldInstance } from '../../../utils'
+import { drawOutlineIcon, fieldsMetaData, getFieldInstance, getType } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
@@ -245,7 +245,7 @@ export class ObjectContainer extends Container {
         const path = cloneDeep(this.property._path)
         path.push(propetyName)
         const pathWithPropetyName = path
-        this.data.removeProperty(pathWithPropetyName)
+        this.data.removeData(pathWithPropetyName)
 
         // reducing the counter
         this.containerLength--
@@ -262,6 +262,13 @@ export class ObjectContainer extends Container {
      * This function is responsible for adding a property in an object container
      */
     public addProperty (property: Property): void {
+        console.log('adding a property')
+        // TODO: create a method called setData in the Data object and set your newly created data there
+        // thats why you dont see your newly created property in the data object
+        // something like this
+        const path = cloneDeep(this.property._path)
+        this.data.addProperty(path, property._key, property)
+
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''
         }
@@ -302,20 +309,20 @@ export class ObjectContainer extends Container {
             elementId: this.params.elementId,
             dialogTitle: 'New Field'
         }
-        const data = await Dialog.get(dialogData, dialogParams) // TODO: the problem of the container not wanting to show anything is from here
+        const data = await Dialog.get(dialogData, dialogParams)
 
         // adding the element
         if (data !== null) {
-            const propertyExample: Property = {
+            const newProperty: Property = {
                 _path: [...this.property._path, data['Field Name']],
                 _key: data['Field Name'],
-                _valueType: PrimitiveTypes.String,
-                _value: '',
+                _valueType: getType(fieldsMetaData[data['Field Type']].defaultValue),
+                _value: fieldsMetaData[data['Field Type']].defaultValue,
                 _fieldType: data['Field Type'],
                 _rules: undefined,
                 _params: undefined
             }
-            this.addProperty(propertyExample)
+            this.addProperty(newProperty)
         }
     }
 }

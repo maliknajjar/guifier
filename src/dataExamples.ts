@@ -7,20 +7,7 @@ export const exampleData = `{
   },
   "number": 42,
   "boolean": true,
-  "array": [1, 2, 3],
-  "object": {
-    "nestedString": "I am nested!",
-    "nestedNumber": 3.14,
-    "nestedBoolean": false,
-    "nestedArray": ["apple", "banana", "orange"],
-    "nestedObject": {
-      "deeplyNestedString": "I am deeply nested!",
-      "deeplyNestedNumber": 2.71828,
-      "deeplyNestedBoolean": true,
-      "deeplyNestedArray": [true, false, true],
-      "deeplyNestedObject": {}
-    }
-  }
+  "array": [1, 2, 3]
 }`
 
 // export const exampleData = `

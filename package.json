@@ -1,6 +1,5 @@
 {
   "name": "guifier",
-  "private": true,
   "version": "1.0.0",
   "type": "module",
   "license": "GPL-3.0",

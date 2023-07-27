@@ -6,7 +6,7 @@ import type { ObjectContainer } from '../../../fields/containers/ObjectContainer
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
-import { fieldsMetaData, getFieldInstance, isOdd } from '../../../utils'
+import { fieldsMetaData, getFieldInstance, getType, isOdd } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
@@ -337,7 +337,7 @@ export class ArrayContainer extends Container {
 
             // adding the index element to the path
             path.push(elementIndex)
-            this.data.removeProperty(path)
+            this.data.removeData(path)
 
             // redrawing the index label and the background color of the array elements in the html
             this.resetElementsUiInArrayContainer()
@@ -386,16 +386,16 @@ export class ArrayContainer extends Container {
 
         // adding the element
         if (data !== null) {
-            const propertyExample: Property = {
+            const newElement: Property = {
                 _path: [...this.property._path, this.containerLength],
                 _key: this.containerLength,
-                _valueType: PrimitiveTypes.String,
-                _value: '',
+                _valueType: getType(fieldsMetaData[data['Field Type']].defaultValue),
+                _value: fieldsMetaData[data['Field Type']].defaultValue,
                 _fieldType: data['Field Type'],
                 _rules: undefined,
                 _params: undefined
             }
-            this.addElement(propertyExample)
+            this.addElement(newElement)
         }
     }
 

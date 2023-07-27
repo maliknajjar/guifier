@@ -103,42 +103,49 @@ export function mergeObjectsOnlyNewProperties (obj1: AnyObject, obj2: AnyObject)
 export const fieldsMetaData: FieldsMetaData = {
     text: {
         staticObject: TextField,
+        defaultValue: '',
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new TextField(property, data, params)
         }
     },
     number: {
         staticObject: NumberField,
+        defaultValue: 0,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new NumberField(property, data, params)
         }
     },
     boolean: {
         staticObject: BooleanField,
+        defaultValue: true,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new BooleanField(property, data, params)
         }
     },
     null: {
         staticObject: NullField,
+        defaultValue: null,
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new NullField(property, data, params)
         }
     },
     object: {
         staticObject: ObjectContainer,
+        defaultValue: {},
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal): Field => {
             return new ObjectContainer(property, data, params)
         }
     },
     array: {
         staticObject: ArrayContainer,
+        defaultValue: [],
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new ArrayContainer(property, data, params)
         }
     },
     cardSelect: {
         staticObject: CardSelectField,
+        defaultValue: '',
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new CardSelectField(property, data, params)
         }
@@ -213,4 +220,31 @@ export function drawError (elementId: string, error: any): void {
 
     const element = document.getElementById(elementId)
     element?.append(errorContainer)
+}
+
+/**
+ * this function is used by the Data object to assign default field type to a property
+ * if the field type wasnt specified by the user
+ */
+export function getFieldTypeByValuetype (valueType: string): string {
+    switch (valueType) {
+        case 'string':
+            return 'text'
+        case 'number':
+            return 'number'
+        case 'boolean':
+            return 'boolean'
+        case 'object':
+            return 'object'
+        case 'array':
+            return 'array'
+        case 'null':
+            return 'null'
+        case 'undefined':
+            return 'undefined'
+        case 'NaN':
+            return 'null'
+        default:
+            throw new Error('value type is not supported')
+    }
 }

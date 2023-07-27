@@ -7,7 +7,7 @@ import * as toml from 'toml'
 import { stringify as tomlStringify } from 'toml-patch'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
-import { getType, mergeObjectsOnlyNewProperties } from '../utils'
+import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
 import * as yaml from 'js-yaml'
 import unset from 'lodash/unset'
 import compact from 'lodash/compact'
@@ -23,19 +23,6 @@ export class Data {
     public parsedData: Property = defaultProperty
     public params: Parameters
     private readonly path: Array<number | string> = []
-
-    // this object is used to assign default field type to a property
-    // if the field type wasnt specified by the user
-    public static valueTypesToFieldTypes = {
-        string: 'text',
-        number: 'number',
-        boolean: 'boolean',
-        object: 'object',
-        array: 'array',
-        null: 'null',
-        undefined: 'null',
-        NaN: 'null'
-    }
 
     constructor (data: string, dataType: DataType, params: Parameters) {
         // add guifier params
@@ -239,7 +226,7 @@ export class Data {
 
         // assigning the field type based on the value type
         if (field._fieldType === undefined) {
-            returnedObject._fieldType = this.valueTypesToFieldTypes[returnedObject._valueType]
+            returnedObject._fieldType = getFieldTypeByValuetype(returnedObject._valueType)
         } else {
             returnedObject._fieldType = field._fieldType
         }
@@ -323,13 +310,23 @@ export class Data {
     }
 
     /**
-     * This method removes an array element. for example you pass it this property path `['root', 'orders', 4]`
-     * and it will remove it from the data object
+     * This method adds an array element or an object property.
      */
-    public removeProperty (propertyPath: Array<number | string>): void {
+    public addProperty (propertyPath: Array<number | string>, key: string | number, value: Property): void {
+        const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
+        const path = propertyStringPath + `.${key}`
+        console.log(value)
+        set(this.parsedData, path, value)
+    }
+
+    /**
+     * This method removes an array element or an object property.
+     */
+    public removeData (propertyPath: Array<number | string>): void {
         const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
         unset(this.parsedData, propertyStringPath)
         const lastElement = last(propertyPath)
+        // if its an array
         if (getType(lastElement) === PrimitiveTypes.Number) {
             propertyPath.pop()
             const _valueString = propertyPath.length === 1 ? '' : '._value'
