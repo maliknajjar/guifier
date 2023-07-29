@@ -4,7 +4,6 @@ import type { ParametersInternal } from '../types'
 import type { DialogParameters } from './dialogTypes'
 
 import { drawOutlineIcon } from '../utils'
-import { DataType } from '../enums'
 import Guifier from '../Guifier'
 import lodash from 'lodash'
 
@@ -75,7 +74,7 @@ export class Dialog {
         this.showDialog()
         return await new Promise((resolve) => {
             this.confirmButton.addEventListener('click', () => {
-                const data = this.guifier?.getData(DataType.Js)
+                const data = this.guifier?.getData('js')
                 for (const key in data) {
                     const value = data[key]
                     if (lodash.isEmpty(value)) {
@@ -212,7 +211,7 @@ export class Dialog {
         const params: ParametersInternal = {
             elementId: this.params.elementId,
             data,
-            dataType: DataType.Js,
+            dataType: 'js',
             withoutContainer: true,
             flipBackgroundColors: true,
             expandFieldsToFullWidth: true,

@@ -6,7 +6,8 @@ import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 import * as toml from 'toml'
 import { stringify as tomlStringify } from 'toml-patch'
 import { defaultProperty } from '../types'
-import { DataType, PrimitiveTypes } from '../enums'
+import type { DataType } from '../enums'
+import { PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
 import * as yaml from 'js-yaml'
 import lodash from 'lodash'
@@ -60,27 +61,27 @@ export class Data {
      */
     private static deserializeData (data: string | any, datatype: DataType): any {
         switch (datatype) {
-            case DataType.Js:
+            case 'js':
                 return data
-            case DataType.Json:
+            case 'json':
                 try {
                     return JSON.parse(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Yaml:
+            case 'yaml':
                 try {
                     return yaml.load(data) as any
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Xml:
+            case 'xml':
                 try {
                     return (new XMLParser()).parse(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Toml:
+            case 'toml':
                 try {
                     return toml.parse(data)
                 } catch (error: any) {
@@ -100,27 +101,27 @@ export class Data {
      */
     private static serializeData (data: any, datatype: DataType): string | any {
         switch (datatype) {
-            case DataType.Js:
+            case 'js':
                 return data
-            case DataType.Json:
+            case 'json':
                 try {
                     return JSON.stringify(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Yaml:
+            case 'yaml':
                 try {
                     return yaml.dump(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Xml:
+            case 'xml':
                 try {
                     return (new XMLBuilder()).build(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
-            case DataType.Toml:
+            case 'toml':
                 try {
                     return tomlStringify(data)
                 } catch (error: any) {

@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-import { PrimitiveTypes, DataType } from './enums'
+import { PrimitiveTypes, DataTypeSchema } from './enums'
 import type { Data } from './classes/Data'
 import type { Field } from './fields/Field/Field'
 
@@ -12,7 +12,7 @@ export type AnyObject = Record<any, any>
 export const ParameterSchema = z.object({
     elementId: z.string(),
     data: z.any(),
-    dataType: z.nativeEnum(DataType),
+    dataType: DataTypeSchema,
     withoutContainer: z.boolean().optional().default(false),
     flipBackgroundColors: z.boolean().optional().default(false),
     expandFieldsToFullWidth: z.boolean().optional().default(false),
