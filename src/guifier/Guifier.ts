@@ -14,49 +14,42 @@ import { drawError } from './utils'
  * @param {Parameters} params is the object that has all parameters for the Guifier class.
  */
 export default class Guifier {
-    readonly params!: ParametersInternal
+    private readonly params!: ParametersInternal
     private data!: Data
     private view!: View
-    private element: HTMLElement | null = null
+    private containerElement: HTMLElement | null = null
+    private guifierElement: HTMLElement | null = null
 
     constructor (params: Parameters) {
         try {
-            // checking if the main element exist
-            this.checkIfMainElementExist(params)
-
             // validating Guifier params
             this.params = parameterSchemaInternal.parse(params)
 
-            // parsing data phase
-            this.data = new Data(this.params.data, this.params.dataType, this.params)
+            // checing if the main element exists
+            this.checkIfMainElementExist()
 
-            // drawing internally data phase
-            this.view = new View(this.data, this.params)
-
-            // pasting the drawn data to the element with the elementId
-            this.drawGeneratedHtmlElement()
+            // setting the data
+            this.setData(this.params.data, this.params.dataType)
         } catch (error) {
-            console.log(error)
-            drawError(params.elementId, error)
+            console.error(error)
+            drawError(params.elementSelector, error)
         }
     }
 
     /**
      * This function draws the generated htmlElement from the data into params element
      */
-    public drawGeneratedHtmlElement (): void {
-        const el = document.getElementById(this.params.elementId)
-        if (el !== null) {
-            this.element = el
-            el.append(this.view.getGeneratedHTML())
+    private drawGeneratedHtmlElement (): void {
+        if (this.containerElement !== null) {
+            this.containerElement.append(this.getGeneratedHtmlElement())
         }
     }
 
     /**
      * This function throws an error if it didnt find the params element
      */
-    private checkIfMainElementExist (param: Parameters): void {
-        const mainElement = document.getElementById(param.elementId)
+    private checkIfMainElementExist (): void {
+        const mainElement = document.querySelector(this.params.elementSelector)
         if (mainElement === null) {
             throw new Error('Did not find the Main Element')
         }
@@ -66,7 +59,8 @@ export default class Guifier {
      * This function returns the generate htmlElement
      */
     public getGeneratedHtmlElement (): HTMLElement {
-        return this.view.getGeneratedHTML()
+        this.guifierElement = this.view.getGeneratedHTML()
+        return this.guifierElement
     }
 
     /**
@@ -77,28 +71,29 @@ export default class Guifier {
     }
 
     /**
-     * This method sets the data. you can use it to change the data shown in the Guifier element
+     * This method empties the main element
+     */
+    private emptyThisElement (): void {
+        if (this.guifierElement !== null) {
+            this.guifierElement.remove()
+        }
+    }
+
+    /**
+     * This method sets new data. you can use it to change the data shown in the Guifier element
      */
     public setData (data: any, dataType: DataType | string): void {
         try {
-            // updating the params
+            this.containerElement = document.querySelector(this.params.elementSelector)
             this.params.data = data
             this.params.dataType = dataType as DataType
-
-            // parsing data phase
             this.data = new Data(data, dataType as DataType, this.params)
-
-            // drawing data phase
             this.view = new View(this.data, this.params)
-
-            // pasting the drawn data to the element with the elementId
-            if (this.element !== null) {
-                this.element.innerHTML = ''
-                this.drawGeneratedHtmlElement()
-            }
+            this.emptyThisElement()
+            this.drawGeneratedHtmlElement()
         } catch (error) {
             console.log(error)
-            drawError(this.params.elementId, error)
+            drawError(this.params.elementSelector, error)
         }
     }
 }

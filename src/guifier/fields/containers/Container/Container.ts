@@ -69,7 +69,6 @@ export abstract class Container extends Field {
         addELementButton.append(`Add ${singularText}`)
         addELementButton.append(this.drawAddButton())
         addELementButton.addEventListener('click', (): void => {
-            console.log(forArrayContainer)
             Promise.resolve().then(async () => {
                 if (forArrayContainer) {
                     const container = (this as unknown as ArrayContainer)

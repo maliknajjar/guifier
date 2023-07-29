@@ -320,9 +320,8 @@ export class Data {
         const arrayPath = lodash.cloneDeep(property._path)
         arrayPath.pop()
         const path = Data.convertPathArrayToStringPathFormat(arrayPath)
-        const array = lodash.get(this.parsedData, path + '._value') as [any]
-        console.log(path)
-        console.log(array)
+        const dotValue = arrayPath.length === 1 ? '' : '._value'
+        const array = lodash.get(this.parsedData, path + dotValue) as [any]
         array.push(property)
     }
 

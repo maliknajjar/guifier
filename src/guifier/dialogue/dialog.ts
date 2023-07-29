@@ -79,7 +79,6 @@ export class Dialog {
                 for (const key in data) {
                     const value = data[key]
                     if (lodash.isEmpty(value)) {
-                        console.log(key + ' is empty')
                         alert('Please ensure that all required fields have been completed.')
                         return
                     }
@@ -105,7 +104,7 @@ export class Dialog {
      * the selected element with the chosen Id
      */
     private buildGuifierDialog (): void {
-        const mainElement = document.querySelector(`#${this.params.elementId} > .guifierMainWrapper`)
+        const mainElement = document.querySelector(this.params.elementSelector)
         if (mainElement !== null) {
             mainElement.append(this.drawdialog())
         }
@@ -121,7 +120,7 @@ export class Dialog {
         this.dialogElement = guifierDialogBackgroundContainer
 
         // drawing the dialog itself
-        guifierDialogBackgroundContainer.append(this.drawdialogContainer())
+        guifierDialogBackgroundContainer.append(this.drawDialogContainer())
 
         // hide dialog if clicked on background element
         guifierDialogBackgroundContainer.addEventListener('click', (e) => {
@@ -164,7 +163,7 @@ export class Dialog {
     /**
      * This function is responsible for drawing the dialog container element
      */
-    private drawdialogContainer (): HTMLElement {
+    private drawDialogContainer (): HTMLElement {
         // drawing the dialog itself
         const guifierDialogContainer = document.createElement('div')
         guifierDialogContainer.classList.add('guifierDialogContainer')
@@ -210,7 +209,7 @@ export class Dialog {
      */
     private drawGuifierGeneratedContent (data: any): HTMLElement {
         const params: ParametersInternal = {
-            elementId: this.params.elementId,
+            elementSelector: this.params.elementSelector,
             data,
             dataType: DataType.Js,
             withoutContainer: true,

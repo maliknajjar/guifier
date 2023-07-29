@@ -216,6 +216,7 @@ export class ObjectContainer extends Container {
                         break
                     case 'add':
                         button.addEventListener('click', () => {
+                            console.log('saklskalskalsk')
                             Promise.resolve().then(async () => {
                                 if (childContainer.getFieldLabelName() === 'Object') {
                                     const container = (childContainer as ObjectContainer)
@@ -300,7 +301,7 @@ export class ObjectContainer extends Container {
             }
         }
         const dialogParams = {
-            elementId: this.params.elementId,
+            elementSelector: this.params.elementSelector + ' > div',
             dialogTitle: 'New Field'
         }
         const data = await Dialog.get(dialogData, dialogParams)

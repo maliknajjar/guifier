@@ -10,7 +10,7 @@ import type { Field } from './fields/Field/Field'
 export type AnyObject = Record<any, any>
 
 export const ParameterSchema = z.object({
-    elementId: z.string(),
+    elementSelector: z.string(),
     data: z.any(),
     dataType: z.string(),
     withoutContainer: z.boolean().optional().default(false),
