@@ -20,7 +20,7 @@ async function init (): Promise<void> {
     document.addEventListener('keydown', (e) => {
         // press on s key on the keyboard to show the big Data object
         if (e.keyCode === 83) {
-            console.log('XXXXXXXXXXXXXXXXXXXXX')
+            console.log('printing the Data object')
             console.log(guifier.getData(DataType.Json))
         }
     })
