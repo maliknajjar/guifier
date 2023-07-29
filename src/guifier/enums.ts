@@ -1,10 +1,13 @@
-import * as z from 'zod'
-
 /**
 * Represents type of the data passed to the instantiated Guifier object
 */
-export const DataTypeSchema = z.enum(['js', 'json', 'yaml', 'xml', 'toml'])
-export type DataType = z.input<typeof DataTypeSchema>
+export enum DataType {
+    Js = 'js',
+    Json = 'json',
+    Yaml = 'yaml',
+    Xml = 'xml',
+    Toml = 'toml'
+}
 
 /**
 * Represents JS primitive types

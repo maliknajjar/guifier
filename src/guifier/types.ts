@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-import { PrimitiveTypes, DataTypeSchema } from './enums'
+import { PrimitiveTypes, DataType } from './enums'
 import type { Data } from './classes/Data'
 import type { Field } from './fields/Field/Field'
 
@@ -12,7 +12,7 @@ export type AnyObject = Record<any, any>
 export const ParameterSchema = z.object({
     elementId: z.string(),
     data: z.any(),
-    dataType: DataTypeSchema,
+    dataType: z.string(),
     withoutContainer: z.boolean().optional().default(false),
     flipBackgroundColors: z.boolean().optional().default(false),
     expandFieldsToFullWidth: z.boolean().optional().default(false),
@@ -23,7 +23,10 @@ export const ParameterSchema = z.object({
  * Represents the object that gets passed to the instantiated Guifier object
  */
 export type Parameters = z.input<typeof ParameterSchema>
-export type ParametersInternal = z.infer<typeof ParameterSchema>
+export const parameterSchemaInternal = ParameterSchema.extend({
+    dataType: z.nativeEnum(DataType)
+})
+export type ParametersInternal = z.infer<typeof parameterSchemaInternal>
 
 /**
  * Represents the guifier property contents

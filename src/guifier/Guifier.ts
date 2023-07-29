@@ -1,6 +1,6 @@
 import { Data } from './classes/Data'
 import { View } from './classes/View'
-import { ParameterSchema } from './types'
+import { parameterSchemaInternal } from './types'
 
 import type { Parameters, ParametersInternal } from './types'
 import type { DataType } from './enums'
@@ -25,7 +25,7 @@ export default class Guifier {
             this.checkIfMainElementExist(params)
 
             // validating Guifier params
-            this.params = ParameterSchema.parse(params)
+            this.params = parameterSchemaInternal.parse(params)
 
             // parsing data phase
             this.data = new Data(this.params.data, this.params.dataType, this.params)
@@ -72,21 +72,21 @@ export default class Guifier {
     /**
      * This method gets the current state of the data from the GUI
      */
-    public getData (dataType: DataType): any {
-        return this.data.getData(dataType)
+    public getData (dataType: DataType | string): any {
+        return this.data.getData(dataType as DataType)
     }
 
     /**
      * This method sets the data. you can use it to change the data shown in the Guifier element
      */
-    public setData (data: any, dataType: DataType): void {
+    public setData (data: any, dataType: DataType | string): void {
         try {
             // updating the params
             this.params.data = data
-            this.params.dataType = dataType
+            this.params.dataType = dataType as DataType
 
             // parsing data phase
-            this.data = new Data(data, dataType, this.params)
+            this.data = new Data(data, dataType as DataType, this.params)
 
             // drawing data phase
             this.view = new View(this.data, this.params)
