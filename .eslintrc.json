@@ -18,7 +18,10 @@
     "@typescript-eslint/indent": ["error", 4]
   },
   "ignorePatterns": [
-    "vite.config.js"
+    "vite.config.js",
+    "types",
+    "dist",
+    "js_dist"
   ]
 }
   
