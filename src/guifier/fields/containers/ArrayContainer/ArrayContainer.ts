@@ -6,11 +6,10 @@ import type { ObjectContainer } from '../../../fields/containers/ObjectContainer
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
-import { fieldsMetaData, getFieldInstance, getType, isOdd } from '../../../utils'
+import { fieldsMetaData, getDefaultValueByFieldType, getFieldInstance, getType, isOdd } from '../../../utils'
 
 import cloneDeep from 'lodash/cloneDeep'
 import isEmpty from 'lodash/isEmpty'
-import { PrimitiveTypes } from '../../../enums'
 import { Dialog } from '../../../dialogue/dialog'
 
 /**
@@ -389,8 +388,8 @@ export class ArrayContainer extends Container {
             const newElement: Property = {
                 _path: [...this.property._path, this.containerLength],
                 _key: this.containerLength,
-                _valueType: getType(fieldsMetaData[data['Field Type']].defaultValue),
-                _value: fieldsMetaData[data['Field Type']].defaultValue,
+                _valueType: getType(getDefaultValueByFieldType(data['Field Type'])),
+                _value: getDefaultValueByFieldType(data['Field Type']),
                 _fieldType: data['Field Type'],
                 _rules: undefined,
                 _params: undefined
@@ -403,6 +402,9 @@ export class ArrayContainer extends Container {
      * This function is responsible for adding a property in an object container
      */
     public addElement (property: Property): void {
+        // TODO: add a method to the data object called addElement
+        // to handle adding an element to an array in the parsed data object
+
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''
         }

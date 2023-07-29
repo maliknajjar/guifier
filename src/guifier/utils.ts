@@ -14,6 +14,7 @@ import { NumberField } from './fields/baseFields/NumberField/NumberField'
 import { BooleanField } from './fields/baseFields/BooleanField/BooleanField'
 import { NullField } from './fields/baseFields/NullField/NullField'
 import { CardSelectField } from './fields/CustomFields/CardSelectField/CardSelectField'
+import { cloneDeep } from 'lodash'
 
 /**
  * A function that tells you wether a number is odd or even
@@ -150,6 +151,13 @@ export const fieldsMetaData: FieldsMetaData = {
             return new CardSelectField(property, data, params)
         }
     }
+}
+
+/**
+ * A function that gets an default value of a fieldType
+ */
+export function getDefaultValueByFieldType (fieldType: string): Field {
+    return cloneDeep(fieldsMetaData[fieldType].defaultValue)
 }
 
 /**

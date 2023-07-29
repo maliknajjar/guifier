@@ -314,8 +314,7 @@ export class Data {
      */
     public addProperty (propertyPath: Array<number | string>, key: string | number, value: Property): void {
         const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-        const path = propertyStringPath + `.${key}`
-        console.log(value)
+        const path = propertyStringPath + (propertyPath.length === 1 ? `.${key}` : `._value.${key}`)
         set(this.parsedData, path, value)
     }
 
