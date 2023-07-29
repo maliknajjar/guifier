@@ -61,6 +61,9 @@ export class TextField extends Field {
             inputElement.value = this.property._value
         }
 
+        // adding a placeholder
+        inputElement.placeholder = 'Text Field'
+
         // setting style based on color set wether primary or secondary
         if (this.showSecondaryColors) {
             inputElement.classList.add('guifierPrimaryBgColor')

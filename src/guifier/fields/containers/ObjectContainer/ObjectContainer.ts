@@ -261,8 +261,8 @@ export class ObjectContainer extends Container {
      * This function is responsible for adding a property in an object container
      */
     public addProperty (property: Property): void {
-        const path = cloneDeep(this.property._path)
-        this.data.addProperty(path, property._key, property)
+        property = cloneDeep(property)
+        this.data.addProperty(property)
 
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''

@@ -312,10 +312,9 @@ export class Data {
     /**
      * This method adds an array element or an object property.
      */
-    public addProperty (propertyPath: Array<number | string>, key: string | number, value: Property): void {
-        const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-        const path = propertyStringPath + (propertyPath.length === 1 ? `.${key}` : `._value.${key}`)
-        set(this.parsedData, path, value)
+    public addProperty (property: Property): void {
+        const path = Data.convertPathArrayToStringPathFormat(property._path)
+        set(this.parsedData, path, property)
     }
 
     /**
