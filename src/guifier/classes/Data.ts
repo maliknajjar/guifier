@@ -9,11 +9,7 @@ import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
 import * as yaml from 'js-yaml'
-import unset from 'lodash/unset'
-import compact from 'lodash/compact'
-import get from 'lodash/get'
-import set from 'lodash/set'
-import last from 'lodash/last'
+import lodash from 'lodash'
 
 /**
  * Represents the guifier parsed data
@@ -49,7 +45,7 @@ export class Data {
                 continue
             }
             const objectPath = Data.convertPathArrayToStringPathFormat(path, false)
-            set(exportedData, objectPath, clone(obj._value))
+            lodash.set(exportedData, objectPath, clone(obj._value))
         }
 
         return Data.serializeData(exportedData, dataType)
@@ -310,11 +306,24 @@ export class Data {
     }
 
     /**
-     * This method adds an array element or an object property.
+     * This method adds an object property.
      */
     public addProperty (property: Property): void {
         const path = Data.convertPathArrayToStringPathFormat(property._path)
-        set(this.parsedData, path, property)
+        lodash.set(this.parsedData, path, property)
+    }
+
+    /**
+     * This method adds an array element.
+     */
+    public addElement (property: Property): void {
+        const arrayPath = lodash.cloneDeep(property._path)
+        arrayPath.pop()
+        const path = Data.convertPathArrayToStringPathFormat(arrayPath)
+        const array = lodash.get(this.parsedData, path + '._value') as [any]
+        console.log(path)
+        console.log(array)
+        array.push(property)
     }
 
     /**
@@ -322,14 +331,14 @@ export class Data {
      */
     public removeData (propertyPath: Array<number | string>): void {
         const propertyStringPath = Data.convertPathArrayToStringPathFormat(propertyPath)
-        unset(this.parsedData, propertyStringPath)
-        const lastElement = last(propertyPath)
+        lodash.unset(this.parsedData, propertyStringPath)
+        const lastElement = lodash.last(propertyPath)
         // if its an array
         if (getType(lastElement) === PrimitiveTypes.Number) {
             propertyPath.pop()
             const _valueString = propertyPath.length === 1 ? '' : '._value'
             const parentPath = Data.convertPathArrayToStringPathFormat(propertyPath) + _valueString
-            const arrayToReset = get(this.parsedData, parentPath)
+            const arrayToReset = lodash.get(this.parsedData, parentPath)
             const resettedArray = Data.resetArrayIndexes(arrayToReset)
             // reset all the propert._path property _key and _path to be accordance with their current index
             for (let index = 0; index < resettedArray.length; index++) {
@@ -337,7 +346,7 @@ export class Data {
                 const pathLength = resettedArray[index]._path.length
                 resettedArray[index]._path[pathLength - 1] = index
             }
-            set(this.parsedData, parentPath, resettedArray)
+            lodash.set(this.parsedData, parentPath, resettedArray)
         }
     }
 
@@ -374,7 +383,7 @@ export class Data {
      * This method resets the indexes of the array when there is an empty element in an array
      */
     private static resetArrayIndexes (array: any[]): any[] {
-        const newArray = compact(array)
+        const newArray = lodash.compact(array)
         return newArray
     }
 }

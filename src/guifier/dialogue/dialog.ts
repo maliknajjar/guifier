@@ -6,7 +6,7 @@ import type { DialogParameters } from './dialogTypes'
 import { drawOutlineIcon } from '../utils'
 import { DataType } from '../enums'
 import Guifier from '../Guifier'
-import { isEmpty } from 'lodash'
+import lodash from 'lodash'
 
 export class Dialog {
     /**
@@ -78,7 +78,7 @@ export class Dialog {
                 const data = this.guifier?.getData(DataType.Js)
                 for (const key in data) {
                     const value = data[key]
-                    if (isEmpty(value)) {
+                    if (lodash.isEmpty(value)) {
                         console.log(key + ' is empty')
                         alert('Please ensure that all required fields have been completed.')
                         return

@@ -8,8 +8,7 @@ import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/type
 import { Container } from '../Container/Container'
 import { drawOutlineIcon, fieldsMetaData, getDefaultValueByFieldType, getFieldInstance, getType } from '../../../utils'
 
-import cloneDeep from 'lodash/cloneDeep'
-import isEmpty from 'lodash/isEmpty'
+import lodash from 'lodash'
 import { Dialog } from '../../../dialogue/dialog'
 
 /**
@@ -67,7 +66,7 @@ export class ObjectContainer extends Container {
         this.containerLength = Object.keys(object).length
 
         // checking if the array is empty
-        if (!isEmpty(object)) {
+        if (!lodash.isEmpty(object)) {
             for (const key in object) {
                 const property = object[key]
                 const propertyElement = this.drawProperty(property)
@@ -241,7 +240,7 @@ export class ObjectContainer extends Container {
      * This function is responsible for deleting an object property in the ui
      */
     protected deleteProperty (propetyName: string | number): void {
-        const path = cloneDeep(this.property._path)
+        const path = lodash.cloneDeep(this.property._path)
         path.push(propetyName)
         const pathWithPropetyName = path
         this.data.removeData(pathWithPropetyName)
@@ -261,7 +260,7 @@ export class ObjectContainer extends Container {
      * This function is responsible for adding a property in an object container
      */
     public addProperty (property: Property): void {
-        property = cloneDeep(property)
+        property = lodash.cloneDeep(property)
         this.data.addProperty(property)
 
         if (this.containerLength === 0) {

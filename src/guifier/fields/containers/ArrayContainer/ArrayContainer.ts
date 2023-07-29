@@ -8,8 +8,7 @@ import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/type
 import { Container } from '../Container/Container'
 import { fieldsMetaData, getDefaultValueByFieldType, getFieldInstance, getType, isOdd } from '../../../utils'
 
-import cloneDeep from 'lodash/cloneDeep'
-import isEmpty from 'lodash/isEmpty'
+import lodash from 'lodash'
 import { Dialog } from '../../../dialogue/dialog'
 
 /**
@@ -70,7 +69,7 @@ export class ArrayContainer extends Container {
         const array: [any] = this.property._value
 
         // checking if the array is empty
-        if (!isEmpty(array)) {
+        if (!lodash.isEmpty(array)) {
             for (const key in array) {
                 const property: Property = array[key]
                 guifierArrayContainerbody.append(this.drawElement(property))
@@ -332,7 +331,7 @@ export class ArrayContainer extends Container {
         setTimeout(() => {
             guifierArrayFieldContainers[elementIndex].remove()
             // remove the element from the data
-            const path = cloneDeep(this.property._path)
+            const path = lodash.cloneDeep(this.property._path)
 
             // adding the index element to the path
             path.push(elementIndex)
@@ -404,6 +403,8 @@ export class ArrayContainer extends Container {
     public addElement (property: Property): void {
         // TODO: add a method to the data object called addElement
         // to handle adding an element to an array in the parsed data object
+        property = lodash.cloneDeep(property)
+        this.data.addElement(property)
 
         if (this.containerLength === 0) {
             this.contentBody.innerHTML = ''
