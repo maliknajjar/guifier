@@ -9,10 +9,7 @@ async function init (): Promise<void> {
     const params: Parameters = {
         elementSelector: '#app',
         data: exampleData,
-        dataType: DataType.Json,
-        onChange: () => {
-            console.log('data has changed')
-        }
+        dataType: DataType.Json
     }
 
     const guifier = new Guifier(params)

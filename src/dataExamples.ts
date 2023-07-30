@@ -1,13 +1,13 @@
 export const exampleData = `{
-  "string": {
-    "_params": {
-      "fullWidth": true
-    },
-    "_value": "Hello, world!"
-  },
-  "number": 42,
-  "boolean": true,
-  "array": [1, 2, 3]
+  "name": "Alice",
+  "age": 25,
+  "isStudent": true,
+  "hobbies": ["reading", "painting"],
+  "address": {
+    "city": "London",
+    "zipcode": "SW1A 1AA",
+    "country": "United Kingdom"
+  }
 }`
 
 // export const exampleData = `
