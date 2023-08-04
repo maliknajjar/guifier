@@ -6,7 +6,6 @@ import type { Parameters, ParametersInternal } from './types'
 import type { DataType } from './enums'
 
 import './guifierStyle.css'
-import { drawError } from './utils'
 
 /**
  * Guifier class handles converting the passed data into an HTML/GUI representation
@@ -32,7 +31,7 @@ export default class Guifier {
             this.setData(this.params.data, this.params.dataType)
         } catch (error) {
             console.error(error)
-            drawError(params.elementSelector, error)
+            this.drawErrorHtmlElement(error)
         }
     }
 
@@ -42,6 +41,16 @@ export default class Guifier {
     private drawGeneratedHtmlElement (): void {
         if (this.containerElement !== null) {
             this.containerElement.append(this.getGeneratedHtmlElement())
+        }
+    }
+
+    /**
+     * This function draws the generated htmlElement from the data into params element
+     */
+    private drawErrorHtmlElement (error: any): void {
+        this.guifierElement = this.drawErrorElement(error)
+        if (this.containerElement !== null) {
+            this.containerElement.append(this.guifierElement)
         }
     }
 
@@ -94,9 +103,30 @@ export default class Guifier {
         } catch (error) {
             console.error(error)
             this.emptyThisElement()
-            drawError(this.params.elementSelector, error)
-            // FIXME: return the html and draw it yourself and then set that element to the this.guifier element so you fix the issue
-            // when pressing s three time in duplicates the error
+            this.drawErrorHtmlElement(error)
         }
+    }
+
+    /**
+     * This function will draw an error on the element that has the this.params.elementId
+     */
+    private drawErrorElement (error: any): HTMLElement {
+        const errorContainer = document.createElement('div')
+        errorContainer.classList.add('guifierErrorContainer')
+
+        // drawing the header
+        const errorContainerHeader = document.createElement('div')
+        errorContainerHeader.classList.add('guifierErrorContainerError')
+        errorContainerHeader.innerHTML = 'Error Occured'
+        errorContainer.append(errorContainerHeader)
+
+        // drawing the content
+        const errorContainerContent = document.createElement('pre')
+        errorContainerContent.classList.add('guifierErrorContainerContent')
+        errorContainerContent.style.whiteSpace = 'pre-wrap'
+        errorContainerContent.innerHTML = error
+        errorContainer.append(errorContainerContent)
+
+        return errorContainer
     }
 }

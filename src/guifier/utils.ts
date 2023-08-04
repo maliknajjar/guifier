@@ -207,30 +207,6 @@ export function getPrimitiveEnumByStringType (stringType: string): PrimitiveType
 }
 
 /**
- * This function will draw an error on the element that has the this.params.elementId
- */
-export function drawError (elementSelector: string, error: any): void {
-    const errorContainer = document.createElement('div')
-    errorContainer.classList.add('guifierErrorContainer')
-
-    // drawing the header
-    const errorContainerHeader = document.createElement('div')
-    errorContainerHeader.classList.add('guifierErrorContainerError')
-    errorContainerHeader.innerHTML = 'Error Occured'
-    errorContainer.append(errorContainerHeader)
-
-    // drawing the content
-    const errorContainerContent = document.createElement('pre')
-    errorContainerContent.classList.add('guifierErrorContainerContent')
-    errorContainerContent.style.whiteSpace = 'pre-wrap'
-    errorContainerContent.innerHTML = error
-    errorContainer.append(errorContainerContent)
-
-    const element = document.querySelector(elementSelector)
-    element?.append(errorContainer)
-}
-
-/**
  * this function is used by the Data object to assign default field type to a property
  * if the field type wasnt specified by the user
  */

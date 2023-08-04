@@ -19,7 +19,7 @@ async function init (): Promise<void> {
         if (e.keyCode === 83) {
             console.log('printing the Data object')
             // console.log(guifier.getData(DataType.Json))
-            guifier.setData('[1,2,3', DataType.Json)
+            guifier.setData('[1,2,3]', DataType.Json)
         }
     })
 }
