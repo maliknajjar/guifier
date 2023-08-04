@@ -93,7 +93,10 @@ export default class Guifier {
             this.drawGeneratedHtmlElement()
         } catch (error) {
             console.error(error)
+            this.emptyThisElement()
             drawError(this.params.elementSelector, error)
+            // FIXME: return the html and draw it yourself and then set that element to the this.guifier element so you fix the issue
+            // when pressing s three time in duplicates the error
         }
     }
 }

@@ -120,7 +120,7 @@ export class NumberField extends Field {
      * This function handles the input event on the text field
      */
     private inputEventHandler (element: HTMLInputElement): void {
-        this.setValue(element.value)
+        this.setValue(parseInt(element.value))
     }
 
     /**
