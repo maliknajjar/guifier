@@ -1,5 +1,6 @@
 export const exampleData = `{
   "name": "Alice",
+  "brother": null,
   "age": 25,
   "isStudent": true,
   "hobbies": ["reading", "painting"],
