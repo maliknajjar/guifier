@@ -92,8 +92,8 @@ export default class Guifier {
      * This method sets new data. you can use it to change the data shown in the Guifier element
      */
     public setData (data: any, dataType: DataType | string): void {
+        this.containerElement = document.querySelector(this.params.elementSelector)
         try {
-            this.containerElement = document.querySelector(this.params.elementSelector)
             this.params.data = data
             this.params.dataType = dataType as DataType
             this.data = new Data(data, dataType as DataType, this.params)

@@ -18,7 +18,7 @@ async function init (): Promise<void> {
         // press on s key on the keyboard to show the big Data object
         if (e.keyCode === 83) {
             console.log('printing the Data object')
-            // console.log(guifier.getData(DataType.Json))
+            console.log(guifier.getData(DataType.Json))
             guifier.setData('[1,2,3]', DataType.Json)
         }
     })

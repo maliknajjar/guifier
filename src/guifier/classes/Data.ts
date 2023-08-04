@@ -221,7 +221,7 @@ export class Data {
         }
 
         // assigning the field type based on the value type
-        if (field._fieldType === undefined) {
+        if (typeof returnedObject._fieldType === 'undefined') {
             returnedObject._fieldType = getFieldTypeByValuetype(returnedObject._valueType)
         } else {
             returnedObject._fieldType = field._fieldType
