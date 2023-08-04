@@ -216,7 +216,6 @@ export class ObjectContainer extends Container {
                         break
                     case 'add':
                         button.addEventListener('click', () => {
-                            console.log('saklskalskalsk')
                             Promise.resolve().then(async () => {
                                 if (childContainer.getFieldLabelName() === 'Object') {
                                     const container = (childContainer as ObjectContainer)

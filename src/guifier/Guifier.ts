@@ -92,7 +92,7 @@ export default class Guifier {
             this.emptyThisElement()
             this.drawGeneratedHtmlElement()
         } catch (error) {
-            console.log(error)
+            console.error(error)
             drawError(this.params.elementSelector, error)
         }
     }
