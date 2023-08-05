@@ -5,7 +5,7 @@ An interactive front-end toolkit simplifying JSON, YAML, TOML, and XML data. Vis
 ## Getting started
 ### Installing
 By executing this command on your npm project, you can effortlessly install guifier.
-```
+```bash
 npm install guifier
 ``` 
 
