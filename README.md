@@ -59,5 +59,4 @@ guifier.setData('[1,2,3]', 'json')
 
 After executing this method, your GUI representation element will be updated to accommodate your new data.
 
-![Example Image](./images/set_data_guifier.png)
 ![Example Image](https://raw.githubusercontent.com/maliknajjar/guifier/main/images/set_data_guifier.png)
