@@ -9,7 +9,11 @@ async function init (): Promise<void> {
     const params: Parameters = {
         elementSelector: '#app',
         data: exampleData,
-        dataType: DataType.Json
+        dataType: DataType.Json,
+        onChange: () => {
+            console.log('guifier has changed')
+            console.log(guifier.getData(DataType.Json))
+        }
     }
 
     const guifier = new Guifier(params)
@@ -19,7 +23,7 @@ async function init (): Promise<void> {
         if (e.keyCode === 83) {
             console.log('printing the Data object')
             console.log(guifier.getData(DataType.Json))
-            guifier.setData('{"sasa":null}', DataType.Json)
+            // guifier.setData('{"sasa":null}', DataType.Json)
         }
     })
 }

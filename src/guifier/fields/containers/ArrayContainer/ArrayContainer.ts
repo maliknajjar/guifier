@@ -345,11 +345,11 @@ export class ArrayContainer extends Container {
             if (this.containerLength === 0) {
                 this.contentBody.append(this.drawEmptyContent(true))
             }
-        }, animationMilliSeconds)
 
-        if (this.params.onChange !== undefined) {
-            this.params.onChange()
-        }
+            if (this.params.onChange !== undefined) {
+                this.params.onChange()
+            }
+        }, animationMilliSeconds)
     }
 
     /**
