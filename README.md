@@ -8,6 +8,21 @@ By executing this command on your npm project, you can effortlessly install guif
 ```
 npm install guifier
 ``` 
+
+### Importing
+```js
+import Guifier from 'guifier'
+```
+Or import it as a cdn by adding this script tag to you html page
+```html
+<script src="https://cdn.jsdelivr.net/npm/guifier/dist/Guifier.js"></script>
+```
+
+You can specify a version like this
+```html
+<script src="https://cdn.jsdelivr.net/npm/guifier@1.0.8/dist/Guifier.js"></script>
+```
+
 ### Hello world example
 Below, you'll find an example demonstrating how to generate an HTML representation based on the data you provided to the Guifier class.
 ```js
