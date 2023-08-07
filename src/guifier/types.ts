@@ -18,7 +18,7 @@ export const ParameterSchema = z.object({
     expandFieldsToFullWidth: z.boolean().optional().default(false),
     readOnlyMode: z.boolean().optional().default(false),
     onChange: z.function().optional(),
-    xmlRootName: z.string().optional().default('root')
+    xmlRootName: z.any()
 })
 /**
  * Represents the object that gets passed to the instantiated Guifier object
