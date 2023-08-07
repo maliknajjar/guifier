@@ -10,6 +10,7 @@ import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
 import * as yaml from 'js-yaml'
 import lodash from 'lodash'
+import xmlFormat from 'xml-formatter'
 
 /**
  * Represents the guifier parsed data
@@ -25,7 +26,7 @@ export class Data {
         this.params = params
 
         // converting data types string into a js object
-        this.rawData = Data.deserializeData(data, dataType)
+        this.rawData = this.deserializeData(data, dataType)
 
         // adding meta data (private properties) to the properties that dont have them
         this.parsedData = this.addMetaDataRecursively(this.rawData, 'root')
@@ -48,7 +49,7 @@ export class Data {
             lodash.set(exportedData, objectPath, clone(obj._value))
         }
 
-        return Data.serializeData(exportedData, dataType)
+        return this.serializeData(exportedData, dataType)
     }
 
     /**
@@ -58,7 +59,7 @@ export class Data {
      * @param {DataType} dataType is the data type
      * @returns {AnyObject} javascript object
      */
-    private static deserializeData (data: string | any, datatype: DataType): any {
+    private deserializeData (data: string | any, datatype: DataType): any {
         switch (datatype) {
             case DataType.Js:
                 return data
@@ -76,7 +77,12 @@ export class Data {
                 }
             case DataType.Xml:
                 try {
-                    return (new XMLParser()).parse(data)
+                    xmlFormat(data) // throws error when finds multiple root nodes on an xml
+                    const parsedData = (new XMLParser()).parse(data)
+                    const rootNodeName = Object.keys(parsedData)[0]
+                    this.params.xmlRootName = rootNodeName
+                    const returnedData = parsedData[rootNodeName]
+                    return returnedData
                 } catch (error: any) {
                     throw new Error(error)
                 }
@@ -98,7 +104,7 @@ export class Data {
      * @param {DataType} dataType is the data type
      * @returns {AnyObject} is data string
      */
-    private static serializeData (data: any, datatype: DataType): string | any {
+    private serializeData (data: any, datatype: DataType): string | any {
         switch (datatype) {
             case DataType.Js:
                 return data
@@ -116,7 +122,13 @@ export class Data {
                 }
             case DataType.Xml:
                 try {
-                    return (new XMLBuilder()).build(data)
+                    const returnedObject: any = {}
+                    if (this.params.xmlRootName !== undefined) {
+                        returnedObject[this.params.xmlRootName] = data
+                    } else {
+                        returnedObject.root = data
+                    }
+                    return (new XMLBuilder()).build(returnedObject)
                 } catch (error: any) {
                     throw new Error(error)
                 }

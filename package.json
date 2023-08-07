@@ -1,6 +1,6 @@
 {
   "name": "guifier",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "type": "module",
   "license": "GPL-3.0",
   "description": "An interactive front-end toolkit simplifying JSON, YAML, TOML, and XML data. Visualize, edit, convert formats, and perform real-time data manipulations. Empower your data-driven apps with user-friendly data processing and interactive visualization.",
@@ -74,6 +74,7 @@
     "toml": "^3.0.0",
     "toml-patch": "^0.2.3",
     "vite-plugin-css-injected-by-js": "^3.2.1",
+    "xml-formatter": "^3.5.0",
     "zod": "^3.21.4"
   }
 }

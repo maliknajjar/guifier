@@ -9,10 +9,10 @@ async function init (): Promise<void> {
     const params: Parameters = {
         elementSelector: '#app',
         data: exampleData,
-        dataType: DataType.Json,
+        dataType: DataType.Xml,
         onChange: () => {
             console.log('guifier has changed')
-            console.log(guifier.getData(DataType.Json))
+            console.log(guifier.getData(DataType.Xml))
         }
     }
 
@@ -22,7 +22,7 @@ async function init (): Promise<void> {
         // press on s key on the keyboard to show the big Data object
         if (e.keyCode === 83) {
             console.log('printing the Data object')
-            console.log(guifier.getData(DataType.Json))
+            console.log(guifier.getData(DataType.Xml))
             // guifier.setData('{"sasa":null}', DataType.Json)
         }
     })

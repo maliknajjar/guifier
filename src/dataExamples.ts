@@ -1,45 +1,46 @@
-export const exampleData = `{
-  "name": "Alice",
-  "brother": null,
-  "age": 25,
-  "isStudent": true,
-  "hobbies": ["reading", "painting"],
-  "address": {
-    "city": "London",
-    "zipcode": "SW1A 1AA",
-    "country": "United Kingdom"
-  }
-}`
+// export const exampleData = `{
+//   "name": "Alice",
+//   "brother": null,
+//   "age": 25,
+//   "isStudent": true,
+//   "hobbies": ["reading", "painting"],
+//   "address": {
+//     "city": "London",
+//     "zipcode": "SW1A 1AA",
+//     "country": "United Kingdom"
+//   }
+// }`
 
-// export const exampleData = `
-//     <string>
-//         <_params>
-//             <fullWidth>true</fullWidth>
-//         </_params>
-//         <_value>Hello, world!</_value>
-//     </string>
-//     <number>42</number>
-//     <boolean>true</boolean>
-//     <array>1</array>
-//     <array>2</array>
-//     <array>3</array>
-//     <object>
-//         <nestedString>I am nested!</nestedString>
-//         <nestedNumber>3.14</nestedNumber>
-//         <nestedBoolean>false</nestedBoolean>
-//         <nestedArray>apple</nestedArray>
-//         <nestedArray>banana</nestedArray>
-//         <nestedArray>orange</nestedArray>
-//         <nestedObject>
-//             <deeplyNestedString>I am deeply nested!</deeplyNestedString>
-//             <deeplyNestedNumber>2.71828</deeplyNestedNumber>
-//             <deeplyNestedBoolean>true</deeplyNestedBoolean>
-//             <deeplyNestedArray>true</deeplyNestedArray>
-//             <deeplyNestedArray>false</deeplyNestedArray>
-//             <deeplyNestedArray>true</deeplyNestedArray>
-//         </nestedObject>
-//     </object>
-// `
+export const exampleData = `<rootElement>
+  <string>
+      <_params>
+          <fullWidth>true</fullWidth>
+      </_params>
+      <_value>Hello, world!</_value>
+  </string>
+  <number>42</number>
+  <boolean>true</boolean>
+  <array>1</array>
+  <array>2</array>
+  <array>3</array>
+  <object>
+      <nestedString>I am nested!</nestedString>
+      <nestedNumber>3.14</nestedNumber>
+      <nestedBoolean>false</nestedBoolean>
+      <nestedArray>apple</nestedArray>
+      <nestedArray>banana</nestedArray>
+      <nestedArray>orange</nestedArray>
+      <nestedObject>
+          <deeplyNestedString>I am deeply nested!</deeplyNestedString>
+          <deeplyNestedNumber>2.71828</deeplyNestedNumber>
+          <deeplyNestedBoolean>true</deeplyNestedBoolean>
+          <deeplyNestedArray>true</deeplyNestedArray>
+          <deeplyNestedArray>false</deeplyNestedArray>
+          <deeplyNestedArray>true</deeplyNestedArray>
+      </nestedObject>
+  </object>
+</rootElement>
+`
 
 // export const exampleData = `
 //     title = "TOML Configuration Example"
