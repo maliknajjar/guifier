@@ -13,7 +13,7 @@ npm install guifier
 ```js
 import Guifier from 'guifier'
 ```
-Or import it as a cdn by adding this script tag to you html page
+Or import it as a cdn by adding this script tag to your html page
 ```html
 <script src="https://cdn.jsdelivr.net/npm/guifier/dist/Guifier.js"></script>
 ```
