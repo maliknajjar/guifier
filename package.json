@@ -2,7 +2,7 @@
   "name": "guifier",
   "version": "1.0.11",
   "type": "module",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "description": "An interactive front-end toolkit simplifying JSON, YAML, TOML, and XML data. Visualize, edit, convert formats, and perform real-time data manipulations. Empower your data-driven apps with user-friendly data processing and interactive visualization.",
   "repository": {
     "type": "git",
