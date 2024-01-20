@@ -1,0 +1,17 @@
+name: Publish Package to npmjs
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm login --registry=https://registry.npmjs.org/ --scope=@your-scope --always-auth --//registry.npmjs.org/:_authToken=${{secrets.NPM_ACCESS_TOKEN}}
+      - run: npm publish
