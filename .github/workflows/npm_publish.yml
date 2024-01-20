@@ -22,5 +22,6 @@ jobs:
         with:
           owner: maliknajjar
           repo: guifier_website
+          workflow_file_name: dockerization.yml
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           wait_workflow: false
