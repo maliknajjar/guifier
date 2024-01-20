@@ -20,7 +20,8 @@
 }
 
 .guifierCard:hover {
-    border-color: grey;
+    border-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.025);
 }
 
 .cardIconElement .material-icons-outlined {

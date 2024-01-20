@@ -69,8 +69,10 @@ export class NumberField extends Field {
         const minusIcon = drawOutlineIcon('remove')
         minusButtonElement.classList.add('guifierNumberButton')
         minusButtonElement.append(minusIcon)
-        minusButtonElement.addEventListener('mousedown', () => {
-            this.keyDownInputButtonsEventHandler(inputElement, false)
+        minusButtonElement.addEventListener('mousedown', (event: MouseEvent) => {
+            if (event.button === 0) {
+                this.keyDownInputButtonsEventHandler(inputElement, false)
+            }
         })
         minusButtonElement.addEventListener('mouseup', () => {
             this.keyUpInputButtonsEventHandler()
@@ -80,8 +82,10 @@ export class NumberField extends Field {
         const plusIcon = drawOutlineIcon('add')
         plusButtonElement.classList.add('guifierNumberButton')
         plusButtonElement.append(plusIcon)
-        plusButtonElement.addEventListener('mousedown', () => {
-            this.keyDownInputButtonsEventHandler(inputElement, true)
+        plusButtonElement.addEventListener('mousedown', (event) => {
+            if (event.button === 0) {
+                this.keyDownInputButtonsEventHandler(inputElement, true)
+            }
         })
         plusButtonElement.addEventListener('mouseup', () => {
             this.keyUpInputButtonsEventHandler()
