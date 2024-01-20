@@ -320,36 +320,27 @@ export class ArrayContainer extends Container {
         if (guifierArrayFieldContainers[elementIndex].classList.contains('guifierContainerFieldType')) {
             guifierArrayFieldContainers[elementIndex].nextElementSibling?.remove()
         }
-        const animationMilliSeconds = 150
-        const height = guifierArrayFieldContainers[elementIndex].offsetHeight
-        guifierArrayFieldContainers[elementIndex].style.height = `${height}px`
-        guifierArrayFieldContainers[elementIndex].style.transition = `${animationMilliSeconds}ms`
-        setTimeout(() => {
-            guifierArrayFieldContainers[elementIndex].classList.add('guifierHeightZero')
-            guifierArrayFieldContainers[elementIndex].classList.add('guifierOpacityZero')
-        }, 0)
-        setTimeout(() => {
-            guifierArrayFieldContainers[elementIndex].remove()
-            // remove the element from the data
-            const path = lodash.cloneDeep(this.property._path)
 
-            // adding the index element to the path
-            path.push(elementIndex)
-            this.data.removeData(path)
+        guifierArrayFieldContainers[elementIndex].remove()
+        // remove the element from the data
+        const path = lodash.cloneDeep(this.property._path)
 
-            // redrawing the index label and the background color of the array elements in the html
-            this.resetElementsUiInArrayContainer()
+        // adding the index element to the path
+        path.push(elementIndex)
+        this.data.removeData(path)
 
-            // reducing the counter
-            this.containerLength--
-            if (this.containerLength === 0) {
-                this.contentBody.append(this.drawEmptyContent(true))
-            }
+        // redrawing the index label and the background color of the array elements in the html
+        this.resetElementsUiInArrayContainer()
 
-            if (this.params.onChange !== undefined) {
-                this.params.onChange()
-            }
-        }, animationMilliSeconds)
+        // reducing the counter
+        this.containerLength--
+        if (this.containerLength === 0) {
+            this.contentBody.append(this.drawEmptyContent(true))
+        }
+
+        if (this.params.onChange !== undefined) {
+            this.params.onChange()
+        }
     }
 
     /**
