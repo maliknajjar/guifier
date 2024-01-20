@@ -9,12 +9,18 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      # - uses: actions/checkout@v4
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: "20"
+      # - run: npm ci
+      # - run: npm run build
+      # - uses: JS-DevTools/npm-publish@v3
+      #   with:
+      #     token: ${{ secrets.NPM_ACCESS_TOKEN }}
+      - uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
-          node-version: "20"
-      - run: npm ci
-      - run: npm run build
-      - uses: JS-DevTools/npm-publish@v3
-        with:
-          token: ${{ secrets.NPM_ACCESS_TOKEN }}
+          owner: maliknajjar
+          repo: guifier_website
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          wait_workflow: false
