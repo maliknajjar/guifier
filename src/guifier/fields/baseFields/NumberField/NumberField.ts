@@ -92,11 +92,11 @@ export class NumberField extends Field {
         })
 
         if (this.showSecondaryColors) {
-            minusButtonElement.classList.add('guifierSecondaryBgColor')
-            plusButtonElement.classList.add('guifierSecondaryBgColor')
-        } else {
             minusButtonElement.classList.add('guifierPrimaryBgColor')
             plusButtonElement.classList.add('guifierPrimaryBgColor')
+        } else {
+            minusButtonElement.classList.add('guifierSecondaryBgColor')
+            plusButtonElement.classList.add('guifierSecondaryBgColor')
         }
 
         buttonsContainerElement.append(minusButtonElement)

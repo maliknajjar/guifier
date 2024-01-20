@@ -12,7 +12,7 @@
     --header-horizontal-padding: 15px;
     --primary-border-color: #CDD0DE;
     --primary-border-width: 2px;
-    --primary-border: var(--primary-border-width) solid var(--primary-border-color);
+    --primary-border: 2px solid var(--primary-border-color);
     --primary-border-radius: 7.5px;
     --primary-selected-border: 2px solid #1D5EFF;
 }

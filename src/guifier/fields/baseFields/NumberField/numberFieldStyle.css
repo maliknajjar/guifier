@@ -1,4 +1,6 @@
 .guifierNumberInputContainer {
+    display: flex;
+    gap: 6px;
     position: relative;
     flex: 1;
 }
@@ -32,22 +34,32 @@
 }
 
 .guifierButtonsContainer {
-    position: absolute;
     display: flex;
-    height: 100%;
-    top: 0;
-    right: 0;
-    padding: 6px;
-    gap: 6px;
+    flex-direction: column;
+    flex: 1;
 }
 
 .guifierNumberButton {
     display: flex;
+    flex: 1;
     justify-content: center;
     align-items: center;
-    width: 34px;
-    border: var(--primary-border);
-    border-radius: 10px;
+    width: 30px;
     color: #888E9D;
     cursor: pointer;
+    border: var(--primary-border);
+    border-radius: 10px 10px 0 0;
+}
+
+.guifierNumberButton:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.guifierNumberButton:last-child {
+    border-radius: 0 0 10px 10px;
+    border-top: none;
+}
+
+.guifierNumberButton span {
+    font-size: small;
 }
