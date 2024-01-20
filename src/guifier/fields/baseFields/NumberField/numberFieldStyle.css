@@ -7,7 +7,6 @@
 
 .guifierNumberField {
     padding: 7.5px 15px;
-    padding-right: 85px;
     border-radius: 10px;
     border: var(--primary-border);
     outline: 3px solid transparent;
@@ -35,7 +34,7 @@
 
 .guifierButtonsContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     flex: 1;
 }
 
@@ -52,12 +51,12 @@
 }
 
 .guifierNumberButton:first-child {
-    border-radius: 10px 10px 0 0;
+    border-radius: 0 0 10px 10px;
 }
 
 .guifierNumberButton:last-child {
-    border-radius: 0 0 10px 10px;
-    border-top: none;
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
 }
 
 .guifierNumberButton span {
