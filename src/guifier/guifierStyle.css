@@ -1,19 +1,19 @@
 /* global variables */
 :root {
     --primary-color: #1D5EFF;
-    --primary-lighter-color: #B7C7F2;
-    --primary-text-color: #575757;
-    --primary-bg-color: #F5F7FB;
-    --secondary-bg-color: #FFFFFF;
-    --primary-padding-double: 40px;
+    --second-color: #B7C7F2;
+    --third-color: #575757;
+    --fourth-color: #F5F7FB;
+    --fifth-color: #FFFFFF;
     --primary-padding: 20px;
-    --secondary-padding: 10px;
+    --second-padding: 10px;
     --primary-grid-gap: 20px;
     --header-horizontal-padding: 15px;
-    --primary-border-color: #CDD0DE;
     --primary-border-width: 2px;
-    --primary-border: 2px solid var(--primary-border-color);
-    --primary-border-radius: 7.5px;
+    --container-border-radius: 7.5px;
+    --primary-border: 2px solid #CDD0DE;
+    --second-border: 1px solid #CDD0DE;
+    --primary-dashed-border: 2px dashed #CDD0DE;
     --primary-selected-border: 2px solid #1D5EFF;
 }
 
@@ -42,11 +42,11 @@
 }
 
 .guifierPrimaryBgColor {
-    background-color: var(--primary-bg-color);
+    background-color: var(--fourth-color);
 }
 
 .guifierSecondaryBgColor {
-    background-color: var(--secondary-bg-color);
+    background-color: var(--fifth-color);
 }
 
 .guifierPrimaryMarginTop {
@@ -57,16 +57,8 @@
     margin-bottom: var(--primary-padding);
 }
 
-.guifierSecondaryMarginTop {
-    margin-top: var(--secondary-padding);
-}
-
-.guifierSecondaryMarginBottom {
-    margin-bottom: var(--secondary-padding);
-}
-
 .guifierPrimaryTextColor {
-    color: var(--primary-text-color);
+    color: var(--third-color);
 }
 
 .guifierPrimaryTextMediumSize {
@@ -106,7 +98,7 @@
 /* error container styles */
 .guifierErrorContainer {
     background-color: rgba(255, 0, 0, 0.1);
-    border-radius: var(--primary-border-radius);
+    border-radius: var(--container-border-radius);
     border: 2px solid rgba(255, 0, 0, 0.25);
     height: 100%;
 }

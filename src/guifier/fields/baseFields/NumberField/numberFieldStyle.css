@@ -18,7 +18,7 @@
 
 .guifierNumberField:focus {
     border: 2px solid var(--primary-color);
-    outline: 3px solid var(--primary-lighter-color);
+    outline: 3px solid var(--second-color);
 }
 
 /* this like removes the arrows in the number type input */

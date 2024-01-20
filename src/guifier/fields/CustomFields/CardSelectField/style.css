@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     border: var(--primary-border);
-    border-radius: var(--primary-border-radius);
+    border-radius: var(--container-border-radius);
     padding: 15px;
     height: 75px;
     cursor: pointer;
@@ -31,7 +31,7 @@
 
 .guifierSelectedCard {
     border-color: var(--primary-color) !important;
-    outline: 3px solid var(--primary-lighter-color);
+    outline: 3px solid var(--second-color);
 }
 
 .cardTextElement {

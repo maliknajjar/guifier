@@ -12,7 +12,7 @@
     transition: 150ms;
     opacity: 1;
     backdrop-filter: blur(2px);
-    border-radius: var(--primary-border-radius);
+    border-radius: var(--container-border-radius);
 }
 
 .guifierDialogContainer {
@@ -24,7 +24,7 @@
     background-color: white;
     box-shadow: rgb(255, 255, 255) 0px 0px 100px;
     border: var(--primary-border);
-    border-radius: var(--primary-border-radius);
+    border-radius: var(--container-border-radius);
 }
 
 .guifierDialogContainerTitle {
@@ -64,8 +64,8 @@
 
 .guifierDialogCancelButton {
     border: var(--primary-border);
-    background-color: var(--primary-bg-color);
-    color: var(--primary-text-color);
+    background-color: var(--fourth-color);
+    color: var(--third-color);
 }
 
 .guifierDialogCancelButton:hover {

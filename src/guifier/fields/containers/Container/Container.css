@@ -8,14 +8,14 @@
     flex-direction: column;
     height: 100%;
     border: var(--primary-border);
-    border-radius: var(--primary-border-radius);
+    border-radius: var(--container-border-radius);
 }
 
 .guifierContainerHeader {
     display: flex;
     justify-content: space-between;
     font-size: larger;
-    color: var(--primary-text-color);
+    color: var(--third-color);
     padding: var(--header-horizontal-padding) var(--primary-grid-gap);
     padding-right: 15px;
 }
@@ -61,12 +61,12 @@
 }
 
 .guifierArrayContainerbody .emptyContentContianerWrapper {
-    padding: var(--primary-padding-double);
+    padding: var(--primary-padding);
 }
 
 .guifierEmptyTitle {
     margin: 0;
-    color: var(--primary-text-color);
+    color: var(--third-color);
     font-size: large;
 }
 
@@ -86,15 +86,16 @@
     background-color: var(--primary-color);
     padding: 5px 10px;
     padding-left: 19px;
-    border-radius: var(--primary-border-radius);
+    border-radius: var(--container-border-radius);
     color: white;
     cursor: pointer;
     font-weight: bold;
     font-size: small;
     margin-top: 15px;
-    box-shadow: #1d5dff5e 0px 0px 25px 0px;
 }
 
 .guifierEmptyButton:hover {
     background-color: #1d5dffec;
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)),
+        linear-gradient(var(--primary-color), var(--primary-color));
 }

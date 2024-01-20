@@ -41,8 +41,8 @@
 }
 
 .fieldButtons > * {
-    color: var(--primary-text-color);
-    border: 1px solid var(--primary-border-color);
+    color: var(--third-color);
+    border: var(--second-border);
     /* background-color: white; */
     padding: 5px;
     border-radius: 100%;
