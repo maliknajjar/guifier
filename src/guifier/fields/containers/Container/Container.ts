@@ -149,8 +149,12 @@ export abstract class Container extends Field {
         // creating the key part of the header
         const objectName = this.property._key
         const guifierContainerHeaderKeyName = document.createElement('div')
+        // adding an icon
+        if (this.property._path.length !== 1) {
+            guifierContainerHeaderKeyName.append(drawOutlineIcon(this.property._valueType === 'array' ? 'data_array' : 'data_object'))
+        }
         guifierContainerHeaderKeyName.classList.add('guifierContainerHeaderKeyName')
-        guifierContainerHeaderKeyName.innerHTML = this.property._path.length === 1 ? this.params.rootContainerName : `${objectName}`
+        guifierContainerHeaderKeyName.append(this.property._path.length === 1 ? this.params.rootContainerName : objectName.toString())
         guifierContainerHeader.append(guifierContainerHeaderKeyName)
 
         // todo: add this part to a function
