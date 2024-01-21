@@ -1,6 +1,6 @@
 .guifierTextField {
     padding: 7.5px 15px;
-    border-radius: 10px;
+    border-radius: var(--primary-border-radius);
     border: var(--primary-border);
     outline: 3px solid transparent;
     transition: 150ms;

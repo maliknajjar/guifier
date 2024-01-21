@@ -9,12 +9,12 @@
     --second-padding: 10px;
     --primary-grid-gap: 20px;
     --header-horizontal-padding: 15px;
+    --primary-border-radius: 10px;
     --primary-border-width: 2px;
-    --container-border-radius: 7.5px;
-    --primary-border: 2px solid #CDD0DE;
+    --primary-border: var(--primary-border-width) solid #CDD0DE;
     --second-border: 1px solid #CDD0DE;
-    --primary-dashed-border: 2px dashed #CDD0DE;
-    --primary-selected-border: 2px solid #1D5EFF;
+    --primary-dashed-border: var(--primary-border-width) dashed #CDD0DE;
+    --primary-selected-border: var(--primary-border-width) solid #1D5EFF;
 }
 
 .guifierMainWrapper * {
@@ -98,7 +98,7 @@
 /* error container styles */
 .guifierErrorContainer {
     background-color: rgba(255, 0, 0, 0.1);
-    border-radius: var(--container-border-radius);
+    border-radius: var(--primary-border-radius);
     border: 2px solid rgba(255, 0, 0, 0.25);
     height: 100%;
 }

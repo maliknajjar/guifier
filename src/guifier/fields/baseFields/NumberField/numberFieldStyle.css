@@ -7,7 +7,7 @@
 
 .guifierNumberField {
     padding: 7.5px 15px;
-    border-radius: 10px;
+    border-radius: var(--primary-border-radius);
     border: var(--primary-border);
     outline: 3px solid transparent;
     transition: 150ms;
@@ -47,15 +47,14 @@
     color: #888E9D;
     cursor: pointer;
     border: var(--primary-border);
-    border-radius: 10px 10px 0 0;
 }
 
 .guifierNumberButton:first-child {
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 var(--primary-border-radius) var(--primary-border-radius);
 }
 
 .guifierNumberButton:last-child {
-    border-radius: 10px 10px 0 0;
+    border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
     border-bottom: none;
 }
 

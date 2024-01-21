@@ -8,7 +8,7 @@
     flex-direction: column;
     height: 100%;
     border: var(--primary-border);
-    border-radius: var(--container-border-radius);
+    border-radius: var(--primary-border-radius);
 }
 
 .guifierContainerHeader {
@@ -89,7 +89,7 @@
     background-color: var(--primary-color);
     padding: 5px 10px;
     padding-left: 19px;
-    border-radius: var(--container-border-radius);
+    border-radius: var(--primary-border-radius);
     color: white;
     cursor: pointer;
     font-weight: bold;

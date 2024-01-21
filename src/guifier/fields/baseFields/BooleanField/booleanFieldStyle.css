@@ -4,7 +4,7 @@
     height: 45px;
     padding: 4px;
     border: var(--primary-border);
-    border-radius: 10px;
+    border-radius: var(--primary-border-radius);
     width: fit-content;
     color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -16,7 +16,7 @@
     justify-content: center;
     align-items: center;
     padding: 0 10px;
-    border-radius: 10px;
+    border-radius: var(--primary-border-radius);
     border: 2px solid transparent;
     transition: 150ms;
     cursor: pointer;
