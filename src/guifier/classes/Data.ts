@@ -1,6 +1,6 @@
 import clone from 'clone'
 
-import type { Property, Parameters } from '../types'
+import type { Property, ParametersInternal } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 import * as toml from 'toml'
@@ -18,10 +18,10 @@ import xmlFormat from 'xml-formatter'
 export class Data {
     public rawData: any
     public parsedData: Property = defaultProperty
-    public params: Parameters
+    public params: ParametersInternal
     private readonly path: Array<number | string> = []
 
-    constructor (data: string, dataType: DataType, params: Parameters) {
+    constructor (data: string, dataType: DataType, params: ParametersInternal) {
         // add guifier params
         this.params = params
 
@@ -29,7 +29,7 @@ export class Data {
         this.rawData = this.deserializeData(data, dataType)
 
         // adding meta data (private properties) to the properties that dont have them
-        this.parsedData = this.addMetaDataRecursively(this.rawData, 'root')
+        this.parsedData = this.addMetaDataRecursively(this.rawData, this.params.rootContainerName)
 
         // normalizing _rules array in the property meta data
         this.normalizingRules()

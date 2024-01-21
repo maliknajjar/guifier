@@ -13,6 +13,7 @@ export const ParameterSchema = z.object({
     elementSelector: z.string(),
     data: z.any(),
     dataType: z.string(),
+    rootContainerName: z.string().default('root'),
     withoutContainer: z.boolean().optional().default(false),
     flipBackgroundColors: z.boolean().optional().default(false),
     expandFieldsToFullWidth: z.boolean().optional().default(false),

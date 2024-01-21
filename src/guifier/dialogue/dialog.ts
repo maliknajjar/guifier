@@ -1,6 +1,6 @@
 import './dialog.css'
 
-import type { ParametersInternal } from '../types'
+import type { Parameters } from '../types'
 import type { DialogParameters } from './dialogTypes'
 
 import { drawOutlineIcon } from '../utils'
@@ -208,7 +208,7 @@ export class Dialog {
      * This function is responsible for drawing a grid element
      */
     private drawGuifierGeneratedContent (data: any): HTMLElement {
-        const params: ParametersInternal = {
+        const params: Parameters = {
             elementSelector: this.params.elementSelector,
             data,
             dataType: DataType.Js,

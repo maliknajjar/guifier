@@ -10,6 +10,7 @@ async function init (): Promise<void> {
         elementSelector: '#app',
         data: exampleData,
         dataType: DataType.Json,
+        rootContainerName: 'Example Object',
         onChange: () => {
             console.log('guifier has changed')
             console.log(guifier.getData(DataType.Json))
