@@ -14,10 +14,10 @@ export const ParameterSchema = z.object({
     data: z.any(),
     dataType: z.string(),
     rootContainerName: z.string().default('root'),
-    withoutContainer: z.boolean().optional().default(false),
-    flipBackgroundColors: z.boolean().optional().default(false),
-    expandFieldsToFullWidth: z.boolean().optional().default(false),
-    readOnlyMode: z.boolean().optional().default(false),
+    withoutContainer: z.boolean().default(false),
+    flipBackgroundColors: z.boolean().default(false),
+    expandFieldsToFullWidth: z.boolean().default(false),
+    readOnlyMode: z.boolean().default(false),
     onChange: z.function().optional(),
     xmlRootName: z.any()
 })

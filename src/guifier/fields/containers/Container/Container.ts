@@ -150,7 +150,7 @@ export abstract class Container extends Field {
         const objectName = this.property._key
         const guifierContainerHeaderKeyName = document.createElement('div')
         guifierContainerHeaderKeyName.classList.add('guifierContainerHeaderKeyName')
-        guifierContainerHeaderKeyName.innerHTML = `${objectName}`
+        guifierContainerHeaderKeyName.innerHTML = this.property._path.length === 1 ? this.params.rootContainerName : `${objectName}`
         guifierContainerHeader.append(guifierContainerHeaderKeyName)
 
         // todo: add this part to a function
