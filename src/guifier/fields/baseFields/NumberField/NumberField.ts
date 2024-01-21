@@ -66,7 +66,7 @@ export class NumberField extends Field {
         buttonsContainerElement.classList.add('guifierButtonsContainer')
 
         const minusButtonElement = document.createElement('div')
-        const minusIcon = drawOutlineIcon('remove')
+        const minusIcon = drawOutlineIcon('keyboard_arrow_down')
         minusButtonElement.classList.add('guifierNumberButton')
         minusButtonElement.append(minusIcon)
         minusButtonElement.addEventListener('mousedown', (event: MouseEvent) => {
@@ -79,7 +79,7 @@ export class NumberField extends Field {
         })
 
         const plusButtonElement = document.createElement('div')
-        const plusIcon = drawOutlineIcon('add')
+        const plusIcon = drawOutlineIcon('keyboard_arrow_up')
         plusButtonElement.classList.add('guifierNumberButton')
         plusButtonElement.append(plusIcon)
         plusButtonElement.addEventListener('mousedown', (event) => {
