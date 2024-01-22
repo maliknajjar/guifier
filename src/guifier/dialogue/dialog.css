@@ -13,14 +13,17 @@
     opacity: 1;
     backdrop-filter: blur(2px);
     border-radius: var(--primary-border-radius);
+    padding: 20px;
 }
 
 .guifierDialogContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 450px;
-    height: 550px;
+    width: 100%;
+    height: 100%;
+    max-width: 450px;
+    max-height: 550px;
     background-color: white;
     box-shadow: rgb(255, 255, 255) 0px 0px 100px;
     border: var(--primary-border);
