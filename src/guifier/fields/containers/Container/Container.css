@@ -52,11 +52,13 @@
     display: flex;
     flex-direction: row;
     grid-column: span 2;
+    height: 175px;
 }
 
 .emptyContentContianerWrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     flex: 1;
     padding: 0px var(--primary-padding);

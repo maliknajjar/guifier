@@ -1,6 +1,21 @@
 export const exampleData = `{
   "test": {},
-  "test2": [],
+  "test2": [
+    [
+      {
+        "array": [
+          {},
+          []
+        ]
+      },
+      [
+        [
+          {},
+          []
+        ]
+      ]
+    ]
+  ],
   "name": "Alice",
   "brother": null,
   "age": 25,
@@ -12,6 +27,27 @@ export const exampleData = `{
     "country": "United Kingdom"
   }
 }`
+
+// export const exampleData = `[
+//   "test",
+//   "test",
+//   "test",
+//   "test",
+//   "test",
+//   "test",
+//   "test",
+//   "test",
+//   "test",
+//   [
+//     "test",
+//     "test",
+//     "test",
+//     "test",
+//     "test",
+//     "test",
+//     "test"
+//   ]
+// ]`
 
 // export const exampleData = `<rootElement>
 //   <string>
