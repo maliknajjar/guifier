@@ -5,15 +5,16 @@
     --third-color: #575757;
     --fourth-color: #F5F7FB;
     --fifth-color: #FFFFFF;
+    --sixth-color: #CDD0DE;
     --primary-padding: 20px;
     --second-padding: 10px;
     --primary-grid-gap: 20px;
     --header-horizontal-padding: 15px;
     --primary-border-radius: 10px;
     --primary-border-width: 2px;
-    --primary-border: var(--primary-border-width) solid #CDD0DE;
-    --second-border: 1px solid #CDD0DE;
-    --primary-dashed-border: var(--primary-border-width) dashed #CDD0DE;
+    --primary-border: var(--primary-border-width) solid var(--sixth-color);
+    --second-border: 1px solid var(--sixth-color);
+    --primary-dashed-border: var(--primary-border-width) dashed var(--sixth-color);
     --primary-selected-border: var(--primary-border-width) solid #1D5EFF;
 }
 
@@ -30,6 +31,10 @@
 /* to keep google font icons */
 .material-icons-outlined {
     font-family: Material Icons Outlined;
+}
+
+.material-icons-outlined::selection {
+    background-color: transparent;
 }
 
 /* global classes */
