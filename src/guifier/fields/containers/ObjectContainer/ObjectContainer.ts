@@ -9,8 +9,7 @@ import { Container } from '../Container/Container'
 import { drawOutlineIcon, fieldsMetaData, getDefaultValueByFieldType, getFieldInstance, getType } from '../../../utils'
 
 import lodash from 'lodash'
-import { computePosition } from '@floating-ui/dom'
-import { flip, offset, shift } from '@floating-ui/core'
+import { computePosition, flip, offset, shift } from '@floating-ui/dom'
 import { Dialog } from '../../../dialogue/dialog'
 
 /**
@@ -170,10 +169,7 @@ export class ObjectContainer extends Container {
                         left: `${x}px`,
                         top: `${y}px`
                     })
-                }).then((res) => {
-                    console.log('done positioning')
-                    console.log(res)
-                }).catch((err) => {
+                }).then(() => {}).catch((err) => {
                     console.log('ERROR: from positioning')
                     console.log(err)
                 })

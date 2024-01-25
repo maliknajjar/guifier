@@ -5,6 +5,7 @@ import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 
 import { Field } from '../../../fields/Field/Field'
 import { drawOutlineIcon } from '../../../utils'
+import { computePosition, flip, offset, shift } from '@floating-ui/dom'
 
 export abstract class Container extends Field {
     /**
@@ -149,6 +150,7 @@ export abstract class Container extends Field {
         // creating the key part of the header
         const objectName = this.property._key
         const guifierContainerHeaderKeyName = document.createElement('div')
+
         // adding an icon
         if (this.property._path.length !== 1) {
             guifierContainerHeaderKeyName.append(drawOutlineIcon(this.property._valueType === 'array' ? 'data_array' : 'data_object'))
@@ -156,6 +158,44 @@ export abstract class Container extends Field {
         guifierContainerHeaderKeyName.classList.add('guifierContainerHeaderKeyName')
         guifierContainerHeaderKeyName.append(this.property._path.length === 1 ? this.params.rootContainerName : objectName.toString())
         guifierContainerHeader.append(guifierContainerHeaderKeyName)
+
+        // showing tooltip
+        const descriptionSymbol = document.createElement('div')
+        descriptionSymbol.classList.add('guifierDescriptionSymbol')
+        descriptionSymbol.append('!')
+        guifierContainerHeaderKeyName.append(descriptionSymbol)
+
+        // the tool tip you need to show
+        const descriptionTooltip = document.createElement('div')
+        descriptionTooltip.classList.add('guifierDescriptionTooltip')
+        descriptionTooltip.append('this is a comment about the new field that you have here man')
+        guifierContainerHeader.append(descriptionTooltip)
+        // the refrence of the tool tip
+        const descriptionTooltipRefrence = document.createElement('div')
+        descriptionTooltipRefrence.classList.add('descriptionTooltipRefrence')
+        guifierContainerHeader.append(descriptionTooltipRefrence)
+        // compute its position
+        let timeout: number = 0
+        guifierContainerHeader.addEventListener('mouseenter', () => {
+            clearTimeout(timeout)
+            computePosition(descriptionTooltipRefrence, descriptionTooltip, {
+                placement: 'top',
+                middleware: [offset(15), flip(), shift()]
+            }).then(({ x, y }) => {
+                Object.assign(descriptionTooltip.style, {
+                    left: `${x}px`,
+                    top: `${y}px`
+                })
+            }).then(() => {}).catch((err) => {
+                console.log('ERROR: from positioning')
+                console.log(err)
+            })
+        })
+        guifierContainerHeader.addEventListener('mouseleave', () => {
+            timeout = setTimeout(() => {
+                descriptionTooltip.removeAttribute('style')
+            }, 250)
+        })
 
         // todo: add this part to a function
         const guifierContainerHeaderButtons = this.drawContainerHeaderButtons()
