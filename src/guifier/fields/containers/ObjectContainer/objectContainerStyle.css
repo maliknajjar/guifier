@@ -38,23 +38,6 @@
     cursor: pointer;
 }
 
-.guifierDescriptionTooltip {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    width: 100%;
-    border-radius: var(--primary-border-radius);
-    border: var(--primary-border);
-    background-color: white;
-    padding: var(--second-padding);
-    opacity: 0;
-    height: fit-content;
-    z-index: 1;
-    transition: 250ms;
-    pointer-events: none;
-    color: var(--third-color);
-}
-
 .descriptionTooltipRefrence {
     position: absolute;
     top: 0;

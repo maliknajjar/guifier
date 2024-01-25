@@ -169,11 +169,11 @@ export abstract class Container extends Field {
         const descriptionTooltip = document.createElement('div')
         descriptionTooltip.classList.add('guifierDescriptionTooltip')
         descriptionTooltip.append('this is a comment about the new field that you have here man')
-        guifierContainerHeader.append(descriptionTooltip)
+        guifierContainerHeaderKeyName.append(descriptionTooltip)
         // the refrence of the tool tip
         const descriptionTooltipRefrence = document.createElement('div')
         descriptionTooltipRefrence.classList.add('descriptionTooltipRefrence')
-        guifierContainerHeader.append(descriptionTooltipRefrence)
+        guifierContainerHeaderKeyName.append(descriptionTooltipRefrence)
         // compute its position
         let timeout: number = 0
         guifierContainerHeader.addEventListener('mouseenter', () => {
