@@ -12,12 +12,21 @@
 }
 
 .guifierContainerHeader {
+    position: relative;
     display: flex;
     justify-content: space-between;
     font-size: larger;
     color: var(--third-color);
     padding: var(--header-horizontal-padding) var(--primary-grid-gap);
     padding-right: 15px;
+}
+
+.guifierContainerHeader .guifierDescriptionTooltip {
+    width: 95%;
+}
+
+.guifierContainerHeader:hover .guifierDescriptionTooltip {
+    opacity: 1;
 }
 
 .guifierContainerHeaderButtons {

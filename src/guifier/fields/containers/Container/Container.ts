@@ -4,7 +4,8 @@ import type { ObjectContainer } from '../ObjectContainer/ObjectContainer'
 import type { ArrayContainer } from '../ArrayContainer/ArrayContainer'
 
 import { Field } from '../../../fields/Field/Field'
-import { drawOutlineIcon } from '../../../utils'
+import { drawDescriptionSymbol, drawOutlineIcon, drawDescriptionToolTip } from '../../../utils'
+import { isEmpty } from 'lodash'
 
 export abstract class Container extends Field {
     /**
@@ -149,6 +150,7 @@ export abstract class Container extends Field {
         // creating the key part of the header
         const objectName = this.property._key
         const guifierContainerHeaderKeyName = document.createElement('div')
+
         // adding an icon
         if (this.property._path.length !== 1) {
             guifierContainerHeaderKeyName.append(drawOutlineIcon(this.property._valueType === 'array' ? 'data_array' : 'data_object'))
@@ -156,6 +158,12 @@ export abstract class Container extends Field {
         guifierContainerHeaderKeyName.classList.add('guifierContainerHeaderKeyName')
         guifierContainerHeaderKeyName.append(this.property._path.length === 1 ? this.params.rootContainerName : objectName.toString())
         guifierContainerHeader.append(guifierContainerHeaderKeyName)
+
+        // showing tooltip
+        if (!isEmpty(this.property._params.description)) {
+            guifierContainerHeaderKeyName.append(drawDescriptionSymbol())
+            drawDescriptionToolTip(this, guifierContainerHeader)
+        }
 
         // todo: add this part to a function
         const guifierContainerHeaderButtons = this.drawContainerHeaderButtons()

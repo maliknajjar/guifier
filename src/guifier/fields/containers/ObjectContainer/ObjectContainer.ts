@@ -6,9 +6,9 @@ import type { Field } from '../../Field/Field'
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
-import { drawOutlineIcon, fieldsMetaData, getDefaultValueByFieldType, getFieldInstance, getType } from '../../../utils'
+import { drawDescriptionSymbol, drawOutlineIcon, fieldsMetaData, drawDescriptionToolTip, getDefaultValueByFieldType, getFieldInstance, getType } from '../../../utils'
 
-import lodash from 'lodash'
+import lodash, { isEmpty } from 'lodash'
 import { Dialog } from '../../../dialogue/dialog'
 
 /**
@@ -115,8 +115,10 @@ export class ObjectContainer extends Container {
 
             const textPart = document.createElement('div')
             textPart.classList.add('guifierObjectLabelTextPart')
+
             const labelName = property._key
-            textPart.innerHTML = labelName.toString()
+            textPart.append(labelName.toString())
+
             labelContainer.append(textPart)
 
             const buttonsPart = document.createElement('div')
@@ -137,7 +139,14 @@ export class ObjectContainer extends Container {
             const fieldInnerContainer = document.createElement('div')
             fieldInnerContainer.classList.add('guifierObjectfieldInnerContainer')
             fieldInnerContainer.append(fieldElement)
+
             guifierObjectFieldContainer.append(fieldInnerContainer)
+
+            // showing tooltip
+            if (!isEmpty(field.property._params.description)) {
+                textPart.append(drawDescriptionSymbol())
+                drawDescriptionToolTip(field, guifierObjectFieldContainer)
+            }
 
             propertyElement = guifierObjectFieldContainer
         }

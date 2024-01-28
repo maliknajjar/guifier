@@ -1,5 +1,8 @@
 import 'material-icons/iconfont/outlined.css'
 
+import { computePosition, flip, offset, shift } from '@floating-ui/dom'
+import lodash from 'lodash'
+
 import type { AnyObject, Property, FieldsMetaData, ParametersInternal } from './types'
 import type { Field } from './fields/Field/Field'
 import type { Data } from './classes/Data'
@@ -14,7 +17,6 @@ import { NumberField } from './fields/baseFields/NumberField/NumberField'
 import { BooleanField } from './fields/baseFields/BooleanField/BooleanField'
 import { NullField } from './fields/baseFields/NullField/NullField'
 import { CardSelectField } from './fields/CustomFields/CardSelectField/CardSelectField'
-import lodash from 'lodash'
 
 /**
  * A function that tells you wether a number is odd or even
@@ -177,7 +179,7 @@ export function getFieldInstance (property: Property, data: Data, params: Parame
  * A function that draws any google font outline Icon by icon name
  *
  * @param {string} iconName is the the name of the icon you want to draw
- * @returns {Field} instance of the Field
+ * @returns {HTMLElement} instance of the Field
  */
 export function drawOutlineIcon (iconName: string): HTMLElement {
     const deleteIconElement = document.createElement('span')
@@ -185,6 +187,65 @@ export function drawOutlineIcon (iconName: string): HTMLElement {
     deleteIconElement.innerHTML = iconName
 
     return deleteIconElement
+}
+
+/**
+ * A function that draws the descriptionSymbol
+ *
+ * @returns {HTMLElement} instance of the Field
+ */
+export function drawDescriptionSymbol (): HTMLElement {
+    const descriptionSymbol = document.createElement('div')
+    descriptionSymbol.classList.add('guifierDescriptionSymbol')
+    descriptionSymbol.append('!')
+
+    return descriptionSymbol
+}
+
+/**
+ * A function that generated the description tool tip
+ */
+export function drawDescriptionToolTip (field: Field, objectFieldContainer: HTMLElement): void {
+    // the tool tip you need to show
+    const descriptionTooltip = document.createElement('div')
+    descriptionTooltip.classList.add('guifierDescriptionTooltip')
+    descriptionTooltip.insertAdjacentHTML('afterbegin', `
+        <div class="descriptionHeader">
+            <div class="guifierDescriptionSymbol">!</div>
+            <div>
+                ${field.keyName}
+                <span class="descriptionFieldType">(${field.getFieldLabelName()})</span>
+            </div>
+        </div>
+        <div class="descriptionBody">${field.property._params.description as string}</div>
+    `)
+    objectFieldContainer.append(descriptionTooltip)
+    // the refrence of the tool tip
+    const descriptionTooltipRefrence = document.createElement('div')
+    descriptionTooltipRefrence.classList.add('descriptionTooltipRefrence')
+    objectFieldContainer.append(descriptionTooltipRefrence)
+    // compute its position
+    let timeout: number = 0
+    objectFieldContainer.addEventListener('mouseenter', () => {
+        clearTimeout(timeout)
+        computePosition(descriptionTooltipRefrence, descriptionTooltip, {
+            placement: 'top',
+            middleware: [offset(15), flip(), shift()]
+        }).then(({ x, y }) => {
+            Object.assign(descriptionTooltip.style, {
+                left: `${x}px`,
+                top: `${y}px`
+            })
+        }).then(() => {}).catch((err) => {
+            console.log('ERROR: from positioning')
+            console.log(err)
+        })
+    })
+    objectFieldContainer.addEventListener('mouseleave', () => {
+        timeout = setTimeout(() => {
+            descriptionTooltip.removeAttribute('style')
+        }, 250)
+    })
 }
 
 /**
