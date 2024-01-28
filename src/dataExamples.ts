@@ -1,22 +1,39 @@
 export const exampleData = `{
-  "test": {},
-  "test2": [
-    [
-      {
-        "array": [
-          {},
-          []
-        ]
-      },
+  "test2": {
+    "_value": [
       [
+        {
+          "array": [
+            {},
+            []
+          ]
+        },
         [
-          {},
-          []
+          [
+            {},
+            []
+          ]
         ]
       ]
-    ]
-  ],
+    ],
+    "_params": {
+      "description": "this is a nested array I created for test purposes"
+    }
+  },
+  "userName": {
+    "_value": "rim",
+    "_fieldType": "text",
+    "_params": {
+      "fullWidth": true
+    }
+  },
   "name": "Alice",
+  "userAge": {
+    "_value": 22,
+    "_params": {
+      "description": "this is the age of the user"
+    }
+  },
   "brother": null,
   "age": 25,
   "isStudent": true,

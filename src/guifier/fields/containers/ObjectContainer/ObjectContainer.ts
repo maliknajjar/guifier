@@ -6,10 +6,9 @@ import type { Field } from '../../Field/Field'
 import type { CardSchemaInternal } from '../../CustomFields/CardSelectField/types'
 
 import { Container } from '../Container/Container'
-import { drawOutlineIcon, fieldsMetaData, getDefaultValueByFieldType, getFieldInstance, getType } from '../../../utils'
+import { drawDescriptionSymbol, drawOutlineIcon, fieldsMetaData, drawDescriptionToolTip, getDefaultValueByFieldType, getFieldInstance, getType } from '../../../utils'
 
-import lodash from 'lodash'
-import { computePosition, flip, offset, shift } from '@floating-ui/dom'
+import lodash, { isEmpty } from 'lodash'
 import { Dialog } from '../../../dialogue/dialog'
 
 /**
@@ -120,11 +119,6 @@ export class ObjectContainer extends Container {
             const labelName = property._key
             textPart.append(labelName.toString())
 
-            const descriptionSymbol = document.createElement('div')
-            descriptionSymbol.classList.add('guifierDescriptionSymbol')
-            descriptionSymbol.append('!')
-            textPart.append(descriptionSymbol)
-
             labelContainer.append(textPart)
 
             const buttonsPart = document.createElement('div')
@@ -148,37 +142,11 @@ export class ObjectContainer extends Container {
 
             guifierObjectFieldContainer.append(fieldInnerContainer)
 
-            // the tool tip you need to show
-            const descriptionTooltip = document.createElement('div')
-            descriptionTooltip.classList.add('guifierDescriptionTooltip')
-            descriptionTooltip.append('this is a comment about the new field that you have here man')
-            guifierObjectFieldContainer.append(descriptionTooltip)
-            // the refrence of the tool tip
-            const descriptionTooltipRefrence = document.createElement('div')
-            descriptionTooltipRefrence.classList.add('descriptionTooltipRefrence')
-            guifierObjectFieldContainer.append(descriptionTooltipRefrence)
-            // compute its position
-            let timeout: number = 0
-            guifierObjectFieldContainer.addEventListener('mouseenter', () => {
-                clearTimeout(timeout)
-                computePosition(descriptionTooltipRefrence, descriptionTooltip, {
-                    placement: 'top',
-                    middleware: [offset(15), flip(), shift()]
-                }).then(({ x, y }) => {
-                    Object.assign(descriptionTooltip.style, {
-                        left: `${x}px`,
-                        top: `${y}px`
-                    })
-                }).then(() => {}).catch((err) => {
-                    console.log('ERROR: from positioning')
-                    console.log(err)
-                })
-            })
-            guifierObjectFieldContainer.addEventListener('mouseleave', () => {
-                timeout = setTimeout(() => {
-                    descriptionTooltip.removeAttribute('style')
-                }, 250)
-            })
+            // showing tooltip
+            if (!isEmpty(field.property._params.description)) {
+                textPart.append(drawDescriptionSymbol())
+                drawDescriptionToolTip(field, guifierObjectFieldContainer)
+            }
 
             propertyElement = guifierObjectFieldContainer
         }

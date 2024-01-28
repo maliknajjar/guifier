@@ -126,10 +126,7 @@
     bottom: 15px;
     left: 15px;
     width: 100%;
-    border-radius: var(--primary-border-radius);
-    border: var(--primary-border);
     background-color: white;
-    padding: var(--second-padding);
     opacity: 0;
     height: fit-content;
     font-weight: normal;
@@ -138,4 +135,32 @@
     transition: 250ms;
     pointer-events: none;
     color: var(--third-color);
+    /* transform: translateX(7.5px); */
+    border-radius: var(--primary-border-radius);
+}
+
+.guifierDescriptionTooltip .descriptionHeader {
+    display: flex;
+    align-items: center;
+    gap: 7.5px;
+    border: var(--primary-border);
+    padding: 7.5px;
+    border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
+    font-weight: bold;
+}
+
+.guifierDescriptionTooltip .descriptionHeader .guifierDescriptionSymbol {
+    color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0.5);
+}
+
+.guifierDescriptionTooltip .descriptionHeader .descriptionFieldType {
+    color: mediumslateblue;
+}
+
+.guifierDescriptionTooltip .descriptionBody {
+    border: var(--primary-border);
+    border-top: none;
+    padding: var(--second-padding);
+    border-radius: 0 0 var(--primary-border-radius) var(--primary-border-radius);
 }
