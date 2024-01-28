@@ -20,13 +20,6 @@ export const exampleData = `{
       "description": "this is a nested array I created for test purposes"
     }
   },
-  "userName": {
-    "_value": "rim",
-    "_fieldType": "text",
-    "_params": {
-      "fullWidth": true
-    }
-  },
   "name": "Alice",
   "userAge": {
     "_value": 22,
