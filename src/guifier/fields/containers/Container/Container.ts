@@ -183,7 +183,7 @@ export abstract class Container extends Field {
         guifierContainerHeaderButtons.classList.add('guifierContainerHeaderButtons')
 
         if (!this.params.readOnlyMode) {
-            if (this.containerInFirstLevel() && this.params.fullScrean) {
+            if (this.containerInFirstLevel() && this.params.fullScreen) {
                 guifierContainerHeaderButtons.append(this.drawFullScreenButton())
             }
             if (!this.containerInFirstLevel()) {

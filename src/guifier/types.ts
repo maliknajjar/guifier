@@ -20,7 +20,7 @@ export const ParameterSchema = z.object({
     readOnlyMode: z.boolean().default(false),
     onChange: z.function().optional(),
     xmlRootName: z.any(),
-    fullScrean: z.boolean().default(false)
+    fullScreen: z.boolean().default(false)
 })
 /**
  * Represents the object that gets passed to the instantiated Guifier object

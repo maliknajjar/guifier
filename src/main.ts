@@ -11,7 +11,7 @@ async function init (): Promise<void> {
         data: exampleData,
         dataType: DataType.Json,
         rootContainerName: 'Example Object',
-        fullScrean: true,
+        fullScreen: true,
         onChange: () => {
             console.log('guifier has changed')
             console.log(guifier.getData(DataType.Json))
