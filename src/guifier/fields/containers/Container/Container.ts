@@ -183,7 +183,12 @@ export abstract class Container extends Field {
         guifierContainerHeaderButtons.classList.add('guifierContainerHeaderButtons')
 
         if (!this.params.readOnlyMode) {
-            if (!this.containerInFirstLevel()) guifierContainerHeaderButtons.append(this.drawDeleteButton())
+            if (this.containerInFirstLevel() && this.params.fullScrean) {
+                guifierContainerHeaderButtons.append(this.drawFullScreenButton())
+            }
+            if (!this.containerInFirstLevel()) {
+                guifierContainerHeaderButtons.append(this.drawDeleteButton())
+            }
             guifierContainerHeaderButtons.append(this.drawAddButton())
         }
         if (!this.containerInFirstLevel()) guifierContainerHeaderButtons.append(this.drawCollapseButton(collapseButtonDown))
@@ -271,5 +276,40 @@ export abstract class Container extends Field {
         const iconElement = drawOutlineIcon('add')
 
         return iconElement
+    }
+
+    /**
+     * This function is responsible for drawing the fullScreen button for the container field
+     *
+     * @returns {HTMLElement} html element object
+     */
+    protected drawFullScreenButton (): HTMLElement {
+        const fullScreenButton = drawOutlineIcon('fullscreen')
+        const fullScreenExitButton = drawOutlineIcon('fullscreen_exit')
+        fullScreenExitButton.setAttribute('style', 'display: none')
+
+        const fullScreenContainer = document.createElement('span')
+        fullScreenContainer.style.height = '25px'
+        fullScreenContainer.append(fullScreenButton)
+        fullScreenContainer.append(fullScreenExitButton)
+
+        fullScreenContainer.addEventListener('click', () => {
+            const mainContainer = document.querySelector(this.params.elementSelector) as HTMLElement
+            if (fullScreenButton.getAttribute('style') !== null) {
+                // when its not full screen
+                fullScreenExitButton.setAttribute('style', 'display: none')
+                fullScreenButton.removeAttribute('style')
+                void document.exitFullscreen()
+                mainContainer.removeAttribute('style')
+            } else {
+                // when its fullscreen
+                fullScreenButton.setAttribute('style', 'display: none')
+                fullScreenExitButton.removeAttribute('style')
+                void mainContainer?.requestFullscreen()
+                mainContainer.setAttribute('style', 'padding: 2vw')
+            }
+        })
+
+        return fullScreenContainer
     }
 }
