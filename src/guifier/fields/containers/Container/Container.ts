@@ -293,8 +293,8 @@ export abstract class Container extends Field {
         fullScreenContainer.append(fullScreenButton)
         fullScreenContainer.append(fullScreenExitButton)
 
+        const mainContainer = document.querySelector(this.params.elementSelector) as HTMLElement
         fullScreenContainer.addEventListener('click', () => {
-            const mainContainer = document.querySelector(this.params.elementSelector) as HTMLElement
             if (fullScreenButton.getAttribute('style') !== null) {
                 // when its not full screen
                 fullScreenExitButton.setAttribute('style', 'display: none')
@@ -307,6 +307,14 @@ export abstract class Container extends Field {
                 fullScreenExitButton.removeAttribute('style')
                 void mainContainer?.requestFullscreen()
                 mainContainer.setAttribute('style', 'padding: 2vw')
+            }
+        })
+
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement === null) {
+                fullScreenExitButton.setAttribute('style', 'display: none')
+                fullScreenButton.removeAttribute('style')
+                mainContainer.removeAttribute('style')
             }
         })
 
