@@ -3,8 +3,7 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
-import * as toml from 'toml'
-import { stringify as tomlStringify } from 'toml-patch'
+import { parse as tomlParse, stringify as tomlStringify } from 'smol-toml'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -88,7 +87,7 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    return toml.parse(data)
+                    return tomlParse(data)
                 } catch (error: any) {
                     throw new Error(error)
                 }
@@ -240,7 +239,6 @@ export class Data {
         } else {
             returnedObject._fieldType = field._fieldType
         }
-
         return returnedObject
     }
 
