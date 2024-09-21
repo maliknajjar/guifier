@@ -21,4 +21,5 @@ export enum PrimitiveTypes {
     Null = 'null',
     Undefined = 'undefined',
     NaN = 'NaN',
+    Date = 'Date',
 }

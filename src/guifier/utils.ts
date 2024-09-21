@@ -17,6 +17,7 @@ import { NumberField } from './fields/baseFields/NumberField/NumberField'
 import { BooleanField } from './fields/baseFields/BooleanField/BooleanField'
 import { NullField } from './fields/baseFields/NullField/NullField'
 import { CardSelectField } from './fields/CustomFields/CardSelectField/CardSelectField'
+import { DateField } from './fields/baseFields/DateField/DateField'
 
 /**
  * A function that tells you wether a number is odd or even
@@ -49,6 +50,8 @@ export function getType (value: any): PrimitiveTypes {
     if (type === PrimitiveTypes.Object) {
         if (Array.isArray(value)) {
             return PrimitiveTypes.Array
+        } else if (lodash.isDate(value)) {
+            return PrimitiveTypes.Date
         } else if (value === null) {
             return PrimitiveTypes.Null
         } else {
@@ -152,6 +155,13 @@ export const fieldsMetaData: FieldsMetaData = {
         getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
             return new CardSelectField(property, data, params)
         }
+    },
+    date: {
+        staticObject: DateField,
+        defaultValue: new Date(),
+        getInstantiatedObject: (property: Property, data: Data, params: ParametersInternal) => {
+            return new DateField(property, data, params)
+        }
     }
 }
 
@@ -170,6 +180,9 @@ export function getDefaultValueByFieldType (fieldType: string): Field {
  */
 export function getFieldInstance (property: Property, data: Data, params: ParametersInternal): Field {
     if (property._fieldType !== undefined) {
+        console.log('NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN')
+        console.log(property._fieldType)
+        console.log(fieldsMetaData[property._fieldType])
         return fieldsMetaData[property._fieldType].getInstantiatedObject(property, data, params)
     }
     throw new Error('property._fieldType is undefined')
@@ -272,6 +285,8 @@ export function getPrimitiveEnumByStringType (stringType: string): PrimitiveType
  * if the field type wasnt specified by the user
  */
 export function getFieldTypeByValuetype (valueType: string): string {
+    console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
+    console.log(valueType)
     switch (valueType) {
         case 'string':
             return 'text'
@@ -289,6 +304,8 @@ export function getFieldTypeByValuetype (valueType: string): string {
             return 'undefined'
         case 'NaN':
             return 'null'
+        case 'Date':
+            return 'date'
         default:
             throw new Error('value type is not supported')
     }

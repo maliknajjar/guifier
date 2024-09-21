@@ -9,7 +9,7 @@ async function init (): Promise<void> {
     const params: Parameters = {
         elementSelector: '#app',
         data: exampleData,
-        dataType: DataType.Json,
+        dataType: DataType.Toml,
         rootContainerName: 'Example Object',
         fullScreen: true,
         onChange: () => {
