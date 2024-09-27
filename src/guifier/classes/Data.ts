@@ -3,7 +3,7 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
-import { parse as tomlParse, stringify as tomlStringify } from 'smol-toml'
+import { TomlDate, parse as tomlParse, stringify as tomlStringify } from 'smol-toml'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -133,7 +133,13 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    return tomlStringify(data)
+                    const processedData = lodash.cloneDeepWith(data, (value: any, key: any) => {
+                        if (value instanceof Date) {
+                            value = new TomlDate(value.toISOString().split('T')[0])
+                            return value
+                        }
+                    })
+                    return tomlStringify(processedData)
                 } catch (error: any) {
                     throw new Error(error)
                 }
