@@ -133,7 +133,7 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    const processedData = lodash.cloneDeepWith(data, (value: any, key: any) => {
+                    const processedData = lodash.cloneDeepWith(data, (value: any) => {
                         if (value instanceof Date) {
                             value = new TomlDate(value.toISOString().split('T')[0])
                             return value
