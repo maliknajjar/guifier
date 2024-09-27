@@ -285,8 +285,6 @@ export function getPrimitiveEnumByStringType (stringType: string): PrimitiveType
  * if the field type wasnt specified by the user
  */
 export function getFieldTypeByValuetype (valueType: string): string {
-    console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM')
-    console.log(valueType)
     switch (valueType) {
         case 'string':
             return 'text'
