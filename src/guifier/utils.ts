@@ -180,9 +180,6 @@ export function getDefaultValueByFieldType (fieldType: string): Field {
  */
 export function getFieldInstance (property: Property, data: Data, params: ParametersInternal): Field {
     if (property._fieldType !== undefined) {
-        console.log('NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN')
-        console.log(property._fieldType)
-        console.log(fieldsMetaData[property._fieldType])
         return fieldsMetaData[property._fieldType].getInstantiatedObject(property, data, params)
     }
     throw new Error('property._fieldType is undefined')
