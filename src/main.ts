@@ -14,7 +14,7 @@ async function init (): Promise<void> {
         fullScreen: true,
         onChange: () => {
             console.log('guifier has changed')
-            console.log(guifier.getData(DataType.Json))
+            console.log(guifier.getData(DataType.Toml))
         }
     }
 

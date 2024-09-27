@@ -70,6 +70,6 @@ export class DateField extends Field {
      */
     private inputEventHandler (event: Event): void {
         const element = event.target as HTMLInputElement
-        this.setValue(element.value)
+        this.setValue(new Date(element.value))
     }
 }
