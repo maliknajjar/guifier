@@ -124,7 +124,7 @@ export class NumberField extends Field {
      * This function handles the input event on the text field
      */
     private inputEventHandler (element: HTMLInputElement): void {
-        this.setValue(parseInt(element.value))
+        this.setValue(parseFloat(element.value))
     }
 
     /**
@@ -136,17 +136,17 @@ export class NumberField extends Field {
             input.value = '0'
         }
         if (isPlus) {
-            input.value = (parseInt(input.value) + 1).toString()
+            input.value = (parseFloat(input.value) + 1).toString()
             this.intervalId = setInterval(() => {
-                input.value = (parseInt(input.value) + 1).toString()
+                input.value = (parseFloat(input.value) + 1).toString()
             }, 100)
         } else {
-            input.value = (parseInt(input.value) - 1).toString()
+            input.value = (parseFloat(input.value) - 1).toString()
             this.intervalId = setInterval(() => {
-                input.value = (parseInt(input.value) - 1).toString()
+                input.value = (parseFloat(input.value) - 1).toString()
             }, 100)
         }
-        this.setValue(parseInt(input.value))
+        this.setValue(parseFloat(input.value))
     }
 
     /**
