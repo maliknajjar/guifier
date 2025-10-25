@@ -67,6 +67,7 @@
     "vite": "^4.3.1"
   },
   "dependencies": {
+    "@decimalturn/toml-patch": "^0.3.7",
     "@floating-ui/dom": "^1.5.4",
     "clone": "^2.1.2",
     "fast-xml-parser": "^4.2.6",
