@@ -51,16 +51,29 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.2",
+    "@storybook/addon-a11y": "^10.0.4",
+    "@storybook/addon-docs": "^10.0.4",
+    "@storybook/addon-svelte-csf": "^5.0.10",
+    "@storybook/addon-vitest": "^10.0.4",
+    "@storybook/svelte-vite": "^10.0.4",
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@tsconfig/svelte": "^5.0.5",
     "@types/node": "^24.6.0",
+    "storybook": "^10.0.4",
     "svelte": "^5.39.6",
     "svelte-check": "^4.3.2",
     "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.1.14"
+    "vite": "npm:rolldown-vite@7.1.14",
+    "vitest": "^4.0.7",
+    "playwright": "^1.56.1",
+    "@vitest/browser-playwright": "^4.0.7",
+    "@vitest/coverage-v8": "^4.0.7"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"
