@@ -1,24 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "es2015",
-    "useDefineForClassFields": true,
-    "module": "commonjs",
-    "lib": ["esnext", "DOM"],
-    "moduleResolution": "node",
-    "strict": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "noEmit": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "types",
-    "outDir": "js_dist",
-    "downlevelIteration": true
-  },
-  "include": ["src"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

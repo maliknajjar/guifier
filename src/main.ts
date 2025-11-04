@@ -1,33 +1,9 @@
-import './style.css'
+import { mount } from 'svelte'
+import './app.css'
+import App from './App.svelte'
 
-import type { Parameters } from './guifier/types'
-import { DataType } from './guifier/enums'
-import Guifier from './guifier/Guifier'
-import { exampleData } from './dataExamples'
+const app = mount(App, {
+  target: document.getElementById('app')!,
+})
 
-async function init (): Promise<void> {
-    const params: Parameters = {
-        elementSelector: '#app',
-        data: exampleData,
-        dataType: DataType.Toml,
-        rootContainerName: 'Example Object',
-        fullScreen: true,
-        onChange: () => {
-            console.log('guifier has changed')
-            console.log(guifier.getData(DataType.Toml))
-        }
-    }
-
-    const guifier = new Guifier(params)
-
-    document.addEventListener('keydown', (e) => {
-        // press on s key on the keyboard to show the big Data object
-        if (e.keyCode === 83) {
-            console.log('printing the Data object')
-            console.log(guifier.getData(DataType.Xml))
-            // guifier.setData('{"sasa":null}', DataType.Json)
-        }
-    })
-}
-
-void init()
+export default app
