@@ -110,6 +110,11 @@ export class ObjectContainer extends Container {
                 guifierObjectFieldContainer.style.gridColumn = 'span 2'
             }
 
+            // automatically make multiline text fields full width
+            if (field.getFieldLabelName() === 'Text' && typeof property._value === 'string' && property._value.includes('\n')) {
+                guifierObjectFieldContainer.style.gridColumn = 'span 2'
+            }
+
             const labelContainer = document.createElement('div')
             labelContainer.classList.add('guifierObjectLabelContainer')
 
