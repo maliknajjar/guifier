@@ -3,7 +3,8 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
-import { TomlDate, parse as tomlParse, stringify as tomlStringify } from 'smol-toml'
+import { parse as tomlParse, patch as tomlPatch } from '@decimalturn/toml-patch'
+import { TomlDate } from 'smol-toml'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -19,10 +20,14 @@ export class Data {
     public parsedData: Property = defaultProperty
     public params: Parameters
     private readonly path: Array<number | string> = []
+    private readonly rawString: string
 
     constructor (data: string, dataType: DataType, params: Parameters) {
         // add guifier params
         this.params = params
+
+        // storing the raw string for toml patching
+        this.rawString = data
 
         // converting data types string into a js object
         this.rawData = this.deserializeData(data, dataType)
@@ -139,7 +144,7 @@ export class Data {
                             return value
                         }
                     })
-                    return tomlStringify(processedData)
+                    return tomlPatch(this.rawString, processedData)
                 } catch (error: any) {
                     throw new Error(error)
                 }

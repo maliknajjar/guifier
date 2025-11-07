@@ -93,6 +93,9 @@
 export const exampleData = `
     title = "TOML Configuration Example"
     ld1 = 1979-05-27
+    description = """
+This is a TOML configuration file example.
+It demonstrates various data types and structures."""
 
     [server]
     hostname = "example.com"

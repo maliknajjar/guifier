@@ -53,16 +53,43 @@ export class TextField extends Field {
      * @returns {HTMLElement} html element object
      */
     public draw (): HTMLElement {
-        // drawing the input
-        const inputElement = document.createElement('input')
-        inputElement.type = 'text'
-        inputElement.classList.add('guifierTextField')
-        if (this.property._value !== '') {
-            inputElement.value = this.property._value
-        }
+        let inputElement: HTMLInputElement | HTMLTextAreaElement
 
-        // adding a placeholder
-        inputElement.placeholder = 'Text Field'
+        // Auto-detect multiline if the value contains line breaks
+        const hasLineBreaks = typeof this.property._value === 'string' && this.property._value.includes('\n')
+
+        if (hasLineBreaks) {
+            // drawing the textarea for multiline text
+            const textareaElement = document.createElement('textarea')
+            textareaElement.classList.add('guifierTextField', 'guifierTextFieldMultiline')
+            if (this.property._value !== '') {
+                textareaElement.value = this.property._value
+            }
+            textareaElement.placeholder = 'Multiline Text Field'
+            
+            // auto-resize functionality for textarea
+            const autoResize = (): void => {
+                textareaElement.style.height = 'auto'
+                textareaElement.style.height = `${Math.max(textareaElement.scrollHeight, 45)}px`
+            }
+            
+            textareaElement.addEventListener('input', autoResize)
+            // Set initial height
+            setTimeout(autoResize, 0)
+            
+            inputElement = textareaElement
+        } else {
+            // drawing the input for single line text
+            const singleLineElement = document.createElement('input')
+            singleLineElement.type = 'text'
+            singleLineElement.classList.add('guifierTextField')
+            if (this.property._value !== '') {
+                singleLineElement.value = this.property._value
+            }
+            singleLineElement.placeholder = 'Text Field'
+            
+            inputElement = singleLineElement
+        }
 
         // setting style based on color set wether primary or secondary
         if (this.showSecondaryColors) {
@@ -83,7 +110,7 @@ export class TextField extends Field {
      * This function handles the input event on the text field
      */
     private inputEventHandler (event: Event): void {
-        const element = event.target as HTMLInputElement
+        const element = event.target as HTMLInputElement | HTMLTextAreaElement
         this.setValue(element.value)
     }
 }
