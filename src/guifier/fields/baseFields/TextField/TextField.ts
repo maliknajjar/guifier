@@ -66,17 +66,17 @@ export class TextField extends Field {
                 textareaElement.value = this.property._value
             }
             textareaElement.placeholder = 'Multiline Text Field'
-            
+
             // auto-resize functionality for textarea
             const autoResize = (): void => {
                 textareaElement.style.height = 'auto'
                 textareaElement.style.height = `${Math.max(textareaElement.scrollHeight, 45)}px`
             }
-            
+
             textareaElement.addEventListener('input', autoResize)
             // Set initial height
             setTimeout(autoResize, 0)
-            
+
             inputElement = textareaElement
         } else {
             // drawing the input for single line text
@@ -87,7 +87,7 @@ export class TextField extends Field {
                 singleLineElement.value = this.property._value
             }
             singleLineElement.placeholder = 'Text Field'
-            
+
             inputElement = singleLineElement
         }
 
