@@ -1,5 +1,7 @@
 <script lang="ts">
-    export type GuifierData = Record<string, any> | Array<any>;
+    import ObjectContainer from "./objectContainer.svelte";
+
+    export type GuifierData = Record<string, unknown> | Array<unknown>;
 
     interface Props {
         data: GuifierData;
@@ -11,5 +13,5 @@
 {#if Array.isArray(data)}
     the array is not implemented yet man
 {:else}
-    <div>this is the guifier component</div>
+    <ObjectContainer {data} />
 {/if}

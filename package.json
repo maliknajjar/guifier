@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.2",
+    "@internationalized/date": "^3.10.0",
     "@lucide/svelte": "^0.553.0",
     "@storybook/addon-a11y": "^10.0.4",
     "@storybook/addon-docs": "^10.0.4",
@@ -70,6 +71,7 @@
     "@types/node": "^24.6.0",
     "@vitest/browser-playwright": "^4.0.7",
     "@vitest/coverage-v8": "^4.0.7",
+    "bits-ui": "^2.14.2",
     "clsx": "^2.1.1",
     "playwright": "^1.56.1",
     "storybook": "^10.0.4",
