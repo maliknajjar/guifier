@@ -5,10 +5,11 @@
 
     interface Props {
         data: Record<string, unknown>;
+        level: number;
         class?: ClassValue;
     }
 
-    const { data, class: className }: Props = $props();
+    const { data, class: className, level }: Props = $props();
 </script>
 
 <div
@@ -19,10 +20,10 @@
         <div class="{isContainer ? "col-span-2" : ""}">
             {#if isContainerValue(value)}
                 <div class="py-4 px-6 border-t border-l border-r rounded-t-md">{key}</div>
-                <Field value={value} key={key} class={"border rounded-b-md"} />
+                <Field value={value} key={key} class={"border rounded-b-md"} level={level + 1} />
             {:else}
                 <div>{key}</div>
-                <Field value={value} key={key} />
+                <Field value={value} key={key} level={level + 1} />
             {/if}
         </div>
     {/each}

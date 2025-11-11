@@ -72,6 +72,46 @@
       "malik",
       54,
       true,
+      [
+        "malik",
+        54,
+        true,
+      ]
+    ]
+  ]
+}} />
+
+<Story name="Object in Array" args={{
+  class: "max-w-xl",
+  data: [
+    "malik",
+    54,
+    true,
+    {
+      name: "malik",
+      age: 33,
+      hair_color: "black",
+      is_married: true,
+    }
+  ]
+}} />
+
+<Story name="Object in Array in Array" args={{
+  class: "max-w-xl",
+  data: [
+    "malik",
+    54,
+    true,
+    [
+      "malik",
+      54,
+      true,
+      {
+        name: "malik",
+        age: 33,
+        hair_color: "black",
+        is_married: true,
+      }
     ]
   ]
 }} />

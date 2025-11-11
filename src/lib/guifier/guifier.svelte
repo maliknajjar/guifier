@@ -15,8 +15,8 @@
 
 <div class="border rounded-md {className}">
     {#if Array.isArray(data)}
-        <ArrayContainer {data} />
+        <ArrayContainer {data} level={0} />
     {:else}
-        <ObjectContainer {data} />
+        <ObjectContainer {data} level={0} />
     {/if}
 </div>

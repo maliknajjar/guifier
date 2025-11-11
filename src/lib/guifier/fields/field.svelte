@@ -8,11 +8,12 @@
 
     interface Props {
         value: unknown;
+        level: number;
         key?: string;
         class?: ClassValue;
     }
 
-    const { value, key, class: className }: Props = $props();
+    const { value, key, class: className, level }: Props = $props();
 </script>
 
 <!-- TODO: add the icons for each field man -->
@@ -24,9 +25,9 @@
     {:else if typeof value === "boolean"}
         <Boolean {value} />
     {:else if isPlainObject(value)}
-        <ObjectContainer data={value as Record<string, unknown>} class="rounded-t-none" />
+        <ObjectContainer data={value as Record<string, unknown>} level={level + 1} class="rounded-t-none" />
     {:else if Array.isArray(value)}
-        <ArrayContainer data={value as Array<unknown>} class="rounded-t-none" />
+        <ArrayContainer data={value as Array<unknown>} level={level + 1} class="rounded-t-none" />
     {:else}
         <div class="text-red-500">This type doesnt have a default field</div>
     {/if}
