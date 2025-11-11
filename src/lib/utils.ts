@@ -15,3 +15,7 @@ export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?:
 export function isPlainObject(value: unknown): boolean {
 	return Boolean(value && typeof value === "object" && !Array.isArray(value));
 }
+
+export function isContainerValue(value: unknown): boolean {
+	return Boolean(isPlainObject(value) || Array.isArray(value));
+}

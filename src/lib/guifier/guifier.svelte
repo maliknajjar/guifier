@@ -1,17 +1,22 @@
 <script lang="ts">
+  import type { ClassValue } from "svelte/elements";
     import ObjectContainer from "./objectContainer.svelte";
+  import ArrayContainer from "./arrayContainer.svelte";
 
     export type GuifierData = Record<string, unknown> | Array<unknown>;
 
     interface Props {
         data: GuifierData;
+        class?: ClassValue;
     }
 
-    const { data }: Props = $props();
+    const { data, class: className }: Props = $props();
 </script>
 
-{#if Array.isArray(data)}
-    the array is not implemented yet man
-{:else}
-    <ObjectContainer {data} />
-{/if}
+<div class="border rounded-md {className}">
+    {#if Array.isArray(data)}
+        <ArrayContainer {data} />
+    {:else}
+        <ObjectContainer {data} />
+    {/if}
+</div>

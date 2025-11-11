@@ -87,5 +87,8 @@
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.14"
+  },
+  "dependencies": {
+    "lucide-svelte": "^0.553.0"
   }
 }

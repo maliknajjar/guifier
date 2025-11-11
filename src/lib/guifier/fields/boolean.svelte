@@ -10,7 +10,7 @@
   
 </script>
  
-<Tabs.Root value={value ? "true" : "false"} class="w-[400px]">
+<Tabs.Root value={value ? "true" : "false"}>
   <Tabs.List>
     <Tabs.Trigger value="true">true</Tabs.Trigger>
     <Tabs.Trigger value="false">false</Tabs.Trigger>
