@@ -4,14 +4,14 @@
   import Field from "./fields/field.svelte";
   import ArrayContainer from "./arrayContainer.svelte";
   import ObjectContainer from "./objectContainer.svelte";
-  import { Ban, Binary, Hash, Type } from "lucide-svelte";
+  import { Ban, Binary, Braces, Brackets, Hash, Type } from "lucide-svelte";
 
     interface Props {
         data: Record<string, unknown>;
         class?: ClassValue;
     }
 
-    const { data, class: className }: Props = $props();
+    const { data = $bindable(), class: className }: Props = $props();
 </script>
 
 <div
@@ -21,12 +21,19 @@
         {@const isContainer = isContainerValue(value)}
         <div class="{isContainer ? "col-span-2" : ""}">
             {#if isContainerValue(value)}
-                <div class="py-2 px-4 border-t border-l border-r rounded-t-md">{key}</div>
+                <div class="flex gap-2 items-center py-2 px-4 border-t border-l border-r rounded-t-md">
+                    {#if Array.isArray(value)}
+                        <Brackets size={17.5} />
+                    {:else}
+                        <Braces size={17.5} />
+                    {/if}
+                    <div>{key}</div>
+                </div>
                 <div class="border rounded-b-md">
                     {#if Array.isArray(value)}
-                        <ArrayContainer data={value as Array<unknown>} levels={0} class="rounded-t-none" />
+                        <ArrayContainer bind:data={data[key] as Array<unknown>} levels={0} class="rounded-t-none" />
                     {:else}
-                        <ObjectContainer data={value as Record<string, unknown>} class="rounded-t-none" />
+                        <ObjectContainer bind:data={data[key] as Record<string, unknown>} class="rounded-t-none" />
                     {/if}
                 </div>
             {:else}
@@ -44,7 +51,7 @@
                         {/if}
                     </div>
                 </div>
-                <Field value={value} />
+                <Field bind:value={data[key]} />
             {/if}
         </div>
     {/each}

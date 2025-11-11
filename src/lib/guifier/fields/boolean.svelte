@@ -5,10 +5,10 @@
     value: boolean;
   }
 
-  const { value }: Props = $props();  
+  let { value = $bindable() }: Props = $props();  
 </script>
  
-<Tabs.Root value={value ? "true" : "false"}>
+<Tabs.Root value={value ? "true" : "false"} onValueChange={(localValue) => { value = localValue === "true" ? true : false }}>
   <Tabs.List>
     <Tabs.Trigger value="true">true</Tabs.Trigger>
     <Tabs.Trigger value="false">false</Tabs.Trigger>

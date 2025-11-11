@@ -1,11 +1,5 @@
 <script lang="ts">
   import { Ban } from "lucide-svelte";
-
-  interface Props {
-    value: null;
-  }
-
-  const { value }: Props = $props();
 </script>
  
 <div class="flex items-center border w-fit px-4 rounded-md bg-muted text-muted-foreground gap-1 h-9">

@@ -10,13 +10,13 @@
         class?: ClassValue;
     }
 
-    const { data, class: className }: Props = $props();
+    let { data = $bindable(), class: className }: Props = $props();
 </script>
 
 <div class="border rounded-md {className}">
     {#if Array.isArray(data)}
-        <ArrayContainer {data} levels={0} />
+        <ArrayContainer bind:data={data} levels={0} />
     {:else}
-        <ObjectContainer {data} />
+        <ObjectContainer bind:data={data} />
     {/if}
 </div>

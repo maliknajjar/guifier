@@ -2,7 +2,7 @@
     import type { ClassValue } from "svelte/elements";
     import { cn, isContainerValue, isPlainObject } from "$lib/utils";
     import Field from "./fields/field.svelte";
-    import { ChevronDown, ChevronUp } from "lucide-svelte";
+    import { ChevronUp } from "lucide-svelte";
     import ArrayContainer from "./arrayContainer.svelte"
     import ObjectContainer from "./objectContainer.svelte";
 
@@ -12,7 +12,7 @@
         class?: ClassValue;
     }
 
-    const { data, class: className, levels }: Props = $props();
+    let { data = $bindable(), class: className, levels }: Props = $props();
 </script>
 
 <div
@@ -51,20 +51,20 @@
                         </div>
                     </div>
                 {:else}
-                    <Field value={value} />
+                    <Field bind:value={data[index]} />
                 {/if}
             </div>
         </div>
         {#if isContainerValue(value)}
             {#if Array.isArray(value)}
-                <ArrayContainer data={value} levels={levels + 1} />
+                <ArrayContainer bind:data={data[index] as Array<unknown>} levels={levels + 1} />
             {:else if (isPlainObject(value))}
                 <div class="flex">
                     {#each Array.from({ length: levels + 1 }) as _, index}
                         <div class="w-7 h-full"></div>
                     {/each}
                     <div class="flex-1 border-l border-dashed">
-                        <ObjectContainer data={value as Record<string, unknown>} />
+                        <ObjectContainer bind:data={data[index] as Record<string, unknown>} />
                     </div>
                 </div>
             {:else}

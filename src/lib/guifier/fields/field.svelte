@@ -10,18 +10,18 @@
         class?: ClassValue;
     }
 
-    const { value, class: className }: Props = $props();
+    let { value = $bindable(), class: className }: Props = $props();
 </script>
 
 <div class="w-full {className}">
     {#if typeof value === "string"}
-        <String {value} />
+        <String bind:value={value} />
     {:else if typeof value === "number"}
-        <Number {value} />
+        <Number bind:value={value} />
     {:else if typeof value === "boolean"}
-        <Boolean {value} />
+        <Boolean bind:value={value} />
     {:else if value === null}
-        <Null {value} />
+        <Null />
     {:else}
         <div class="text-red-500">This type doesnt have a default field</div>
     {/if}
