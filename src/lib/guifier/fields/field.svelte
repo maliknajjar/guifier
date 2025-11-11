@@ -13,7 +13,6 @@
     const { value, class: className }: Props = $props();
 </script>
 
-<!-- TODO: add the icons for each field man -->
 <div class="w-full {className}">
     {#if typeof value === "string"}
         <String {value} />

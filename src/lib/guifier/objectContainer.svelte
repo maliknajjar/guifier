@@ -4,6 +4,7 @@
   import Field from "./fields/field.svelte";
   import ArrayContainer from "./arrayContainer.svelte";
   import ObjectContainer from "./objectContainer.svelte";
+  import { Ban, Binary, Hash, Type } from "lucide-svelte";
 
     interface Props {
         data: Record<string, unknown>;
@@ -29,7 +30,20 @@
                     {/if}
                 </div>
             {:else}
-                <div>{key}</div>
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="font-bold text-xs">{key}</div>
+                    <div class="text-muted-foreground">
+                        {#if typeof value === "string"}
+                            <Type size={15} />
+                        {:else if typeof value === "number"}
+                            <Hash size={15} />
+                        {:else if typeof value === "boolean"}
+                            <Binary size={15} />
+                        {:else if value === null}
+                            <Ban size={15} />
+                        {/if}
+                    </div>
+                </div>
                 <Field value={value} />
             {/if}
         </div>
