@@ -42,9 +42,9 @@
                     </div>
                 {/if}
             </div>
-            <div class="flex-1 py-2 pr-2 h-full">
+            <div class="flex items-center flex-1 pr-2 h-full">
                 {#if isContainerValue(value)}
-                    <div class="flex items-center justify-between text-sm h-full">
+                    <div class="flex items-center justify-between text-sm h-full w-full">
                         <div>{Array.isArray(value) ? "Array" : "Object"}</div>
                         <div class="flex justify-center items-center aspect-square w-10 h-full">
                             <ChevronUp size={17.5} />

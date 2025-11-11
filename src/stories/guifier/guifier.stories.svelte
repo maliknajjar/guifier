@@ -27,6 +27,7 @@
     age: 33,
     hair_color: "black",
     is_married: true,
+    is_crazy: null
   }
 }} />
 
@@ -36,6 +37,7 @@
     "malik",
     54,
     true,
+    null
   ]
 }} />
 
@@ -128,5 +130,26 @@
       54,
       true,
     ]
+  }
+}} />
+
+<Story name="Array in Object in Object" args={{
+  class: "max-w-xl",
+  data: {
+    name: "malik",
+    age: 33,
+    hair_color: "black",
+    is_married: true,
+    person: {
+      name: "malik",
+      age: 33,
+      hair_color: "black",
+      is_married: true,
+      children: [
+        "malik",
+        54,
+        true,
+      ]
+    }
   }
 }} />

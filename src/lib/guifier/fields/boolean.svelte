@@ -5,9 +5,7 @@
     value: boolean;
   }
 
-  const { value }: Props = $props();
-
-  
+  const { value }: Props = $props();  
 </script>
  
 <Tabs.Root value={value ? "true" : "false"}>

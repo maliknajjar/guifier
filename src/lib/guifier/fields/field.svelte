@@ -1,10 +1,9 @@
 <script lang="ts">
-  import Input from "$lib/components/ui/input/input.svelte";
-  import { isPlainObject } from "$lib/utils";
   import type { ClassValue } from "svelte/elements";
-  import ArrayContainer from "../arrayContainer.svelte";
-  import ObjectContainer from "../objectContainer.svelte";
   import Boolean from "./boolean.svelte";
+  import Number from "./number.svelte";
+  import String from "./string.svelte";
+  import Null from "./null.svelte";
 
     interface Props {
         value: unknown;
@@ -17,11 +16,13 @@
 <!-- TODO: add the icons for each field man -->
 <div class="w-full {className}">
     {#if typeof value === "string"}
-        <Input {value} />
+        <String {value} />
     {:else if typeof value === "number"}
-        <Input {value} type="number" />
+        <Number {value} />
     {:else if typeof value === "boolean"}
         <Boolean {value} />
+    {:else if value === null}
+        <Null {value} />
     {:else}
         <div class="text-red-500">This type doesnt have a default field</div>
     {/if}
