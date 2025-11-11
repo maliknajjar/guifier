@@ -4,15 +4,15 @@
     import Field from "./fields/field.svelte";
     import { ChevronDown, ChevronUp } from "lucide-svelte";
     import ArrayContainer from "./arrayContainer.svelte"
-  import ObjectContainer from "./objectContainer.svelte";
+    import ObjectContainer from "./objectContainer.svelte";
 
     interface Props {
         data: Array<unknown>;
-        level: number;
+        levels: number;
         class?: ClassValue;
     }
 
-    const { data, class: className, level }: Props = $props();
+    const { data, class: className, levels }: Props = $props();
 </script>
 
 <div
@@ -21,14 +21,14 @@
     {#each data as value, index}
         {@const isLast = data.length === index + 1}
         <div class="flex items-center {isLast && !isContainerValue(value) ? "" : "border-b"} h-14">
-            {#each Array.from({ length: level }) as _, index}
+            {#each Array.from({ length: levels }) as _, index}
                 <div class="w-7 h-full"></div>
             {/each}
             <div class="relative flex w-14 h-full">
                 <div class="absolute top-0 flex justify-center items-center w-full h-full">
                     <div class="w-8 h-8 border rounded-full bg-background text-muted-foreground flex justify-center items-center text-xs">{index + 1}</div>
                 </div>
-                {#if level === 0}
+                {#if levels === 0}
                     <div class="flex-1 h-full border-r border-dashed"></div>
                     <div class="flex-1 h-full"></div>
                 {:else}
@@ -51,20 +51,20 @@
                         </div>
                     </div>
                 {:else}
-                    <Field value={value} level={level + 1} />
+                    <Field value={value} />
                 {/if}
             </div>
         </div>
         {#if isContainerValue(value)}
             {#if Array.isArray(value)}
-                <ArrayContainer data={value} level={level + 1} />
+                <ArrayContainer data={value} levels={levels + 1} />
             {:else if (isPlainObject(value))}
                 <div class="flex">
-                    {#each Array.from({ length: level + 1 }) as _, index}
+                    {#each Array.from({ length: levels + 1 }) as _, index}
                         <div class="w-7 h-full"></div>
                     {/each}
                     <div class="flex-1 border-l border-dashed">
-                        <ObjectContainer data={value as Record<string, unknown>} level={level + 1} />
+                        <ObjectContainer data={value as Record<string, unknown>} />
                     </div>
                 </div>
             {:else}

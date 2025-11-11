@@ -115,3 +115,18 @@
     ]
   ]
 }} />
+
+<Story name="Array in Object" args={{
+  class: "max-w-xl",
+  data: {
+    name: "malik",
+    age: 33,
+    hair_color: "black",
+    is_married: true,
+    children: [
+      "malik",
+      54,
+      true,
+    ]
+  }
+}} />
