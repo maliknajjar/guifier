@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type { ClassValue } from "svelte/elements";
+    import type { ClassValue } from "svelte/elements";
     import ObjectContainer from "./objectContainer.svelte";
-  import ArrayContainer from "./arrayContainer.svelte";
+    import ArrayContainer from "./arrayContainer.svelte";
 
     export type GuifierData = Record<string, unknown> | Array<unknown>;
 
-    interface Props {
+    export interface GuifierProps {
         data: GuifierData;
         class?: ClassValue;
     }
 
-    let { data = $bindable(), class: className }: Props = $props();
+    let { data = $bindable(), class: className }: GuifierProps = $props();
 </script>
 
 <div class="border rounded-md {className}">

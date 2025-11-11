@@ -9,19 +9,11 @@
     title: 'Guifier',
     component: Guifier,
     tags: ['autodocs'],
-    argTypes: {
-      backgroundColor: { control: 'color' },
-      size: {
-        control: { type: 'select' },
-        options: ['small', 'medium', 'large'],
-      },
-    },
   });
 </script>
 
 <!-- More on writing stories with args: https://storybook.js.org/docs/writing-stories/args -->
 <Story name="Simple Object" args={{
-  class: "max-w-xl",
   data: {
     name: "malik",
     age: 33,
@@ -32,7 +24,6 @@
 }} />
 
 <Story name="Simple Array" args={{
-  class: "max-w-xl",
   data: [
     "malik",
     54,
@@ -43,7 +34,6 @@
 
 
 <Story name="Nested Object" args={{
-  class: "max-w-xl",
   data: {
     name: "malik",
     age: 33,
@@ -65,7 +55,6 @@
 }} />
 
 <Story name="Nested Array" args={{
-  class: "max-w-xl",
   data: [
     "malik",
     54,
@@ -84,7 +73,6 @@
 }} />
 
 <Story name="Object in Array" args={{
-  class: "max-w-xl",
   data: [
     "malik",
     54,
@@ -99,7 +87,6 @@
 }} />
 
 <Story name="Object in Array in Array" args={{
-  class: "max-w-xl",
   data: [
     "malik",
     54,
@@ -119,7 +106,6 @@
 }} />
 
 <Story name="Array in Object" args={{
-  class: "max-w-xl",
   data: {
     name: "malik",
     age: 33,
@@ -134,7 +120,6 @@
 }} />
 
 <Story name="Array in Object in Object" args={{
-  class: "max-w-xl",
   data: {
     name: "malik",
     age: 33,

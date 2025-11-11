@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { cn, isContainerValue, isPlainObject } from "$lib/utils";
-  import type { ClassValue } from "svelte/elements";
-  import Field from "./fields/field.svelte";
-  import ArrayContainer from "./arrayContainer.svelte";
-  import ObjectContainer from "./objectContainer.svelte";
-  import { Ban, Binary, Braces, Brackets, Hash, Type } from "lucide-svelte";
+    import { cn, isContainerValue } from "$lib/utils";
+    import type { ClassValue } from "svelte/elements";
+    import Field from "./fields/field.svelte";
+    import ArrayContainer from "./arrayContainer.svelte";
+    import ObjectContainer from "./objectContainer.svelte";
+    import { Ban, Binary, Braces, Brackets, Hash, Type } from "lucide-svelte";
 
     interface Props {
         data: Record<string, unknown>;
