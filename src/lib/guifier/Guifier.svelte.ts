@@ -3,52 +3,68 @@ import GuifierComponent, { type GuifierData } from "./guifier.svelte"
 
 export type DataType = 'json' | 'yaml' | 'xml' | 'toml' | 'js';
 
-export interface GuifierClassParams {
+interface GuifierClassParamsBase {
   target: Element;
-  dataType: DataType;
-  data: string | GuifierData;
 }
+
+// Use discriminated union:
+type GuifierClassDataParams = (
+  | {
+    dataType: 'js';
+    data: GuifierData
+  }
+  | {
+    dataType: Exclude<DataType, 'js'>;
+    data: string
+  }
+);
+export type GuifierClassParams = GuifierClassParamsBase & GuifierClassDataParams;
 
 export interface State {
   data: GuifierData;
 }
 
 export class Guifier {
-  public raw_data: string | GuifierData;
-  public target: Element;
-  public dataType: DataType;
+  public params: GuifierClassParams;
   public state: State;
 
   constructor(params: GuifierClassParams) {
-    this.target = params.target;
-    this.raw_data = params.data;
-    this.dataType = params.dataType;
+    this.params = params;
     this.state = $state({
-      data: this.parseRawData(this.raw_data),
+      data: this.parseRawData(this.params),
     });
     this.init();
   }
 
   private init() {
     const component = mount(GuifierComponent, {
-        target: this.target,
+        target: this.params.target,
         props: this.state
     })
     this.state.data = { wow: "wwww" }
   }
 
   public getData(format: DataType): GuifierData {
+    return this.state.data;
   }
 
-  public setData(data: string | GuifierData, format: DataType): void {
-    this.state.data = { wow: "wwww" }
+  public setData(params: GuifierClassDataParams): void {
+    this.state.data = this.parseRawData(params);
   }
 
-  private parseRawData(raw_data: string | GuifierData): GuifierData {
-    if (typeof raw_data !== "string") {
-      return raw_data;
+  private parseRawData(params: GuifierClassDataParams): GuifierData {
+    if (params.dataType === 'js') {
+      return params.data;
+    } else if (params.dataType === 'json') {
+      return JSON.parse(params.data);
+    } else if (params.dataType === 'toml') {
+      return JSON.parse(params.data);
+    } else if (params.dataType === 'xml') {
+      return JSON.parse(params.data);
+    } else if (params.dataType === 'yaml') {
+      return JSON.parse(params.data);
+    } else {
+      throw new Error(`The (${params.dataType}) data type is not supported (setData) method`);
     }
-    // handle parsing this based on the dataType
-    return raw_data;
   }
 }
