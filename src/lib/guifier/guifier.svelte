@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" module>
     import type { ClassValue } from "svelte/elements";
     import ObjectContainer from "./objectContainer.svelte";
     import ArrayContainer from "./arrayContainer.svelte";
@@ -9,7 +9,9 @@
         data: GuifierData;
         class?: ClassValue;
     }
+</script>
 
+<script lang="ts">
     let { data = $bindable(), class: className }: GuifierProps = $props();
 </script>
 

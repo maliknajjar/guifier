@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { mount, onMount } from "svelte";
-  import Guifier from "./guifier.svelte";
+    import { onMount } from "svelte";
+    import { Guifier as GuifierClass } from "./Guifier.svelte";
 
     onMount(() => {
         const guifierContainer = document.querySelector(".guifier_container");
@@ -9,16 +9,11 @@
             throw new Error("The guifier container doesnt exist yet");
         }
 
-        mount(Guifier, {
+        new GuifierClass({
             target: guifierContainer,
-            props: {
-                data: {
-                    name: "malik",
-                    age: 33,
-                    hair_color: "black",
-                    is_married: true,
-                    is_crazy: null
-                }
+            dataType: "js",
+            data: {
+                name: "malik"
             }
         })
     })
