@@ -1,1 +1,2 @@
+- move the website of guifier from the `guifier_website` to this repo so we have it in one place
 - start sharing this library in all public repos "discussians" page where its related
