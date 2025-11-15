@@ -9,6 +9,9 @@
     title: 'Guifier',
     component: Guifier,
     tags: ['autodocs'],
+    args: {
+      style: "max-width: 40rem"
+    }
   });
 </script>
 

@@ -8,14 +8,15 @@
     export interface GuifierProps {
         data: GuifierData;
         class?: ClassValue;
+        style: string;
     }
 </script>
 
 <script lang="ts">
-    let { data = $bindable(), class: className }: GuifierProps = $props();
+    let { data = $bindable(), class: className, style }: GuifierProps = $props();
 </script>
 
-<div class="border rounded-md {className}">
+<div class="border rounded-md {className}" style={style}>
     {#if Array.isArray(data)}
         <ArrayContainer bind:data={data} levels={0} />
     {:else}

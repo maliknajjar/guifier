@@ -1,3 +1,3 @@
-# allow crawling everything by default
 User-agent: *
+Sitemap: https://guifier.com/sitemap.xml
 Disallow:
