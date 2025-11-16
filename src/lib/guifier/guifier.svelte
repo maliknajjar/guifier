@@ -8,7 +8,7 @@
     export interface GuifierProps {
         data: GuifierData;
         class?: ClassValue;
-        style: string;
+        style?: string;
     }
 </script>
 
