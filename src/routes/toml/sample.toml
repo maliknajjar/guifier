@@ -1,0 +1,10 @@
+name = "Michael"
+age = 28
+isWorking = true
+date = 1979-05-27
+hobbies = [ "swimming", "photography" ]
+
+[address]
+city = "Berlin"
+zipcode = "10115"
+country = "Germany"

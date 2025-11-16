@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://guifier.com/</loc>
-        <lastmod>2023-08-25</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://guifier.com/json</loc>
-        <lastmod>2023-08-25</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://guifier.com/yaml</loc>
-        <lastmod>2023-08-25</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://guifier.com/xml</loc>
-        <lastmod>2023-08-25</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://guifier.com/toml</loc>
-        <lastmod>2023-08-25</lastmod>
+        <lastmod>2025-11-16</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>

@@ -17,6 +17,7 @@
 
 <!-- More on writing stories with args: https://storybook.js.org/docs/writing-stories/args -->
 <Story name="Simple Object" args={{
+  dataType: "js",
   data: {
     name: "malik",
     age: 33,
@@ -27,6 +28,7 @@
 }} />
 
 <Story name="Simple Array" args={{
+  dataType: "js",
   data: [
     "malik",
     54,
@@ -37,6 +39,7 @@
 
 
 <Story name="Nested Object" args={{
+  dataType: "js",
   data: {
     name: "malik",
     age: 33,
@@ -58,6 +61,7 @@
 }} />
 
 <Story name="Nested Array" args={{
+  dataType: "js",
   data: [
     "malik",
     54,
@@ -76,6 +80,7 @@
 }} />
 
 <Story name="Object in Array" args={{
+  dataType: "js",
   data: [
     "malik",
     54,
@@ -90,6 +95,7 @@
 }} />
 
 <Story name="Object in Array in Array" args={{
+  dataType: "js",
   data: [
     "malik",
     54,
@@ -109,6 +115,7 @@
 }} />
 
 <Story name="Array in Object" args={{
+  dataType: "js",
   data: {
     name: "malik",
     age: 33,
@@ -123,6 +130,7 @@
 }} />
 
 <Story name="Array in Object in Object" args={{
+  dataType: "js",
   data: {
     name: "malik",
     age: 33,

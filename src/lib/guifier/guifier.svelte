@@ -1,18 +1,16 @@
-<script lang="ts" module>
+<script lang="ts">
     import type { ClassValue } from "svelte/elements";
-    import ObjectContainer from "./objectContainer.svelte";
-    import ArrayContainer from "./arrayContainer.svelte";
+    import ObjectContainer from "./containers/objectContainer.svelte";
+    import ArrayContainer from "./containers/arrayContainer.svelte";
 
     export type GuifierData = Record<string, unknown> | Array<unknown>;
-
-    export interface GuifierProps {
+    
+    interface GuifierProps {
         data: GuifierData;
         class?: ClassValue;
         style?: string;
     }
-</script>
-
-<script lang="ts">
+    
     let { data = $bindable(), class: className, style }: GuifierProps = $props();
 </script>
 

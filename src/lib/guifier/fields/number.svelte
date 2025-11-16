@@ -8,4 +8,4 @@
   let { value = $bindable() }: Props = $props();
 </script>
  
-<Input type="number" bind:value={value} />
+<Input type="number" bind:value />

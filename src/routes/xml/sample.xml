@@ -1,0 +1,12 @@
+<root>
+  <name>Emma</name>
+  <age>22</age>
+  <isStudent>false</isStudent>
+  <hobbies>dancing</hobbies>
+  <hobbies>singing</hobbies>
+  <address>
+    <city>Tokyo</city>
+    <zipcode>100-0001</zipcode>
+    <country>Japan</country>
+  </address>
+</root>

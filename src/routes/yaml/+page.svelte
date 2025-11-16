@@ -1,18 +1,18 @@
 <svelte:head>
     <!-- base tags -->
-	<title>JSON Viewer & Editor</title>
-	<meta name="description" content="Explore our JSON viewer and editor, offering seamless data interaction. Simplify JSON tasks effortlessly with Guifier's intuitive features." />
-	<meta name="keywords" content="json viewer, online json viewer, json viewer online, json online viewer, json validator, validate json, json visualizer">
-    <link rel="canonical" href="https://guifier.com/json">
+	<title>YAML Viewer & Editor</title>
+	<meta name="description" content="Explore our YAML viewer and editor, offering seamless data interaction. Simplify YAML tasks effortlessly with Guifier's intuitive features." />
+	<meta name="keywords" content="yaml viewer, online yaml viewer, yaml viewer online, yaml online viewer, yaml validator, validate yaml, yaml visualizer">
+	<link rel="canonical" href="https://guifier.com/yaml">
 
 	<!--  Social Media Tags -->
-	<meta property="og:title" content="JSON Viewer & JSON editor | Guifier">
+	<meta property="og:title" content="YAML Viewer & YAML editor | Guifier">
 	<meta property="og:type" content="website" />
 	<meta property="og:image" content="https://guifier.com/thumbnail.jpg">
-	<meta property="og:url" content="https://guifier.com/json">
+	<meta property="og:url" content="https://guifier.com/yaml">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta property="og:description" content="Explore our JSON viewer and editor, offering seamless data interaction. Simplify JSON tasks effortlessly with Guifier's intuitive features.">
-	<meta property="og:site_name" content="JSON Viewer & JSON editor | Guifier">
+	<meta property="og:description" content="Explore our YAML viewer and editor, offering seamless data interaction. Simplify YAML tasks effortlessly with Guifier's intuitive features.">
+	<meta property="og:site_name" content="YAML Viewer & YAML editor | Guifier">
 	<meta name="twitter:image:alt" content="Guifier npm library logo">
 
 	<!-- structured-data for search engines -->
@@ -20,9 +20,9 @@
 		{
 		  "@context": "http://schema.org",
 		  "@type": "WebPage",
-		  "name": "JSON Viewer & JSON editor | Guifier",
-		  "description": "Explore our JSON viewer and editor, offering seamless data interaction. Simplify JSON tasks effortlessly with Guifier's intuitive features.",
-		  "url": "https://guifier.com/json"
+		  "name": "YAML Viewer & YAML editor | Guifier",
+		  "description": "Explore our YAML viewer and editor, offering seamless data interaction. Simplify YAML tasks effortlessly with Guifier's intuitive features.",
+		  "url": "https://guifier.com/yaml"
 		}
 	</script>
 
@@ -40,8 +40,8 @@
                 {
                     "@type": "ListItem",
                     "position": 2,
-                    "name": "json",
-                    "item": "https://guifier.com/json"
+                    "name": "yaml",
+                    "item": "https://guifier.com/yaml"
                 }
             ]
 		}
@@ -53,21 +53,21 @@
 	import FeatureSuggest from "$lib/featureSuggest.svelte";
 	import Guifier from "$lib/guifier/guifier.svelte";
 	import { encode, decode } from "$lib/guifier/utils";
-	import sample from "./sample.json?raw";
+	import sample from "./sample.yaml?raw";
 
-    let value = $state(encode('json', sample));
+    let value = $state(encode('yaml', sample));
 </script>
 
 <div class="flex flex-col items-center p-4 gap-4">
-    <h1 class="text-3xl font-bold">JSON Viewer & Editor</h1>
+    <h1 class="text-3xl font-bold">YAML Viewer & Editor</h1>
     <FeatureSuggest />
     <div class="flex gap-4 w-full max-w-2xl">
         <CodeEditor bind:value={
             () => {
-                return decode('json', value)
+                return decode('yaml', value)
             },
             (v) => {
-                value = encode('json', v)
+                value = encode('yaml', v)
             }
         } class="border flex-1 h-[60vh] rounded-md min-w-0" />
         <Guifier class="flex-1 min-w-0" bind:data={value} />

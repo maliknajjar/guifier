@@ -1,17 +1,18 @@
 <script lang="ts">
-    import { cn, isContainerValue } from "$lib/utils";
+    import { cn } from "$lib/utils";
     import type { ClassValue } from "svelte/elements";
-    import Field from "./fields/field.svelte";
+    import Field from "../fields/field.svelte";
     import ArrayContainer from "./arrayContainer.svelte";
     import ObjectContainer from "./objectContainer.svelte";
     import { Ban, Binary, Braces, Brackets, Hash, Type } from "lucide-svelte";
+	import { isContainerValue } from "../utils";
 
     interface Props {
         data: Record<string, unknown>;
         class?: ClassValue;
     }
 
-    const { data = $bindable(), class: className }: Props = $props();
+    const { data = $bindable({}), class: className }: Props = $props();
 </script>
 
 <div

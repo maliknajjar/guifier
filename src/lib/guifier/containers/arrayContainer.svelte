@@ -1,10 +1,11 @@
 <script lang="ts">
     import type { ClassValue } from "svelte/elements";
-    import { cn, isContainerValue, isPlainObject } from "$lib/utils";
-    import Field from "./fields/field.svelte";
+    import { cn } from "$lib/utils";
+    import Field from "../fields/field.svelte";
     import { ChevronUp } from "lucide-svelte";
     import ArrayContainer from "./arrayContainer.svelte"
     import ObjectContainer from "./objectContainer.svelte";
+	import { isContainerValue, isPlainObject } from "../utils";
 
     interface Props {
         data: Array<unknown>;
@@ -12,7 +13,7 @@
         class?: ClassValue;
     }
 
-    let { data = $bindable(), class: className, levels }: Props = $props();
+    let { data = $bindable([]), class: className, levels }: Props = $props();
 </script>
 
 <div

@@ -5,7 +5,7 @@
     value: string;
   }
 
-  const { value = $bindable() }: Props = $props();
+  let { value = $bindable() }: Props = $props();
 </script>
  
-<Input type="text" value={value} />
+<Input type="text" bind:value />

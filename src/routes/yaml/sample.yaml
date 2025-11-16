@@ -1,0 +1,11 @@
+name: Bob
+age: 30
+isEmployee: false
+nullData: null
+hobbies:
+  - hiking
+  - cooking
+address:
+  city: Paris
+  zipcode: "75001"
+  country: France
