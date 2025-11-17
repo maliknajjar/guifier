@@ -85,8 +85,8 @@
                         value = encode(type, v)
                     }
                 }
-            } class="border flex-1 h-[60vh] rounded-md min-w-0" />
-            <Guifier class="flex-1 min-w-0" bind:data={value} />
+            } class="border flex-1 h-[60vh] rounded-md min-w-0 bg-background overflow-hidden" />
+            <Guifier class="flex-1 min-w-0 bg-background" bind:data={value} />
         {/if}
     </div>
 </div>

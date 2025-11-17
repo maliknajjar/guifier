@@ -1,8 +1,9 @@
 <script lang="ts">
 	import github from '../images/github-mark.png'
+	import { websiteStore } from './stores.svelte';
 </script>
 
-<header class="flex items-center justify-between h-14 border-b px-4">
+<header class="flex items-center justify-between h-14 px-4 bg-background/50" style="border-bottom: 2px solid {websiteStore.borderColor};">
 	<a class="font-bold italic text-2xl" href="/">Guifier</a>
 	<nav class="flex gap-8 text-lg">
 		<a href="/json">json</a>
