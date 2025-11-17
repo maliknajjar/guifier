@@ -2,3 +2,4 @@
 - start sharing this library in all public repos "discussians" page where its related
 - add the feature of different background colors for input and its container to make them more visible
 - add a button to fields to nullify the values of those fields
+- add animation to color transition
