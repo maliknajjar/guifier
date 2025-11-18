@@ -66,7 +66,9 @@
 </svelte:head>
 
 <div class="flex justify-center p-4">
-    <div class="prose
+    <div class="
+        w-full
+        prose
         prose-pre:p-0
         prose-code:rounded-md
         prose-pre:bg-transparent
