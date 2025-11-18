@@ -1,0 +1,8 @@
+version: '3'
+services:
+  guifier_website:
+    build: .
+    image: guifier_website
+    restart: always
+    environment:
+      PUBLIC_CURRENT_HOST: 'https://guifier.com'
