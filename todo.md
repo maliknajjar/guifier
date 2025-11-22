@@ -1,4 +1,9 @@
+# URGENT
+
+- add the adding and remove properties feature in guifier editor
 - fix the scroll issue in guifier component
+
+# todo
 - create a kanban in github
 - let the staff set the hourly rate of xp and coins for each event not by setting the xp and coins rate by themeselves as numbers. but by choosing a dificulty field that has 5 options: `very easy`, `easy`, `medium`, `hard`, `very hard`.
 - check every page of the website and add content to them. Headers are not enough you need to add paragraphs. you can use seo tools to check every page of the website. this is so that you can be approved in google adsense
