@@ -54,7 +54,7 @@ const guifier = new Guifier(params)
 
 That's it! When you execute this code, it will parse your data, generate an HTML GUI, and paste it into the element you selected using the elementSelector property of the params.
 
-![Example Image](https://raw.githubusercontent.com/maliknajjar/guifier/main/images/guifier.png)
+![Example Image](/images/image_1.png)
 
 This GUI will allow you to visualize and edit your JSON data easily. Once you've made the necessary modifications, you can obtain the edited version of your JSON data simply by executing this Guifier method.
 
@@ -74,4 +74,4 @@ guifier.setData('[1,2,3]', 'json')
 
 After executing this method, your GUI representation element will be updated to accommodate your new data.
 
-![Example Image](https://raw.githubusercontent.com/maliknajjar/guifier/main/images/set_data_guifier.png)
+![Example Image](/images/image_2.png)
