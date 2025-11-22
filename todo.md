@@ -1,3 +1,6 @@
+- fix the scroll issue in guifier component
+- create a kanban in github
+- let the staff set the hourly rate of xp and coins for each event not by setting the xp and coins rate by themeselves as numbers. but by choosing a dificulty field that has 5 options: `very easy`, `easy`, `medium`, `hard`, `very hard`.
 - check every page of the website and add content to them. Headers are not enough you need to add paragraphs. you can use seo tools to check every page of the website. this is so that you can be approved in google adsense
 - work on compiling the Guifier Class successfully and work on the npm CICD to publish the package there
 - add the ability to add an delete properties
@@ -8,3 +11,6 @@
 - add a button to fields to nullify the values of those fields
 - add fade animation to color transition in the guifier website when navigating to `json` `yaml` etc...
 - create blogs on dev.to introducing guifier and how to use it
+- the user can appear what level he is by the borders that surrounds his profile picture. the way we choose the count of borders and their color is this way: every 10 levels we add a border. and every level in these 10 levels will have a specific color. from pale to bright colors to show significats. for example a user that has level 21. will have two borders the first will be a bright color and the second will be a pale color.
+- we will have a limited amount of badge types for example 5 badges. every badge is related to a certain category of voluntering work ex: `fundraising` `design`. every time the volunteer achieves a new achievement thats related to a previous badge. his new badge will replace the older one. for example a volunteer in `fundraising` will get 5 donations when he does that he will get a firts level of that badge type. when he gets 20 donations he will get another badge of the same type that will replace his first one but it will have brighter colors. and badges will be shown in front of his profile name similar to the twitter verified badge.
+- we should categorize the xp based on the main categories that the app has. those main limited categories we base our badges system on. and we will use these categories on the leader boards page to show the categorized liderboard not the global one. so the xp wont be saved as one number but it will be saved for each category
