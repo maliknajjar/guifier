@@ -2,8 +2,9 @@
 - work on compiling the Guifier Class successfully and work on the npm CICD to publish the package there
 - add the ability to add an delete properties
 - announce GuifierV2 in the ReadMe file
+- move the lib/guifier up to the `src` directory
 - start sharing this library in all public repos "discussians" page where its related
 - add the feature of different background colors for input in different levels and its container to make them more visible
 - add a button to fields to nullify the values of those fields
-- add animation to color transition in the guifier website when navigating to `json` `yaml` etc...
+- add fade animation to color transition in the guifier website when navigating to `json` `yaml` etc...
 - create blogs on dev.to introducing guifier and how to use it
