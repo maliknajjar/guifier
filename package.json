@@ -70,7 +70,7 @@
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.38.0",
 		"@internationalized/date": "^3.10.0",
-		"@lucide/svelte": "^0.553.0",
+		"@lucide/svelte": "^0.544.0",
 		"@storybook/addon-svelte-csf": "^5.0.10",
 		"@storybook/sveltekit": "^10.0.7",
 		"@sveltejs/adapter-auto": "^7.0.0",

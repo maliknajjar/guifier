@@ -149,3 +149,27 @@
     }
   }
 }} />
+
+<Story name="Arrays and Objects next to each other" args={{
+  dataType: "js",
+  data: [
+    [
+      "reading",
+      "painting",
+    ],
+    {
+      "city": "London",
+      "zipcode": "SW1A 1AA",
+      "country": "United Kingdom"
+    },
+    [
+      "reading",
+      "painting",
+    ],
+    {
+      "city": "London",
+      "zipcode": "SW1A 1AA",
+      "country": "United Kingdom"
+    },
+  ]
+}} />

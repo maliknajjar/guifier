@@ -1,21 +1,44 @@
+<script lang="ts" module>
+    export function objectContainerSelectHandler(v: CreateFieldButtonOptions, data: Record<string, unknown>) {
+        const keyName = prompt("Enter the name of the new property");
+        if (keyName) {
+            if (v === 'object') {
+                data[keyName] = {};
+            } else if (v === 'array') {
+                data[keyName] = [];
+            } else if (v === 'string') {
+                data[keyName] = "";
+            } else if (v === 'number') {
+                data[keyName] = 0;
+            } else if (v === 'boolean') {
+                data[keyName] = true;
+            }
+        }
+    }
+</script>
+
 <script lang="ts">
     import { cn } from "$lib/utils";
     import type { ClassValue } from "svelte/elements";
     import Field from "../fields/field.svelte";
     import ArrayContainer from "./arrayContainer.svelte";
     import ObjectContainer from "./objectContainer.svelte";
-    import { Ban, Binary, Braces, Hash, Plus, Type } from "lucide-svelte";
-	import { isContainerValue } from "../utils";
+    import { Ban, Binary, Braces, Hash, Plus, Trash, Type } from "lucide-svelte";
+	import { isContainerValue, isPlainObject } from "../utils";
+	import CreateFieldButton, { type CreateFieldButtonOptions } from "$lib/createFieldButton.svelte";
 	import Button from "$lib/components/ui/button/button.svelte";
+	import type { GuifierData } from "../guifier.svelte";
 
     interface Props {
         data: Record<string, unknown>;
+        parentData: GuifierData;
         name?: string;
         class?: ClassValue;
         style?: string;
+        mainContainer?: boolean;
     }
 
-    const { data = $bindable({}), name, class: className, style }: Props = $props();
+    let { data = $bindable({}), parentData = $bindable(), name, class: className, style, mainContainer = false }: Props = $props();
 </script>
 
 {#snippet inner()}
@@ -24,9 +47,9 @@
         <div class="{isContainer ? "col-span-2" : ""}">
             {#if isContainerValue(value)}
                 {#if Array.isArray(value)}
-                    <ArrayContainer name={key} bind:data={data[key] as Array<unknown>} levels={0} class="rounded-t-none" />
+                    <ArrayContainer name={key} bind:data={data[key] as Array<unknown>} bind:parentData={data} levels={0} class="rounded-t-none" />
                 {:else}
-                    <ObjectContainer name={key} bind:data={data[key] as Record<string, unknown>} class="rounded-t-none" />
+                    <ObjectContainer name={key} bind:data={data[key] as Record<string, unknown>} bind:parentData={data} class="rounded-t-none" />
                 {/if}
             {:else}
                 <div class="flex items-center gap-2 mb-1">
@@ -56,16 +79,25 @@
                 <Braces size={17.5} />
                 <div class="text-sm">{name}</div>
             </div>
-            <div class="flex items-center">
-                <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer">
-                    <Plus />
-                </Button>
+            <div class="flex items-center gap-3">
+                {#if !mainContainer}
+                    <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer" onclick={() => {
+                        if (isPlainObject(parentData)) {
+                            delete parentData[name];
+                        }
+                    }}>
+                        <Trash />
+                    </Button>
+                {/if}
+                <CreateFieldButton onSelect={(v) => objectContainerSelectHandler(v, data)} />
             </div>
         </div>
         <div
-            class={cn("grid grid-cols-2 gap-4 p-4 rounded-md rounded-t-none border overflow-auto", className)}
+            class={cn("rounded-md rounded-t-none border overflow-auto")}
         >
-            {@render inner()}
+            <div class="grid grid-cols-2 gap-4 p-4">
+                {@render inner()}
+            </div>
         </div>
     </div>
 {:else}

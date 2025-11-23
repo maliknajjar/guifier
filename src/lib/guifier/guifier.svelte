@@ -12,10 +12,14 @@
     }
     
     let { data = $bindable(), class: className, style }: GuifierProps = $props();
+
+    let parentData: GuifierData = $derived({
+        data,
+    });
 </script>
 
 {#if Array.isArray(data)}
-    <ArrayContainer name="root" bind:data={data} levels={0} class={className} style={style} />
+    <ArrayContainer name="root" bind:data bind:parentData levels={0} class={className} style={style} mainContainer={true} />
 {:else}
-    <ObjectContainer name="root" bind:data={data} class={className} style={style} />
+    <ObjectContainer name="root" bind:data bind:parentData class={className} style={style} mainContainer={true} />
 {/if}
