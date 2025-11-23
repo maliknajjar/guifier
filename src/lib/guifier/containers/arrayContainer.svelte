@@ -79,7 +79,7 @@
     <div class="grid grid-rows-[auto_1fr] rounded-md h-fit {className}" style={style}>
         <div class="flex gap-2 items-center py-2 px-4 border-t border-l border-r rounded-t-md">
             <Brackets size={17.5} />
-            <div>{name}</div>
+            <div class="text-sm">{name}</div>
         </div>
         <div
             class={cn("grid grid-cols-1 rounded-md rounded-t-none border overflow-auto", className)}
