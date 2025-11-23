@@ -4,7 +4,7 @@
     import { Marked } from "marked";
     import { markedHighlight } from "marked-highlight";
     import readme from "../../README.md?raw"
-	import { setWebsiteColor, websiteStore } from '$lib/stores.svelte';
+	import { setWebsiteColor } from '$lib/stores.svelte';
 
     setWebsiteColor('json');
 

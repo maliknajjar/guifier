@@ -1,5 +1,6 @@
 # URGENT
 
+- render the md from the server side
 - add the adding and remove properties feature in guifier editor
 - fix the scroll issue in guifier component. when you try to add more data into the guifier it overflows
 
