@@ -2,7 +2,7 @@
     import type { ClassValue } from "svelte/elements";
     import { cn } from "$lib/utils";
     import Field from "../fields/field.svelte";
-    import { ChevronUp } from "lucide-svelte";
+    import { Brackets, ChevronUp } from "lucide-svelte";
     import ArrayContainer from "./arrayContainer.svelte"
     import ObjectContainer from "./objectContainer.svelte";
 	import { isContainerValue, isPlainObject } from "../utils";
@@ -10,15 +10,15 @@
     interface Props {
         data: Array<unknown>;
         levels: number;
+        name?: string;
         class?: ClassValue;
+        style?: string;
     }
 
-    let { data = $bindable([]), class: className, levels }: Props = $props();
+    let { name, data = $bindable([]), class: className, levels, style }: Props = $props();
 </script>
 
-<div
-    class={cn("grid grid-cols-1 rounded-md", className)}
->
+{#snippet inner()}
     {#each data as value, index}
         {@const isLast = data.length === index + 1}
         <div class="flex items-center {isLast && !isContainerValue(value) ? "" : "border-b"} h-14">
@@ -73,4 +73,20 @@
             {/if}
         {/if}
     {/each}
-</div>
+{/snippet}
+
+{#if name}
+    <div class="grid grid-rows-[auto_1fr] rounded-md h-fit {className}" style={style}>
+        <div class="flex gap-2 items-center py-2 px-4 border-t border-l border-r rounded-t-md">
+            <Brackets size={17.5} />
+            <div>{name}</div>
+        </div>
+        <div
+            class={cn("grid grid-cols-1 rounded-md rounded-t-none border overflow-auto", className)}
+        >
+            {@render inner()}
+        </div>
+    </div>
+{:else}
+    {@render inner()}
+{/if}

@@ -5,6 +5,7 @@
 - add the adding and remove properties feature in guifier editor
 
 # todo
+- xml page should should work without the need of a <root> element. adding xml properties witout a parent root element should work
 - create a kanban in github
 - check every page of the website and add content to them. Headers are not enough you need to add paragraphs. you can use seo tools to check every page of the website. this is so that you can be approved in google adsense
 - change the name of the `guifier` class into `guifierClass`

@@ -4,39 +4,29 @@
     import Field from "../fields/field.svelte";
     import ArrayContainer from "./arrayContainer.svelte";
     import ObjectContainer from "./objectContainer.svelte";
-    import { Ban, Binary, Braces, Brackets, Hash, Type } from "lucide-svelte";
+    import { Ban, Binary, Braces, Hash, Type } from "lucide-svelte";
 	import { isContainerValue } from "../utils";
 
     interface Props {
         data: Record<string, unknown>;
+        name?: string;
         class?: ClassValue;
+        style?: string;
     }
 
-    const { data = $bindable({}), class: className }: Props = $props();
+    const { data = $bindable({}), name, class: className, style }: Props = $props();
 </script>
 
-<div
-    class={cn("grid grid-cols-2 gap-4 p-4 rounded-md", className)}
->
+{#snippet inner()}
     {#each Object.entries(data) as [key, value]}
         {@const isContainer = isContainerValue(value)}
         <div class="{isContainer ? "col-span-2" : ""}">
             {#if isContainerValue(value)}
-                <div class="flex gap-2 items-center py-2 px-4 border-t border-l border-r rounded-t-md">
-                    {#if Array.isArray(value)}
-                        <Brackets size={17.5} />
-                    {:else}
-                        <Braces size={17.5} />
-                    {/if}
-                    <div>{key}</div>
-                </div>
-                <div class="border rounded-b-md">
-                    {#if Array.isArray(value)}
-                        <ArrayContainer bind:data={data[key] as Array<unknown>} levels={0} class="rounded-t-none" />
-                    {:else}
-                        <ObjectContainer bind:data={data[key] as Record<string, unknown>} class="rounded-t-none" />
-                    {/if}
-                </div>
+                {#if Array.isArray(value)}
+                    <ArrayContainer name={key} bind:data={data[key] as Array<unknown>} levels={0} class="rounded-t-none" />
+                {:else}
+                    <ObjectContainer name={key} bind:data={data[key] as Record<string, unknown>} class="rounded-t-none" />
+                {/if}
             {:else}
                 <div class="flex items-center gap-2 mb-1">
                     <div class="font-bold text-xs">{key}</div>
@@ -56,4 +46,22 @@
             {/if}
         </div>
     {/each}
-</div>
+{/snippet}
+
+{#if name}
+    <div class="grid grid-rows-[auto_1fr] rounded-md h-fit {className}" style={style}>
+        <div class="flex gap-2 items-center py-2 px-4 border-t border-l border-r rounded-t-md">
+            <Braces size={17.5} />
+            <div>{name}</div>
+        </div>
+        <div
+            class={cn("grid grid-cols-2 gap-4 p-4 rounded-md rounded-t-none border overflow-auto", className)}
+        >
+            {@render inner()}
+        </div>
+    </div>
+{:else}
+    <div class="grid grid-cols-2 gap-4 p-4 overflow-auto rounded-t-none">
+        {@render inner()}
+    </div>
+{/if}
