@@ -4,8 +4,9 @@
     import Field from "../fields/field.svelte";
     import ArrayContainer from "./arrayContainer.svelte";
     import ObjectContainer from "./objectContainer.svelte";
-    import { Ban, Binary, Braces, Hash, Type } from "lucide-svelte";
+    import { Ban, Binary, Braces, Hash, Plus, Type } from "lucide-svelte";
 	import { isContainerValue } from "../utils";
+	import Button from "$lib/components/ui/button/button.svelte";
 
     interface Props {
         data: Record<string, unknown>;
@@ -50,9 +51,16 @@
 
 {#if name}
     <div class="grid grid-rows-[auto_1fr] rounded-md h-fit {className}" style={style}>
-        <div class="flex gap-2 items-center py-2 px-4 border-t border-l border-r rounded-t-md">
-            <Braces size={17.5} />
-            <div class="text-sm">{name}</div>
+        <div class="flex gap-2 justify-between items-center h-10 px-4 border-t border-l border-r rounded-t-md">
+            <div class="flex items-center gap-2">
+                <Braces size={17.5} />
+                <div class="text-sm">{name}</div>
+            </div>
+            <div class="flex items-center">
+                <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer">
+                    <Plus />
+                </Button>
+            </div>
         </div>
         <div
             class={cn("grid grid-cols-2 gap-4 p-4 rounded-md rounded-t-none border overflow-auto", className)}
