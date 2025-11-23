@@ -79,11 +79,7 @@
                         <div>{Array.isArray(value) ? "Array" : "Object"}</div>
                         <div class="flex justify-center items-center pr-4 gap-3">
                             <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer" onclick={() => {
-                                console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-                                console.log(parentData);
-                                if (Array.isArray(parentData)) {
-                                    delete parentData[index];
-                                }
+                                data.splice(index, 1)
                             }}>
                                 <Trash />
                             </Button>
@@ -97,8 +93,13 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="pr-2 w-full">
+                    <div class="flex gap-3 pr-4 w-full">
                         <Field bind:value={data[index]} />
+                        <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer" onclick={() => {
+                            data.splice(index, 1);
+                        }}>
+                            <Trash />
+                        </Button>
                     </div>
                 {/if}
             </div>

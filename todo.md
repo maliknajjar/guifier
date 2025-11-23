@@ -1,13 +1,13 @@
 # URGENT
 
 - add the remove properties feature in guifier editor
-- fix the inconsistancies in the different data shapes in the guifier
+- fix the styles inconsistancies in the different data shapes in the guifier
+- add an empty content when having an array or an object container thats empty
 
 - show an error in the guifier if the parsing process didnt go well
 - add the fullscreen button at the main container header
 
 - render the md from the server side
-- add an empty content when having an array or an object container thats empty
 - add in story book empty containers for array and object and in a nested ways too
 - and add a book with a container with three elements only
 

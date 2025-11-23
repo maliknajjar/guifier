@@ -52,7 +52,7 @@
                     <ObjectContainer name={key} bind:data={data[key] as Record<string, unknown>} bind:parentData={data} class="rounded-t-none" />
                 {/if}
             {:else}
-                <div class="flex items-center gap-2 mb-1">
+                <div class="flex items-center gap-1 mb-1">
                     <div class="font-bold text-xs">{key}</div>
                     <div class="text-muted-foreground">
                         {#if typeof value === "string"}
@@ -64,6 +64,13 @@
                         {:else if value === null}
                             <Ban size={15} />
                         {/if}
+                    </div>
+                    <div>
+                        <button class="flex justify-center hover:cursor-pointer h-4" onclick={() => {
+                           delete data[key];
+                        }}>
+                            <Trash class="h-full" />
+                        </button>
                     </div>
                 </div>
                 <Field bind:value={data[key]} />
