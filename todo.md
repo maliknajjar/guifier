@@ -1,8 +1,8 @@
 # URGENT
 
+- fix the scroll issue in guifier component. when you try to add more data into the guifier it overflows. for object container and array container
 - render the md from the server side
 - add the adding and remove properties feature in guifier editor
-- fix the scroll issue in guifier component. when you try to add more data into the guifier it overflows
 
 # todo
 - create a kanban in github
