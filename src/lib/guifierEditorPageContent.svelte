@@ -81,7 +81,7 @@
             <Tabs.Trigger value="gui">Gui Editor</Tabs.Trigger>
         </Tabs.List>
     </Tabs.Root>
-    <div class="relative flex gap-4 w-full max-w-2xl h-140">
+    <div class="relative flex gap-4 w-full max-w-3xl h-140">
         {#if value}
             <CodeEditor lang={type} bind:value={
                     () => {

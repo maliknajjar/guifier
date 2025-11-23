@@ -1,8 +1,8 @@
 # URGENT
 
-- add the remove properties feature in guifier editor
-- fix the styles inconsistancies in the different data shapes in the guifier
 - add an empty content when having an array or an object container thats empty
+- fix the styles inconsistancies in the different data shapes in the guifier
+- make the remove button and other buttons can be add in the same place to show in a smooth animation way
 
 - show an error in the guifier if the parsing process didnt go well
 - add the fullscreen button at the main container header
