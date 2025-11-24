@@ -37,14 +37,10 @@
     }
 
     let { name, data = $bindable([]), parentData = $bindable(), class: className, levels, style, mainContainer = false }: Props = $props();
-
-    console.log(parentData);
-    console.log(data);
 </script>
 
 {#snippet inner()}
     {#each data as value, index}
-        {@const isParentArray = Array.isArray(parentData)}
         {@const isLast = data.length === index + 1}
         <div class="
             flex
@@ -52,8 +48,12 @@
             {isLast && !isContainerValue(value) ? "" : "border-b"}
             h-14
         ">
-            {#each Array.from({ length: levels }) as _, index}
-                <div class="w-[1.8rem] h-full border-r border-dashed"></div>
+            {#each Array.from({ length: levels }) as _, levelIndex}
+                {@const isLastLevel = levels === levelIndex + 1}
+                <div class="flex flex-col w-[1.8rem] h-full">
+                    <div class="flex-1 {true ? "border-r border-dashed" : ""}"></div>
+                    <div class="flex-1 {true ? "border-r border-dashed" : ""}"></div>
+                </div>
             {/each}
             <div class="relative flex w-14 h-full">
                 <div class="absolute top-0 flex justify-center items-center w-full h-full">
@@ -64,8 +64,8 @@
                     <div class="flex-1 h-full"></div>
                 {:else}
                     <div class="flex flex-col flex-1 h-full">
-                        <div class="flex-1 h-full"></div>
-                        <div class="flex-1 h-full"></div>
+                        <div class="flex-1 h-full border-b border-dashed"></div>
+                        <div class="flex-1 h-full { isContainerValue(value) ? "border-r border-dashed" : ""}"></div>
                     </div>
                     <div class="flex flex-col flex-1 h-full">
                         <div class="flex h-full"></div>

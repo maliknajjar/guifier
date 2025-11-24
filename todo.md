@@ -1,5 +1,6 @@
 # URGENT
 
+- keep the levels lines in the array container like they exist in the code editor
 - add an empty content when having an array or an object container thats empty
 - fix the styles inconsistancies in the different data shapes in the guifier
 - make the remove button and other buttons can be add in the same place to show in a smooth animation way
@@ -12,6 +13,7 @@
 - and add a book with a container with three elements only
 
 # todo
+- add the feature of saving a code editor data in the url. so that a person can share it and send it anywhere
 - xml page should should work without the need of a <root> element. adding xml properties witout a parent root element should work
 - create a kanban in github
 - check every page of the website and add content to them. Headers are not enough you need to add paragraphs. you can use seo tools to check every page of the website. this is so that you can be approved in google adsense
@@ -23,4 +25,7 @@
 - add the feature of different background colors for input in different levels and its container to make them more visible
 - add a button to fields to nullify the values of those fields
 - add fade animation to color transition in the guifier website when navigating to `json` `yaml` etc...
+
+# SEO
+- you can answear people on stackoverflow or other forumes who have json viewier related stuff questions
 - create blogs on dev.to introducing guifier and how to use it
