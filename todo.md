@@ -11,6 +11,7 @@
 - render the md from the server side
 - add in story book empty containers for array and object and in a nested ways too
 - and add a book with a container with three elements only
+- make the add and delete button have muted color nad gets primary on hover
 
 # todo
 - add the feature of saving a code editor data in the url. so that a person can share it and send it anywhere
