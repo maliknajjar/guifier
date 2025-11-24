@@ -12,6 +12,7 @@
 - add in story book empty containers for array and object and in a nested ways too
 - and add a book with a container with three elements only
 - make the add and delete button have muted color nad gets primary on hover
+- add the ability to add information for each field. for exmaple if you have a `name` property in the json. you can add an info that says `the name of the main charachter in the game`
 
 # todo
 - add the feature of saving a code editor data in the url. so that a person can share it and send it anywhere
