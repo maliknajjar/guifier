@@ -110,9 +110,9 @@
                     <ArrayContainer bind:data={data[index] as Array<unknown>} bind:parentData={data} levels={levels + 1} />
                 </div>
             {:else if (isPlainObject(value))}
-                <div class="flex {Array.isArray(data) && !isLast ? "border-b" : ""}">
+                <div class="flex items-stretch {Array.isArray(data) && !isLast ? "border-b" : ""}">
                     {#each Array.from({ length: levels + 1 }) as _, index}
-                        <div class="w-[1.8rem] h-full border-r border-dashed"></div>
+                        <div class="w-[1.8rem] border-r border-dashed"></div>
                     {/each}
                     <div class="flex-1">
                         <ObjectContainer bind:data={data[index] as Record<string, unknown>} bind:parentData={data} />
