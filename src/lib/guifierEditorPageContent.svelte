@@ -5,7 +5,6 @@
 	import { encode, decode } from "$lib/guifier/utils";
 	import { onMount } from "svelte";
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
-	import Skeleton from "./components/ui/skeleton/skeleton.svelte";
 
     interface Props {
         type: "json" | "yaml" | "xml" | "toml";
@@ -14,11 +13,17 @@
     const { type }: Props = $props();
 
     let value: GuifierData | undefined = $state();
+    let encodingError = $state();
     let showGuiEditor: boolean = $state(true);
 
     onMount(async () => {
         const sample = (await import(`./samples/sample.${type}?raw`)).default;
-        value = encode(type, sample);
+        try {
+            encodingError = undefined;
+            value = encode(type, sample);
+        } catch (error) {
+            encodingError = error;
+        }
     })
 </script>
 
@@ -86,12 +91,19 @@
             <CodeEditor lang={type} bind:value={
                     () => {
                         if (value) {
-                            return decode(type, value)
+                            if (!encodingError) {
+                                return decode(type, value)
+                            }
                         }
                     },
                     (v) => {
                         if (v) {
-                            value = encode(type, v)
+                            try {
+                                encodingError = undefined;
+                                value = encode(type, v);
+                            } catch (error) {
+                                encodingError = error;
+                            }
                         }
                     }
                 }
@@ -109,7 +121,12 @@
                     max-sm:w-full
                 "
             />
-            {#if showGuiEditor}
+            {#if encodingError}
+                <div class="flex flex-col gap-2 flex-1 min-w-0 bg-red-50 border border-red-500 h-full max-sm:absolute rounded-md p-2 text-red-600 text-sm">
+                    <div class="text-2xl">Encoding Error</div>
+                    <div>{encodingError}</div>
+                </div>
+            {:else if showGuiEditor}
                 <Guifier class="flex-1 min-w-0 bg-background h-full max-sm:absolute" bind:data={value} />
             {/if}
         {:else}
