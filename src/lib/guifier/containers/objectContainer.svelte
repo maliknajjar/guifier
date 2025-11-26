@@ -42,41 +42,48 @@
 </script>
 
 {#snippet inner()}
-    {#each Object.entries(data) as [key, value]}
-        {@const isContainer = isContainerValue(value)}
-        <div class="{isContainer ? "col-span-2" : ""}">
-            {#if isContainerValue(value)}
-                {#if Array.isArray(value)}
-                    <ArrayContainer name={key} bind:data={data[key] as Array<unknown>} bind:parentData={data} levels={0} class="rounded-t-none" />
+    {#if Object.entries(data).length}
+        {#each Object.entries(data) as [key, value]}
+            {@const isContainer = isContainerValue(value)}
+            <div class="{isContainer ? "col-span-2" : ""}">
+                {#if isContainerValue(value)}
+                    {#if Array.isArray(value)}
+                        <ArrayContainer name={key} bind:data={data[key] as Array<unknown>} bind:parentData={data} levels={0} class="rounded-t-none" />
+                    {:else}
+                        <ObjectContainer name={key} bind:data={data[key] as Record<string, unknown>} bind:parentData={data} class="rounded-t-none" />
+                    {/if}
                 {:else}
-                    <ObjectContainer name={key} bind:data={data[key] as Record<string, unknown>} bind:parentData={data} class="rounded-t-none" />
+                    <div class="flex items-center gap-1 mb-1">
+                        <div class="font-bold text-xs">{key}</div>
+                        <div class="text-muted-foreground">
+                            {#if typeof value === "string"}
+                                <Type size={15} />
+                            {:else if typeof value === "number"}
+                                <Hash size={15} />
+                            {:else if typeof value === "boolean"}
+                                <Binary size={15} />
+                            {:else if value === null}
+                                <Ban size={15} />
+                            {/if}
+                        </div>
+                        <div>
+                            <button class="flex justify-center hover:cursor-pointer h-4" onclick={() => {
+                            delete data[key];
+                            }}>
+                                <Trash class="h-full" />
+                            </button>
+                        </div>
+                    </div>
+                    <Field bind:value={data[key]} />
                 {/if}
-            {:else}
-                <div class="flex items-center gap-1 mb-1">
-                    <div class="font-bold text-xs">{key}</div>
-                    <div class="text-muted-foreground">
-                        {#if typeof value === "string"}
-                            <Type size={15} />
-                        {:else if typeof value === "number"}
-                            <Hash size={15} />
-                        {:else if typeof value === "boolean"}
-                            <Binary size={15} />
-                        {:else if value === null}
-                            <Ban size={15} />
-                        {/if}
-                    </div>
-                    <div>
-                        <button class="flex justify-center hover:cursor-pointer h-4" onclick={() => {
-                           delete data[key];
-                        }}>
-                            <Trash class="h-full" />
-                        </button>
-                    </div>
-                </div>
-                <Field bind:value={data[key]} />
-            {/if}
+            </div>
+        {/each}
+    {:else}
+        <div class="col-span-full">
+            <div class="text-center text-md text-muted-foreground">No items yet</div>
+            <div class="text-center text-xs text-muted-foreground">Click + to add your first one</div>
         </div>
-    {/each}
+    {/if}
 {/snippet}
 
 {#if name}

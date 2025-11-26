@@ -1,7 +1,8 @@
 # URGENT
 
-- keep the levels lines in the array container like they exist in the code editor
 - add an empty content when having an array or an object container thats empty
+
+- keep the levels lines in the array container like they exist in the code editor
 - fix the styles inconsistancies in the different data shapes in the guifier
 - make the remove button and other buttons can be add in the same place to show in a smooth animation way
 

@@ -40,89 +40,97 @@
 </script>
 
 {#snippet inner()}
-    {#each data as value, index}
-        {@const isLast = data.length === index + 1}
-        <div class="
-            flex
-            items-center
-            {isLast && !isContainerValue(value) ? "" : "border-b"}
-            h-14
-        ">
-            {#each Array.from({ length: levels }) as _, levelIndex}
-                {@const isLastLevel = levels === levelIndex + 1}
-                <div class="flex flex-col w-[1.8rem] h-full">
-                    <div class="flex-1 {true ? "border-r border-dashed" : ""}"></div>
-                    <div class="flex-1 {true ? "border-r border-dashed" : ""}"></div>
-                </div>
-            {/each}
-            <div class="relative flex w-14 h-full">
-                <div class="absolute top-0 flex justify-center items-center w-full h-full">
-                    <div class="w-8 h-8 border rounded-full bg-background text-muted-foreground flex justify-center items-center text-xs">{index + 1}</div>
-                </div>
-                {#if levels === 0}
-                    <div class="flex-1 h-full border-r border-dashed"></div>
-                    <div class="flex-1 h-full"></div>
-                {:else}
-                    <div class="flex flex-col flex-1 h-full">
-                        <div class="flex-1 h-full border-b border-dashed"></div>
-                        <div class="flex-1 h-full { isContainerValue(value) ? "border-r border-dashed" : ""}"></div>
+    {#if data.length}
+        
+        {#each data as value, index}
+            {@const isLast = data.length === index + 1}
+            <div class="
+                flex
+                items-center
+                {isLast && !isContainerValue(value) ? "" : "border-b"}
+                h-14
+            ">
+                {#each Array.from({ length: levels }) as _, levelIndex}
+                    {@const isLastLevel = levels === levelIndex + 1}
+                    <div class="flex flex-col w-[1.8rem] h-full">
+                        <div class="flex-1 {true ? "border-r border-dashed" : ""}"></div>
+                        <div class="flex-1 {true ? "border-r border-dashed" : ""}"></div>
                     </div>
-                    <div class="flex flex-col flex-1 h-full">
-                        <div class="flex h-full"></div>
-                        <div class="flex h-full"></div>
+                {/each}
+                <div class="relative flex w-14 h-full">
+                    <div class="absolute top-0 flex justify-center items-center w-full h-full">
+                        <div class="w-8 h-8 border rounded-full bg-background text-muted-foreground flex justify-center items-center text-xs">{index + 1}</div>
                     </div>
-                {/if}
-            </div>
-            <div class="flex items-center flex-1 h-full">
-                {#if isContainerValue(value)}
-                    <div class="flex items-center justify-between text-sm h-full w-full">
-                        <div>{Array.isArray(value) ? "Array" : "Object"}</div>
-                        <div class="flex justify-center items-center pr-4 gap-3">
+                    {#if levels === 0}
+                        <div class="flex-1 h-full border-r border-dashed"></div>
+                        <div class="flex-1 h-full"></div>
+                    {:else}
+                        <div class="flex flex-col flex-1 h-full">
+                            <div class="flex-1 h-full border-b border-dashed"></div>
+                            <div class="flex-1 h-full { isContainerValue(value) ? "border-r border-dashed" : ""}"></div>
+                        </div>
+                        <div class="flex flex-col flex-1 h-full">
+                            <div class="flex h-full"></div>
+                            <div class="flex h-full"></div>
+                        </div>
+                    {/if}
+                </div>
+                <div class="flex items-center flex-1 h-full">
+                    {#if isContainerValue(value)}
+                        <div class="flex items-center justify-between text-sm h-full w-full">
+                            <div>{Array.isArray(value) ? "Array" : "Object"}</div>
+                            <div class="flex justify-center items-center pr-4 gap-3">
+                                <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer" onclick={() => {
+                                    data.splice(index, 1)
+                                }}>
+                                    <Trash />
+                                </Button>
+                                <CreateFieldButton onSelect={(v) => {
+                                    if (Array.isArray(value)) {
+                                        arrayContainerSelectHandler(v, value);
+                                    } else if (isPlainObject(value)) {
+                                        objectContainerSelectHandler(v, value)
+                                    }
+                                }} />
+                            </div>
+                        </div>
+                    {:else}
+                        <div class="flex gap-3 pr-4 w-full">
+                            <Field bind:value={data[index]} />
                             <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer" onclick={() => {
-                                data.splice(index, 1)
+                                data.splice(index, 1);
                             }}>
                                 <Trash />
                             </Button>
-                            <CreateFieldButton onSelect={(v) => {
-                                if (Array.isArray(value)) {
-                                    arrayContainerSelectHandler(v, value);
-                                } else if (isPlainObject(value)) {
-                                    objectContainerSelectHandler(v, value)
-                                }
-                            }} />
+                        </div>
+                    {/if}
+                </div>
+            </div>
+            {#if isContainerValue(value)}
+                {#if Array.isArray(value)}
+                    <div class={Array.isArray(data) && !isLast ? "border-b" : ""}>
+                        <ArrayContainer bind:data={data[index] as Array<unknown>} bind:parentData={data} levels={levels + 1} />
+                    </div>
+                {:else if (isPlainObject(value))}
+                    <div class="flex items-stretch {Array.isArray(data) && !isLast ? "border-b" : ""}">
+                        {#each Array.from({ length: levels + 1 }) as _, index}
+                            <div class="w-[1.8rem] border-r border-dashed"></div>
+                        {/each}
+                        <div class="flex-1">
+                            <ObjectContainer bind:data={data[index] as Record<string, unknown>} bind:parentData={data} />
                         </div>
                     </div>
                 {:else}
-                    <div class="flex gap-3 pr-4 w-full">
-                        <Field bind:value={data[index]} />
-                        <Button variant="ghost" class="p-0! hover:bg-transparent hover:cursor-pointer" onclick={() => {
-                            data.splice(index, 1);
-                        }}>
-                            <Trash />
-                        </Button>
-                    </div>
+                    <div>Error: For some reason the value is not a an object nor an array</div>
                 {/if}
-            </div>
-        </div>
-        {#if isContainerValue(value)}
-            {#if Array.isArray(value)}
-                <div class={Array.isArray(data) && !isLast ? "border-b" : ""}>
-                    <ArrayContainer bind:data={data[index] as Array<unknown>} bind:parentData={data} levels={levels + 1} />
-                </div>
-            {:else if (isPlainObject(value))}
-                <div class="flex items-stretch {Array.isArray(data) && !isLast ? "border-b" : ""}">
-                    {#each Array.from({ length: levels + 1 }) as _, index}
-                        <div class="w-[1.8rem] border-r border-dashed"></div>
-                    {/each}
-                    <div class="flex-1">
-                        <ObjectContainer bind:data={data[index] as Record<string, unknown>} bind:parentData={data} />
-                    </div>
-                </div>
-            {:else}
-                <div>Error: For some reason the value is not a an object nor an array</div>
             {/if}
-        {/if}
-    {/each}
+        {/each}
+    {:else}
+        <div class="p-4">
+            <div class="text-center text-md text-muted-foreground">No items yet</div>
+            <div class="text-center text-xs text-muted-foreground">Click + to add your first one</div>
+        </div>
+    {/if}
 {/snippet}
 
 {#if name}
