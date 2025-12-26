@@ -135,11 +135,19 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
+                    // Strip time component from dates before serialization
+                    const processedData = lodash.cloneDeepWith(data, (value: any) => {
+                        if (value instanceof Date) {
+                            // Create a new date with time set to 00:00:00 UTC
+                            value = new Date(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate())
+                            return value
+                        }
+                    })
                     if (this.tomlDocument !== null) {
-                        this.tomlDocument.patch(data)
+                        this.tomlDocument.patch(processedData)
                         return this.tomlDocument.toTomlString
                     } else {
-                        return tomlStringify(data)
+                        return tomlStringify(processedData)
                     }
                 } catch (error: any) {
                     throw new Error(error)
