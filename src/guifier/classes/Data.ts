@@ -3,7 +3,7 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
-import { TomlDate, parse as tomlParse, stringify as tomlStringify } from 'smol-toml'
+import { stringify as tomlStringify, TomlDocument } from '@decimalturn/toml-patch'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -19,6 +19,7 @@ export class Data {
     public parsedData: Property = defaultProperty
     public params: Parameters
     private readonly path: Array<number | string> = []
+    private tomlDocument: TomlDocument | null = null
 
     constructor (data: string, dataType: DataType, params: Parameters) {
         // add guifier params
@@ -87,7 +88,8 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    return tomlParse(data)
+                    this.tomlDocument = new TomlDocument(data)
+                    return this.tomlDocument.toJsObject
                 } catch (error: any) {
                     throw new Error(error)
                 }
@@ -133,13 +135,12 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    const processedData = lodash.cloneDeepWith(data, (value: any) => {
-                        if (value instanceof Date) {
-                            value = new TomlDate(value.toISOString().split('T')[0])
-                            return value
-                        }
-                    })
-                    return tomlStringify(processedData)
+                    if (this.tomlDocument !== null) {
+                        this.tomlDocument.patch(data)
+                        return this.tomlDocument.toTomlString
+                    } else {
+                        return tomlStringify(data)
+                    }
                 } catch (error: any) {
                     throw new Error(error)
                 }

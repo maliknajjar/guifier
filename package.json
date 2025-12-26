@@ -67,13 +67,13 @@
     "vite": "^4.3.1"
   },
   "dependencies": {
+    "@decimalturn/toml-patch": "^0.4.1",
     "@floating-ui/dom": "^1.5.4",
     "clone": "^2.1.2",
     "fast-xml-parser": "^4.2.6",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "material-icons": "^1.13.8",
-    "smol-toml": "^1.3.0",
     "vite-plugin-css-injected-by-js": "^3.2.1",
     "xml-formatter": "^3.5.0",
     "zod": "^3.21.4"
