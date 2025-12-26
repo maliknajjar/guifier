@@ -3,7 +3,7 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
-import { stringify as tomlStringify, TomlDocument } from '@decimalturn/toml-patch'
+import { stringify as tomlStringify, TomlDocument, TomlFormat } from '@decimalturn/toml-patch'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -143,11 +143,17 @@ export class Data {
                             return value
                         }
                     })
+                    const format = TomlFormat.default()
+                    format.truncateZeroTimeInDates = true
                     if (this.tomlDocument !== null) {
-                        this.tomlDocument.patch(processedData)
+                        console.log('Patching existing TOML Document.')
+                        this.tomlDocument.patch(processedData, format)
                         return this.tomlDocument.toTomlString
                     } else {
-                        return tomlStringify(processedData)
+                        console.log("Resetting TOML Document as it wasn't initialized during parsing.")
+                        const tomlString = tomlStringify(processedData, format)
+                        this.tomlDocument = new TomlDocument(tomlString)
+                        return tomlString
                     }
                 } catch (error: any) {
                     throw new Error(error)
