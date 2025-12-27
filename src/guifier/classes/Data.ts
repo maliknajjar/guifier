@@ -144,7 +144,7 @@ export class Data {
                     const processedData = lodash.cloneDeepWith(data, (value: any) => {
                         if (value instanceof Date) {
                             // Create a new date with time set to 00:00:00 UTC
-                            value = new Date(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate())
+                            value = new Date(Date.UTC(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate()))
                             return value
                         }
                     })
