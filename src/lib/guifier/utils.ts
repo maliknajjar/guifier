@@ -52,10 +52,8 @@ export function decode(dataType: DataType, data: GuifierData): string {
 				return value
 			}
 		})
-
 		const format = TomlFormat.default()
 		format.truncateZeroTimeInDates = true
-
 		if (currentTomlDocument) {
 			currentTomlDocument.patch(processedData, format)
 			return currentTomlDocument.toTomlString
