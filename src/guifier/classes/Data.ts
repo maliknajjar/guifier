@@ -3,7 +3,7 @@ import clone from 'clone'
 import type { Property, Parameters } from '../types'
 
 import { XMLParser, XMLBuilder } from 'fast-xml-parser'
-import { stringify as tomlStringify, TomlDocument, TomlFormat } from '@decimalturn/toml-patch'
+import { TomlDocument, TomlFormat } from '@decimalturn/toml-patch'
 import { defaultProperty } from '../types'
 import { DataType, PrimitiveTypes } from '../enums'
 import { getFieldTypeByValuetype, getType, mergeObjectsOnlyNewProperties } from '../utils'
@@ -88,11 +88,7 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    console.log('Setup TOML Document.')
                     this.tomlDocument = new TomlDocument(data)
-                    console.log('TOML Document setup complete:')
-                    console.log(this.tomlDocument.toTomlString)
-
                     return this.tomlDocument.toJsObject
                 } catch (error: any) {
                     throw new Error(error)
@@ -139,29 +135,20 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
-                    console.log('Date received for TOML serialization:', data)
+                    if (this.tomlDocument == null) {
+                        throw new Error('TOML Document not initialized.')
+                    }
                     // Strip time component from dates before serialization
                     const processedData = lodash.cloneDeepWith(data, (value: any) => {
                         if (value instanceof Date) {
-                            // Create a new date with time set to 00:00:00 UTC
                             value = new Date(Date.UTC(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate()))
                             return value
                         }
                     })
-                    console.log('Processed data for TOML serialization:', processedData)
                     const format = TomlFormat.default()
                     format.truncateZeroTimeInDates = true
-                    if (this.tomlDocument !== null) {
-                        console.log('Patching existing TOML Document.')
-                        console.log(this.tomlDocument.toTomlString)
-                        this.tomlDocument.patch(processedData, format)
-                        return this.tomlDocument.toTomlString
-                    } else {
-                        console.log("Resetting TOML Document as it wasn't initialized during parsing.")
-                        const tomlString = tomlStringify(processedData, format)
-                        this.tomlDocument = new TomlDocument(tomlString)
-                        return tomlString
-                    }
+                    this.tomlDocument.patch(processedData, format)
+                    return this.tomlDocument.toTomlString
                 } catch (error: any) {
                     throw new Error(error)
                 }
