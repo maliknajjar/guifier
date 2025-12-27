@@ -88,7 +88,11 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
+                    console.log('Setup TOML Document.')
                     this.tomlDocument = new TomlDocument(data)
+                    console.log('TOML Document setup complete:')
+                    console.log(this.tomlDocument.toTomlString)
+
                     return this.tomlDocument.toJsObject
                 } catch (error: any) {
                     throw new Error(error)
@@ -135,6 +139,7 @@ export class Data {
                 }
             case DataType.Toml:
                 try {
+                    console.log('Date received for TOML serialization:', data)
                     // Strip time component from dates before serialization
                     const processedData = lodash.cloneDeepWith(data, (value: any) => {
                         if (value instanceof Date) {
@@ -143,10 +148,12 @@ export class Data {
                             return value
                         }
                     })
+                    console.log('Processed data for TOML serialization:', processedData)
                     const format = TomlFormat.default()
                     format.truncateZeroTimeInDates = true
                     if (this.tomlDocument !== null) {
                         console.log('Patching existing TOML Document.')
+                        console.log(this.tomlDocument.toTomlString)
                         this.tomlDocument.patch(processedData, format)
                         return this.tomlDocument.toTomlString
                     } else {
