@@ -67,7 +67,7 @@
 		"@codemirror/lang-json": "^6.0.2",
 		"@codemirror/lang-xml": "^6.1.0",
 		"@codemirror/lang-yaml": "^6.1.2",
-		"@decimalturn/toml-patch": "^0.5.0",
+		"@decimalturn/toml-patch": "^0.5.2",
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.38.0",
 		"@internationalized/date": "^3.10.0",
