@@ -16,6 +16,8 @@
 - add the ability to add information for each field. for exmaple if you have a `name` property in the json. you can add an info that says `the name of the main charachter in the game`
 
 # todo
+
+- add redirect rules from `www.guifier.com` to `guifier.com` using the solution in this issue `https://github.com/Dokploy/dokploy/issues/3088#issuecomment-4017526235`
 - add the feature of saving a code editor data in the url. so that a person can share it and send it anywhere
 - xml page should should work without the need of a <root> element. adding xml properties witout a parent root element should work
 - create a kanban in github
@@ -30,5 +32,6 @@
 - add fade animation to color transition in the guifier website when navigating to `json` `yaml` etc...
 
 # SEO
+
 - you can answear people on stackoverflow or other forumes who have json viewier related stuff questions
 - create blogs on dev.to introducing guifier and how to use it
