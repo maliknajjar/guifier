@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=maliknajjar&project=guifier&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 > ⚠️ **Warning:** This README is slightly outdated. The tutorial sections may not match Guifier V2. Updated docs are coming soon.
 
 # Guifier
