@@ -1,5 +1,7 @@
 # URGENT
 
+- www.guifier.com is not indexed. please make sure people can access guifier through that url
+
 - add an empty content when having an array or an object container thats empty
 
 - keep the levels lines in the array container like they exist in the code editor
